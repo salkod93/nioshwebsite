@@ -238,7 +238,7 @@ export default function Home() {
                 <Card className="h-full hover:shadow-lg transition-all duration-300 border-border/50 hover:border-secondary/30 group overflow-hidden">
                   <div className="absolute top-0 left-0 w-1 h-full bg-secondary opacity-0 group-hover:opacity-100 transition-opacity" />
                   <CardHeader className="flex flex-row items-start gap-4 pb-2">
-                    <div className="p-3 rounded-lg bg-secondary/5 text-secondary group-hover:bg-secondary group-hover:text-white transition-colors duration-300">
+                    <div className="p-3 rounded-lg bg-secondary/5 text-secondary group-hover:bg-secondary group-hover:text-white transition-colors duration-300 relative z-10">
                       {serviceIcons[index]}
                     </div>
                     <div className="space-y-1">
@@ -251,10 +251,7 @@ export default function Home() {
                     <p className="text-muted-foreground leading-relaxed">
                       {service.description}
                     </p>
-                    <div className="mt-6 flex items-center text-sm font-medium text-secondary opacity-0 group-hover:opacity-100 transition-all transform translate-y-2 group-hover:translate-y-0">
-                      {t.hero.cta}
-                      {isRTL ? <ArrowLeft className="mr-2 h-4 w-4" /> : <ArrowRight className="ml-2 h-4 w-4" />}
-                    </div>
+                    
                   </CardContent>
                 </Card>
               </motion.div>
