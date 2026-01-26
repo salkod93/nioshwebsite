@@ -238,7 +238,7 @@ export default function Home() {
                 <Card className="h-full hover:shadow-lg transition-all duration-300 border-border/50 hover:border-secondary/30 group overflow-hidden">
                   <div className="absolute top-0 left-0 w-1 h-full bg-secondary opacity-0 group-hover:opacity-100 transition-opacity" />
                   <CardHeader className="flex flex-row items-start gap-4 pb-2">
-                    <div className="p-3 rounded-lg bg-secondary/5 text-secondary group-hover:bg-secondary group-hover:text-white transition-colors duration-300 relative z-10">
+                    <div className="p-3 rounded-lg bg-secondary/5 text-secondary transition-colors duration-300 relative z-10">
                       {serviceIcons[index]}
                     </div>
                     <div className="space-y-1">
