@@ -64,10 +64,7 @@ export default function Home() {
             variants={fadeInUp}
             className="space-y-6"
           >
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/20 backdrop-blur-sm text-sm font-medium text-accent">
-              <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
-              {t.about.vision.title}
-            </div>
+            
             <h1 className="text-4xl md:text-6xl font-bold leading-tight">
               {t.hero.title}
             </h1>
