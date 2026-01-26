@@ -50,9 +50,9 @@ export default function Layout({ children, lang, setLang }: LayoutProps) {
           isScrolled ? "bg-background/95 backdrop-blur-md shadow-sm border-border/40 py-2" : "bg-transparent py-4"
         )}
       >
-        <div className="container flex items-center justify-between">
+        <div className="container flex items-center justify-between h-full">
           {/* Logo */}
-          <div className="flex items-center gap-2 z-50">
+          <div className="flex items-center gap-2 z-50 h-full">
             <img 
               src={lang === 'ar' ? "/images/logo-ar.png" : "/images/logo-en.png"} 
               alt="NIOSH Logo" 
