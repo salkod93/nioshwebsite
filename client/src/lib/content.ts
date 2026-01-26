@@ -5,26 +5,68 @@ export const content = {
     nav: {
       home: "Home",
       about: "About Us",
+      priorities: "Strategic Priorities",
       services: "Services",
       contact: "Contact",
       langSwitch: "العربية"
     },
     hero: {
       title: "National Institute for Occupational Safety and Health",
-      subtitle: "A national reference for enabling capabilities and enhancing a safe and sustainable work environment.",
+      subtitle: "Global leadership towards enabling an integrated national system for occupational safety and health.",
       cta: "Explore Our Services"
     },
     about: {
       title: "About NIOSH",
-      description: "The National Institute for Occupational Safety and Health is the executive arm of the National Council for Occupational Safety and Health. It was established in 2024 to be the first national reference for qualifying competencies, developing policies, and promoting innovation in the field of occupational safety and health.",
+      description: [
+        "The National Institute for Occupational Safety and Health is the executive arm of the National Council for Occupational Safety and Health. It was established in 2024 to be the first national reference for qualifying competencies, developing policies, and promoting innovation in the field of occupational safety and health.",
+        "The Institute's establishment came in response to the economic and social transformations witnessed by the Saudi labor market, with the significant expansion in the number of establishments and workers, and the increasing need for safe and healthy work environments.",
+        "The Institute aims to be the national reference in building capabilities, developing knowledge, and standardizing practices in the field of occupational safety and health, in a way that enhances the quality of the work environment and supports sustainable development."
+      ],
       mission: {
         title: "Our Mission",
-        text: "To be the national reference in building capabilities, developing knowledge, and standardizing practices in the field of occupational safety and health, in a way that enhances the quality of the work environment and supports sustainable development."
+        text: "Empowering the occupational safety and health system by spreading the culture, building capacities, and providing advanced training, consulting, and technical services, to achieve a safe and attractive work environment."
       },
       vision: {
         title: "Our Vision",
-        text: "A national reference for enabling capabilities and enhancing a safe and sustainable work environment."
+        text: "Global leadership towards enabling an integrated national system for occupational safety and health."
       }
+    },
+    priorities: {
+      title: "Strategic Priorities",
+      items: [
+        {
+          title: "Develop specialized national capabilities",
+          description: "Qualify national competencies according to specialized and accredited training and qualification programs."
+        },
+        {
+          title: "Build a national technical reference",
+          description: "Provide operational models and technical frameworks that support regulatory bodies."
+        },
+        {
+          title: "Provide consulting services",
+          description: "Provide specialized consulting and technical services in the field of occupational safety and health."
+        },
+        {
+          title: "Enable research and innovation",
+          description: "Conduct research for practical, implementable solutions and provide specialized consultations."
+        },
+        {
+          title: "Conclude agreements and partnerships",
+          description: "Build a network of local and international partnerships with the aim of enhancing technical implementation."
+        },
+        {
+          title: "Spread institutional and community awareness",
+          description: "Design and implement professional and community awareness campaigns."
+        },
+        {
+          title: "Develop the digital infrastructure in the field of OSH",
+          description: "Operate digital platforms to provide the institute's services nationally and locally."
+        },
+        {
+          title: "Align practices with international standards",
+          description: "Provide studies and technical recommendations to update regulatory frameworks."
+        }
+      ]
     },
     services: {
       title: "Our Services",
@@ -56,26 +98,68 @@ export const content = {
     nav: {
       home: "الرئيسية",
       about: "من نحن",
+      priorities: "الأولويات الاستراتيجية",
       services: "خدماتنا",
       contact: "تواصل معنا",
       langSwitch: "English"
     },
     hero: {
       title: "المعهد الوطني للسلامة والصحة المهنية",
-      subtitle: "مرجع وطني لتمكين القدرات وتعزيز بيئة عمل آمنة ومستدامة.",
+      subtitle: "الريادة العالمية نحو تمكين نظام وطني متكامل للسلامة والصحة المهنية.",
       cta: "استكشف خدماتنا"
     },
     about: {
       title: "عن المعهد",
-      description: "المعهد الوطني للسلامة والصحة المهنية هو الذراع التنفيذي للمجلس الوطني للسلامة والصحة المهنية. تأسس عام 2024 ليكون المرجع الوطني الأول لتأهيل الكفاءات وتطوير السياسات وتعزيز الابتكار في مجال السلامة والصحة المهنية.",
+      description: [
+        "المعهد الوطني للسلامة والصحة المهنية هو الذراع التنفيذي للمجلس الوطني للسلامة والصحة المهنية. تأسس عام 2024 ليكون المرجع الوطني الأول لتأهيل الكفاءات وتطوير السياسات وتعزيز الابتكار في مجال السلامة والصحة المهنية.",
+        "جاء تأسيس المعهد استجابة للتحولات الاقتصادية والاجتماعية التي يشهدها سوق العمل السعودي، مع التوسع الكبير في أعداد المنشآت والعاملين، والحاجة المتزايدة لبيئات عمل آمنة وصحية.",
+        "يهدف المعهد إلى أن يكون المرجع الوطني في بناء القدرات وتطوير المعرفة وتوحيد الممارسات في مجال السلامة والصحة المهنية، بما يعزز جودة بيئة العمل ويدعم التنمية المستدامة."
+      ],
       mission: {
         title: "رسالتنا",
-        text: "أن نكون المرجع الوطني في بناء القدرات وتطوير المعرفة وتوحيد الممارسات في مجال السلامة والصحة المهنية، بما يعزز جودة بيئة العمل ويدعم التنمية المستدامة."
+        text: "تمكين منظومة السلامة والصحة المهنية من خلال نشر الثقافة وبناء القدرات وتقديم خدمات تدريبية واستشارية وفنية متقدمة، لتحقيق بيئة عمل آمنة وجاذبة."
       },
       vision: {
         title: "رؤيتنا",
-        text: "مرجع وطني لتمكين القدرات وتعزيز بيئة عمل آمنة ومستدامة."
+        text: "الريادة العالمية نحو تمكين نظام وطني متكامل للسلامة والصحة المهنية."
       }
+    },
+    priorities: {
+      title: "الأولويات الاستراتيجية",
+      items: [
+        {
+          title: "تطوير القدرات الوطنية المتخصصة",
+          description: "تأهيل الكفاءات الوطنية وفق برامج تدريب وتأهيل متخصصة ومعتمدة."
+        },
+        {
+          title: "بناء مرجع فني وطني",
+          description: "توفير نماذج تشغيلية وأطر فنية تدعم الجهات التنظيمية."
+        },
+        {
+          title: "تقديم الخدمات الاستشارية",
+          description: "تقديم خدمات استشارية وفنية متخصصة في مجال السلامة والصحة المهنية."
+        },
+        {
+          title: "تمكين البحث والابتكار",
+          description: "إجراء أبحاث لحلول عملية قابلة للتطبيق وتقديم استشارات متخصصة."
+        },
+        {
+          title: "إبرام الاتفاقيات والشراكات",
+          description: "بناء شبكة من الشراكات المحلية والدولية بهدف تعزيز التنفيذ الفني."
+        },
+        {
+          title: "نشر الوعي المؤسسي والمجتمعي",
+          description: "تصميم وتنفيذ حملات توعية مهنية ومجتمعية."
+        },
+        {
+          title: "تطوير البنية التحتية الرقمية في مجال السلامة والصحة المهنية",
+          description: "تشغيل منصات رقمية لتقديم خدمات المعهد وطنياً ومحلياً."
+        },
+        {
+          title: "مواءمة الممارسات مع المعايير الدولية",
+          description: "تقديم دراسات وتوصيات فنية لتحديث الأطر التنظيمية."
+        }
+      ]
     },
     services: {
       title: "خدماتنا",

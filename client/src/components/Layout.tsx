@@ -68,6 +68,9 @@ export default function Layout({ children, lang, setLang }: LayoutProps) {
             <button onClick={() => scrollToSection('about')} className="text-foreground/80 hover:text-primary font-medium transition-colors">
               {t.nav.about}
             </button>
+            <button onClick={() => scrollToSection('priorities')} className="text-foreground/80 hover:text-primary font-medium transition-colors">
+              {t.nav.priorities}
+            </button>
             <button onClick={() => scrollToSection('services')} className="text-foreground/80 hover:text-primary font-medium transition-colors">
               {t.nav.services}
             </button>
@@ -102,6 +105,9 @@ export default function Layout({ children, lang, setLang }: LayoutProps) {
           </button>
           <button onClick={() => scrollToSection('about')} className="text-2xl font-medium text-foreground hover:text-primary">
             {t.nav.about}
+          </button>
+          <button onClick={() => scrollToSection('priorities')} className="text-2xl font-medium text-foreground hover:text-primary">
+            {t.nav.priorities}
           </button>
           <button onClick={() => scrollToSection('services')} className="text-2xl font-medium text-foreground hover:text-primary">
             {t.nav.services}

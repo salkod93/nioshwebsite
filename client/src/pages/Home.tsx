@@ -4,7 +4,7 @@ import { content, Language } from "@/lib/content";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { motion } from "framer-motion";
-import { Shield, GraduationCap, Users, FileCheck, ArrowRight, ArrowLeft } from "lucide-react";
+import { Shield, GraduationCap, Users, FileCheck, ArrowRight, ArrowLeft, Target, Lightbulb, Handshake, Globe, Laptop, BookOpen } from "lucide-react";
 
 export default function Home() {
   const [lang, setLang] = useState<Language>('ar');
@@ -21,7 +21,7 @@ export default function Home() {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2
+        staggerChildren: 0.1
       }
     }
   };
@@ -31,6 +31,17 @@ export default function Home() {
     <GraduationCap className="h-10 w-10 text-secondary" />,
     <Shield className="h-10 w-10 text-secondary" />,
     <FileCheck className="h-10 w-10 text-secondary" />
+  ];
+
+  const priorityIcons = [
+    <GraduationCap className="h-6 w-6" />,
+    <BookOpen className="h-6 w-6" />,
+    <Users className="h-6 w-6" />,
+    <Lightbulb className="h-6 w-6" />,
+    <Handshake className="h-6 w-6" />,
+    <Target className="h-6 w-6" />,
+    <Laptop className="h-6 w-6" />,
+    <Globe className="h-6 w-6" />
   ];
 
   return (
@@ -80,11 +91,11 @@ export default function Home() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="relative hidden md:block"
           >
-            <div className="relative z-10 bg-white/5 backdrop-blur-md rounded-2xl p-8 border border-white/10 shadow-2xl">
+            <div className="relative z-10 bg-white rounded-2xl p-8 shadow-2xl">
               <img 
                 src={lang === 'ar' ? "/images/logo-ar.png" : "/images/logo-en.png"} 
                 alt="NIOSH Emblem" 
-                className="w-full h-auto drop-shadow-2xl"
+                className="w-full h-auto drop-shadow-sm"
               />
             </div>
             {/* Decorative elements behind logo */}
@@ -108,9 +119,11 @@ export default function Home() {
               {t.about.title}
             </h2>
             <div className="w-20 h-1 bg-accent mx-auto rounded-full" />
-            <p className="text-lg text-muted-foreground leading-relaxed">
-              {t.about.description}
-            </p>
+            <div className="space-y-4 text-lg text-muted-foreground leading-relaxed text-justify md:text-center">
+              {t.about.description.map((paragraph, index) => (
+                <p key={index}>{paragraph}</p>
+              ))}
+            </div>
           </motion.div>
 
           <div className="grid md:grid-cols-2 gap-8">
@@ -146,6 +159,52 @@ export default function Home() {
               </p>
             </motion.div>
           </div>
+        </div>
+      </section>
+
+      {/* Strategic Priorities Section */}
+      <section id="priorities" className="py-24 bg-primary/5 relative">
+        <div className="container">
+          <motion.div 
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeInUp}
+            className="text-center mb-16 space-y-4"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold text-primary">
+              {t.priorities.title}
+            </h2>
+            <div className="w-20 h-1 bg-secondary mx-auto rounded-full" />
+          </motion.div>
+
+          <motion.div 
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6"
+          >
+            {t.priorities.items.map((item, index) => (
+              <motion.div key={index} variants={fadeInUp}>
+                <Card className="h-full hover:shadow-md transition-all duration-300 border-border/50 hover:border-secondary/30">
+                  <CardHeader className="pb-2">
+                    <div className="w-10 h-10 rounded-lg bg-white shadow-sm flex items-center justify-center mb-3 text-primary">
+                      {priorityIcons[index]}
+                    </div>
+                    <CardTitle className="text-lg font-bold text-primary leading-tight">
+                      {item.title}
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                      {item.description}
+                    </p>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
+          </motion.div>
         </div>
       </section>
 
