@@ -111,6 +111,10 @@ export default function Layout({ children, lang, setLang }: LayoutProps) {
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
+
+            <button onClick={() => scrollToSection('contact')} className="text-foreground/80 hover:text-primary font-medium transition-colors">
+              {t.nav.contact}
+            </button>
             
             <Button 
               variant="outline" 
@@ -148,6 +152,9 @@ export default function Layout({ children, lang, setLang }: LayoutProps) {
           </button>
           <button onClick={() => scrollToSection('services')} className="text-2xl font-medium text-foreground hover:text-primary">
             {t.nav.services}
+          </button>
+          <button onClick={() => scrollToSection('contact')} className="text-2xl font-medium text-foreground hover:text-primary">
+            {t.nav.contact}
           </button>
           <Button 
             variant="outline" 

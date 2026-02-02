@@ -19,7 +19,7 @@ export const content = {
         consultancy: "Consultancy Services",
         qualification: "Qualification Services"
       },
-      contact: "Contact",
+      contact: "Contact Us",
       langSwitch: "العربية"
     },
     hero: {
@@ -100,6 +100,22 @@ export const content = {
           description: "Governing body for OSH quality standards, managing accreditation for OSH Professionals, Service Providers, and Training Institutes."
         }
       ]
+    },
+    contact: {
+      title: "Contact Us",
+      subtitle: "Get in touch with us for any inquiries or support.",
+      address: {
+        label: "Address",
+        value: "Riyadh, Kingdom of Saudi Arabia"
+      },
+      email: {
+        label: "Email",
+        value: "info@niosh.gov.sa"
+      },
+      phone: {
+        label: "Phone",
+        value: "+966 11 000 0000"
+      }
     },
     footer: {
       copyright: "© 2026 National Institute for Occupational Safety and Health. All rights reserved.",
@@ -205,6 +221,22 @@ export const content = {
           description: "الهيئة الحاكمة لمعايير الجودة، وإدارة عملية الاعتماد لمحترفي السلامة، ومقدمي الخدمات، ومعاهد التدريب."
         }
       ]
+    },
+    contact: {
+      title: "تواصل معنا",
+      subtitle: "تواصل معنا لأي استفسارات أو دعم.",
+      address: {
+        label: "العنوان",
+        value: "الرياض، المملكة العربية السعودية"
+      },
+      email: {
+        label: "البريد الإلكتروني",
+        value: "info@niosh.gov.sa"
+      },
+      phone: {
+        label: "الهاتف",
+        value: "+966 11 000 0000"
+      }
     },
     footer: {
       copyright: "© 2026 المعهد الوطني للسلامة والصحة المهنية. جميع الحقوق محفوظة.",

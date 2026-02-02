@@ -4,7 +4,7 @@ import { content, Language } from "@/lib/content";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { motion } from "framer-motion";
-import { Shield, GraduationCap, Users, FileCheck, ArrowRight, ArrowLeft, Target, Lightbulb, Handshake, Globe, Laptop, BookOpen } from "lucide-react";
+import { Shield, GraduationCap, Users, FileCheck, ArrowRight, ArrowLeft, Target, Lightbulb, Handshake, Globe, Laptop, BookOpen, MapPin, Mail, Phone } from "lucide-react";
 
 export default function Home() {
   const [lang, setLang] = useState<Language>('ar');
@@ -257,6 +257,95 @@ export default function Home() {
               </motion.div>
             ))}
           </motion.div>
+        </div>
+      </section>
+
+      {/* Contact Section */}
+      <section id="contact" className="py-24 bg-background relative">
+        <div className="container">
+          <motion.div 
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeInUp}
+            className="text-center mb-16 space-y-4"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold text-primary">
+              {t.contact.title}
+            </h2>
+            <div className="w-20 h-1 bg-accent mx-auto rounded-full" />
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              {t.contact.subtitle}
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 gap-12 items-start">
+            {/* Contact Info */}
+            <motion.div 
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={fadeInUp}
+              className="space-y-8"
+            >
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center text-primary shrink-0">
+                  <MapPin className="w-6 h-6" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-primary mb-2">{t.contact.address.label}</h3>
+                  <p className="text-muted-foreground">{t.contact.address.value}</p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center text-primary shrink-0">
+                  <Mail className="w-6 h-6" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-primary mb-2">{t.contact.email.label}</h3>
+                  <p className="text-muted-foreground">{t.contact.email.value}</p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center text-primary shrink-0">
+                  <Phone className="w-6 h-6" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-primary mb-2">{t.contact.phone.label}</h3>
+                  <p className="text-muted-foreground dir-ltr">{t.contact.phone.value}</p>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Map Placeholder */}
+            <motion.div 
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={fadeInUp}
+              className="h-[400px] bg-muted rounded-2xl overflow-hidden relative border border-border"
+            >
+              <div className="absolute inset-0 flex items-center justify-center bg-muted/50">
+                <div className="text-center space-y-2">
+                  <MapPin className="w-12 h-12 text-muted-foreground/50 mx-auto" />
+                  <p className="text-muted-foreground font-medium">Map Location Placeholder</p>
+                  <p className="text-sm text-muted-foreground/70">Riyadh, Saudi Arabia</p>
+                </div>
+              </div>
+              {/* Actual map iframe would go here */}
+              <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d232047.8285257372!2d46.542335640625!3d24.725191699999996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e2f03890d489399%3A0xba974d1c98e79fd5!2sRiyadh%20Saudi%20Arabia!5e0!3m2!1sen!2sus!4v1706543210000!5m2!1sen!2sus" 
+                width="100%" 
+                height="100%" 
+                style={{ border: 0, filter: 'grayscale(100%) opacity(0.8)' }} 
+                allowFullScreen 
+                loading="lazy" 
+                referrerPolicy="no-referrer-when-downgrade"
+              />
+            </motion.div>
+          </div>
         </div>
       </section>
     </Layout>
