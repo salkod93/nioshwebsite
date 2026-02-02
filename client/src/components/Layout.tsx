@@ -138,7 +138,7 @@ export default function Layout({ children, lang, setLang }: LayoutProps) {
 
         {/* Mobile Nav Overlay */}
         <div className={cn(
-          "fixed inset-0 bg-background z-40 flex flex-col items-center justify-center gap-8 transition-transform duration-300 md:hidden",
+          "fixed inset-0 top-0 bg-background z-40 flex flex-col items-center justify-center gap-8 transition-transform duration-300 md:hidden overflow-y-auto",
           mobileMenuOpen ? "translate-y-0" : "-translate-y-full"
         )}>
           <button onClick={() => scrollToSection('home')} className="text-2xl font-medium text-foreground hover:text-primary">
