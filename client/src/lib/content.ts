@@ -110,7 +110,7 @@ export const content = {
       },
       email: {
         label: "Email",
-        value: "info@niosh.gov.sa"
+        value: "info@niosh.sa"
       },
       phone: {
         label: "Phone",
@@ -231,7 +231,7 @@ export const content = {
       },
       email: {
         label: "البريد الإلكتروني",
-        value: "info@niosh.gov.sa"
+        value: "info@niosh.sa"
       },
       phone: {
         label: "الهاتف",
