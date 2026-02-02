@@ -136,40 +136,41 @@ export default function Layout({ children, lang, setLang }: LayoutProps) {
           </button>
         </div>
 
-        {/* Mobile Nav Overlay */}
-        <div className={cn(
-          "fixed inset-0 top-0 bg-background z-40 flex flex-col items-center justify-center gap-8 transition-transform duration-300 md:hidden overflow-y-auto",
-          mobileMenuOpen ? "translate-y-0" : "-translate-y-full"
-        )}>
-          <button onClick={() => scrollToSection('home')} className="text-2xl font-medium text-foreground hover:text-primary">
-            {t.nav.home}
-          </button>
-          <button onClick={() => scrollToSection('about')} className="text-2xl font-medium text-foreground hover:text-primary">
-            {t.nav.about}
-          </button>
-          <button onClick={() => scrollToSection('priorities')} className="text-2xl font-medium text-foreground hover:text-primary">
-            {t.nav.priorities}
-          </button>
-          <button onClick={() => scrollToSection('services')} className="text-2xl font-medium text-foreground hover:text-primary">
-            {t.nav.services}
-          </button>
-          <button onClick={() => scrollToSection('contact')} className="text-2xl font-medium text-foreground hover:text-primary">
-            {t.nav.contact}
-          </button>
-          <Button 
-            variant="outline" 
-            size="lg" 
-            onClick={() => {
-              toggleLang();
-              setMobileMenuOpen(false);
-            }}
-            className="gap-2 mt-4"
-          >
-            <Globe className="h-5 w-5" />
-            {t.nav.langSwitch}
-          </Button>
-        </div>
       </header>
+
+      {/* Mobile Nav Overlay - Moved outside header to avoid stacking context issues */}
+      <div className={cn(
+        "fixed inset-0 top-0 bg-background z-40 flex flex-col items-center justify-center gap-8 transition-transform duration-300 md:hidden overflow-y-auto",
+        mobileMenuOpen ? "translate-y-0" : "-translate-y-full"
+      )}>
+        <button onClick={() => scrollToSection('home')} className="text-2xl font-medium text-foreground hover:text-primary">
+          {t.nav.home}
+        </button>
+        <button onClick={() => scrollToSection('about')} className="text-2xl font-medium text-foreground hover:text-primary">
+          {t.nav.about}
+        </button>
+        <button onClick={() => scrollToSection('priorities')} className="text-2xl font-medium text-foreground hover:text-primary">
+          {t.nav.priorities}
+        </button>
+        <button onClick={() => scrollToSection('services')} className="text-2xl font-medium text-foreground hover:text-primary">
+          {t.nav.services}
+        </button>
+        <button onClick={() => scrollToSection('contact')} className="text-2xl font-medium text-foreground hover:text-primary">
+          {t.nav.contact}
+        </button>
+        <Button 
+          variant="outline" 
+          size="lg" 
+          onClick={() => {
+            toggleLang();
+            setMobileMenuOpen(false);
+          }}
+          className="gap-2 mt-4"
+        >
+          <Globe className="h-5 w-5" />
+          {t.nav.langSwitch}
+        </Button>
+      </div>
 
       {/* Main Content */}
       <main className="flex-grow pt-20">
