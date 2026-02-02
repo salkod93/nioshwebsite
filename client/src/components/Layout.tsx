@@ -1,8 +1,14 @@
 import { useState, useEffect } from "react";
 import { content, Language } from "@/lib/content";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Globe } from "lucide-react";
+import { Menu, X, Globe, ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -51,7 +57,7 @@ export default function Layout({ children, lang, setLang }: LayoutProps) {
         )}
       >
         <div className="container flex items-center justify-between h-full">
-          {/* Logo */}
+          {/* Logo - Always on the right in RTL, left in LTR */}
           <div className="flex items-center gap-2 z-50 h-full">
             <img 
               src={lang === 'ar' ? "/images/logo-ar.png" : "/images/logo-en.png"} 
@@ -65,15 +71,46 @@ export default function Layout({ children, lang, setLang }: LayoutProps) {
             <button onClick={() => scrollToSection('home')} className="text-foreground/80 hover:text-primary font-medium transition-colors">
               {t.nav.home}
             </button>
-            <button onClick={() => scrollToSection('about')} className="text-foreground/80 hover:text-primary font-medium transition-colors">
-              {t.nav.about}
-            </button>
+
+            {/* About Dropdown */}
+            <DropdownMenu>
+              <DropdownMenuTrigger className="flex items-center gap-1 text-foreground/80 hover:text-primary font-medium transition-colors outline-none">
+                {t.nav.about}
+                <ChevronDown className="h-4 w-4" />
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align={isRTL ? "end" : "start"} className="w-56">
+                <DropdownMenuItem onClick={() => scrollToSection('about')}>
+                  {t.nav.aboutDropdown.overview}
+                </DropdownMenuItem>
+                <DropdownMenuItem>{t.nav.aboutDropdown.ceoMessage}</DropdownMenuItem>
+                <DropdownMenuItem>{t.nav.aboutDropdown.boardMembers}</DropdownMenuItem>
+                <DropdownMenuItem>{t.nav.aboutDropdown.boardRoles}</DropdownMenuItem>
+                <DropdownMenuItem>{t.nav.aboutDropdown.strategy}</DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+
             <button onClick={() => scrollToSection('priorities')} className="text-foreground/80 hover:text-primary font-medium transition-colors">
               {t.nav.priorities}
             </button>
-            <button onClick={() => scrollToSection('services')} className="text-foreground/80 hover:text-primary font-medium transition-colors">
-              {t.nav.services}
-            </button>
+
+            {/* Services Dropdown */}
+            <DropdownMenu>
+              <DropdownMenuTrigger className="flex items-center gap-1 text-foreground/80 hover:text-primary font-medium transition-colors outline-none">
+                {t.nav.services}
+                <ChevronDown className="h-4 w-4" />
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align={isRTL ? "end" : "start"} className="w-56">
+                <DropdownMenuItem onClick={() => scrollToSection('services')}>
+                  {t.nav.servicesDropdown.training}
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => scrollToSection('services')}>
+                  {t.nav.servicesDropdown.consultancy}
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => scrollToSection('services')}>
+                  {t.nav.servicesDropdown.qualification}
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
             
             <Button 
               variant="outline" 

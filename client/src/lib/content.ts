@@ -4,9 +4,21 @@ export const content = {
   en: {
     nav: {
       home: "Home",
-      about: "About Us",
+      about: "About the Institute",
+      aboutDropdown: {
+        overview: "About the Institute",
+        ceoMessage: "CEO's Message",
+        boardMembers: "Board of Directors",
+        boardRoles: "Board Roles and Powers",
+        strategy: "Strategic Direction"
+      },
       priorities: "Strategic Priorities",
-      services: "Services",
+      services: "Services & Products",
+      servicesDropdown: {
+        training: "Training",
+        consultancy: "Consultancy Services",
+        qualification: "Qualification Services"
+      },
       contact: "Contact",
       langSwitch: "العربية"
     },
@@ -97,9 +109,21 @@ export const content = {
   ar: {
     nav: {
       home: "الرئيسية",
-      about: "من نحن",
+      about: "عن المعهد",
+      aboutDropdown: {
+        overview: "نبذة عن المعهد",
+        ceoMessage: "كلمة الرئيس التنفيذي",
+        boardMembers: "أعضاء مجلس الإدارة",
+        boardRoles: "أدوار وصلاحيات المجلس",
+        strategy: "التوجه الاستراتيجي"
+      },
       priorities: "الأولويات الاستراتيجية",
-      services: "خدماتنا",
+      services: "الخدمات والمنتجات",
+      servicesDropdown: {
+        training: "تدريب",
+        consultancy: "خدمات استشارية",
+        qualification: "خدمات التأهيل"
+      },
       contact: "تواصل معنا",
       langSwitch: "English"
     },
