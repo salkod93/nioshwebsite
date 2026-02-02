@@ -64,7 +64,17 @@ export default function Home() {
             variants={fadeInUp}
             className="space-y-6"
           >
-            
+            {/* Mobile Logo - Visible only on mobile, above title */}
+            <div className="md:hidden w-full max-w-[200px] mb-6">
+              <div className="bg-white rounded-xl p-4 shadow-lg">
+                <img 
+                  src={lang === 'ar' ? "/images/logo-ar.png" : "/images/logo-en.png"} 
+                  alt="NIOSH Emblem" 
+                  className="w-full h-auto"
+                />
+              </div>
+            </div>
+
             <h1 className="text-4xl md:text-6xl font-bold leading-tight">
               {t.hero.title}
             </h1>
