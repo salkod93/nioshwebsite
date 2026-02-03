@@ -65,7 +65,7 @@ export default function Home() {
             className="space-y-8 flex flex-col justify-center"
           >
             {/* Mobile Hero Image - Visible only on mobile, above title */}
-            <div className="md:hidden w-full max-w-[200px] mb-8 mx-auto">
+            <div className="md:hidden w-full max-w-[220px] mb-8 mx-auto">
               <div className="relative">
                 <img 
                   src="/images/hero-image.png" 
@@ -98,7 +98,7 @@ export default function Home() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="relative hidden md:flex justify-center items-center h-full"
           >
-            <div className="relative z-10 w-full max-w-[350px] -mt-8">
+            <div className="relative z-10 w-full max-w-[385px] -mt-8">
               <img 
                 src="/images/hero-image.png" 
                 alt="Safety Helmet" 
