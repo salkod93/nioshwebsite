@@ -64,13 +64,13 @@ export default function Home() {
             variants={fadeInUp}
             className="space-y-6"
           >
-            {/* Mobile Logo - Visible only on mobile, above title */}
-            <div className="md:hidden w-full max-w-[200px] mb-6">
-              <div className="bg-white rounded-xl p-4 shadow-lg">
+            {/* Mobile Hero Image - Visible only on mobile, above title */}
+            <div className="md:hidden w-full max-w-[280px] mb-8 mx-auto">
+              <div className="relative">
                 <img 
-                  src={lang === 'ar' ? "/images/logo-ar.png" : "/images/logo-en.png"} 
-                  alt="NIOSH Emblem" 
-                  className="w-full h-auto"
+                  src="/images/hero-image.png" 
+                  alt="Safety Helmet" 
+                  className="w-full h-auto drop-shadow-2xl"
                 />
               </div>
             </div>
@@ -96,18 +96,17 @@ export default function Home() {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="relative hidden md:block"
+            className="relative hidden md:flex justify-center"
           >
-            <div className="relative z-10 bg-white rounded-2xl p-8 shadow-2xl">
+            <div className="relative z-10 w-full max-w-[500px]">
               <img 
-                src={lang === 'ar' ? "/images/logo-ar.png" : "/images/logo-en.png"} 
-                alt="NIOSH Emblem" 
-                className="w-full h-auto drop-shadow-sm"
+                src="/images/hero-image.png" 
+                alt="Safety Helmet" 
+                className="w-full h-auto drop-shadow-2xl"
               />
             </div>
-            {/* Decorative elements behind logo */}
-            <div className="absolute -inset-4 border border-white/10 rounded-3xl -z-10" />
-            <div className="absolute -inset-8 border border-white/5 rounded-[2rem] -z-20" />
+            {/* Decorative elements behind image */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-secondary/20 blur-3xl rounded-full -z-10" />
           </motion.div>
         </div>
       </section>
