@@ -65,7 +65,7 @@ export default function Home() {
             className="space-y-6"
           >
             {/* Mobile Hero Image - Visible only on mobile, above title */}
-            <div className="md:hidden w-full max-w-[280px] mb-8 mx-auto">
+            <div className="md:hidden w-full max-w-[200px] mb-8 mx-auto">
               <div className="relative">
                 <img 
                   src="/images/hero-image.png" 
@@ -98,7 +98,7 @@ export default function Home() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="relative hidden md:flex justify-center"
           >
-            <div className="relative z-10 w-full max-w-[500px]">
+            <div className="relative z-10 w-full max-w-[350px]">
               <img 
                 src="/images/hero-image.png" 
                 alt="Safety Helmet" 
@@ -240,27 +240,46 @@ export default function Home() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            className="grid md:grid-cols-2 gap-6"
+            className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
           >
             {t.services.items.map((service, index) => (
               <motion.div key={index} variants={fadeInUp}>
-                <Card className="h-full hover:shadow-lg transition-all duration-300 border-border/50 hover:border-secondary/30 group overflow-hidden">
-                  <div className="absolute top-0 left-0 w-1 h-full bg-secondary opacity-0 group-hover:opacity-100 transition-opacity" />
-                  <CardHeader className="flex flex-row items-start gap-4 pb-2">
-                    <div className="p-3 rounded-lg bg-secondary/5 text-secondary transition-colors duration-300 relative z-10">
-                      {serviceIcons[index]}
+                <Card className="h-full flex flex-col hover:shadow-lg transition-all duration-300 border-border/50 hover:border-secondary/30 group overflow-hidden bg-white">
+                  <CardHeader className="pb-4">
+                    <div className="w-12 h-12 rounded-full bg-secondary/5 flex items-center justify-center mb-4 text-secondary">
+                      <FileCheck className="w-6 h-6" />
                     </div>
-                    <div className="space-y-1">
-                      <CardTitle className="text-xl font-bold text-primary group-hover:text-secondary transition-colors">
-                        {service.title}
-                      </CardTitle>
-                    </div>
+                    <CardTitle className="text-lg font-bold text-primary leading-tight min-h-[3rem]">
+                      {service.title}
+                    </CardTitle>
                   </CardHeader>
-                  <CardContent>
-                    <p className="text-muted-foreground leading-relaxed">
+                  <CardContent className="flex-grow flex flex-col gap-4">
+                    <p className="text-sm text-muted-foreground leading-relaxed flex-grow">
                       {service.description}
                     </p>
                     
+                    <div className="flex flex-wrap gap-2 mt-auto">
+                      {service.tags?.map((tag, tagIndex) => (
+                        <span 
+                          key={tagIndex}
+                          className={`text-xs px-2 py-1 rounded border ${
+                            tag === 'individuals' || tag === 'أفراد'
+                              ? 'bg-red-50 text-red-700 border-red-100'
+                              : tag === 'government' || tag === 'حكومي'
+                              ? 'bg-green-50 text-green-700 border-green-100'
+                              : 'bg-blue-50 text-blue-700 border-blue-100'
+                          }`}
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+
+                    <Button 
+                      className="w-full mt-4 bg-[#3A5A40] hover:bg-[#3A5A40]/90 text-white"
+                    >
+                      {service.buttonText}
+                    </Button>
                   </CardContent>
                 </Card>
               </motion.div>

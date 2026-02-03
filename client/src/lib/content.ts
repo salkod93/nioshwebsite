@@ -24,7 +24,7 @@ export const content = {
     },
     hero: {
       title: "National Institute for Occupational Safety and Health",
-      subtitle: "Global leadership towards enabling an integrated national system for occupational safety and health.",
+      subtitle: "Providing an integrated national system for occupational safety and health services to act as a reference for enabling capabilities and enhancing a safe and sustainable work environment in the Kingdom of Saudi Arabia.",
       cta: "Explore Our Services"
     },
     about: {
@@ -81,23 +81,61 @@ export const content = {
       ]
     },
     services: {
-      title: "Our Services",
+      title: "Proposed Services",
       items: [
         {
-          title: "Professional Development & Awareness",
-          description: "Targeted, short-term online training programs designed for professionals and the general workforce to keep skills current and foster a culture of safety."
+          title: "Entry-level Employment Training",
+          description: "Comprehensive training programs designed for new employees to ensure foundational safety knowledge.",
+          tags: ["individuals", "works"],
+          buttonText: "Start the service"
         },
         {
-          title: "Certified Workforce Education",
-          description: "Professional Certificate programs and Diplomas designed to build a highly qualified workforce and meet market demand for OSH experts."
+          title: "Consultancy Services",
+          description: "Expert guidance and advisory services to help organizations maintain high safety standards.",
+          tags: ["government", "works"],
+          buttonText: "Start the service"
         },
         {
-          title: "Strategic OSH Consulting",
-          description: "Expert consulting services across all industrial sectors, assisting organizations in navigating regulations and implementing bespoke OSH strategies."
+          title: "Institutional Qualification and Training Services",
+          description: "Specialized programs for qualifying institutions and enhancing their safety protocols.",
+          tags: ["government", "works"],
+          buttonText: "Start the service"
         },
         {
-          title: "Accreditation & Quality Assurance",
-          description: "Governing body for OSH quality standards, managing accreditation for OSH Professionals, Service Providers, and Training Institutes."
+          title: "Assessment/Audit/Compliance",
+          description: "Rigorous assessment and auditing services to ensure full compliance with safety regulations.",
+          tags: ["government", "works"],
+          buttonText: "Start the service"
+        },
+        {
+          title: "Issuance of Certificates and Renewals",
+          description: "Official certification services for individuals and organizations meeting safety standards.",
+          tags: ["individuals", "works"],
+          buttonText: "Start the service"
+        },
+        {
+          title: "Professional Membership",
+          description: "Membership programs offering exclusive resources, networking, and professional development.",
+          tags: ["individuals"],
+          buttonText: "Start the service"
+        },
+        {
+          title: "Conferences and Exhibitions",
+          description: "Organizing and hosting major events to promote safety awareness and industry innovation.",
+          tags: ["government", "individuals"],
+          buttonText: "Start the service"
+        },
+        {
+          title: "Content Sales and Publications",
+          description: "Access to a wide range of educational materials, guides, and industry publications.",
+          tags: ["individuals", "works"],
+          buttonText: "Start the service"
+        },
+        {
+          title: "Research and Innovation Services",
+          description: "Supporting research initiatives to drive innovation in occupational safety and health.",
+          tags: ["government", "works"],
+          buttonText: "Start the service"
         }
       ]
     },
@@ -145,7 +183,7 @@ export const content = {
     },
     hero: {
       title: "المعهد الوطني للسلامة والصحة المهنية",
-      subtitle: "الريادة العالمية نحو تمكين نظام وطني متكامل للسلامة والصحة المهنية.",
+      subtitle: "توفير منظومة وطنية متكاملة لخدمات السلامة والصحة المهنية لتكون مرجعاً لتمكين القدرات وتعزيز بيئة عمل آمنة ومستدامة في المملكة العربية السعودية.",
       cta: "استكشف خدماتنا"
     },
     about: {
@@ -202,23 +240,61 @@ export const content = {
       ]
     },
     services: {
-      title: "خدماتنا",
+      title: "الخدمات المقترحة",
       items: [
         {
-          title: "التطوير المهني والتوعية",
-          description: "برامج تدريبية قصيرة وموجهة عبر الإنترنت مصممة للمحترفين والقوى العاملة العامة للحفاظ على المهارات وتعزيز ثقافة السلامة."
+          title: "التدريب المبتدئ بالتوظيف",
+          description: "برامج تدريبية شاملة مصممة للموظفين الجدد لضمان المعرفة الأساسية بالسلامة.",
+          tags: ["أفراد", "أعمال"],
+          buttonText: "ابدأ الخدمة"
         },
         {
-          title: "تعليم القوى العاملة المعتمد",
-          description: "برامج شهادات مهنية ودبلومات مصممة لبناء قوى عاملة مؤهلة تأهيلاً عالياً وتلبية طلب السوق لخبراء السلامة والصحة المهنية."
+          title: "خدمات استشارية",
+          description: "توجيهات الخبراء والخدمات الاستشارية لمساعدة المؤسسات في الحفاظ على معايير سلامة عالية.",
+          tags: ["حكومي", "أعمال"],
+          buttonText: "ابدأ الخدمة"
         },
         {
-          title: "استشارات السلامة والصحة المهنية الاستراتيجية",
-          description: "خدمات استشارية متخصصة عبر جميع القطاعات الصناعية، لمساعدة المنظمات في التعامل مع اللوائح وتنفيذ استراتيجيات مخصصة."
+          title: "خدمات التأهيل والتدريب المؤسسي",
+          description: "برامج متخصصة لتأهيل المؤسسات وتعزيز بروتوكولات السلامة لديها.",
+          tags: ["حكومي", "أعمال"],
+          buttonText: "ابدأ الخدمة"
         },
         {
-          title: "الاعتماد وضمان الجودة",
-          description: "الهيئة الحاكمة لمعايير الجودة، وإدارة عملية الاعتماد لمحترفي السلامة، ومقدمي الخدمات، ومعاهد التدريب."
+          title: "تقييم/تدقيق/امتثال",
+          description: "خدمات تقييم وتدقيق صارمة لضمان الامتثال الكامل للوائح السلامة.",
+          tags: ["حكومي", "أعمال"],
+          buttonText: "ابدأ الخدمة"
+        },
+        {
+          title: "اصدار الشهادات والتجديد",
+          description: "خدمات إصدار الشهادات الرسمية للأفراد والمؤسسات التي تستوفي معايير السلامة.",
+          tags: ["أفراد", "أعمال"],
+          buttonText: "ابدأ الخدمة"
+        },
+        {
+          title: "العضوية المهنية",
+          description: "برامج عضوية تقدم موارد حصرية، وفرص للتواصل، وتطوير مهني.",
+          tags: ["أفراد"],
+          buttonText: "ابدأ الخدمة"
+        },
+        {
+          title: "المؤتمرات والمعارض",
+          description: "تنظيم واستضافة الفعاليات الكبرى لتعزيز الوعي بالسلامة والابتكار في الصناعة.",
+          tags: ["حكومي", "أفراد"],
+          buttonText: "ابدأ الخدمة"
+        },
+        {
+          title: "بيع المحتوى والمطبوعات",
+          description: "الوصول إلى مجموعة واسعة من المواد التعليمية والأدلة والمنشورات الصناعية.",
+          tags: ["أفراد", "أعمال"],
+          buttonText: "ابدأ الخدمة"
+        },
+        {
+          title: "خدمات البحث والابتكار",
+          description: "دعم المبادرات البحثية لدفع الابتكار في مجال السلامة والصحة المهنية.",
+          tags: ["حكومي", "أعمال"],
+          buttonText: "ابدأ الخدمة"
         }
       ]
     },
