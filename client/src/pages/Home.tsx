@@ -57,12 +57,12 @@ export default function Home() {
           </svg>
         </div>
 
-        <div className="container relative z-10 grid md:grid-cols-2 gap-12 items-center pt-20">
+        <div className="container relative z-10 grid md:grid-cols-2 gap-12 items-center min-h-[70vh]">
           <motion.div 
             initial="hidden"
             animate="visible"
             variants={fadeInUp}
-            className="space-y-6"
+            className="space-y-8 flex flex-col justify-center"
           >
             {/* Mobile Hero Image - Visible only on mobile, above title */}
             <div className="md:hidden w-full max-w-[200px] mb-8 mx-auto">
@@ -75,10 +75,10 @@ export default function Home() {
               </div>
             </div>
 
-            <h1 className="text-4xl md:text-6xl font-bold leading-tight">
+            <h1 className="text-5xl md:text-7xl font-extrabold leading-tight tracking-tight">
               {t.hero.title}
             </h1>
-            <p className="text-lg md:text-xl text-white/80 max-w-lg leading-relaxed">
+            <p className="text-xl md:text-2xl font-medium text-white/90 max-w-lg leading-relaxed">
               {t.hero.subtitle}
             </p>
             <div className="flex flex-wrap gap-4 pt-4">
@@ -96,9 +96,9 @@ export default function Home() {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="relative hidden md:flex justify-center"
+            className="relative hidden md:flex justify-center items-center h-full"
           >
-            <div className="relative z-10 w-full max-w-[350px]">
+            <div className="relative z-10 w-full max-w-[350px] -mt-8">
               <img 
                 src="/images/hero-image.png" 
                 alt="Safety Helmet" 
