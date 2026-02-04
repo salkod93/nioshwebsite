@@ -376,8 +376,8 @@ export default function Home() {
                     <MapPin className="w-6 h-6 text-secondary" />
                   </div>
                   <div>
-                    <h3 className="font-bold text-lg mb-1">{t.contact.address.label}</h3>
-                    <p className="text-white/80">{t.contact.address.value}</p>
+                    <h3 className="font-bold text-lg mb-1" style={{ marginRight: "8px" }}>{t.contact.address.label}</h3>
+                    <p className="text-white/80" style={{ marginRight: "10px" }}>{t.contact.address.value}</p>
                   </div>
                 </div>
 
@@ -386,8 +386,8 @@ export default function Home() {
                     <Mail className="w-6 h-6 text-secondary" />
                   </div>
                   <div>
-                    <h3 className="font-bold text-lg mb-1">{t.contact.email.label}</h3>
-                    <p className="text-white/80">{t.contact.email.value}</p>
+                    <h3 className="font-bold text-lg mb-1" style={{ marginRight: "8px" }}>{t.contact.email.label}</h3>
+                    <p className="text-white/80" style={{ marginRight: "10px" }}>{t.contact.email.value}</p>
                   </div>
                 </div>
 
@@ -396,8 +396,8 @@ export default function Home() {
                     <Phone className="w-6 h-6 text-secondary" />
                   </div>
                   <div>
-                    <h3 className="font-bold text-lg mb-1">{t.contact.phone.label}</h3>
-                    <p className="text-white/80">{t.contact.phone.value}</p>
+                    <h3 className="font-bold text-lg mb-1" style={{ borderRadius: "8px", marginRight: "8px" }}>{t.contact.phone.label}</h3>
+                    <p className="text-white/80" style={{ marginRight: "10px" }}>0000 000 00 966+</p>
                   </div>
                 </div>
               </div>
