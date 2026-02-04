@@ -73,9 +73,6 @@ export default function Home() {
           {/* Texture Pattern Top */}
           <div className="absolute top-0 left-0 w-full h-12 z-20" style={{ backgroundImage: 'url(/images/texture-pattern.png)', backgroundRepeat: 'repeat-x', backgroundSize: 'contain' }} />
           
-          {/* Texture Pattern Bottom */}
-          <div className="absolute bottom-0 left-0 w-full h-12 z-20" style={{ backgroundImage: 'url(/images/texture-pattern.png)', backgroundRepeat: 'repeat-x', backgroundSize: 'contain' }} />
-          
           <svg className="absolute bottom-0 left-0 w-full h-24 text-background fill-current" viewBox="0 0 1440 100" preserveAspectRatio="none">
             <path d="M0,100 C320,100 420,0 720,0 C1020,0 1120,100 1440,100 Z" />
           </svg>
