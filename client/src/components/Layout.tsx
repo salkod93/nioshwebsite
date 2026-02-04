@@ -210,8 +210,11 @@ export default function Layout({ children, lang, setLang }: LayoutProps) {
       </main>
 
       {/* Footer */}
-      <footer className="bg-primary text-primary-foreground py-12 mt-20">
-        <div className="container">
+      <footer className="bg-primary text-primary-foreground py-12 mt-20 relative overflow-hidden">
+        {/* Texture Pattern */}
+        <div className="absolute bottom-0 left-0 w-full h-12 z-0 opacity-20" style={{ backgroundImage: 'url(/images/texture-pattern.png)', backgroundRepeat: 'repeat-x', backgroundSize: 'auto 100%' }} />
+        
+        <div className="container relative z-10">
           <div className="flex flex-col md:flex-row justify-between items-center gap-6">
             <div className="flex flex-col items-center md:items-start gap-4">
               <img 
