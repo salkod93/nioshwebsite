@@ -10,7 +10,8 @@ export const content = {
         ceoMessage: "CEO's Message",
         boardMembers: "Board of Directors",
         boardRoles: "Board Roles and Powers",
-        strategy: "Strategic Direction"
+        sla: "Service Level Agreement",
+        structure: "Organizational Structure"
       },
       priorities: "Strategic Priorities",
       services: "Services & Products",
@@ -262,7 +263,8 @@ export const content = {
         ceoMessage: "كلمة الرئيس التنفيذي",
         boardMembers: "أعضاء مجلس الإدارة",
         boardRoles: "أدوار وصلاحيات المجلس",
-        strategy: "التوجه الاستراتيجي"
+        sla: "اتفاقية مستوى الخدمة",
+        structure: "الهيكل التنظيمي"
       },
       priorities: "الأولويات الاستراتيجية",
       services: "الخدمات والمنتجات",

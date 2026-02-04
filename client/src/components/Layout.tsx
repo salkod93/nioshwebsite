@@ -85,7 +85,8 @@ export default function Layout({ children, lang, setLang }: LayoutProps) {
                 <DropdownMenuItem>{t.nav.aboutDropdown.ceoMessage}</DropdownMenuItem>
                 <DropdownMenuItem>{t.nav.aboutDropdown.boardMembers}</DropdownMenuItem>
                 <DropdownMenuItem>{t.nav.aboutDropdown.boardRoles}</DropdownMenuItem>
-                <DropdownMenuItem>{t.nav.aboutDropdown.strategy}</DropdownMenuItem>
+                <DropdownMenuItem>{t.nav.aboutDropdown.sla}</DropdownMenuItem>
+                <DropdownMenuItem>{t.nav.aboutDropdown.structure}</DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
 
