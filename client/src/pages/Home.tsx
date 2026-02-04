@@ -183,6 +183,35 @@ export default function Home() {
               </p>
             </motion.div>
           </div>
+
+          {/* Institute in Numbers */}
+          <motion.div 
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeInUp}
+            className="mt-24"
+          >
+            <div className="text-center mb-12 space-y-4">
+              <h2 className="text-3xl md:text-4xl font-bold text-primary">
+                {t.about.stats.title}
+              </h2>
+              <div className="w-20 h-1 bg-accent mx-auto rounded-full" />
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {t.about.stats.items.map((item, index) => (
+                <div key={index} className="bg-white p-8 rounded-2xl shadow-sm border border-border/50 hover:shadow-md transition-all text-center group">
+                  <div className="text-4xl md:text-5xl font-bold text-secondary mb-4 group-hover:scale-110 transition-transform duration-300">
+                    {item.value}
+                  </div>
+                  <p className="text-muted-foreground font-medium leading-relaxed">
+                    {item.label}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </motion.div>
         </div>
       </section>
 

@@ -51,6 +51,17 @@ export const content = {
       vision: {
         title: "Our Vision",
         text: "Global leadership towards enabling an integrated national system for occupational safety and health."
+      },
+      stats: {
+        title: "Institute in Numbers",
+        items: [
+          { value: "0", label: "Hours without work injury" },
+          { value: "0", label: "Accreditations from global quality systems (ISO 9001, ISO 14001, ISO 45001)" },
+          { value: "0", label: "Short training course" },
+          { value: "0", label: "Diplomas developed" },
+          { value: "0", label: "Student and trainee in diploma programs" },
+          { value: "0% | 0%", label: "Trainee satisfaction and partner satisfaction with training quality and outcomes" }
+        ]
       }
     },
     priorities: {
@@ -303,7 +314,18 @@ export const content = {
       },
       vision: {
         title: "رؤيتنا",
-        text: "الريادة العالمية نحو تمكين نظام وطني متكامل للسلامة والصحة المهنية."
+        text: "الريادة العالمية نحو تمكين منظومة وطنية متكاملة للسلامة والصحة المهنية."
+      },
+      stats: {
+        title: "الأكاديمية بالأرقام",
+        items: [
+          { value: "0", label: "ساعة بدون إصابة عمل" },
+          { value: "0", label: "اعتمادات من أنظمة الجودة العالمية (ISO 9001, ISO 14001, ISO 45001)" },
+          { value: "0", label: "دورة تدريبية قصيرة" },
+          { value: "0", label: "دبلومات تم تطويرها" },
+          { value: "0", label: "طالب وطالبة تحت التدريب في برامج الدبلوم" },
+          { value: "0% | 0%", label: "رضا المتدربين و رضا الشركاء عن جودة التدريب والمخرجات" }
+        ]
       }
     },
     priorities: {
