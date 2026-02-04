@@ -214,9 +214,9 @@ export default function Layout({ children, lang, setLang }: LayoutProps) {
           <div className="flex flex-col md:flex-row justify-between items-center gap-6">
             <div className="flex flex-col items-center md:items-start gap-4">
               <img 
-                src="/images/logo-en.png" 
+                src={lang === 'ar' ? "/images/logo-ar-white.png" : "/images/logo-en.png"} 
                 alt="NIOSH Logo" 
-                className="h-12 w-auto brightness-0 invert opacity-90"
+                className={cn("h-12 w-auto opacity-90", lang === 'en' && "brightness-0 invert")}
               />
               <p className="text-primary-foreground/80 text-sm max-w-md text-center md:text-start">
                 {t.about.vision.text}
