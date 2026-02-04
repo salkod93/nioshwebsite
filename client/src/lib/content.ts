@@ -32,7 +32,7 @@ export const content = {
       langSwitch: "العربية"
     },
     hero: {
-      title: "National Institute for Occupational Safety and Health",
+      title: "",
       subtitle: "Providing an integrated national system for occupational safety and health services to act as a reference for enabling capabilities and enhancing a safe and sustainable work environment in the Kingdom of Saudi Arabia.",
       cta: "Explore Our Services"
     },
