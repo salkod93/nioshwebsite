@@ -71,7 +71,7 @@ export default function Home() {
           <div className="absolute -top-[20%] -right-[10%] w-[60vw] h-[60vw] rounded-full bg-secondary/10 blur-3xl" />
           <div className="absolute top-[40%] -left-[10%] w-[40vw] h-[40vw] rounded-full bg-accent/5 blur-3xl" />
           {/* Texture Pattern */}
-          <div className="absolute bottom-0 left-0 w-full h-12 z-20" style={{ backgroundImage: 'url(/images/texture-pattern.png)', backgroundRepeat: 'repeat-x', backgroundSize: 'auto 100%' }} />
+          <div className="absolute top-0 left-0 w-full h-12 z-20" style={{ backgroundImage: 'url(/images/texture-pattern.png)', backgroundRepeat: 'repeat-x', backgroundSize: 'auto 100%' }} />
           <svg className="absolute bottom-0 left-0 w-full h-24 text-background fill-current" viewBox="0 0 1440 100" preserveAspectRatio="none">
             <path d="M0,100 C320,100 420,0 720,0 C1020,0 1120,100 1440,100 Z" />
           </svg>
