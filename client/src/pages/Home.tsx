@@ -26,12 +26,19 @@ export default function Home() {
     }
   };
 
-  const serviceIcons = [
-    <Users className="h-10 w-10 text-secondary" />,
-    <GraduationCap className="h-10 w-10 text-secondary" />,
-    <Shield className="h-10 w-10 text-secondary" />,
-    <FileCheck className="h-10 w-10 text-secondary" />
-  ];
+  const serviceIcons = {
+    consultancy: <Users className="h-10 w-10 text-secondary" />,
+    training: <GraduationCap className="h-10 w-10 text-secondary" />,
+    other: <Shield className="h-10 w-10 text-secondary" />
+  };
+
+  const mediaIcons = {
+    Newspaper: <FileCheck className="h-6 w-6" />,
+    FileText: <FileCheck className="h-6 w-6" />,
+    Video: <Laptop className="h-6 w-6" />,
+    Image: <Target className="h-6 w-6" />,
+    Library: <BookOpen className="h-6 w-6" />
+  };
 
   const priorityIcons = [
     <GraduationCap className="h-6 w-6" />,
@@ -240,56 +247,64 @@ export default function Home() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
+            className="grid md:grid-cols-3 gap-8"
           >
-            {t.services.items.map((service, index) => (
-              <motion.div key={index} variants={fadeInUp}>
-                <Card className="h-full flex flex-col hover:shadow-lg transition-all duration-300 border-border/50 hover:border-secondary/30 group overflow-hidden bg-white">
-                  <CardHeader className="pb-4">
-                    <div className="w-12 h-12 rounded-full bg-secondary/5 flex items-center justify-center mb-4 text-secondary">
-                      <FileCheck className="w-6 h-6" />
+            {Object.entries(t.services.categories).map(([key, category], index) => (
+              <motion.div key={index} variants={fadeInUp} className="h-full">
+                <div className="group relative h-full bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-500 overflow-hidden border border-border/50">
+                  {/* Default State */}
+                  <div className="p-8 h-full flex flex-col items-center text-center transition-all duration-500 group-hover:opacity-0 group-hover:translate-y-[-20px]">
+                    <div className="w-20 h-20 rounded-2xl bg-secondary/5 flex items-center justify-center mb-6 text-secondary transform group-hover:scale-110 transition-transform duration-500">
+                      {serviceIcons[key as keyof typeof serviceIcons]}
                     </div>
-                    <CardTitle className="text-lg font-bold text-primary leading-tight min-h-[3rem]">
-                      {service.title}
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent className="flex-grow flex flex-col gap-4">
-                    <p className="text-sm text-muted-foreground leading-relaxed flex-grow">
-                      {service.description}
+                    <h3 className="text-2xl font-bold text-primary mb-4">{category.title}</h3>
+                    <p className="text-muted-foreground leading-relaxed">
+                      {category.description}
                     </p>
-                    
-                    <div className="flex flex-wrap gap-2 mt-auto">
-                      {service.tags?.map((tag, tagIndex) => (
-                        <span 
-                          key={tagIndex}
-                          className={`text-xs px-2 py-1 rounded border ${
-                            tag === 'individuals' || tag === 'أفراد'
-                              ? 'bg-red-50 text-red-700 border-red-100'
-                              : tag === 'government' || tag === 'حكومي'
-                              ? 'bg-green-50 text-green-700 border-green-100'
-                              : 'bg-blue-50 text-blue-700 border-blue-100'
-                          }`}
-                        >
-                          {tag}
-                        </span>
+                    <div className="mt-auto pt-8">
+                      <span className="inline-flex items-center text-secondary font-semibold">
+                        {isRTL ? <ArrowLeft className="mr-2 h-5 w-5" /> : null}
+                        {t.hero.cta}
+                        {!isRTL ? <ArrowRight className="ml-2 h-5 w-5" /> : null}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Hover State - Reveal Services */}
+                  <div className="absolute inset-0 bg-primary p-6 flex flex-col opacity-0 translate-y-[20px] group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 z-10 overflow-y-auto">
+                    <h3 className="text-xl font-bold text-white mb-6 pb-4 border-b border-white/10">
+                      {category.title}
+                    </h3>
+                    <div className="space-y-4">
+                      {category.items.map((item: any, idx: number) => (
+                        <div key={idx} className="bg-white/5 p-4 rounded-lg hover:bg-white/10 transition-colors cursor-pointer group/item">
+                          <h4 className="font-bold text-white mb-2 flex items-center justify-between">
+                            {item.title}
+                            {isRTL ? 
+                              <ArrowLeft className="h-4 w-4 opacity-0 group-hover/item:opacity-100 transition-opacity" /> : 
+                              <ArrowRight className="h-4 w-4 opacity-0 group-hover/item:opacity-100 transition-opacity" />
+                            }
+                          </h4>
+                          <div className="flex flex-wrap gap-2 mt-2">
+                            {item.tags?.map((tag: string, tagIdx: number) => (
+                              <span key={tagIdx} className="text-[10px] px-2 py-0.5 rounded bg-white/10 text-white/80">
+                                {tag}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
                       ))}
                     </div>
-
-                    <Button 
-                      className="w-full mt-4 bg-[#3A5A40] hover:bg-[#3A5A40]/90 text-white"
-                    >
-                      {service.buttonText}
-                    </Button>
-                  </CardContent>
-                </Card>
+                  </div>
+                </div>
               </motion.div>
             ))}
           </motion.div>
         </div>
       </section>
 
-      {/* Contact Section */}
-      <section id="contact" className="py-24 bg-background relative">
+      {/* Media Center Section */}
+      <section id="media-center" className="py-24 bg-background relative">
         <div className="container">
           <motion.div 
             initial="hidden"
@@ -299,16 +314,44 @@ export default function Home() {
             className="text-center mb-16 space-y-4"
           >
             <h2 className="text-3xl md:text-4xl font-bold text-primary">
-              {t.contact.title}
+              {t.mediaCenter.title}
             </h2>
-            <div className="w-20 h-1 bg-accent mx-auto rounded-full" />
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              {t.contact.subtitle}
-            </p>
+            <div className="w-20 h-1 bg-secondary mx-auto rounded-full" />
           </motion.div>
 
-          <div className="grid md:grid-cols-2 gap-12 items-start">
-            {/* Contact Info */}
+          <motion.div 
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="grid sm:grid-cols-2 lg:grid-cols-5 gap-6"
+          >
+            {t.mediaCenter.items.map((item, index) => (
+              <motion.div key={index} variants={fadeInUp}>
+                <Card className="h-full hover:shadow-lg transition-all duration-300 border-border/50 hover:border-primary/30 group cursor-pointer">
+                  <CardContent className="p-6 flex flex-col items-center text-center h-full">
+                    <div className="w-16 h-16 rounded-full bg-primary/5 group-hover:bg-primary/10 flex items-center justify-center mb-6 text-primary transition-colors duration-300">
+                      {mediaIcons[item.icon as keyof typeof mediaIcons]}
+                    </div>
+                    <h3 className="text-lg font-bold text-primary mb-3 group-hover:text-secondary transition-colors">
+                      {item.title}
+                    </h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                      {item.description}
+                    </p>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Contact Section */}
+      <section id="contact" className="py-24 bg-primary text-white relative overflow-hidden">
+        <div className="absolute inset-0 bg-[url('/images/pattern.png')] opacity-10 mix-blend-overlay" />
+        <div className="container relative z-10">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
             <motion.div 
               initial="hidden"
               whileInView="visible"
@@ -316,62 +359,102 @@ export default function Home() {
               variants={fadeInUp}
               className="space-y-8"
             >
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center text-primary shrink-0">
-                  <MapPin className="w-6 h-6" />
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold text-primary mb-2">{t.contact.address.label}</h3>
-                  <p className="text-muted-foreground">{t.contact.address.value}</p>
-                </div>
+              <div className="space-y-4">
+                <h2 className="text-3xl md:text-4xl font-bold">
+                  {t.contact.title}
+                </h2>
+                <div className="w-20 h-1 bg-secondary rounded-full" />
+                <p className="text-lg text-white/80">
+                  {t.contact.subtitle}
+                </p>
               </div>
 
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center text-primary shrink-0">
-                  <Mail className="w-6 h-6" />
+              <div className="space-y-6">
+                <div className="flex items-start space-x-4 rtl:space-x-reverse">
+                  <div className="w-12 h-12 rounded-lg bg-white/10 flex items-center justify-center flex-shrink-0">
+                    <MapPin className="w-6 h-6 text-secondary" />
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-lg mb-1">{t.contact.address.label}</h3>
+                    <p className="text-white/80">{t.contact.address.value}</p>
+                  </div>
                 </div>
-                <div>
-                  <h3 className="text-xl font-bold text-primary mb-2">{t.contact.email.label}</h3>
-                  <p className="text-muted-foreground">{t.contact.email.value}</p>
-                </div>
-              </div>
 
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center text-primary shrink-0">
-                  <Phone className="w-6 h-6" />
+                <div className="flex items-start space-x-4 rtl:space-x-reverse">
+                  <div className="w-12 h-12 rounded-lg bg-white/10 flex items-center justify-center flex-shrink-0">
+                    <Mail className="w-6 h-6 text-secondary" />
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-lg mb-1">{t.contact.email.label}</h3>
+                    <p className="text-white/80">{t.contact.email.value}</p>
+                  </div>
                 </div>
-                <div>
-                  <h3 className="text-xl font-bold text-primary mb-2">{t.contact.phone.label}</h3>
-                  <p className="text-muted-foreground dir-ltr">{t.contact.phone.value}</p>
+
+                <div className="flex items-start space-x-4 rtl:space-x-reverse">
+                  <div className="w-12 h-12 rounded-lg bg-white/10 flex items-center justify-center flex-shrink-0">
+                    <Phone className="w-6 h-6 text-secondary" />
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-lg mb-1">{t.contact.phone.label}</h3>
+                    <p className="text-white/80">{t.contact.phone.value}</p>
+                  </div>
                 </div>
               </div>
             </motion.div>
 
-            {/* Map Placeholder */}
             <motion.div 
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
               variants={fadeInUp}
-              className="h-[400px] bg-muted rounded-2xl overflow-hidden relative border border-border"
+              className="bg-white p-8 rounded-2xl shadow-xl text-primary"
             >
-              <div className="absolute inset-0 flex items-center justify-center bg-muted/50">
-                <div className="text-center space-y-2">
-                  <MapPin className="w-12 h-12 text-muted-foreground/50 mx-auto" />
-                  <p className="text-muted-foreground font-medium">Map Location Placeholder</p>
-                  <p className="text-sm text-muted-foreground/70">Riyadh, Saudi Arabia</p>
+              <form className="space-y-6">
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium">
+                      {lang === 'en' ? 'First Name' : 'الاسم الأول'}
+                    </label>
+                    <input 
+                      type="text" 
+                      className="w-full px-4 py-3 rounded-lg border border-border focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium">
+                      {lang === 'en' ? 'Last Name' : 'الاسم الأخير'}
+                    </label>
+                    <input 
+                      type="text" 
+                      className="w-full px-4 py-3 rounded-lg border border-border focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
+                    />
+                  </div>
                 </div>
-              </div>
-              {/* Actual map iframe would go here */}
-              <iframe 
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d232047.8285257372!2d46.542335640625!3d24.725191699999996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e2f03890d489399%3A0xba974d1c98e79fd5!2sRiyadh%20Saudi%20Arabia!5e0!3m2!1sen!2sus!4v1706543210000!5m2!1sen!2sus" 
-                width="100%" 
-                height="100%" 
-                style={{ border: 0, filter: 'grayscale(100%) opacity(0.8)' }} 
-                allowFullScreen 
-                loading="lazy" 
-                referrerPolicy="no-referrer-when-downgrade"
-              />
+                
+                <div className="space-y-2">
+                  <label className="text-sm font-medium">
+                    {lang === 'en' ? 'Email Address' : 'البريد الإلكتروني'}
+                  </label>
+                  <input 
+                    type="email" 
+                    className="w-full px-4 py-3 rounded-lg border border-border focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <label className="text-sm font-medium">
+                    {lang === 'en' ? 'Message' : 'الرسالة'}
+                  </label>
+                  <textarea 
+                    rows={4}
+                    className="w-full px-4 py-3 rounded-lg border border-border focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all resize-none"
+                  />
+                </div>
+
+                <Button className="w-full bg-primary hover:bg-primary/90 text-white h-12 text-lg">
+                  {lang === 'en' ? 'Send Message' : 'إرسال الرسالة'}
+                </Button>
+              </form>
             </motion.div>
           </div>
         </div>

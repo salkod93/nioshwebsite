@@ -15,9 +15,17 @@ export const content = {
       priorities: "Strategic Priorities",
       services: "Services & Products",
       servicesDropdown: {
-        training: "Training",
+        training: "Training Services",
         consultancy: "Consultancy Services",
-        qualification: "Qualification Services"
+        other: "Other Services"
+      },
+      mediaCenter: "Media Center",
+      mediaCenterDropdown: {
+        news: "News",
+        reports: "Reports",
+        videoGallery: "Video Gallery",
+        photoGallery: "Photo Gallery",
+        digitalLibrary: "Digital Library"
       },
       contact: "Contact Us",
       langSwitch: "العربية"
@@ -81,61 +89,109 @@ export const content = {
       ]
     },
     services: {
-      title: "Proposed Services",
-      items: [
-        {
-          title: "Entry-level Employment Training",
-          description: "Comprehensive training programs designed for new employees to ensure foundational safety knowledge.",
-          tags: ["individuals", "works"],
-          buttonText: "Start the service"
-        },
-        {
+      title: "Services & Products",
+      categories: {
+        consultancy: {
           title: "Consultancy Services",
           description: "Expert guidance and advisory services to help organizations maintain high safety standards.",
-          tags: ["government", "works"],
-          buttonText: "Start the service"
+          items: [
+            {
+              title: "Consultancy Services",
+              description: "Expert guidance and advisory services to help organizations maintain high safety standards.",
+              tags: ["government", "works"],
+              buttonText: "Start the service"
+            },
+            {
+              title: "Assessment/Audit/Compliance",
+              description: "Rigorous assessment and auditing services to ensure full compliance with safety regulations.",
+              tags: ["government", "works"],
+              buttonText: "Start the service"
+            },
+            {
+              title: "Research and Innovation Services",
+              description: "Supporting research initiatives to drive innovation in occupational safety and health.",
+              tags: ["government", "works"],
+              buttonText: "Start the service"
+            }
+          ]
+        },
+        training: {
+          title: "Training Services",
+          description: "Comprehensive training programs designed for individuals and institutions.",
+          items: [
+            {
+              title: "Entry-level Employment Training",
+              description: "Comprehensive training programs designed for new employees to ensure foundational safety knowledge.",
+              tags: ["individuals", "works"],
+              buttonText: "Start the service"
+            },
+            {
+              title: "Institutional Qualification and Training Services",
+              description: "Specialized programs for qualifying institutions and enhancing their safety protocols.",
+              tags: ["government", "works"],
+              buttonText: "Start the service"
+            }
+          ]
+        },
+        other: {
+          title: "Other Services",
+          description: "A wide range of additional services including certification, membership, and events.",
+          items: [
+            {
+              title: "Issuance of Certificates and Renewals",
+              description: "Official certification services for individuals and organizations meeting safety standards.",
+              tags: ["individuals", "works"],
+              buttonText: "Start the service"
+            },
+            {
+              title: "Professional Membership",
+              description: "Membership programs offering exclusive resources, networking, and professional development.",
+              tags: ["individuals"],
+              buttonText: "Start the service"
+            },
+            {
+              title: "Conferences and Exhibitions",
+              description: "Organizing and hosting major events to promote safety awareness and industry innovation.",
+              tags: ["government", "individuals"],
+              buttonText: "Start the service"
+            },
+            {
+              title: "Content Sales and Publications",
+              description: "Access to a wide range of educational materials, guides, and industry publications.",
+              tags: ["individuals", "works"],
+              buttonText: "Start the service"
+            }
+          ]
+        }
+      }
+    },
+    mediaCenter: {
+      title: "Media Center",
+      items: [
+        {
+          title: "News",
+          description: "Latest updates and announcements from NIOSH.",
+          icon: "Newspaper"
         },
         {
-          title: "Institutional Qualification and Training Services",
-          description: "Specialized programs for qualifying institutions and enhancing their safety protocols.",
-          tags: ["government", "works"],
-          buttonText: "Start the service"
+          title: "Reports",
+          description: "In-depth reports and analysis on occupational safety.",
+          icon: "FileText"
         },
         {
-          title: "Assessment/Audit/Compliance",
-          description: "Rigorous assessment and auditing services to ensure full compliance with safety regulations.",
-          tags: ["government", "works"],
-          buttonText: "Start the service"
+          title: "Video Gallery",
+          description: "Watch our latest videos and event highlights.",
+          icon: "Video"
         },
         {
-          title: "Issuance of Certificates and Renewals",
-          description: "Official certification services for individuals and organizations meeting safety standards.",
-          tags: ["individuals", "works"],
-          buttonText: "Start the service"
+          title: "Photo Gallery",
+          description: "Browse photos from our events and activities.",
+          icon: "Image"
         },
         {
-          title: "Professional Membership",
-          description: "Membership programs offering exclusive resources, networking, and professional development.",
-          tags: ["individuals"],
-          buttonText: "Start the service"
-        },
-        {
-          title: "Conferences and Exhibitions",
-          description: "Organizing and hosting major events to promote safety awareness and industry innovation.",
-          tags: ["government", "individuals"],
-          buttonText: "Start the service"
-        },
-        {
-          title: "Content Sales and Publications",
-          description: "Access to a wide range of educational materials, guides, and industry publications.",
-          tags: ["individuals", "works"],
-          buttonText: "Start the service"
-        },
-        {
-          title: "Research and Innovation Services",
-          description: "Supporting research initiatives to drive innovation in occupational safety and health.",
-          tags: ["government", "works"],
-          buttonText: "Start the service"
+          title: "Digital Library",
+          description: "Access our comprehensive collection of digital resources.",
+          icon: "Library"
         }
       ]
     },
@@ -174,9 +230,17 @@ export const content = {
       priorities: "الأولويات الاستراتيجية",
       services: "الخدمات والمنتجات",
       servicesDropdown: {
-        training: "تدريب",
+        training: "خدمات التدريب",
         consultancy: "خدمات استشارية",
-        qualification: "خدمات التأهيل"
+        other: "خدمات أخرى"
+      },
+      mediaCenter: "المركز الإعلامي",
+      mediaCenterDropdown: {
+        news: "الأخبار",
+        reports: "التقارير",
+        videoGallery: "مكتبة الفيديو",
+        photoGallery: "مكتبة الصور",
+        digitalLibrary: "المكتبة الرقمية"
       },
       contact: "تواصل معنا",
       langSwitch: "English"
@@ -241,60 +305,108 @@ export const content = {
     },
     services: {
       title: "الخدمات والمنتجات",
-      items: [
-        {
-          title: "التدريب المبتدئ بالتوظيف",
-          description: "برامج تدريبية شاملة مصممة للموظفين الجدد لضمان المعرفة الأساسية بالسلامة.",
-          tags: ["أفراد", "أعمال"],
-          buttonText: "ابدأ الخدمة"
-        },
-        {
+      categories: {
+        consultancy: {
           title: "خدمات استشارية",
           description: "توجيهات الخبراء والخدمات الاستشارية لمساعدة المؤسسات في الحفاظ على معايير سلامة عالية.",
-          tags: ["حكومي", "أعمال"],
-          buttonText: "ابدأ الخدمة"
+          items: [
+            {
+              title: "خدمات استشارية",
+              description: "توجيهات الخبراء والخدمات الاستشارية لمساعدة المؤسسات في الحفاظ على معايير سلامة عالية.",
+              tags: ["حكومي", "أعمال"],
+              buttonText: "ابدأ الخدمة"
+            },
+            {
+              title: "تقييم/تدقيق/امتثال",
+              description: "خدمات تقييم وتدقيق صارمة لضمان الامتثال الكامل للوائح السلامة.",
+              tags: ["حكومي", "أعمال"],
+              buttonText: "ابدأ الخدمة"
+            },
+            {
+              title: "خدمات البحث والابتكار",
+              description: "دعم المبادرات البحثية لدفع الابتكار في مجال السلامة والصحة المهنية.",
+              tags: ["حكومي", "أعمال"],
+              buttonText: "ابدأ الخدمة"
+            }
+          ]
+        },
+        training: {
+          title: "خدمات التدريب",
+          description: "برامج تدريبية شاملة مصممة للأفراد والمؤسسات.",
+          items: [
+            {
+              title: "التدريب المبتدئ بالتوظيف",
+              description: "برامج تدريبية شاملة مصممة للموظفين الجدد لضمان المعرفة الأساسية بالسلامة.",
+              tags: ["أفراد", "أعمال"],
+              buttonText: "ابدأ الخدمة"
+            },
+            {
+              title: "خدمات التأهيل والتدريب المؤسسي",
+              description: "برامج متخصصة لتأهيل المؤسسات وتعزيز بروتوكولات السلامة لديها.",
+              tags: ["حكومي", "أعمال"],
+              buttonText: "ابدأ الخدمة"
+            }
+          ]
+        },
+        other: {
+          title: "خدمات أخرى",
+          description: "مجموعة واسعة من الخدمات الإضافية بما في ذلك الشهادات والعضوية والفعاليات.",
+          items: [
+            {
+              title: "اصدار الشهادات والتجديد",
+              description: "خدمات إصدار الشهادات الرسمية للأفراد والمؤسسات التي تستوفي معايير السلامة.",
+              tags: ["أفراد", "أعمال"],
+              buttonText: "ابدأ الخدمة"
+            },
+            {
+              title: "العضوية المهنية",
+              description: "برامج عضوية تقدم موارد حصرية، وفرص للتواصل، وتطوير مهني.",
+              tags: ["أفراد"],
+              buttonText: "ابدأ الخدمة"
+            },
+            {
+              title: "المؤتمرات والمعارض",
+              description: "تنظيم واستضافة الفعاليات الكبرى لتعزيز الوعي بالسلامة والابتكار في الصناعة.",
+              tags: ["حكومي", "أفراد"],
+              buttonText: "ابدأ الخدمة"
+            },
+            {
+              title: "بيع المحتوى والمطبوعات",
+              description: "الوصول إلى مجموعة واسعة من المواد التعليمية والأدلة والمنشورات الصناعية.",
+              tags: ["أفراد", "أعمال"],
+              buttonText: "ابدأ الخدمة"
+            }
+          ]
+        }
+      }
+    },
+    mediaCenter: {
+      title: "المركز الإعلامي",
+      items: [
+        {
+          title: "الأخبار",
+          description: "آخر التحديثات والإعلانات من المعهد.",
+          icon: "Newspaper"
         },
         {
-          title: "خدمات التأهيل والتدريب المؤسسي",
-          description: "برامج متخصصة لتأهيل المؤسسات وتعزيز بروتوكولات السلامة لديها.",
-          tags: ["حكومي", "أعمال"],
-          buttonText: "ابدأ الخدمة"
+          title: "التقارير",
+          description: "تقارير وتحليلات متعمقة حول السلامة المهنية.",
+          icon: "FileText"
         },
         {
-          title: "تقييم/تدقيق/امتثال",
-          description: "خدمات تقييم وتدقيق صارمة لضمان الامتثال الكامل للوائح السلامة.",
-          tags: ["حكومي", "أعمال"],
-          buttonText: "ابدأ الخدمة"
+          title: "مكتبة الفيديو",
+          description: "شاهد أحدث مقاطع الفيديو وأبرز الفعاليات.",
+          icon: "Video"
         },
         {
-          title: "اصدار الشهادات والتجديد",
-          description: "خدمات إصدار الشهادات الرسمية للأفراد والمؤسسات التي تستوفي معايير السلامة.",
-          tags: ["أفراد", "أعمال"],
-          buttonText: "ابدأ الخدمة"
+          title: "مكتبة الصور",
+          description: "تصفح صور فعالياتنا وأنشطتنا.",
+          icon: "Image"
         },
         {
-          title: "العضوية المهنية",
-          description: "برامج عضوية تقدم موارد حصرية، وفرص للتواصل، وتطوير مهني.",
-          tags: ["أفراد"],
-          buttonText: "ابدأ الخدمة"
-        },
-        {
-          title: "المؤتمرات والمعارض",
-          description: "تنظيم واستضافة الفعاليات الكبرى لتعزيز الوعي بالسلامة والابتكار في الصناعة.",
-          tags: ["حكومي", "أفراد"],
-          buttonText: "ابدأ الخدمة"
-        },
-        {
-          title: "بيع المحتوى والمطبوعات",
-          description: "الوصول إلى مجموعة واسعة من المواد التعليمية والأدلة والمنشورات الصناعية.",
-          tags: ["أفراد", "أعمال"],
-          buttonText: "ابدأ الخدمة"
-        },
-        {
-          title: "خدمات البحث والابتكار",
-          description: "دعم المبادرات البحثية لدفع الابتكار في مجال السلامة والصحة المهنية.",
-          tags: ["حكومي", "أعمال"],
-          buttonText: "ابدأ الخدمة"
+          title: "المكتبة الرقمية",
+          description: "الوصول إلى مجموعتنا الشاملة من الموارد الرقمية.",
+          icon: "Library"
         }
       ]
     },

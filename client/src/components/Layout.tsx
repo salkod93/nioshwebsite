@@ -107,7 +107,32 @@ export default function Layout({ children, lang, setLang }: LayoutProps) {
                   {t.nav.servicesDropdown.consultancy}
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={() => scrollToSection('services')}>
-                  {t.nav.servicesDropdown.qualification}
+                  {t.nav.servicesDropdown.other}
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+
+            {/* Media Center Dropdown */}
+            <DropdownMenu>
+              <DropdownMenuTrigger className="flex items-center gap-1 text-foreground/80 hover:text-primary font-medium transition-colors outline-none">
+                {t.nav.mediaCenter}
+                <ChevronDown className="h-4 w-4" />
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align={isRTL ? "end" : "start"} className="w-56">
+                <DropdownMenuItem onClick={() => scrollToSection('media-center')}>
+                  {t.nav.mediaCenterDropdown.news}
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => scrollToSection('media-center')}>
+                  {t.nav.mediaCenterDropdown.reports}
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => scrollToSection('media-center')}>
+                  {t.nav.mediaCenterDropdown.videoGallery}
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => scrollToSection('media-center')}>
+                  {t.nav.mediaCenterDropdown.photoGallery}
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => scrollToSection('media-center')}>
+                  {t.nav.mediaCenterDropdown.digitalLibrary}
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
@@ -154,6 +179,9 @@ export default function Layout({ children, lang, setLang }: LayoutProps) {
         </button>
         <button onClick={() => scrollToSection('services')} className="text-2xl font-medium text-foreground hover:text-primary">
           {t.nav.services}
+        </button>
+        <button onClick={() => scrollToSection('media-center')} className="text-2xl font-medium text-foreground hover:text-primary">
+          {t.nav.mediaCenter}
         </button>
         <button onClick={() => scrollToSection('contact')} className="text-2xl font-medium text-foreground hover:text-primary">
           {t.nav.contact}
