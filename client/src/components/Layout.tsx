@@ -107,6 +107,9 @@ export default function Layout({ children, lang, setLang }: LayoutProps) {
                   {t.nav.servicesDropdown.consultancy}
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={() => scrollToSection('services')}>
+                  {t.nav.servicesDropdown.wellness}
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => scrollToSection('services')}>
                   {t.nav.servicesDropdown.other}
                 </DropdownMenuItem>
               </DropdownMenuContent>

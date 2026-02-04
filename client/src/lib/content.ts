@@ -17,6 +17,7 @@ export const content = {
       servicesDropdown: {
         training: "Training Services",
         consultancy: "Consultancy Services",
+        wellness: "Occupational Wellness Center",
         other: "Other Services"
       },
       mediaCenter: "Media Center",
@@ -130,6 +131,42 @@ export const content = {
               description: "Specialized programs for qualifying institutions and enhancing their safety protocols.",
               tags: ["government", "works"],
               buttonText: "Start the service"
+            },
+            {
+              title: "Kawader Product",
+              description: "Specialized training product for developing safety cadres.",
+              tags: ["individuals", "works"],
+              buttonText: "Start the service"
+            },
+            {
+              title: "Investigators Product",
+              description: "Advanced training for safety incident investigators.",
+              tags: ["government", "works"],
+              buttonText: "Start the service"
+            },
+            {
+              title: "High Risk Jobs Product",
+              description: "Specialized training for high-risk occupational roles.",
+              tags: ["works"],
+              buttonText: "Start the service"
+            }
+          ]
+        },
+        wellness: {
+          title: "Occupational Wellness Center",
+          description: "Promoting holistic well-being and health in the workplace.",
+          items: [
+            {
+              title: "Wellness Programs",
+              description: "Comprehensive programs to enhance employee well-being.",
+              tags: ["works", "government"],
+              buttonText: "Start the service"
+            },
+            {
+              title: "Health Assessments",
+              description: "Professional health assessments for workplace safety.",
+              tags: ["individuals", "works"],
+              buttonText: "Start the service"
             }
           ]
         },
@@ -232,6 +269,7 @@ export const content = {
       servicesDropdown: {
         training: "خدمات التدريب",
         consultancy: "خدمات استشارية",
+        wellness: "مركز الرفاه المهني",
         other: "خدمات أخرى"
       },
       mediaCenter: "المركز الإعلامي",
@@ -344,6 +382,42 @@ export const content = {
               title: "خدمات التأهيل والتدريب المؤسسي",
               description: "برامج متخصصة لتأهيل المؤسسات وتعزيز بروتوكولات السلامة لديها.",
               tags: ["حكومي", "أعمال"],
+              buttonText: "ابدأ الخدمة"
+            },
+            {
+              title: "منتج كوادر",
+              description: "منتج تدريبي متخصص لتطوير كوادر السلامة.",
+              tags: ["أفراد", "أعمال"],
+              buttonText: "ابدأ الخدمة"
+            },
+            {
+              title: "منتج المحققون",
+              description: "تدريب متقدم لمحققي حوادث السلامة.",
+              tags: ["حكومي", "أعمال"],
+              buttonText: "ابدأ الخدمة"
+            },
+            {
+              title: "منتج مهن ذات المخاطر العالية",
+              description: "تدريب متخصص للمهن ذات المخاطر العالية.",
+              tags: ["أعمال"],
+              buttonText: "ابدأ الخدمة"
+            }
+          ]
+        },
+        wellness: {
+          title: "مركز الرفاه المهني",
+          description: "تعزيز الرفاهية والصحة الشاملة في مكان العمل.",
+          items: [
+            {
+              title: "برامج الرفاهية",
+              description: "برامج شاملة لتعزيز رفاهية الموظفين.",
+              tags: ["أعمال", "حكومي"],
+              buttonText: "ابدأ الخدمة"
+            },
+            {
+              title: "التقييمات الصحية",
+              description: "تقييمات صحية مهنية لسلامة مكان العمل.",
+              tags: ["أفراد", "أعمال"],
               buttonText: "ابدأ الخدمة"
             }
           ]

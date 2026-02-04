@@ -4,7 +4,7 @@ import { content, Language } from "@/lib/content";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { motion } from "framer-motion";
-import { Shield, GraduationCap, Users, FileCheck, ArrowRight, ArrowLeft, Target, Lightbulb, Handshake, Globe, Laptop, BookOpen, MapPin, Mail, Phone } from "lucide-react";
+import { Shield, GraduationCap, Users, FileCheck, ArrowRight, ArrowLeft, Target, Lightbulb, Handshake, Globe, Laptop, BookOpen, MapPin, Mail, Phone, Heart } from "lucide-react";
 
 export default function Home() {
   const [lang, setLang] = useState<Language>('ar');
@@ -29,6 +29,7 @@ export default function Home() {
   const serviceIcons = {
     consultancy: <Users className="h-10 w-10 text-secondary" />,
     training: <GraduationCap className="h-10 w-10 text-secondary" />,
+    wellness: <Heart className="h-10 w-10 text-secondary" />,
     other: <Shield className="h-10 w-10 text-secondary" />
   };
 
@@ -247,7 +248,7 @@ export default function Home() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            className="grid md:grid-cols-3 gap-8"
+            className="grid md:grid-cols-2 lg:grid-cols-4 gap-6"
           >
             {Object.entries(t.services.categories).map(([key, category], index) => (
               <motion.div key={index} variants={fadeInUp} className="h-full">
