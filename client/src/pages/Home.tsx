@@ -63,7 +63,7 @@ export default function Home() {
             alt="Riyadh Skyline" 
             className="w-full h-full object-cover opacity-20 mix-blend-overlay"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-primary/90 via-primary/80 to-primary/90" />
+          <div className="absolute inset-0 bg-gradient-to-r from-primary/70 via-primary/60 to-primary/70" />
         </div>
 
         {/* Abstract Background Elements */}
