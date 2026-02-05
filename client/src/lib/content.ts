@@ -58,8 +58,8 @@ export const content = {
           { value: "0", label: "Hours without work injury" },
           { value: "0", label: "Accreditations from global quality systems (ISO 9001, ISO 14001, ISO 45001)" },
           { value: "0", label: "Short training course" },
-          { value: "0", label: "Diplomas developed" },
-          { value: "0", label: "Student and trainee in diploma programs" },
+          { value: "0", label: "Programs developed" },
+          { value: "0", label: "Trainees" },
           { value: "0% | 0%", label: "Trainee satisfaction and partner satisfaction with training quality and outcomes" }
         ]
       }
