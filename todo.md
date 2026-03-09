@@ -8,3 +8,6 @@
 - [x] Rename "Board Roles and Power" to "Institute's Roles and Powers" (EN) / "أدوار وصلاحيات المعهد" (AR)
 - [x] Remove "Service Level Agreement" from navigation
 - [x] Move "Strategic Priorities" under "About the Institute" tab
+- [x] Create Coming Soon subpages for: CEO's Message, Board of Directors, Institute's Roles and Powers, Organizational Structure, News, Reports, Video Gallery, Photo Gallery, Digital Library
+- [x] Wire subpage routes in App.tsx
+- [x] Link navigation items to their respective subpages

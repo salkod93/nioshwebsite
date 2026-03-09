@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { content, Language } from "@/lib/content";
+import { useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Menu, X, Globe, ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -39,10 +40,19 @@ export default function Layout({ children, lang, setLang }: LayoutProps) {
     setLang(lang === 'en' ? 'ar' : 'en');
   };
 
+  const [, navigate] = useLocation();
+
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
+      setMobileMenuOpen(false);
+    } else {
+      // If element not found, navigate home then scroll
+      navigate('/');
+      setTimeout(() => {
+        document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+      }, 300);
       setMobileMenuOpen(false);
     }
   };
@@ -82,11 +92,11 @@ export default function Layout({ children, lang, setLang }: LayoutProps) {
                 <DropdownMenuItem onClick={() => scrollToSection('about')}>
                   {t.nav.aboutDropdown.overview}
                 </DropdownMenuItem>
-                <DropdownMenuItem>{t.nav.aboutDropdown.ceoMessage}</DropdownMenuItem>
-                <DropdownMenuItem>{t.nav.aboutDropdown.boardMembers}</DropdownMenuItem>
-                <DropdownMenuItem>{t.nav.aboutDropdown.boardRoles}</DropdownMenuItem>
+                <DropdownMenuItem onClick={() => navigate('/ceo-message')}>{t.nav.aboutDropdown.ceoMessage}</DropdownMenuItem>
+                <DropdownMenuItem onClick={() => navigate('/board-of-directors')}>{t.nav.aboutDropdown.boardMembers}</DropdownMenuItem>
+                <DropdownMenuItem onClick={() => navigate('/institute-roles')}>{t.nav.aboutDropdown.boardRoles}</DropdownMenuItem>
                 <DropdownMenuItem onClick={() => scrollToSection('priorities')}>{t.nav.aboutDropdown.priorities}</DropdownMenuItem>
-                <DropdownMenuItem>{t.nav.aboutDropdown.structure}</DropdownMenuItem>
+                <DropdownMenuItem onClick={() => navigate('/organizational-structure')}>{t.nav.aboutDropdown.structure}</DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
 
@@ -117,19 +127,19 @@ export default function Layout({ children, lang, setLang }: LayoutProps) {
                 <ChevronDown className="h-4 w-4" />
               </DropdownMenuTrigger>
               <DropdownMenuContent align={isRTL ? "end" : "start"} className="w-56">
-                <DropdownMenuItem onClick={() => scrollToSection('media-center')}>
+                <DropdownMenuItem onClick={() => navigate('/news')}>
                   {t.nav.mediaCenterDropdown.news}
                 </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => scrollToSection('media-center')}>
+                <DropdownMenuItem onClick={() => navigate('/reports')}>
                   {t.nav.mediaCenterDropdown.reports}
                 </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => scrollToSection('media-center')}>
+                <DropdownMenuItem onClick={() => navigate('/video-gallery')}>
                   {t.nav.mediaCenterDropdown.videoGallery}
                 </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => scrollToSection('media-center')}>
+                <DropdownMenuItem onClick={() => navigate('/photo-gallery')}>
                   {t.nav.mediaCenterDropdown.photoGallery}
                 </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => scrollToSection('media-center')}>
+                <DropdownMenuItem onClick={() => navigate('/digital-library')}>
                   {t.nav.mediaCenterDropdown.digitalLibrary}
                 </DropdownMenuItem>
               </DropdownMenuContent>
