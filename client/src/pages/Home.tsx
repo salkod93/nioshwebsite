@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Layout from "@/components/Layout";
-import { content, Language } from "@/lib/content";
+import { content } from "@/lib/content";
+import { useLang } from "@/contexts/LanguageContext";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { motion } from "framer-motion";
@@ -9,7 +10,7 @@ import { trpc } from "@/lib/trpc";
 import { toast } from "sonner";
 
 export default function Home() {
-  const [lang, setLang] = useState<Language>('ar');
+  const { lang, setLang } = useLang();
   const [formData, setFormData] = useState({ firstName: '', lastName: '', email: '', companyName: '', message: '' });
   const [formSuccess, setFormSuccess] = useState(false);
 

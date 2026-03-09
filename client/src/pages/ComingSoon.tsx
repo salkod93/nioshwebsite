@@ -1,6 +1,6 @@
-import { useState } from "react";
 import Layout from "@/components/Layout";
-import { content, Language } from "@/lib/content";
+import { content } from "@/lib/content";
+import { useLang } from "@/contexts/LanguageContext";
 import { motion } from "framer-motion";
 import { Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -12,7 +12,7 @@ interface ComingSoonProps {
 }
 
 export default function ComingSoon({ titleEn, titleAr }: ComingSoonProps) {
-  const [lang, setLang] = useState<Language>("ar");
+  const { lang, setLang } = useLang();
   const t = content[lang];
   const [, navigate] = useLocation();
 

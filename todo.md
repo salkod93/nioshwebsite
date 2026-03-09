@@ -11,3 +11,4 @@
 - [x] Create Coming Soon subpages for: CEO's Message, Board of Directors, Institute's Roles and Powers, Organizational Structure, News, Reports, Video Gallery, Photo Gallery, Digital Library
 - [x] Wire subpage routes in App.tsx
 - [x] Link navigation items to their respective subpages
+- [x] Fix language persistence: subpages reset to Arabic when navigating from English
