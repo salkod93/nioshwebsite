@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { motion } from "framer-motion";
-import { Shield, GraduationCap, Users, FileCheck, ArrowRight, ArrowLeft, Target, Lightbulb, Handshake, Globe, Laptop, BookOpen, MapPin, Mail, Phone, Loader2, CheckCircle2, ExternalLink } from "lucide-react";
+import { Shield, GraduationCap, Users, FileCheck, ArrowRight, ArrowLeft, Target, Lightbulb, Handshake, Globe, Laptop, BookOpen, MapPin, Mail, Phone, Loader2, CheckCircle2, ExternalLink, Heart } from "lucide-react";
 import { trpc } from "@/lib/trpc";
 import { toast } from "sonner";
 
@@ -58,7 +58,7 @@ export default function Home() {
   const serviceIcons = {
     consultancy: <Users className="h-10 w-10 text-secondary" />,
     training: <GraduationCap className="h-10 w-10 text-secondary" />,
-
+    wellness: <Heart className="h-10 w-10 text-secondary" />,
     other: <Shield className="h-10 w-10 text-secondary" />
   };
 
