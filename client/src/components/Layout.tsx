@@ -85,14 +85,10 @@ export default function Layout({ children, lang, setLang }: LayoutProps) {
                 <DropdownMenuItem>{t.nav.aboutDropdown.ceoMessage}</DropdownMenuItem>
                 <DropdownMenuItem>{t.nav.aboutDropdown.boardMembers}</DropdownMenuItem>
                 <DropdownMenuItem>{t.nav.aboutDropdown.boardRoles}</DropdownMenuItem>
-                <DropdownMenuItem>{t.nav.aboutDropdown.sla}</DropdownMenuItem>
+                <DropdownMenuItem onClick={() => scrollToSection('priorities')}>{t.nav.aboutDropdown.priorities}</DropdownMenuItem>
                 <DropdownMenuItem>{t.nav.aboutDropdown.structure}</DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
-
-            <button onClick={() => scrollToSection('priorities')} className="text-foreground/80 hover:text-primary font-medium transition-colors">
-              {t.nav.priorities}
-            </button>
 
             {/* Services Dropdown */}
             <DropdownMenu>
@@ -182,9 +178,6 @@ export default function Layout({ children, lang, setLang }: LayoutProps) {
         </button>
         <button onClick={() => scrollToSection('about')} className="text-2xl font-medium text-foreground hover:text-primary">
           {t.nav.about}
-        </button>
-        <button onClick={() => scrollToSection('priorities')} className="text-2xl font-medium text-foreground hover:text-primary">
-          {t.nav.priorities}
         </button>
         <button onClick={() => scrollToSection('services')} className="text-2xl font-medium text-foreground hover:text-primary">
           {t.nav.services}

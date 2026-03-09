@@ -9,8 +9,8 @@ export const content = {
         overview: "About the Institute",
         ceoMessage: "CEO's Message",
         boardMembers: "Board of Directors",
-        boardRoles: "Board Roles and Powers",
-        sla: "Service Level Agreement",
+        boardRoles: "Institute's Roles and Powers",
+        priorities: "Strategic Priorities",
         structure: "Organizational Structure"
       },
       priorities: "Strategic Priorities",
@@ -274,8 +274,8 @@ export const content = {
         overview: "نبذة عن المعهد",
         ceoMessage: "كلمة الرئيس التنفيذي",
         boardMembers: "أعضاء مجلس الإدارة",
-        boardRoles: "أدوار وصلاحيات المجلس",
-        sla: "اتفاقية مستوى الخدمة",
+        boardRoles: "أدوار وصلاحيات المعهد",
+        priorities: "الأولويات الاستراتيجية",
         structure: "الهيكل التنظيمي"
       },
       priorities: "الأولويات الاستراتيجية",
