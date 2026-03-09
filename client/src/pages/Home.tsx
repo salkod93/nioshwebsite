@@ -4,10 +4,35 @@ import { content, Language } from "@/lib/content";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { motion } from "framer-motion";
-import { Shield, GraduationCap, Users, FileCheck, ArrowRight, ArrowLeft, Target, Lightbulb, Handshake, Globe, Laptop, BookOpen, MapPin, Mail, Phone } from "lucide-react";
+import { Shield, GraduationCap, Users, FileCheck, ArrowRight, ArrowLeft, Target, Lightbulb, Handshake, Globe, Laptop, BookOpen, MapPin, Mail, Phone, Loader2, CheckCircle2 } from "lucide-react";
+import { trpc } from "@/lib/trpc";
+import { toast } from "sonner";
 
 export default function Home() {
   const [lang, setLang] = useState<Language>('ar');
+  const [formData, setFormData] = useState({ firstName: '', lastName: '', email: '', message: '' });
+  const [formSuccess, setFormSuccess] = useState(false);
+
+  const submitContact = trpc.pipedrive.submitContact.useMutation({
+    onSuccess: () => {
+      setFormSuccess(true);
+      setFormData({ firstName: '', lastName: '', email: '', message: '' });
+      toast.success(lang === 'en' ? 'Message sent successfully!' : 'تم إرسال رسالتك بنجاح!');
+    },
+    onError: (err) => {
+      toast.error(lang === 'en' ? 'Failed to send message. Please try again.' : 'فشل إرسال الرسالة. يرجى المحاولة مرة أخرى.');
+      console.error('Contact form error:', err);
+    },
+  });
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!formData.firstName || !formData.lastName || !formData.email || !formData.message) {
+      toast.error(lang === 'en' ? 'Please fill in all fields.' : 'يرجى ملء جميع الحقول.');
+      return;
+    }
+    submitContact.mutate(formData);
+  };
   const t = content[lang];
   const isRTL = lang === 'ar';
 
@@ -425,14 +450,30 @@ export default function Home() {
               variants={fadeInUp}
               className="bg-white p-8 rounded-2xl shadow-xl text-primary"
             >
-              <form className="space-y-6">
+              {formSuccess ? (
+                <div className="flex flex-col items-center justify-center py-12 space-y-4 text-center">
+                  <CheckCircle2 className="w-16 h-16 text-green-500" />
+                  <h3 className="text-2xl font-bold text-primary">
+                    {lang === 'en' ? 'Message Sent!' : 'تم إرسال رسالتك!'}
+                  </h3>
+                  <p className="text-muted-foreground">
+                    {lang === 'en' ? 'Thank you for reaching out. We will get back to you soon.' : 'شكراً لتواصلك معنا. سنرد عليك في أقرب وقت.'}
+                  </p>
+                  <Button variant="outline" onClick={() => setFormSuccess(false)} className="mt-4">
+                    {lang === 'en' ? 'Send Another Message' : 'إرسال رسالة أخرى'}
+                  </Button>
+                </div>
+              ) : (
+              <form className="space-y-6" onSubmit={handleSubmit}>
                 <div className="grid md:grid-cols-2 gap-6">
                   <div className="space-y-2">
                     <label className="text-sm font-medium">
                       {lang === 'en' ? 'First Name' : 'الاسم الأول'}
                     </label>
                     <input 
-                      type="text" 
+                      type="text"
+                      value={formData.firstName}
+                      onChange={(e) => setFormData(p => ({ ...p, firstName: e.target.value }))}
                       className="w-full px-4 py-3 rounded-lg border border-border focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
                     />
                   </div>
@@ -441,7 +482,9 @@ export default function Home() {
                       {lang === 'en' ? 'Last Name' : 'الاسم الأخير'}
                     </label>
                     <input 
-                      type="text" 
+                      type="text"
+                      value={formData.lastName}
+                      onChange={(e) => setFormData(p => ({ ...p, lastName: e.target.value }))}
                       className="w-full px-4 py-3 rounded-lg border border-border focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
                     />
                   </div>
@@ -452,7 +495,9 @@ export default function Home() {
                     {lang === 'en' ? 'Email Address' : 'البريد الإلكتروني'}
                   </label>
                   <input 
-                    type="email" 
+                    type="email"
+                    value={formData.email}
+                    onChange={(e) => setFormData(p => ({ ...p, email: e.target.value }))}
                     className="w-full px-4 py-3 rounded-lg border border-border focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
                   />
                 </div>
@@ -463,14 +508,25 @@ export default function Home() {
                   </label>
                   <textarea 
                     rows={4}
+                    value={formData.message}
+                    onChange={(e) => setFormData(p => ({ ...p, message: e.target.value }))}
                     className="w-full px-4 py-3 rounded-lg border border-border focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all resize-none"
                   />
                 </div>
 
-                <Button className="w-full bg-primary hover:bg-primary/90 text-white h-12 text-lg">
-                  {lang === 'en' ? 'Send Message' : 'إرسال الرسالة'}
+                <Button 
+                  type="submit"
+                  disabled={submitContact.isPending}
+                  className="w-full bg-primary hover:bg-primary/90 text-white h-12 text-lg"
+                >
+                  {submitContact.isPending ? (
+                    <><Loader2 className="mr-2 h-5 w-5 animate-spin" />{lang === 'en' ? 'Sending...' : 'جارٍ الإرسال...'}</>
+                  ) : (
+                    lang === 'en' ? 'Send Message' : 'إرسال الرسالة'
+                  )}
                 </Button>
               </form>
+              )}
             </motion.div>
           </div>
         </div>
