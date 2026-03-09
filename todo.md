@@ -4,3 +4,4 @@
 - [x] Connect frontend Contact Us form to tRPC mutation
 - [x] Add form state management (loading, success, error)
 - [x] Write vitest test for contact form procedure
+- [x] Add company name field to contact form and Pipedrive integration

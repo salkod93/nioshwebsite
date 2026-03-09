@@ -10,13 +10,13 @@ import { toast } from "sonner";
 
 export default function Home() {
   const [lang, setLang] = useState<Language>('ar');
-  const [formData, setFormData] = useState({ firstName: '', lastName: '', email: '', message: '' });
+  const [formData, setFormData] = useState({ firstName: '', lastName: '', email: '', companyName: '', message: '' });
   const [formSuccess, setFormSuccess] = useState(false);
 
   const submitContact = trpc.pipedrive.submitContact.useMutation({
     onSuccess: () => {
       setFormSuccess(true);
-      setFormData({ firstName: '', lastName: '', email: '', message: '' });
+      setFormData({ firstName: '', lastName: '', email: '', companyName: '', message: '' });
       toast.success(lang === 'en' ? 'Message sent successfully!' : 'تم إرسال رسالتك بنجاح!');
     },
     onError: (err) => {
@@ -498,6 +498,19 @@ export default function Home() {
                     type="email"
                     value={formData.email}
                     onChange={(e) => setFormData(p => ({ ...p, email: e.target.value }))}
+                    className="w-full px-4 py-3 rounded-lg border border-border focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <label className="text-sm font-medium">
+                    {lang === 'en' ? 'Company Name' : 'اسم الشركة'}
+                    <span className="text-muted-foreground text-xs ml-1">({lang === 'en' ? 'Optional' : 'اختياري'})</span>
+                  </label>
+                  <input 
+                    type="text"
+                    value={formData.companyName}
+                    onChange={(e) => setFormData(p => ({ ...p, companyName: e.target.value }))}
                     className="w-full px-4 py-3 rounded-lg border border-border focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
                   />
                 </div>

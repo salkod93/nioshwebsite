@@ -92,12 +92,13 @@ export const pipedriveRouter = router({
         firstName: z.string().min(1, "First name is required"),
         lastName: z.string().min(1, "Last name is required"),
         email: z.string().email("Valid email is required"),
+        companyName: z.string().optional(),
         message: z.string().min(1, "Message is required"),
       })
     )
     .mutation(async ({ input }) => {
       const apiKey = getPipedriveApiKey();
-      const { firstName, lastName, email, message } = input;
+      const { firstName, lastName, email, companyName, message } = input;
 
       // Find or create person
       let personId = await findPersonByEmail(email, apiKey);
@@ -105,9 +106,14 @@ export const pipedriveRouter = router({
         personId = await createPerson(firstName, lastName, email, apiKey);
       }
 
-      // Create a deal linked to the person
-      const dealTitle = `Website Inquiry - ${firstName} ${lastName}`;
-      const dealId = await createDeal(dealTitle, personId, message, apiKey);
+      // Create a deal linked to the person, include company name in title if provided
+      const dealTitle = companyName
+        ? `Website Inquiry - ${firstName} ${lastName} (${companyName})`
+        : `Website Inquiry - ${firstName} ${lastName}`;
+      const noteContent = companyName
+        ? `Company: ${companyName}\n\n${message}`
+        : message;
+      const dealId = await createDeal(dealTitle, personId, noteContent, apiKey);
 
       return { success: true, dealId, personId };
     }),
