@@ -100,25 +100,10 @@ export default function Layout({ children, lang, setLang }: LayoutProps) {
               </DropdownMenuContent>
             </DropdownMenu>
 
-            {/* Services Dropdown */}
-            <DropdownMenu>
-              <DropdownMenuTrigger className="flex items-center gap-1 text-foreground/80 hover:text-primary font-medium transition-colors outline-none">
-                {t.nav.services}
-                <ChevronDown className="h-4 w-4" />
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align={isRTL ? "end" : "start"} className="w-56">
-                <DropdownMenuItem onClick={() => scrollToSection('services')}>
-                  {t.nav.servicesDropdown.training}
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => scrollToSection('services')}>
-                  {t.nav.servicesDropdown.consultancy}
-                </DropdownMenuItem>
-
-                <DropdownMenuItem onClick={() => scrollToSection('services')}>
-                  {t.nav.servicesDropdown.other}
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
+            {/* Services - Direct scroll link */}
+            <button onClick={() => scrollToSection('services')} className="text-foreground/80 hover:text-primary font-medium transition-colors">
+              {t.nav.services}
+            </button>
 
             {/* Media Center Dropdown */}
             <DropdownMenu>
@@ -178,44 +163,107 @@ export default function Layout({ children, lang, setLang }: LayoutProps) {
 
       </header>
 
-      {/* Mobile Nav Overlay - Moved outside header to avoid stacking context issues */}
+      {/* Mobile Nav Overlay */}
       <div className={cn(
-        "fixed inset-0 top-0 bg-background z-40 flex flex-col items-center justify-center gap-8 transition-transform duration-300 md:hidden overflow-y-auto",
+        "fixed inset-0 top-0 bg-background z-40 flex flex-col transition-transform duration-300 md:hidden overflow-y-auto",
         mobileMenuOpen ? "translate-y-0" : "-translate-y-full"
       )}>
-        <button onClick={() => scrollToSection('home')} className="text-2xl font-medium text-foreground hover:text-primary">
-          {t.nav.home}
-        </button>
-        <button onClick={() => scrollToSection('about')} className="text-2xl font-medium text-foreground hover:text-primary">
-          {t.nav.about}
-        </button>
-        <button onClick={() => scrollToSection('services')} className="text-2xl font-medium text-foreground hover:text-primary">
-          {t.nav.services}
-        </button>
-        <button onClick={() => scrollToSection('media-center')} className="text-2xl font-medium text-foreground hover:text-primary">
-          {t.nav.mediaCenter}
-        </button>
-        <button onClick={() => scrollToSection('contact')} className="text-2xl font-medium text-foreground hover:text-primary">
-          {t.nav.contact}
-        </button>
-        <a 
-          href="#" 
-          className="text-xl font-medium text-orange-500 hover:text-orange-600 text-center px-4"
-        >
-          {t.nav.virtualCenter}
-        </a>
-        <Button 
-          variant="outline" 
-          size="lg" 
-          onClick={() => {
-            toggleLang();
-            setMobileMenuOpen(false);
-          }}
-          className="gap-2 mt-4"
-        >
-          <Globe className="h-5 w-5" />
-          {t.nav.langSwitch}
-        </Button>
+        {/* Mobile Menu Header */}
+        <div className="flex items-center justify-between px-6 py-4 border-b border-border/30">
+          <img
+            src={lang === 'ar' ? "/images/logo-ar.png" : "/images/logo-en.png"}
+            alt="NIOSH Logo"
+            className="h-10 w-auto"
+          />
+          <button className="p-2 text-foreground" onClick={() => setMobileMenuOpen(false)}>
+            <X className="h-6 w-6" />
+          </button>
+        </div>
+
+        {/* Mobile Menu Items */}
+        <div className="flex flex-col px-6 py-6 gap-1 flex-1">
+          {/* Home */}
+          <button
+            onClick={() => scrollToSection('home')}
+            className="w-full text-start py-4 px-4 text-lg font-semibold text-foreground hover:text-primary hover:bg-primary/5 rounded-xl transition-colors border-b border-border/20"
+          >
+            {t.nav.home}
+          </button>
+
+          {/* About */}
+          <div className="border-b border-border/20">
+            <button
+              onClick={() => scrollToSection('about')}
+              className="w-full text-start py-4 px-4 text-lg font-semibold text-foreground hover:text-primary hover:bg-primary/5 rounded-xl transition-colors"
+            >
+              {t.nav.about}
+            </button>
+            <div className="flex flex-col gap-1 pb-3 px-4">
+              <button onClick={() => navigate('/ceo-message')} className="text-start py-2 px-3 text-sm text-muted-foreground hover:text-primary hover:bg-primary/5 rounded-lg transition-colors">{t.nav.aboutDropdown.ceoMessage}</button>
+              <button onClick={() => navigate('/board-of-directors')} className="text-start py-2 px-3 text-sm text-muted-foreground hover:text-primary hover:bg-primary/5 rounded-lg transition-colors">{t.nav.aboutDropdown.boardMembers}</button>
+              <button onClick={() => navigate('/institute-roles')} className="text-start py-2 px-3 text-sm text-muted-foreground hover:text-primary hover:bg-primary/5 rounded-lg transition-colors">{t.nav.aboutDropdown.boardRoles}</button>
+              <button onClick={() => scrollToSection('priorities')} className="text-start py-2 px-3 text-sm text-muted-foreground hover:text-primary hover:bg-primary/5 rounded-lg transition-colors">{t.nav.aboutDropdown.priorities}</button>
+              <button onClick={() => navigate('/organizational-structure')} className="text-start py-2 px-3 text-sm text-muted-foreground hover:text-primary hover:bg-primary/5 rounded-lg transition-colors">{t.nav.aboutDropdown.structure}</button>
+            </div>
+          </div>
+
+          {/* Services */}
+          <button
+            onClick={() => scrollToSection('services')}
+            className="w-full text-start py-4 px-4 text-lg font-semibold text-foreground hover:text-primary hover:bg-primary/5 rounded-xl transition-colors border-b border-border/20"
+          >
+            {t.nav.services}
+          </button>
+
+          {/* Media Center */}
+          <div className="border-b border-border/20">
+            <button
+              onClick={() => scrollToSection('media-center')}
+              className="w-full text-start py-4 px-4 text-lg font-semibold text-foreground hover:text-primary hover:bg-primary/5 rounded-xl transition-colors"
+            >
+              {t.nav.mediaCenter}
+            </button>
+            <div className="flex flex-col gap-1 pb-3 px-4">
+              <button onClick={() => navigate('/news')} className="text-start py-2 px-3 text-sm text-muted-foreground hover:text-primary hover:bg-primary/5 rounded-lg transition-colors">{t.nav.mediaCenterDropdown.news}</button>
+              <button onClick={() => navigate('/reports')} className="text-start py-2 px-3 text-sm text-muted-foreground hover:text-primary hover:bg-primary/5 rounded-lg transition-colors">{t.nav.mediaCenterDropdown.reports}</button>
+              <button onClick={() => navigate('/video-gallery')} className="text-start py-2 px-3 text-sm text-muted-foreground hover:text-primary hover:bg-primary/5 rounded-lg transition-colors">{t.nav.mediaCenterDropdown.videoGallery}</button>
+              <button onClick={() => navigate('/photo-gallery')} className="text-start py-2 px-3 text-sm text-muted-foreground hover:text-primary hover:bg-primary/5 rounded-lg transition-colors">{t.nav.mediaCenterDropdown.photoGallery}</button>
+              <button onClick={() => navigate('/digital-library')} className="text-start py-2 px-3 text-sm text-muted-foreground hover:text-primary hover:bg-primary/5 rounded-lg transition-colors">{t.nav.mediaCenterDropdown.digitalLibrary}</button>
+            </div>
+          </div>
+
+          {/* Contact */}
+          <button
+            onClick={() => scrollToSection('contact')}
+            className="w-full text-start py-4 px-4 text-lg font-semibold text-foreground hover:text-primary hover:bg-primary/5 rounded-xl transition-colors border-b border-border/20"
+          >
+            {t.nav.contact}
+          </button>
+
+          {/* Virtual Center */}
+          <a
+            href="#"
+            className="w-full text-start py-4 px-4 text-lg font-semibold text-orange-500 hover:text-orange-600 hover:bg-orange-50 rounded-xl transition-colors border-b border-border/20"
+          >
+            {t.nav.virtualCenter}
+          </a>
+
+          {/* Language Toggle */}
+          <div className="mt-auto pt-6">
+            <Button
+              variant="outline"
+              size="lg"
+              onClick={() => {
+                toggleLang();
+                setMobileMenuOpen(false);
+              }}
+              className="w-full gap-2"
+            >
+              <Globe className="h-5 w-5" />
+              {t.nav.langSwitch}
+            </Button>
+          </div>
+        </div>
       </div>
 
       {/* Main Content */}

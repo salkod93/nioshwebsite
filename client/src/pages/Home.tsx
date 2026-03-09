@@ -4,8 +4,9 @@ import { content } from "@/lib/content";
 import { useLang } from "@/contexts/LanguageContext";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { motion } from "framer-motion";
-import { Shield, GraduationCap, Users, FileCheck, ArrowRight, ArrowLeft, Target, Lightbulb, Handshake, Globe, Laptop, BookOpen, MapPin, Mail, Phone, Loader2, CheckCircle2 } from "lucide-react";
+import { Shield, GraduationCap, Users, FileCheck, ArrowRight, ArrowLeft, Target, Lightbulb, Handshake, Globe, Laptop, BookOpen, MapPin, Mail, Phone, Loader2, CheckCircle2, ExternalLink } from "lucide-react";
 import { trpc } from "@/lib/trpc";
 import { toast } from "sonner";
 
@@ -34,6 +35,8 @@ export default function Home() {
     }
     submitContact.mutate(formData);
   };
+  const [selectedService, setSelectedService] = useState<{ key: string; category: any } | null>(null);
+
   const t = content[lang];
   const isRTL = lang === 'ar';
 
@@ -293,9 +296,12 @@ export default function Home() {
           >
             {Object.entries(t.services.categories).map(([key, category], index) => (
               <motion.div key={index} variants={fadeInUp} className="h-full">
-                <div className="group relative h-full bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-500 overflow-hidden border border-border/50">
+                <button
+                  onClick={() => setSelectedService({ key, category })}
+                  className="group relative h-full w-full bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-500 overflow-hidden border border-border/50 text-start"
+                >
                   {/* Default State */}
-                  <div className="p-8 h-full flex flex-col items-center text-center transition-all duration-500 group-hover:opacity-0 group-hover:translate-y-[-20px]">
+                  <div className="p-8 h-full flex flex-col items-center text-center">
                     <div className="w-20 h-20 rounded-2xl bg-secondary/5 flex items-center justify-center mb-6 text-secondary transform group-hover:scale-110 transition-transform duration-500">
                       {serviceIcons[key as keyof typeof serviceIcons]}
                     </div>
@@ -304,46 +310,81 @@ export default function Home() {
                       {category.description}
                     </p>
                     <div className="mt-auto pt-8">
-                      <span className="inline-flex items-center text-secondary font-semibold">
+                      <span className="inline-flex items-center text-secondary font-semibold group-hover:gap-2 transition-all">
                         {isRTL ? <ArrowLeft className="mr-2 h-5 w-5" /> : null}
-                        {t.hero.cta}
+                        {lang === 'en' ? 'Learn More' : 'اعرف المزيد'}
                         {!isRTL ? <ArrowRight className="ml-2 h-5 w-5" /> : null}
                       </span>
                     </div>
                   </div>
-
-                  {/* Hover State - Reveal Services */}
-                  <div className="absolute inset-0 bg-primary p-6 flex flex-col opacity-0 translate-y-[20px] group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 z-10 overflow-y-auto">
-                    <h3 className="text-xl font-bold text-white mb-6 pb-4 border-b border-white/10">
-                      {category.title}
-                    </h3>
-                    <div className="space-y-4">
-                      {category.items.map((item: any, idx: number) => (
-                        <div key={idx} className="bg-white/5 p-4 rounded-lg hover:bg-white/10 transition-colors cursor-pointer group/item">
-                          <h4 className="font-bold text-white mb-2 flex items-center justify-between">
-                            {item.title}
-                            {isRTL ? 
-                              <ArrowLeft className="h-4 w-4 opacity-0 group-hover/item:opacity-100 transition-opacity" /> : 
-                              <ArrowRight className="h-4 w-4 opacity-0 group-hover/item:opacity-100 transition-opacity" />
-                            }
-                          </h4>
-                          <div className="flex flex-wrap gap-2 mt-2">
-                            {item.tags?.map((tag: string, tagIdx: number) => (
-                              <span key={tagIdx} className="text-[10px] px-2 py-0.5 rounded bg-white/10 text-white/80">
-                                {tag}
-                              </span>
-                            ))}
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
+                </button>
               </motion.div>
             ))}
           </motion.div>
         </div>
       </section>
+
+      {/* Service Detail Dialog */}
+      <Dialog open={!!selectedService} onOpenChange={(open) => !open && setSelectedService(null)}>
+        <DialogContent className="max-w-2xl max-h-[85vh] overflow-y-auto" dir={isRTL ? 'rtl' : 'ltr'}>
+          {selectedService && (
+            <>
+              <DialogHeader>
+                <div className="flex items-center gap-3 mb-2">
+                  <div className="w-12 h-12 rounded-xl bg-secondary/10 flex items-center justify-center text-secondary">
+                    {serviceIcons[selectedService.key as keyof typeof serviceIcons]}
+                  </div>
+                  <DialogTitle className="text-2xl font-bold text-primary">
+                    {selectedService.category.title}
+                  </DialogTitle>
+                </div>
+                <DialogDescription className="text-base text-muted-foreground leading-relaxed">
+                  {selectedService.category.description}
+                </DialogDescription>
+              </DialogHeader>
+
+              <div className="space-y-3 my-4">
+                {selectedService.category.items.map((item: any, idx: number) => (
+                  <div key={idx} className="bg-muted/40 p-4 rounded-xl border border-border/50">
+                    <h4 className="font-bold text-primary mb-1">{item.title}</h4>
+                    <p className="text-sm text-muted-foreground">{item.description}</p>
+                    {item.tags && item.tags.length > 0 && (
+                      <div className="flex flex-wrap gap-2 mt-2">
+                        {item.tags.map((tag: string, tagIdx: number) => (
+                          <span key={tagIdx} className="text-[11px] px-2 py-0.5 rounded-full bg-primary/10 text-primary font-medium">
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+
+              {/* Virtual Center CTA */}
+              <div className="mt-6 pt-6 border-t border-border/50 bg-orange-50 rounded-xl p-5">
+                <p className="text-sm text-muted-foreground mb-4">
+                  {lang === 'en'
+                    ? 'To access the services and for more information, visit:'
+                    : 'للوصول إلى الخدمات والمزيد من المعلومات، قم بزيارة:'}
+                </p>
+                <p className="font-semibold text-primary mb-4 text-sm">
+                  {lang === 'en'
+                    ? 'Virtual Center of Occupational Safety and Health Services'
+                    : 'مركز خدمات السلامة والصحة المهنية الافتراضي'}
+                </p>
+                <a
+                  href="#"
+                  className="inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-xl font-semibold transition-colors"
+                >
+                  <ExternalLink className="h-4 w-4" />
+                  {lang === 'en' ? 'Access Virtual Center' : 'الدخول إلى المركز الافتراضي'}
+                </a>
+              </div>
+            </>
+          )}
+        </DialogContent>
+      </Dialog>
 
       {/* Media Center Section */}
       <section id="media-center" className="py-24 bg-background relative">

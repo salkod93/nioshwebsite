@@ -12,3 +12,6 @@
 - [x] Wire subpage routes in App.tsx
 - [x] Link navigation items to their respective subpages
 - [x] Fix language persistence: subpages reset to Arabic when navigating from English
+- [x] Add service popups with brief intro and Virtual Center CTA button
+- [x] Simplify services nav: remove dropdown, link directly to services section on page
+- [x] Polish and optimize mobile layout
