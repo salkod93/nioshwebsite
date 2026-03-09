@@ -15,3 +15,5 @@
 - [x] Add service popups with brief intro and Virtual Center CTA button
 - [x] Simplify services nav: remove dropdown, link directly to services section on page
 - [x] Polish and optimize mobile layout
+- [x] Fix mobile: duplicated NIOSH logo in burger menu
+- [x] Fix mobile: hero image overlapping with top texture pattern

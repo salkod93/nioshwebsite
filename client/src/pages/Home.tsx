@@ -100,7 +100,7 @@ export default function Home() {
           <div className="absolute -top-[20%] -right-[10%] w-[60vw] h-[60vw] rounded-full bg-secondary/10 blur-3xl" />
           <div className="absolute top-[40%] -left-[10%] w-[40vw] h-[40vw] rounded-full bg-accent/5 blur-3xl" />
           {/* Texture Pattern Top */}
-          <div className="absolute top-0 left-0 w-full h-12 z-20" style={{ backgroundImage: 'url(/images/texture-pattern.png)', backgroundRepeat: 'repeat-x', backgroundSize: 'contain' }} />
+          <div className="absolute top-0 left-0 w-full h-12 z-30" style={{ backgroundImage: 'url(/images/texture-pattern.png)', backgroundRepeat: 'repeat-x', backgroundSize: 'contain' }} />
           
           <svg className="absolute bottom-0 left-0 w-full h-24 text-background fill-current" viewBox="0 0 1440 100" preserveAspectRatio="none">
             <path d="M0,100 C320,100 420,0 720,0 C1020,0 1120,100 1440,100 Z" />
@@ -114,15 +114,13 @@ export default function Home() {
             variants={fadeInUp}
             className="space-y-8 flex flex-col justify-center"
           >
-            {/* Mobile Hero Image - Visible only on mobile, above title */}
-            <div className="md:hidden w-full max-w-[242px] mb-8 mx-auto">
-              <div className="relative">
-                <img 
-                  src="/images/hero-image.png" 
-                  alt="Safety Helmet" 
-                  className="w-full h-auto drop-shadow-2xl"
-                />
-              </div>
+            {/* Mobile Hero Image - Visible only on mobile, below texture pattern */}
+            <div className="md:hidden w-full max-w-[220px] mt-4 mx-auto">
+              <img 
+                src="/images/hero-image.png" 
+                alt="Safety Helmet" 
+                className="w-full h-auto drop-shadow-2xl"
+              />
             </div>
 
             <h1 className="text-5xl md:text-7xl font-extrabold leading-tight tracking-tight">

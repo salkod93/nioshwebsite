@@ -68,7 +68,7 @@ export default function Layout({ children, lang, setLang }: LayoutProps) {
       >
         <div className="container flex items-center justify-between h-full">
           {/* Logo - Always on the right in RTL, left in LTR */}
-          <div className="flex items-center gap-2 z-50 h-full">
+          <div className="flex items-center gap-2 h-full">
             <img 
               src={lang === 'ar' ? "/images/logo-ar.png" : "/images/logo-en.png"} 
               alt="NIOSH Logo" 
@@ -154,7 +154,7 @@ export default function Layout({ children, lang, setLang }: LayoutProps) {
 
           {/* Mobile Menu Toggle */}
           <button 
-            className="md:hidden p-2 text-foreground z-50"
+            className="md:hidden p-2 text-foreground z-[70]"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
             {mobileMenuOpen ? <X /> : <Menu />}
@@ -165,7 +165,7 @@ export default function Layout({ children, lang, setLang }: LayoutProps) {
 
       {/* Mobile Nav Overlay */}
       <div className={cn(
-        "fixed inset-0 top-0 bg-background z-40 flex flex-col transition-transform duration-300 md:hidden overflow-y-auto",
+        "fixed inset-0 top-0 bg-background z-[60] flex flex-col transition-transform duration-300 md:hidden overflow-y-auto",
         mobileMenuOpen ? "translate-y-0" : "-translate-y-full"
       )}>
         {/* Mobile Menu Header */}
