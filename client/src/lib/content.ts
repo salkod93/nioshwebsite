@@ -18,7 +18,7 @@ export const content = {
       servicesDropdown: {
         training: "Training Services",
         consultancy: "Consultancy Services",
-        wellness: "Occupational Wellness Center",
+
         other: "Other Services"
       },
       mediaCenter: "Media Center",
@@ -30,6 +30,7 @@ export const content = {
         digitalLibrary: "Digital Library"
       },
       contact: "Contact Us",
+      virtualCenter: "Virtual Center of Occupational Safety and Health Services",
       langSwitch: "العربية"
     },
     hero: {
@@ -257,7 +258,7 @@ export const content = {
       },
       phone: {
         label: "Phone",
-        value: "+966 11 000 0000"
+        value: "+966 500407755"
       }
     },
     footer: {
@@ -282,7 +283,7 @@ export const content = {
       servicesDropdown: {
         training: "خدمات التدريب",
         consultancy: "خدمات استشارية",
-        wellness: "مركز الرفاه المهني",
+
         other: "خدمات أخرى"
       },
       mediaCenter: "المركز الإعلامي",
@@ -294,6 +295,7 @@ export const content = {
         digitalLibrary: "المكتبة الرقمية"
       },
       contact: "تواصل معنا",
+      virtualCenter: "مركز خدمات السلامة والصحة المهنية الافتراضي",
       langSwitch: "English"
     },
     hero: {
@@ -521,7 +523,7 @@ export const content = {
       },
       phone: {
         label: "الهاتف",
-        value: "+966 11 000 0000"
+        value: "+966 500407755"
       }
     },
     footer: {

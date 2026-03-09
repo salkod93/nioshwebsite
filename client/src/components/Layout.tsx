@@ -107,9 +107,7 @@ export default function Layout({ children, lang, setLang }: LayoutProps) {
                 <DropdownMenuItem onClick={() => scrollToSection('services')}>
                   {t.nav.servicesDropdown.consultancy}
                 </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => scrollToSection('services')}>
-                  {t.nav.servicesDropdown.wellness}
-                </DropdownMenuItem>
+
                 <DropdownMenuItem onClick={() => scrollToSection('services')}>
                   {t.nav.servicesDropdown.other}
                 </DropdownMenuItem>
@@ -144,6 +142,13 @@ export default function Layout({ children, lang, setLang }: LayoutProps) {
             <button onClick={() => scrollToSection('contact')} className="text-foreground/80 hover:text-primary font-medium transition-colors">
               {t.nav.contact}
             </button>
+
+            <a 
+              href="#" 
+              className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-md font-medium transition-colors text-sm text-center leading-tight max-w-[200px]"
+            >
+              {t.nav.virtualCenter}
+            </a>
             
             <Button 
               variant="outline" 
@@ -190,6 +195,12 @@ export default function Layout({ children, lang, setLang }: LayoutProps) {
         <button onClick={() => scrollToSection('contact')} className="text-2xl font-medium text-foreground hover:text-primary">
           {t.nav.contact}
         </button>
+        <a 
+          href="#" 
+          className="text-xl font-medium text-orange-500 hover:text-orange-600 text-center px-4"
+        >
+          {t.nav.virtualCenter}
+        </a>
         <Button 
           variant="outline" 
           size="lg" 
