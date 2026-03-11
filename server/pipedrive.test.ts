@@ -1,30 +1,48 @@
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, vi } from "vitest";
 import axios from "axios";
 
-describe("Pipedrive API credentials", () => {
-  it("should successfully connect to Pipedrive API with provided credentials", async () => {
-    const apiKey = process.env.PIPEDRIVE_API_KEY;
-    const rawDomain = process.env.PIPEDRIVE_COMPANY_DOMAIN ?? "";
+// Mock axios so no live network calls are made
+vi.mock("axios");
+const mockedAxios = vi.mocked(axios, true);
 
-    expect(apiKey, "PIPEDRIVE_API_KEY must be set").toBeTruthy();
-    expect(rawDomain, "PIPEDRIVE_COMPANY_DOMAIN must be set").toBeTruthy();
+process.env.PIPEDRIVE_API_KEY = "test-api-key";
+process.env.PIPEDRIVE_COMPANY_DOMAIN = "testcompany";
 
-    // Support both full URL (https://company.pipedrive.com) and subdomain-only (company)
-    const baseUrl = rawDomain.startsWith("http")
-      ? rawDomain.replace(/\/$/, "")
-      : `https://${rawDomain}.pipedrive.com`;
+import { appRouter } from "./routers";
+import type { TrpcContext } from "./_core/context";
 
-    // Use the standard api.pipedrive.com endpoint to avoid subdomain SSL issues
-    const response = await axios.get(
-      `https://api.pipedrive.com/v1/users/me`,
-      {
-        params: { api_token: apiKey },
-        validateStatus: (status) => status < 500,
-      }
-    );
+function createCtx(): TrpcContext {
+  return {
+    user: null,
+    req: { protocol: "https", headers: {} } as TrpcContext["req"],
+    res: {} as TrpcContext["res"],
+  };
+}
 
-    expect(response.status).toBe(200);
-    expect(response.data.success).toBe(true);
-    expect(response.data.data).toBeDefined();
+describe("Pipedrive contact form integration", () => {
+  it("creates a Pipedrive person and deal when contact form is submitted", async () => {
+    // Mock: no existing person found
+    mockedAxios.get = vi.fn().mockResolvedValue({ data: { data: { items: [] } } });
+    // Mock: person creation, deal creation, note creation
+    mockedAxios.post = vi.fn()
+      .mockResolvedValueOnce({ data: { data: { id: 42 } } })   // create person
+      .mockResolvedValueOnce({ data: { data: { id: 99 } } })   // create deal
+      .mockResolvedValueOnce({ data: { success: true } });     // add note
+
+    const caller = appRouter.createCaller(createCtx());
+    const result = await caller.pipedrive.submitContact({
+      firstName: "Test",
+      lastName: "User",
+      email: "test@example.com",
+      message: "Hello from the contact form",
+      companyName: "Test Company",
+    });
+
+    expect(result.success).toBe(true);
+    expect(mockedAxios.post).toHaveBeenCalledTimes(3);
+
+    // Verify deal title contains the name
+    const dealCall = (mockedAxios.post as ReturnType<typeof vi.fn>).mock.calls[1];
+    expect(dealCall[1].title).toContain("Test User");
   });
 });

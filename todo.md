@@ -23,3 +23,9 @@
 - [x] Register /kawader route in App.tsx
 - [x] Add hover highlight + pointer cursor to all nav tabs
 - [x] Rename Kawader tab to "Apply to Kawader / التقديم على كوادر"
+- [x] Rebuild Kawader form: certification path selector with requirements
+- [x] Add personal information section (AR/EN name, DOB, ID, nationality, experience)
+- [x] Add academic information section with multi-entry support
+- [x] Add OSH certificates and courses list field
+- [x] Add all required document upload fields (9 documents)
+- [x] Update backend to handle all new fields and multi-file uploads to S3/Pipedrive
