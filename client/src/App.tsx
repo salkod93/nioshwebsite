@@ -7,6 +7,7 @@ import { ThemeProvider } from "./contexts/ThemeContext";
 import { LanguageProvider } from "./contexts/LanguageContext";
 import Home from "./pages/Home";
 import ComingSoon from "./pages/ComingSoon";
+import Kawader from "./pages/Kawader";
 
 function Router() {
   return (
@@ -43,6 +44,9 @@ function Router() {
       <Route path={"/digital-library"}>
         {() => <ComingSoon titleEn="Digital Library" titleAr="المكتبة الرقمية" />}
       </Route>
+
+      {/* Kawader Accreditation */}
+      <Route path={"/kawader"} component={Kawader} />
 
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}

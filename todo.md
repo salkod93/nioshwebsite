@@ -17,3 +17,7 @@
 - [x] Polish and optimize mobile layout
 - [x] Fix mobile: duplicated NIOSH logo in burger menu
 - [x] Fix mobile: hero image overlapping with top texture pattern
+- [x] Create Kawader (كوادر) page with accreditation form (name, email, CV upload)
+- [x] Backend: upload CV to S3 and send file URL + form data to Pipedrive
+- [x] Add Kawader nav tab to desktop and mobile navigation
+- [x] Register /kawader route in App.tsx

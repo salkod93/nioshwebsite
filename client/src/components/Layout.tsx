@@ -134,6 +134,10 @@ export default function Layout({ children, lang, setLang }: LayoutProps) {
               {t.nav.contact}
             </button>
 
+            <button onClick={() => navigate('/kawader')} className="text-foreground/80 hover:text-primary font-medium transition-colors">
+              {t.nav.kawader}
+            </button>
+
             <a 
               href="#" 
               className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-md font-medium transition-colors text-sm text-center leading-tight max-w-[200px]"
@@ -238,6 +242,14 @@ export default function Layout({ children, lang, setLang }: LayoutProps) {
             className="w-full text-start py-4 px-4 text-lg font-semibold text-foreground hover:text-primary hover:bg-primary/5 rounded-xl transition-colors border-b border-border/20"
           >
             {t.nav.contact}
+          </button>
+
+          {/* Kawader */}
+          <button
+            onClick={() => { navigate('/kawader'); setMobileMenuOpen(false); }}
+            className="w-full text-start py-4 px-4 text-lg font-semibold text-foreground hover:text-primary hover:bg-primary/5 rounded-xl transition-colors border-b border-border/20"
+          >
+            {t.nav.kawader}
           </button>
 
           {/* Virtual Center */}
