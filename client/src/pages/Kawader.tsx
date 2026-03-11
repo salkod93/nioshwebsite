@@ -39,16 +39,59 @@ const c = {
     practitioner: "Practitioner",
     professional: "Professional",
     practitionerReqs: [
-      "Bachelor's degree in Occupational Safety & Health or a related field",
-      "Minimum 2 years of relevant work experience",
-      "Valid national ID or Iqama",
+      "High School Certificate + 5 years of OSH experience",
+      "One-year OSH Vocational Diploma or higher",
+      "Engineering Specialties: Technical Diploma or Bachelor + 1 year OSH experience",
+      "Non-Engineering Specialties: Bachelor + 2 years, or Non-Technical Diploma + 3 years OSH experience",
+      "Environmental Safety / Health Specialties: Diploma or Bachelor + 1 year OSH experience",
     ],
     professionalReqs: [
-      "Bachelor's degree in Occupational Safety & Health or a related field",
-      "Minimum 5 years of relevant work experience",
-      "Recognized OSH professional certification (e.g., NEBOSH, CSP, CMIOSH)",
-      "Valid national ID or Iqama",
+      "PhD / Master's / Bachelor's degree in Occupational Safety and Health",
+      "Master's degree from NEBOSH / NEBOSH Diploma or equivalent",
+      "Engineering Specialties: Bachelor and above + 1 year, or Technical Diploma + 8 years OSH experience",
+      "Non-Engineering Specialties: Bachelor + 2 years, or Non-Technical Diploma + 10 years OSH experience",
+      "Environmental Safety / Health Specialties: Bachelor and above + 1 year OSH experience",
+      "Occupational Medicine: PhD Holders",
     ],
+    requirementsNote: "A specialized team reviews the application and verifies all attachments according to the standards table.",
+    requirementsTitle: "Eligibility Requirements",
+    requirementsSubtitle: "Criteria for Matching Experience and Qualifications to Enter the Exam",
+    importantNotes: [
+      "Accreditation by the Saudi Council of Engineers is required (Engineering Specialties).",
+      "Qualifications must be accredited by the Saudi Commission for Health Specialties (Health Specialties).",
+      "An equivalency certificate from the Ministry of Education is required for qualifications obtained outside the Kingdom.",
+      "A certificate of matching will be issued automatically if the applicant meets the required standards through the website.",
+      "The matching service is provided free of charge.",
+    ],
+    qualTable: {
+      title: "Basic Qualification Table",
+      degreeCol: "Degree / Certificate",
+      levelCol: "Equivalent Level",
+      reqCol: "Additional Requirements",
+      rows: [
+        { degree: "PhD / Master's / Bachelor's in Occupational Safety and Health", level: "Professional Level", req: "—" },
+        { degree: "Master's from NEBOSH / NEBOSH Diploma or equivalent", level: "Professional Level", req: "—" },
+        { degree: "High School Certificate", level: "Practitioner Level", req: "5 years of OSH experience" },
+        { degree: "One-year OSH Vocational Diploma or higher", level: "Practitioner Level", req: "—" },
+      ],
+    },
+    specTable: {
+      title: "Specialisations Table",
+      specCol: "Specialisation",
+      practQual: "Practitioner Qualification",
+      practExp: "Practitioner OSH Experience",
+      profQual: "Professional Qualification",
+      profExp: "Professional OSH Experience",
+      rows: [
+        { spec: "Engineering Specialties", practQual: "Technical Diploma or Bachelor", practExp: "1 Year", profQual: "Bachelor and above", profExp: "1 Year" },
+        { spec: "Engineering Specialties", practQual: "—", practExp: "—", profQual: "Technical Diploma", profExp: "8 Years" },
+        { spec: "Non-Engineering Specialties", practQual: "Bachelor", practExp: "2 Years", profQual: "Bachelor and above", profExp: "2 Years" },
+        { spec: "Non-Engineering Specialties", practQual: "Non-Technical Diploma", practExp: "3 Years", profQual: "Non-Technical Diploma", profExp: "10 Years" },
+        { spec: "Environmental Safety", practQual: "Diploma or Bachelor", practExp: "1 Year", profQual: "Bachelor and above", profExp: "1 Year" },
+        { spec: "Health Specialties", practQual: "Diploma or Bachelor", practExp: "1 Year", profQual: "Bachelor and above", profExp: "1 Year" },
+        { spec: "Occupational Medicine", practQual: "—", practExp: "—", profQual: "PhD Holders", profExp: "—" },
+      ],
+    },
     personalSection: "Personal Information",
     fullNameAr: "Full Name in Arabic *",
     fullNameEn: "Full Name in English *",
@@ -109,16 +152,59 @@ const c = {
     practitioner: "ممارس",
     professional: "محترف",
     practitionerReqs: [
-      "درجة البكالوريوس في السلامة والصحة المهنية أو مجال ذي صلة",
-      "خبرة عمل ذات صلة لا تقل عن سنتين",
-      "هوية وطنية أو إقامة سارية المفعول",
+      "شهادة الثانوية العامة + 5 سنوات خبرة في السلامة والصحة المهنية",
+      "دبلوم مهني في السلامة والصحة المهنية لمدة سنة أو أعلى",
+      "التخصصات الهندسية: دبلوم تقني أو بكالوريوس + سنة خبرة في السلامة والصحة المهنية",
+      "التخصصات غير الهندسية: بكالوريوس + سنتان، أو دبلوم غير تقني + 3 سنوات خبرة",
+      "السلامة البيئية / التخصصات الصحية: دبلوم أو بكالوريوس + سنة خبرة",
     ],
     professionalReqs: [
-      "درجة البكالوريوس في السلامة والصحة المهنية أو مجال ذي صلة",
-      "خبرة عمل ذات صلة لا تقل عن 5 سنوات",
-      "شهادة مهنية معترف بها في السلامة والصحة المهنية (مثل NEBOSH أو CSP أو CMIOSH)",
-      "هوية وطنية أو إقامة سارية المفعول",
+      "درجة الدكتوراه / الماجستير / البكالوريوس في السلامة والصحة المهنية",
+      "ماجستير من NEBOSH / دبلوم NEBOSH أو ما يعادله",
+      "التخصصات الهندسية: بكالوريوس فأعلى + سنة، أو دبلوم تقني + 8 سنوات خبرة",
+      "التخصصات غير الهندسية: بكالوريوس + سنتان، أو دبلوم غير تقني + 10 سنوات خبرة",
+      "السلامة البيئية / التخصصات الصحية: بكالوريوس فأعلى + سنة خبرة",
+      "الطب المهني: حاملو الدكتوراه",
     ],
+    requirementsNote: "يقوم فريق من المختصين بمراجعة الطلب والتدقيق على كافة المرفقات وذلك وفق جدول المعايير الخاصة بمطابقة الخبرات والمؤهلات لدخول الاختبار في مجال السلامة والصحة المهنية.",
+    requirementsTitle: "متطلبات الأهلية",
+    requirementsSubtitle: "معايير مطابقة الخبرات والمؤهلات لدخول الاختبار",
+    importantNotes: [
+      "يشترط الاعتماد من الهيئة السعودية للمهندسين (التخصصات الهندسية).",
+      "يشترط اعتماد المؤهلات من هيئة التخصصات الصحية (التخصصات الصحية).",
+      "يشترط الحصول على شهادة معادلة من وزارة التعليم للمؤهلات التي تم الحصول عليها من خارج المملكة.",
+      "يتم إصدار شهادة المطابقة آلياً عند تحقيق المتقدم للمتطلبات المطابقة من خلال الموقع.",
+      "خدمة المطابقة تقدم بشكل مجاني.",
+    ],
+    qualTable: {
+      title: "جدول المؤهلات الأساسية",
+      degreeCol: "الدرجة / الشهادة",
+      levelCol: "المستوى المكافئ",
+      reqCol: "المتطلبات الإضافية",
+      rows: [
+        { degree: "درجة الدكتوراه / الماجستير / البكالوريوس في السلامة والصحة المهنية", level: "المستوى المحترف", req: "—" },
+        { degree: "ماجستير من NEBOSH / دبلوم NEBOSH أو ما يعادله", level: "المستوى المحترف", req: "—" },
+        { degree: "الشهادة الثانوية", level: "المستوى الممارس", req: "خبرة 5 سنوات في السلامة والصحة المهنية" },
+        { degree: "دبلوم سلامة وصحة مهنية سنة دراسية فأكثر", level: "المستوى الممارس", req: "—" },
+      ],
+    },
+    specTable: {
+      title: "جدول التخصصات",
+      specCol: "التخصص",
+      practQual: "مؤهل الممارس",
+      practExp: "خبرة الممارس في السلامة والصحة المهنية",
+      profQual: "مؤهل المحترف",
+      profExp: "خبرة المحترف في السلامة والصحة المهنية",
+      rows: [
+        { spec: "التخصصات الهندسية", practQual: "دبلوم تقني أو بكالوريوس", practExp: "سنة", profQual: "بكالوريوس فوق", profExp: "سنة" },
+        { spec: "التخصصات الهندسية", practQual: "—", practExp: "—", profQual: "دبلوم تقني", profExp: "8 سنوات" },
+        { spec: "التخصصات غير الهندسية", practQual: "بكالوريوس", practExp: "سنتان", profQual: "بكالوريوس فوق", profExp: "سنتان" },
+        { spec: "التخصصات غير الهندسية", practQual: "دبلوم غير تقني", practExp: "3 سنوات", profQual: "دبلوم غير تقني", profExp: "10 سنوات" },
+        { spec: "السلامة البيئية", practQual: "دبلوم أو بكالوريوس", practExp: "سنة", profQual: "بكالوريوس فوق", profExp: "سنة" },
+        { spec: "التخصصات الصحية", practQual: "دبلوم أو بكالوريوس", practExp: "سنة", profQual: "بكالوريوس فوق", profExp: "سنة" },
+        { spec: "الطب المهني", practQual: "—", practExp: "—", profQual: "دكتوراه", profExp: "—" },
+      ],
+    },
     personalSection: "المعلومات الشخصية",
     fullNameAr: "الاسم الكامل بالعربية *",
     fullNameEn: "الاسم الكامل بالإنجليزية *",
@@ -397,6 +483,91 @@ export default function Kawader() {
           <h1 className="text-4xl md:text-5xl font-extrabold mb-3">{t.pageTitle}</h1>
           <h2 className="text-xl text-white/80">{t.pageSubtitle}</h2>
           <p className="text-white/70 mt-2 text-sm">{t.pageDesc}</p>
+        </div>
+      </section>
+
+      {/* Requirements Reference Section */}
+      <section className="py-12 bg-muted/30 border-b border-border">
+        <div className="container max-w-5xl mx-auto px-4">
+          <div className="mb-8 text-center">
+            <h2 className="text-2xl font-extrabold text-primary mb-1">{t.requirementsTitle}</h2>
+            <p className="text-muted-foreground text-sm">{t.requirementsSubtitle}</p>
+          </div>
+
+          {/* Basic Qualification Table */}
+          <div className="mb-8">
+            <h3 className="text-lg font-bold text-foreground mb-3">{t.qualTable.title}</h3>
+            <div className="overflow-x-auto rounded-xl border border-border shadow-sm">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="bg-primary text-white">
+                    <th className="px-4 py-3 text-start font-semibold">{t.qualTable.degreeCol}</th>
+                    <th className="px-4 py-3 text-start font-semibold">{t.qualTable.levelCol}</th>
+                    <th className="px-4 py-3 text-start font-semibold">{t.qualTable.reqCol}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {t.qualTable.rows.map((row, i) => (
+                    <tr key={i} className={i % 2 === 0 ? "bg-background" : "bg-muted/40"}>
+                      <td className="px-4 py-3 font-medium">{row.degree}</td>
+                      <td className="px-4 py-3">
+                        <span className={cn(
+                          "inline-block px-2 py-0.5 rounded-full text-xs font-bold",
+                          row.level.includes("Professional") || row.level.includes("المحترف") ? "bg-primary/10 text-primary" : "bg-secondary/10 text-secondary"
+                        )}>{row.level}</span>
+                      </td>
+                      <td className="px-4 py-3 text-muted-foreground">{row.req}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          {/* Specialisations Table */}
+          <div className="mb-8">
+            <h3 className="text-lg font-bold text-foreground mb-3">{t.specTable.title}</h3>
+            <div className="overflow-x-auto rounded-xl border border-border shadow-sm">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="bg-primary text-white">
+                    <th className="px-4 py-3 text-start font-semibold">{t.specTable.specCol}</th>
+                    <th className="px-4 py-3 text-start font-semibold">{t.specTable.practQual}</th>
+                    <th className="px-4 py-3 text-start font-semibold">{t.specTable.practExp}</th>
+                    <th className="px-4 py-3 text-start font-semibold">{t.specTable.profQual}</th>
+                    <th className="px-4 py-3 text-start font-semibold">{t.specTable.profExp}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {t.specTable.rows.map((row, i) => (
+                    <tr key={i} className={i % 2 === 0 ? "bg-background" : "bg-muted/40"}>
+                      <td className="px-4 py-3 font-medium">{row.spec}</td>
+                      <td className="px-4 py-3">{row.practQual}</td>
+                      <td className="px-4 py-3 text-center">{row.practExp}</td>
+                      <td className="px-4 py-3">{row.profQual}</td>
+                      <td className="px-4 py-3 text-center">{row.profExp}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          {/* Important Notes */}
+          <div className="bg-amber-50 border border-amber-200 rounded-xl p-5">
+            <h3 className="text-base font-bold text-amber-800 mb-3 flex items-center gap-2">
+              <span className="text-amber-500">&#9888;</span>
+              {isRTL ? "ملاحظات مهمة" : "Important Notes"}
+            </h3>
+            <ul className="space-y-2">
+              {t.importantNotes.map((note, i) => (
+                <li key={i} className="flex gap-2 text-sm text-amber-900">
+                  <span className="text-amber-500 mt-0.5 shrink-0">•</span>
+                  <span>{note}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </section>
 
