@@ -30,3 +30,6 @@
 - [x] Add all required document upload fields (9 documents)
 - [x] Update backend to handle all new fields and multi-file uploads to S3/Pipedrive
 - [x] Update Kawader page with official requirements from document (qualification table + specialisations table, bilingual)
+- [x] Update OSH certificates placeholder examples (NEBOSH IGC, QHSE Professional Master, IOSH Managing Safely, OHSAS 18001 IRCA)
+- [x] Remove requirement bullet lists from Practitioner/Professional path selection cards (simple radio choice only)
+- [x] Make all form fields mandatory (address, enrollment/graduation dates, OSH certs textarea) with validation and error display

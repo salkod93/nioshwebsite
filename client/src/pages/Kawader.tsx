@@ -112,8 +112,8 @@ const c = {
     addQualification: "Add Another Qualification",
     removeQualification: "Remove",
     oshSection: "OSH Professional Certificates & Courses",
-    oshLabel: "List your OSH professional certificates and courses (one per line)",
-    oshPlaceholder: "e.g. NEBOSH IGC – 2021\nNFPA Fire Safety – 2020",
+    oshLabel: "List your OSH professional certificates and courses (one per line) *",
+    oshPlaceholder: "e.g.\nNEBOSH IGC\nQHSE Professional Master\nIOSH Managing Safely\nOHSAS 18001 IRCA",
     docsSection: "Required Documents",
     docsNote: "Please upload all required documents. Accepted formats: PDF, JPG, PNG (max 10MB each).",
     docs: {
@@ -225,8 +225,8 @@ const c = {
     addQualification: "إضافة مؤهل آخر",
     removeQualification: "حذف",
     oshSection: "شهادات ودورات السلامة والصحة المهنية",
-    oshLabel: "اذكر شهاداتك ودوراتك المهنية في السلامة والصحة المهنية (واحدة في كل سطر)",
-    oshPlaceholder: "مثال: NEBOSH IGC – 2021\nNFPA Fire Safety – 2020",
+    oshLabel: "اذكر شهاداتك ودوراتك المهنية في السلامة والصحة المهنية (واحدة في كل سطر) *",
+    oshPlaceholder: "مثال:\nNEBOSH IGC\nQHSE Professional Master\nIOSH Managing Safely\nOHSAS 18001 IRCA",
     docsSection: "المستندات المطلوبة",
     docsNote: "يرجى رفع جميع المستندات المطلوبة. الصيغ المقبولة: PDF، JPG، PNG (الحد الأقصى 10MB لكل ملف).",
     docs: {
@@ -421,11 +421,15 @@ export default function Kawader() {
     if (!experience.trim()) e.experience = t.errors.required;
     academics.forEach((a, i) => {
       if (!a.institution.trim()) e[`acad_${i}_institution`] = t.errors.required;
+      if (!a.address.trim()) e[`acad_${i}_address`] = t.errors.required;
       if (!a.degreeTitle.trim()) e[`acad_${i}_degreeTitle`] = t.errors.required;
       if (!a.educationLevel) e[`acad_${i}_educationLevel`] = t.errors.required;
+      if (!a.enrollmentDate) e[`acad_${i}_enrollmentDate`] = t.errors.required;
+      if (!a.graduationDate) e[`acad_${i}_graduationDate`] = t.errors.required;
       if (!a.country.trim()) e[`acad_${i}_country`] = t.errors.required;
       if (!a.city.trim()) e[`acad_${i}_city`] = t.errors.required;
     });
+    if (!oshCerts.trim()) e.oshCerts = t.errors.required;
     Object.keys(docs).forEach(k => {
       if (!docs[k]) e[`doc_${k}`] = t.errors.fileRequired;
     });
@@ -583,30 +587,20 @@ export default function Kawader() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {(["Practitioner", "Professional"] as const).map(p => {
                   const label = p === "Practitioner" ? t.practitioner : t.professional;
-                  const reqs = p === "Practitioner" ? t.practitionerReqs : t.professionalReqs;
                   return (
                     <button
                       type="button"
                       key={p}
                       onClick={() => { setPath(p); setErrors(prev => ({ ...prev, path: "" })); }}
                       className={cn(
-                        "text-left p-5 rounded-xl border-2 transition-all cursor-pointer",
+                        "flex items-center gap-3 p-5 rounded-xl border-2 transition-all cursor-pointer",
                         path === p ? "border-primary bg-primary/5" : "border-border hover:border-primary/40"
                       )}
                     >
-                      <div className="flex items-center gap-2 mb-3">
-                        <div className={cn("w-5 h-5 rounded-full border-2 flex items-center justify-center shrink-0", path === p ? "border-primary" : "border-muted-foreground")}>
-                          {path === p && <div className="w-2.5 h-2.5 rounded-full bg-primary" />}
-                        </div>
-                        <span className="font-bold text-foreground">{label}</span>
+                      <div className={cn("w-5 h-5 rounded-full border-2 flex items-center justify-center shrink-0", path === p ? "border-primary" : "border-muted-foreground")}>
+                        {path === p && <div className="w-2.5 h-2.5 rounded-full bg-primary" />}
                       </div>
-                      <ul className="space-y-1">
-                        {reqs.map((r, i) => (
-                          <li key={i} className="text-xs text-muted-foreground flex gap-1.5">
-                            <span className="text-primary mt-0.5">•</span>{r}
-                          </li>
-                        ))}
-                      </ul>
+                      <span className="font-bold text-foreground text-base">{label}</span>
                     </button>
                   );
                 })}
@@ -647,11 +641,11 @@ export default function Kawader() {
                     </div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <InputField label={t.institution} value={a.institution} onChange={v => updateAcademic(a.id, "institution", v)} error={errors[`acad_${i}_institution`]} />
-                      <InputField label={t.institutionAddress} value={a.address} onChange={v => updateAcademic(a.id, "address", v)} />
+                      <InputField label={t.institutionAddress} value={a.address} onChange={v => { updateAcademic(a.id, "address", v); setErrors(p => ({ ...p, [`acad_${i}_address`]: "" })); }} error={errors[`acad_${i}_address`]} />
                       <InputField label={t.degreeTitle} value={a.degreeTitle} onChange={v => updateAcademic(a.id, "degreeTitle", v)} error={errors[`acad_${i}_degreeTitle`]} />
                       <SelectField label={t.educationLevel} value={a.educationLevel} onChange={v => updateAcademic(a.id, "educationLevel", v)} options={t.educationLevels} error={errors[`acad_${i}_educationLevel`]} />
-                      <InputField label={t.enrollmentDate} value={a.enrollmentDate} onChange={v => updateAcademic(a.id, "enrollmentDate", v)} type="date" />
-                      <InputField label={t.graduationDate} value={a.graduationDate} onChange={v => updateAcademic(a.id, "graduationDate", v)} type="date" />
+                      <InputField label={t.enrollmentDate} value={a.enrollmentDate} onChange={v => { updateAcademic(a.id, "enrollmentDate", v); setErrors(p => ({ ...p, [`acad_${i}_enrollmentDate`]: "" })); }} type="date" error={errors[`acad_${i}_enrollmentDate`]} />
+                      <InputField label={t.graduationDate} value={a.graduationDate} onChange={v => { updateAcademic(a.id, "graduationDate", v); setErrors(p => ({ ...p, [`acad_${i}_graduationDate`]: "" })); }} type="date" error={errors[`acad_${i}_graduationDate`]} />
                       <InputField label={t.country} value={a.country} onChange={v => updateAcademic(a.id, "country", v)} error={errors[`acad_${i}_country`]} />
                       <InputField label={t.city} value={a.city} onChange={v => updateAcademic(a.id, "city", v)} error={errors[`acad_${i}_city`]} />
                     </div>
@@ -669,11 +663,12 @@ export default function Kawader() {
                 <label className="block text-sm font-semibold text-foreground">{t.oshLabel}</label>
                 <textarea
                   value={oshCerts}
-                  onChange={e => setOshCerts(e.target.value)}
+                  onChange={e => { setOshCerts(e.target.value); setErrors(p => ({ ...p, oshCerts: "" })); }}
                   placeholder={t.oshPlaceholder}
                   rows={4}
-                  className="w-full px-4 py-3 rounded-xl border border-border bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all resize-none"
+                  className={cn("w-full px-4 py-3 rounded-xl border bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all resize-none", errors.oshCerts ? "border-red-400" : "border-border")}
                 />
+                {errors.oshCerts && <p className="text-red-500 text-xs">{errors.oshCerts}</p>}
               </div>
             </SectionCard>
 
