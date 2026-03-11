@@ -21,3 +21,5 @@
 - [x] Backend: upload CV to S3 and send file URL + form data to Pipedrive
 - [x] Add Kawader nav tab to desktop and mobile navigation
 - [x] Register /kawader route in App.tsx
+- [x] Add hover highlight + pointer cursor to all nav tabs
+- [x] Rename Kawader tab to "Apply to Kawader / التقديم على كوادر"

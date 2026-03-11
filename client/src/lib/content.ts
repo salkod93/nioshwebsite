@@ -30,7 +30,7 @@ export const content = {
         digitalLibrary: "Digital Library"
       },
       contact: "Contact Us",
-      kawader: "Kawader",
+      kawader: "Apply to Kawader",
       virtualCenter: "Virtual Center of Occupational Safety and Health Services",
       langSwitch: "العربية"
     },
@@ -296,7 +296,7 @@ export const content = {
         digitalLibrary: "المكتبة الرقمية"
       },
       contact: "تواصل معنا",
-      kawader: "كوادر",
+      kawader: "التقديم على كوادر",
       virtualCenter: "مركز خدمات السلامة والصحة المهنية الافتراضي",
       langSwitch: "English"
     },

@@ -78,13 +78,13 @@ export default function Layout({ children, lang, setLang }: LayoutProps) {
 
           {/* Desktop Nav */}
           <nav className="hidden md:flex items-center gap-8">
-            <button onClick={() => scrollToSection('home')} className="text-foreground/80 hover:text-primary font-medium transition-colors">
+            <button onClick={() => scrollToSection('home')} className="cursor-pointer text-foreground/80 hover:text-primary font-medium transition-colors px-2 py-1 rounded-md hover:bg-primary/10 hover:underline underline-offset-4">
               {t.nav.home}
             </button>
 
             {/* About Dropdown */}
             <DropdownMenu>
-              <DropdownMenuTrigger className="flex items-center gap-1 text-foreground/80 hover:text-primary font-medium transition-colors outline-none">
+              <DropdownMenuTrigger className="cursor-pointer flex items-center gap-1 text-foreground/80 hover:text-primary font-medium transition-colors outline-none px-2 py-1 rounded-md hover:bg-primary/10 hover:underline underline-offset-4">
                 {t.nav.about}
                 <ChevronDown className="h-4 w-4" />
               </DropdownMenuTrigger>
@@ -101,13 +101,13 @@ export default function Layout({ children, lang, setLang }: LayoutProps) {
             </DropdownMenu>
 
             {/* Services - Direct scroll link */}
-            <button onClick={() => scrollToSection('services')} className="text-foreground/80 hover:text-primary font-medium transition-colors">
+            <button onClick={() => scrollToSection('services')} className="cursor-pointer text-foreground/80 hover:text-primary font-medium transition-colors px-2 py-1 rounded-md hover:bg-primary/10 hover:underline underline-offset-4">
               {t.nav.services}
             </button>
 
             {/* Media Center Dropdown */}
             <DropdownMenu>
-              <DropdownMenuTrigger className="flex items-center gap-1 text-foreground/80 hover:text-primary font-medium transition-colors outline-none">
+              <DropdownMenuTrigger className="cursor-pointer flex items-center gap-1 text-foreground/80 hover:text-primary font-medium transition-colors outline-none px-2 py-1 rounded-md hover:bg-primary/10 hover:underline underline-offset-4">
                 {t.nav.mediaCenter}
                 <ChevronDown className="h-4 w-4" />
               </DropdownMenuTrigger>
@@ -130,11 +130,11 @@ export default function Layout({ children, lang, setLang }: LayoutProps) {
               </DropdownMenuContent>
             </DropdownMenu>
 
-            <button onClick={() => scrollToSection('contact')} className="text-foreground/80 hover:text-primary font-medium transition-colors">
+            <button onClick={() => scrollToSection('contact')} className="cursor-pointer text-foreground/80 hover:text-primary font-medium transition-colors px-2 py-1 rounded-md hover:bg-primary/10 hover:underline underline-offset-4">
               {t.nav.contact}
             </button>
 
-            <button onClick={() => navigate('/kawader')} className="text-foreground/80 hover:text-primary font-medium transition-colors">
+            <button onClick={() => navigate('/kawader')} className="cursor-pointer text-foreground/80 hover:text-primary font-medium transition-colors px-2 py-1 rounded-md hover:bg-primary/10 hover:underline underline-offset-4">
               {t.nav.kawader}
             </button>
 
