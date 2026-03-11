@@ -30,6 +30,12 @@ const academicSchema = z.object({
   city: z.string(),
 });
 
+function generateRefNumber(): string {
+  const year = new Date().getFullYear();
+  const random = Math.floor(10000 + Math.random() * 90000); // 5-digit
+  return `KWD-${year}-${random}`;
+}
+
 const submitSchema = z.object({
   certificationPath: z.enum(["Practitioner", "Professional"]),
   fullNameAr: z.string().min(1),
@@ -37,6 +43,7 @@ const submitSchema = z.object({
   dob: z.string().min(1),
   nationalId: z.string().min(1),
   nationality: z.string().min(1),
+  phone: z.string().min(1),
   experience: z.string().min(1),
   academics: z.array(academicSchema).min(1),
   oshCerts: z.string().optional(),
@@ -96,7 +103,8 @@ async function createDealWithNote(
   data: z.infer<typeof submitSchema>,
   docUrls: Record<string, string>,
   personId: number,
-  apiKey: string
+  apiKey: string,
+  refNumber: string
 ): Promise<void> {
   // Build note
   const academicLines = data.academics
@@ -113,6 +121,7 @@ async function createDealWithNote(
 
   const noteContent = [
     `=== KAWADER ACCREDITATION APPLICATION ===`,
+    `Reference Number: ${refNumber}`,
     `Certification Path: ${data.certificationPath}`,
     ``,
     `--- Personal Information ---`,
@@ -121,6 +130,7 @@ async function createDealWithNote(
     `Date of Birth: ${data.dob}`,
     `National ID / Iqama: ${data.nationalId}`,
     `Nationality: ${data.nationality}`,
+    `Phone: ${data.phone}`,
     `Years of Experience: ${data.experience}`,
     ``,
     `--- Academic Qualifications ---`,
@@ -137,7 +147,8 @@ async function createDealWithNote(
   const dealRes = await axios.post(
     `${PIPEDRIVE_API_BASE}/deals`,
     {
-      title: `Kawader Application – ${data.fullNameEn} (${data.certificationPath})`,
+      title: `[${refNumber}] Kawader Application – ${data.fullNameEn} (${data.certificationPath})`,
+      status: "open",
       person_id: personId,
     },
     { params: { api_token: apiKey } }
@@ -177,17 +188,20 @@ export const kawaderRouter = router({
         }
       }
 
-      // 2. Find or create person in Pipedrive
+      // 2. Generate unique reference number
+      const refNumber = generateRefNumber();
+
+      // 3. Find or create person in Pipedrive
       const personId = await createOrFindPerson(input.fullNameEn, apiKey);
 
-      // 3. Create deal with full note
+      // 4. Create deal with full note
       try {
-        await createDealWithNote(input, docUrls, personId, apiKey);
+        await createDealWithNote(input, docUrls, personId, apiKey, refNumber);
       } catch (err) {
         console.error("[Kawader] Pipedrive deal creation error:", err);
         // Don't fail the submission if Pipedrive is temporarily down
       }
 
-      return { success: true };
+      return { success: true, refNumber };
     }),
 });

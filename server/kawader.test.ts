@@ -38,6 +38,7 @@ const sampleInput = {
   dob: "1990-01-15",
   nationalId: "1234567890",
   nationality: "Saudi",
+  phone: "+966501234567",
   experience: "5",
   academics: [
     {
@@ -87,6 +88,7 @@ describe("kawader.submitAccreditation", () => {
     const result = await caller.kawader.submitAccreditation(sampleInput);
 
     expect(result.success).toBe(true);
+    expect(result.refNumber).toMatch(/^KWD-\d{4}-\d{5}$/);
 
     // All 10 documents should be uploaded
     expect(storagePut).toHaveBeenCalledTimes(10);
@@ -120,6 +122,7 @@ describe("kawader.submitAccreditation", () => {
     const result = await caller.kawader.submitAccreditation(sampleInput);
 
     expect(result.success).toBe(true);
+    expect(result.refNumber).toMatch(/^KWD-\d{4}-\d{5}$/);
     // Should NOT create a new person (only deal + note = 2 POST calls)
     expect(mockedAxios.post).toHaveBeenCalledTimes(2);
     const dealCall = (mockedAxios.post as ReturnType<typeof vi.fn>).mock.calls[0];

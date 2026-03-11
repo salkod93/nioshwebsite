@@ -98,6 +98,7 @@ const c = {
     dob: "Date of Birth *",
     nationalId: "National ID / Iqama Number *",
     nationality: "Nationality *",
+    phone: "Phone Number *",
     experience: "Total Years of Experience *",
     academicSection: "Academic Information",
     academicNote: "You may add more than one qualification.",
@@ -211,6 +212,7 @@ const c = {
     dob: "تاريخ الميلاد *",
     nationalId: "رقم الهوية الوطنية / الإقامة *",
     nationality: "الجنسية *",
+    phone: "رقم الجوال *",
     experience: "إجمالي سنوات الخبرة *",
     academicSection: "المعلومات الأكاديمية",
     academicNote: "يمكنك إضافة أكثر من مؤهل علمي.",
@@ -383,6 +385,7 @@ export default function Kawader() {
   const [dob, setDob] = useState("");
   const [nationalId, setNationalId] = useState("");
   const [nationality, setNationality] = useState("");
+  const [phone, setPhone] = useState("");
   const [experience, setExperience] = useState("");
 
   // Academic info (multi-entry)
@@ -401,8 +404,10 @@ export default function Kawader() {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [submitted, setSubmitted] = useState(false);
 
+  const [refNumber, setRefNumber] = useState("");
+
   const submitMutation = trpc.kawader.submitAccreditation.useMutation({
-    onSuccess: () => setSubmitted(true),
+    onSuccess: (data) => { setRefNumber(data.refNumber); setSubmitted(true); },
     onError: (err) => toast.error(err.message || "Submission failed. Please try again."),
   });
 
@@ -418,6 +423,7 @@ export default function Kawader() {
     if (!dob) e.dob = t.errors.required;
     if (!nationalId.trim()) e.nationalId = t.errors.required;
     if (!nationality.trim()) e.nationality = t.errors.required;
+    if (!phone.trim()) e.phone = t.errors.required;
     if (!experience.trim()) e.experience = t.errors.required;
     academics.forEach((a, i) => {
       if (!a.institution.trim()) e[`acad_${i}_institution`] = t.errors.required;
@@ -456,7 +462,7 @@ export default function Kawader() {
 
     submitMutation.mutate({
       certificationPath: path as "Practitioner" | "Professional",
-      fullNameAr, fullNameEn, dob, nationalId, nationality, experience,
+      fullNameAr, fullNameEn, dob, nationalId, nationality, phone, experience,
       academics: academics.map(({ id: _id, ...rest }) => rest),
       oshCerts,
       documents: uploadedDocs,
@@ -470,7 +476,14 @@ export default function Kawader() {
           <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="text-center max-w-md">
             <CheckCircle className="h-20 w-20 text-green-500 mx-auto mb-6" />
             <h2 className="text-3xl font-bold text-primary mb-4">{t.successTitle}</h2>
-            <p className="text-muted-foreground text-lg mb-8">{t.successMsg}</p>
+            <p className="text-muted-foreground text-lg mb-6">{t.successMsg}</p>
+            {refNumber && (
+              <div className="bg-primary/10 border border-primary/30 rounded-xl px-6 py-4 mb-8 inline-block">
+                <p className="text-xs text-muted-foreground mb-1">{isRTL ? "رقم الطلب" : "Application Reference"}</p>
+                <p className="text-2xl font-extrabold text-primary tracking-widest">{refNumber}</p>
+                <p className="text-xs text-muted-foreground mt-1">{isRTL ? "احتفظ بهذا الرقم للمتابعة" : "Keep this number for follow-up"}</p>
+              </div>
+            )}
             <Button size="lg" onClick={() => window.location.href = '/'}>{t.backHome}</Button>
           </motion.div>
         </div>
@@ -615,6 +628,7 @@ export default function Kawader() {
                 <InputField label={t.dob} value={dob} onChange={v => { setDob(v); setErrors(p => ({ ...p, dob: "" })); }} type="date" error={errors.dob} />
                 <InputField label={t.nationalId} value={nationalId} onChange={v => { setNationalId(v); setErrors(p => ({ ...p, nationalId: "" })); }} error={errors.nationalId} />
                 <InputField label={t.nationality} value={nationality} onChange={v => { setNationality(v); setErrors(p => ({ ...p, nationality: "" })); }} error={errors.nationality} />
+                <InputField label={t.phone} value={phone} onChange={v => { setPhone(v); setErrors(p => ({ ...p, phone: "" })); }} type="tel" error={errors.phone} />
                 <InputField label={t.experience} value={experience} onChange={v => { setExperience(v); setErrors(p => ({ ...p, experience: "" })); }} type="number" error={errors.experience} />
               </div>
             </SectionCard>

@@ -33,3 +33,6 @@
 - [x] Update OSH certificates placeholder examples (NEBOSH IGC, QHSE Professional Master, IOSH Managing Safely, OHSAS 18001 IRCA)
 - [x] Remove requirement bullet lists from Practitioner/Professional path selection cards (simple radio choice only)
 - [x] Make all form fields mandatory (address, enrollment/graduation dates, OSH certs textarea) with validation and error display
+- [x] Add phone number field to Kawader personal information section (mandatory, bilingual)
+- [x] Generate unique application reference number (KWD-YYYY-XXXX) in backend and return it to frontend
+- [x] Display reference number prominently on the success screen
