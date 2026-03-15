@@ -44,3 +44,4 @@
 - [x] SEO: Add meta description (50-160 characters)
 - [x] SEO: Add meta keywords tag
 - [x] SEO: Add H1 heading to homepage
+- [x] Add merge-documents note to Required Documents section in Kawader form (bilingual)

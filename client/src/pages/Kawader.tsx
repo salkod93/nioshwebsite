@@ -118,6 +118,7 @@ const c = {
     oshPlaceholder: "e.g.\nNEBOSH IGC\nQHSE Professional Master\nIOSH Managing Safely\nOHSAS 18001 IRCA",
     docsSection: "Required Documents",
     docsNote: "Please upload all required documents. Accepted formats: PDF, JPG, PNG (max 10MB each).",
+    docsMergeNote: "If you have multiple documents of the same type, please merge them into one file before uploading.",
     docs: {
       nationalId: "National ID *",
       passport: "Passport *",
@@ -233,6 +234,7 @@ const c = {
     oshPlaceholder: "مثال:\nNEBOSH IGC\nQHSE Professional Master\nIOSH Managing Safely\nOHSAS 18001 IRCA",
     docsSection: "المستندات المطلوبة",
     docsNote: "يرجى رفع جميع المستندات المطلوبة. الصيغ المقبولة: PDF، JPG، PNG (الحد الأقصى 10MB لكل ملف).",
+    docsMergeNote: "إذا كان لديك أكثر من مستند من نفس النوع، يرجى دمجها في ملف واحد قبل الرفع.",
     docs: {
       nationalId: "الهوية الوطنية *",
       passport: "جواز السفر *",
@@ -695,6 +697,10 @@ export default function Kawader() {
             {/* ── 5. Required Documents ── */}
             <SectionCard title={t.docsSection}>
               <p className="text-sm text-muted-foreground">{t.docsNote}</p>
+              <div className="flex items-start gap-2 rounded-md border border-amber-300 bg-amber-50 dark:bg-amber-950/30 dark:border-amber-700 px-4 py-3 text-sm text-amber-800 dark:text-amber-300">
+                <span className="mt-0.5 shrink-0 text-amber-500">⚠</span>
+                <span>{t.docsMergeNote}</span>
+              </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {(Object.keys(t.docs) as (keyof typeof t.docs)[]).map(key => (
                   <FileUploadField
