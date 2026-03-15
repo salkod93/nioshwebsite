@@ -67,21 +67,23 @@ export default function Layout({ children, lang, setLang }: LayoutProps) {
         )} style={{height: '85px'}}
       >
         <div className="container flex items-center justify-between h-full">
-          {/* Logo - Always on the right in RTL, left in LTR */}
+          {/* Logo - clicking navigates to home */}
           <div className="flex items-center gap-2 h-full">
-            <img 
-              src={lang === 'ar' ? "/images/logo-ar.png" : "/images/logo-en.png"} 
-              alt="NIOSH Logo" 
-              className="h-12 md:h-16 w-auto object-contain"
-            />
+            <button
+              onClick={() => navigate('/')}
+              className="focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-md"
+              aria-label="Go to homepage"
+            >
+              <img 
+                src={lang === 'ar' ? "/images/logo-ar.png" : "/images/logo-en.png"} 
+                alt="NIOSH Logo" 
+                className="h-12 md:h-16 w-auto object-contain cursor-pointer"
+              />
+            </button>
           </div>
 
           {/* Desktop Nav */}
           <nav className="hidden md:flex items-center gap-8">
-            <button onClick={() => scrollToSection('home')} className="cursor-pointer text-foreground/80 hover:text-primary font-medium transition-colors px-2 py-1 rounded-md hover:bg-primary/10 hover:underline underline-offset-4">
-              {t.nav.home}
-            </button>
-
             {/* About Dropdown */}
             <DropdownMenu>
               <DropdownMenuTrigger className="cursor-pointer flex items-center gap-1 text-foreground/80 hover:text-primary font-medium transition-colors outline-none px-2 py-1 rounded-md hover:bg-primary/10 hover:underline underline-offset-4">
@@ -186,14 +188,6 @@ export default function Layout({ children, lang, setLang }: LayoutProps) {
 
         {/* Mobile Menu Items */}
         <div className="flex flex-col px-6 py-6 gap-1 flex-1">
-          {/* Home */}
-          <button
-            onClick={() => scrollToSection('home')}
-            className="w-full text-start py-4 px-4 text-lg font-semibold text-foreground hover:text-primary hover:bg-primary/5 rounded-xl transition-colors border-b border-border/20"
-          >
-            {t.nav.home}
-          </button>
-
           {/* About */}
           <div className="border-b border-border/20">
             <button
