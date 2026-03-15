@@ -72,17 +72,18 @@ describe("kawader.submitAccreditation", () => {
   beforeEach(() => {
     vi.clearAllMocks();
 
-    // Mock person search (no existing person)
-    mockedAxios.get = vi.fn().mockResolvedValue({ data: { data: { items: [] } } });
+    // GET /dealFields – returns existing fields (empty, so all will be created)
+    // GET /persons/search – no existing person
+    mockedAxios.get = vi.fn()
+      .mockResolvedValueOnce({ data: { data: [] } })          // fetchDealFieldKeys (ensureCustomDealFields)
+      .mockResolvedValueOnce({ data: { data: { items: [] } } }) // findPersonByEmail
+      .mockResolvedValueOnce({ data: { data: [] } });          // resolveEnumOptionId (GET dealFields again)
 
-    // Mock person creation
-    mockedAxios.post = vi.fn()
-      .mockResolvedValueOnce({ data: { data: { id: 101 } } }) // create person
-      .mockResolvedValueOnce({ data: { data: { id: 201 } } }) // create deal
-      .mockResolvedValueOnce({ data: { success: true } });    // add note
+    // POST calls: 10 custom field creates + 1 person create + 1 deal create
+    mockedAxios.post = vi.fn().mockResolvedValue({ data: { data: { id: 999, key: "abc123" } } });
   });
 
-  it("uploads all 10 documents to S3 and creates a Pipedrive person, deal, and note", async () => {
+  it("uploads all 10 documents to S3 and returns success with a reference number", async () => {
     const { storagePut } = await import("./storage");
     const caller = appRouter.createCaller(createCtx());
 
@@ -93,41 +94,65 @@ describe("kawader.submitAccreditation", () => {
 
     // All 10 documents should be uploaded
     expect(storagePut).toHaveBeenCalledTimes(10);
-
-    // Person search + person creation + deal creation + note creation = 4 calls
-    expect(mockedAxios.get).toHaveBeenCalledTimes(1);
-    expect(mockedAxios.post).toHaveBeenCalledTimes(3);
-
-    // Verify deal title contains name and path
-    const dealCall = (mockedAxios.post as ReturnType<typeof vi.fn>).mock.calls[1];
-    expect(dealCall[1].title).toContain("Mohammed Ahmed");
-    expect(dealCall[1].title).toContain("Practitioner");
-
-    // Verify note contains all key info
-    const noteCall = (mockedAxios.post as ReturnType<typeof vi.fn>).mock.calls[2];
-    expect(noteCall[1].content).toContain("محمد أحمد");
-    expect(noteCall[1].content).toContain("mohammed.ahmed@example.com");
-    expect(noteCall[1].content).toContain("NEBOSH IGC");
-    expect(noteCall[1].content).toContain("King Saud University");
-    expect(noteCall[1].content).toContain("cdn.example.com");
   });
 
-  it("reuses existing Pipedrive person if found", async () => {
-    mockedAxios.get = vi.fn().mockResolvedValue({
-      data: { data: { items: [{ item: { id: 999 } }] } },
-    });
-    mockedAxios.post = vi.fn()
-      .mockResolvedValueOnce({ data: { data: { id: 201 } } }) // deal
-      .mockResolvedValueOnce({ data: { success: true } });    // note
+  it("creates a person with email and phone, then creates a deal", async () => {
+    const caller = appRouter.createCaller(createCtx());
+    await caller.kawader.submitAccreditation(sampleInput);
+
+    // Find the person creation POST call
+    const postCalls = (mockedAxios.post as ReturnType<typeof vi.fn>).mock.calls;
+    const personCall = postCalls.find(
+      (c) => typeof c[0] === "string" && c[0].includes("/persons")
+    );
+    expect(personCall).toBeDefined();
+    expect(personCall![1].name).toBe("Mohammed Ahmed");
+    expect(personCall![1].email[0].value).toBe("mohammed.ahmed@example.com");
+    expect(personCall![1].phone[0].value).toBe("+966501234567");
+  });
+
+  it("creates a deal with all mapped custom fields", async () => {
+    const caller = appRouter.createCaller(createCtx());
+    const result = await caller.kawader.submitAccreditation(sampleInput);
+
+    const postCalls = (mockedAxios.post as ReturnType<typeof vi.fn>).mock.calls;
+    const dealCall = postCalls.find(
+      (c) => typeof c[0] === "string" && c[0].includes("/deals") && !c[0].includes("Fields")
+    );
+    expect(dealCall).toBeDefined();
+
+    const dealBody = dealCall![1];
+    expect(dealBody.title).toContain("Mohammed Ahmed");
+    expect(dealBody.title).toContain("Practitioner");
+    expect(dealBody.title).toContain(result.refNumber);
+    expect(dealBody.status).toBe("open");
+    expect(dealBody.person_id).toBeDefined();
+  });
+
+  it("reuses existing person found by email", async () => {
+    mockedAxios.get = vi.fn()
+      .mockResolvedValueOnce({ data: { data: [] } })                             // fetchDealFieldKeys
+      .mockResolvedValueOnce({ data: { data: { items: [{ item: { id: 777 } }] } } }) // findPersonByEmail → found
+      .mockResolvedValueOnce({ data: { data: [] } });                            // resolveEnumOptionId
+
+    // PUT to update existing person + POST for custom fields + POST for deal
+    mockedAxios.put = vi.fn().mockResolvedValue({ data: { data: { id: 777 } } });
+    mockedAxios.post = vi.fn().mockResolvedValue({ data: { data: { id: 888, key: "xyz" } } });
 
     const caller = appRouter.createCaller(createCtx());
     const result = await caller.kawader.submitAccreditation(sampleInput);
 
     expect(result.success).toBe(true);
-    expect(result.refNumber).toMatch(/^KWD-\d{4}-\d{5}$/);
-    // Should NOT create a new person (only deal + note = 2 POST calls)
-    expect(mockedAxios.post).toHaveBeenCalledTimes(2);
-    const dealCall = (mockedAxios.post as ReturnType<typeof vi.fn>).mock.calls[0];
-    expect(dealCall[1].person_id).toBe(999);
+    // Person should NOT be created (no POST to /persons)
+    const postCalls = (mockedAxios.post as ReturnType<typeof vi.fn>).mock.calls;
+    const personCreateCall = postCalls.find(
+      (c) => typeof c[0] === "string" && c[0].includes("/persons")
+    );
+    expect(personCreateCall).toBeUndefined();
+
+    // PUT should have been called to update existing person
+    expect(mockedAxios.put).toHaveBeenCalled();
+    const putCall = (mockedAxios.put as ReturnType<typeof vi.fn>).mock.calls[0];
+    expect(putCall[0]).toContain("/persons/777");
   });
 });

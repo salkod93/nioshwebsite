@@ -38,3 +38,4 @@
 - [x] Display reference number prominently on the success screen
 - [x] Add mandatory email field to Kawader form (with format validation, bilingual, included in Pipedrive note)
 - [x] Remove Home nav item from header; make NIOSH logo a clickable link to homepage
+- [x] Map Kawader form fields to structured Pipedrive person/deal/custom fields (option 2)
