@@ -40,3 +40,7 @@
 - [x] Remove Home nav item from header; make NIOSH logo a clickable link to homepage
 - [x] Map Kawader form fields to structured Pipedrive person/deal/custom fields (option 2)
 - [x] Map each academic qualification field as individual Pipedrive custom deal fields (indexed per entry)
+- [x] SEO: Shorten page title to 30-60 characters
+- [x] SEO: Add meta description (50-160 characters)
+- [x] SEO: Add meta keywords tag
+- [x] SEO: Add H1 heading to homepage

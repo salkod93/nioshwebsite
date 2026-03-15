@@ -107,6 +107,9 @@ export default function Home() {
           </svg>
         </div>
 
+        {/* Visually-hidden H1 for SEO – the visual hero heading uses the subtitle text */}
+        <h1 className="sr-only">NIOSH – National Institute for Occupational Safety and Health in Saudi Arabia</h1>
+
         <div className="container relative z-10 grid md:grid-cols-2 gap-12 items-center min-h-[70vh]">
           <motion.div 
             initial="hidden"
