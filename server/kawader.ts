@@ -5,6 +5,9 @@ import { storagePut } from "./storage";
 
 const PIPEDRIVE_API_BASE = "https://api.pipedrive.com/v1";
 
+// Maximum number of academic qualification slots we pre-create fields for
+const MAX_ACADEMICS = 5;
+
 function getPipedriveApiKey(): string {
   const key = process.env.PIPEDRIVE_API_KEY;
   if (!key) throw new Error("PIPEDRIVE_API_KEY is not set");
@@ -63,23 +66,47 @@ const submitSchema = z.object({
 });
 
 // ─── Custom field definitions ─────────────────────────────────────────────────
-// Each entry: { label, field_type, key? }
-// "key" is populated at runtime after ensuring the field exists in Pipedrive.
 
-const CUSTOM_FIELD_DEFS = [
-  { label: "Kawader: Reference Number",      field_type: "varchar" },
-  { label: "Kawader: Full Name (Arabic)",     field_type: "varchar" },
-  { label: "Kawader: Date of Birth",          field_type: "date"    },
-  { label: "Kawader: National ID / Iqama",    field_type: "varchar" },
-  { label: "Kawader: Nationality",            field_type: "varchar" },
-  { label: "Kawader: Years of Experience",    field_type: "double"  },
-  { label: "Kawader: Certification Path",     field_type: "enum",   options: ["Practitioner", "Professional"] },
-  { label: "Kawader: OSH Certificates",       field_type: "text"    },
-  { label: "Kawader: Academic Qualifications",field_type: "text"    },
-  { label: "Kawader: Uploaded Documents",     field_type: "text"    },
-] as const;
+// Per-academic sub-fields (one set per qualification slot)
+const ACADEMIC_SUB_FIELDS: Array<{ suffix: string; field_type: string }> = [
+  { suffix: "Institution",       field_type: "varchar" },
+  { suffix: "Institution Address", field_type: "varchar" },
+  { suffix: "Degree Title",      field_type: "varchar" },
+  { suffix: "Education Level",   field_type: "varchar" },
+  { suffix: "Enrollment Date",   field_type: "date"    },
+  { suffix: "Graduation Date",   field_type: "date"    },
+  { suffix: "Country",           field_type: "varchar" },
+  { suffix: "City",              field_type: "varchar" },
+];
 
-type FieldDef = { label: string; field_type: string; options?: readonly string[] };
+// Core (non-academic) custom fields
+const CORE_FIELD_DEFS: Array<{ label: string; field_type: string; options?: readonly string[] }> = [
+  { label: "Kawader: Reference Number",   field_type: "varchar" },
+  { label: "Kawader: Full Name (Arabic)", field_type: "varchar" },
+  { label: "Kawader: Date of Birth",      field_type: "date"    },
+  { label: "Kawader: National ID / Iqama", field_type: "varchar" },
+  { label: "Kawader: Nationality",        field_type: "varchar" },
+  { label: "Kawader: Years of Experience", field_type: "double"  },
+  { label: "Kawader: Certification Path", field_type: "enum",   options: ["Practitioner", "Professional"] },
+  { label: "Kawader: OSH Certificates",   field_type: "text"    },
+  { label: "Kawader: Uploaded Documents", field_type: "text"    },
+];
+
+/** Build the full label for an academic sub-field, e.g. "Kawader: Academic 1 – Institution" */
+function academicFieldLabel(index: number, suffix: string): string {
+  return `Kawader: Academic ${index} – ${suffix}`;
+}
+
+/** Collect all field definitions (core + per-slot academic) */
+function allFieldDefs(): Array<{ label: string; field_type: string; options?: readonly string[] }> {
+  const defs = [...CORE_FIELD_DEFS];
+  for (let i = 1; i <= MAX_ACADEMICS; i++) {
+    for (const sub of ACADEMIC_SUB_FIELDS) {
+      defs.push({ label: academicFieldLabel(i, sub.suffix), field_type: sub.field_type });
+    }
+  }
+  return defs;
+}
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
@@ -96,35 +123,27 @@ async function uploadDoc(
   return url;
 }
 
-/**
- * Fetch all existing deal fields from Pipedrive and return a map of label → key.
- */
+/** Fetch all existing deal fields and return label → key map */
 async function fetchDealFieldKeys(apiKey: string): Promise<Record<string, string>> {
   const res = await axios.get(`${PIPEDRIVE_API_BASE}/dealFields`, {
     params: { api_token: apiKey, limit: 500 },
   });
   const fields: Array<{ name: string; key: string }> = res.data?.data ?? [];
   const map: Record<string, string> = {};
-  for (const f of fields) {
-    map[f.name] = f.key;
-  }
+  for (const f of fields) map[f.name] = f.key;
   return map;
 }
 
 /**
  * Ensure all Kawader custom deal fields exist in Pipedrive.
- * Creates any that are missing. Returns a map of label → field key.
+ * Creates any that are missing. Returns label → field key map.
  */
 async function ensureCustomDealFields(apiKey: string): Promise<Record<string, string>> {
   const existing = await fetchDealFieldKeys(apiKey);
-  const result: Record<string, string> = {};
+  const result: Record<string, string> = { ...existing };
 
-  for (const def of CUSTOM_FIELD_DEFS as unknown as FieldDef[]) {
-    if (existing[def.label]) {
-      result[def.label] = existing[def.label];
-      continue;
-    }
-    // Create the field
+  for (const def of allFieldDefs()) {
+    if (existing[def.label]) continue; // already exists
     const body: Record<string, unknown> = {
       name: def.label,
       field_type: def.field_type,
@@ -136,7 +155,8 @@ async function ensureCustomDealFields(apiKey: string): Promise<Record<string, st
       const res = await axios.post(`${PIPEDRIVE_API_BASE}/dealFields`, body, {
         params: { api_token: apiKey },
       });
-      result[def.label] = res.data?.data?.key;
+      const created = res.data?.data;
+      if (created?.key) result[def.label] = created.key;
     } catch (err) {
       console.error(`[Kawader] Failed to create deal field "${def.label}":`, err);
     }
@@ -145,9 +165,7 @@ async function ensureCustomDealFields(apiKey: string): Promise<Record<string, st
   return result;
 }
 
-/**
- * For enum fields, resolve the option label to its numeric ID.
- */
+/** For enum fields, resolve the option label to its numeric ID */
 async function resolveEnumOptionId(
   fieldKey: string,
   optionLabel: string,
@@ -187,22 +205,21 @@ async function createOrFindPerson(
   phone: string,
   apiKey: string
 ): Promise<number> {
-  // Search by email first (most reliable)
   const existing = await findPersonByEmail(email, apiKey);
   if (existing) {
-    // Update email/phone on existing person
-    await axios.put(
-      `${PIPEDRIVE_API_BASE}/persons/${existing}`,
-      {
-        name: fullNameEn,
-        email: [{ value: email, primary: true }],
-        phone: [{ value: phone, primary: true }],
-      },
-      { params: { api_token: apiKey } }
-    ).catch(() => {/* non-critical */});
+    await axios
+      .put(
+        `${PIPEDRIVE_API_BASE}/persons/${existing}`,
+        {
+          name: fullNameEn,
+          email: [{ value: email, primary: true }],
+          phone: [{ value: phone, primary: true }],
+        },
+        { params: { api_token: apiKey } }
+      )
+      .catch(() => {/* non-critical */});
     return existing;
   }
-  // Create new person with email and phone
   const res = await axios.post(
     `${PIPEDRIVE_API_BASE}/persons`,
     {
@@ -223,18 +240,6 @@ async function createDeal(
   refNumber: string,
   fieldKeys: Record<string, string>
 ): Promise<number | null> {
-  // Build academic qualifications text
-  const academicText = data.academics
-    .map(
-      (a, i) =>
-        `Qualification ${i + 1}: ${a.degreeTitle} (${a.educationLevel})\n` +
-        `  Institution: ${a.institution}, ${a.city}, ${a.country}\n` +
-        (a.address ? `  Address: ${a.address}\n` : "") +
-        (a.enrollmentDate ? `  Enrolled: ${a.enrollmentDate}` : "") +
-        (a.graduationDate ? ` | Graduated: ${a.graduationDate}` : "")
-    )
-    .join("\n\n");
-
   // Build uploaded documents text
   const docText = Object.entries(docUrls)
     .map(([k, url]) => `${k}: ${url}`)
@@ -248,31 +253,53 @@ async function createDeal(
     if (optionId !== null) certPathValue = optionId;
   }
 
-  // Build deal payload with custom fields
+  // Build deal payload
   const dealPayload: Record<string, unknown> = {
     title: `[${refNumber}] Kawader Application – ${data.fullNameEn} (${data.certificationPath})`,
     status: "open",
     person_id: personId,
   };
 
-  // Map each custom field
-  const fieldMappings: Array<[string, unknown]> = [
-    ["Kawader: Reference Number",       refNumber],
-    ["Kawader: Full Name (Arabic)",      data.fullNameAr],
-    ["Kawader: Date of Birth",           data.dob],
-    ["Kawader: National ID / Iqama",     data.nationalId],
-    ["Kawader: Nationality",             data.nationality],
-    ["Kawader: Years of Experience",     Number(data.experience)],
-    ["Kawader: Certification Path",      certPathValue],
-    ["Kawader: OSH Certificates",        data.oshCerts ?? ""],
-    ["Kawader: Academic Qualifications", academicText],
-    ["Kawader: Uploaded Documents",      docText],
+  // ── Core custom fields ──
+  const coreFieldMappings: Array<[string, unknown]> = [
+    ["Kawader: Reference Number",    refNumber],
+    ["Kawader: Full Name (Arabic)",  data.fullNameAr],
+    ["Kawader: Date of Birth",       data.dob],
+    ["Kawader: National ID / Iqama", data.nationalId],
+    ["Kawader: Nationality",         data.nationality],
+    ["Kawader: Years of Experience", Number(data.experience)],
+    ["Kawader: Certification Path",  certPathValue],
+    ["Kawader: OSH Certificates",    data.oshCerts ?? ""],
+    ["Kawader: Uploaded Documents",  docText],
   ];
 
-  for (const [label, value] of fieldMappings) {
+  for (const [label, value] of coreFieldMappings) {
     const key = fieldKeys[label];
     if (key) dealPayload[key] = value;
   }
+
+  // ── Per-field academic custom fields ──
+  data.academics.forEach((acad, idx) => {
+    const slot = idx + 1; // 1-based
+    if (slot > MAX_ACADEMICS) return; // ignore beyond max
+
+    const subFieldMappings: Array<[string, unknown]> = [
+      ["Institution",         acad.institution],
+      ["Institution Address", acad.address ?? ""],
+      ["Degree Title",        acad.degreeTitle],
+      ["Education Level",     acad.educationLevel],
+      ["Enrollment Date",     acad.enrollmentDate ?? ""],
+      ["Graduation Date",     acad.graduationDate ?? ""],
+      ["Country",             acad.country],
+      ["City",                acad.city],
+    ];
+
+    for (const [suffix, value] of subFieldMappings) {
+      const label = academicFieldLabel(slot, suffix);
+      const key = fieldKeys[label];
+      if (key) dealPayload[key] = value;
+    }
+  });
 
   const dealRes = await axios.post(
     `${PIPEDRIVE_API_BASE}/deals`,
