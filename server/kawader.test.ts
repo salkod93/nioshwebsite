@@ -39,6 +39,7 @@ const sampleInput = {
   nationalId: "1234567890",
   nationality: "Saudi",
   phone: "+966501234567",
+  email: "mohammed.ahmed@example.com",
   experience: "5",
   academics: [
     {
@@ -105,6 +106,7 @@ describe("kawader.submitAccreditation", () => {
     // Verify note contains all key info
     const noteCall = (mockedAxios.post as ReturnType<typeof vi.fn>).mock.calls[2];
     expect(noteCall[1].content).toContain("محمد أحمد");
+    expect(noteCall[1].content).toContain("mohammed.ahmed@example.com");
     expect(noteCall[1].content).toContain("NEBOSH IGC");
     expect(noteCall[1].content).toContain("King Saud University");
     expect(noteCall[1].content).toContain("cdn.example.com");

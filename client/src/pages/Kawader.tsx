@@ -99,6 +99,7 @@ const c = {
     nationalId: "National ID / Iqama Number *",
     nationality: "Nationality *",
     phone: "Phone Number *",
+    email: "Email Address *",
     experience: "Total Years of Experience *",
     academicSection: "Academic Information",
     academicNote: "You may add more than one qualification.",
@@ -213,6 +214,7 @@ const c = {
     nationalId: "رقم الهوية الوطنية / الإقامة *",
     nationality: "الجنسية *",
     phone: "رقم الجوال *",
+    email: "البريد الإلكتروني *",
     experience: "إجمالي سنوات الخبرة *",
     academicSection: "المعلومات الأكاديمية",
     academicNote: "يمكنك إضافة أكثر من مؤهل علمي.",
@@ -386,6 +388,7 @@ export default function Kawader() {
   const [nationalId, setNationalId] = useState("");
   const [nationality, setNationality] = useState("");
   const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
   const [experience, setExperience] = useState("");
 
   // Academic info (multi-entry)
@@ -424,6 +427,8 @@ export default function Kawader() {
     if (!nationalId.trim()) e.nationalId = t.errors.required;
     if (!nationality.trim()) e.nationality = t.errors.required;
     if (!phone.trim()) e.phone = t.errors.required;
+    if (!email.trim()) e.email = t.errors.required;
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) e.email = t.errors.email;
     if (!experience.trim()) e.experience = t.errors.required;
     academics.forEach((a, i) => {
       if (!a.institution.trim()) e[`acad_${i}_institution`] = t.errors.required;
@@ -462,7 +467,7 @@ export default function Kawader() {
 
     submitMutation.mutate({
       certificationPath: path as "Practitioner" | "Professional",
-      fullNameAr, fullNameEn, dob, nationalId, nationality, phone, experience,
+      fullNameAr, fullNameEn, dob, nationalId, nationality, phone, email, experience,
       academics: academics.map(({ id: _id, ...rest }) => rest),
       oshCerts,
       documents: uploadedDocs,
@@ -629,6 +634,7 @@ export default function Kawader() {
                 <InputField label={t.nationalId} value={nationalId} onChange={v => { setNationalId(v); setErrors(p => ({ ...p, nationalId: "" })); }} error={errors.nationalId} />
                 <InputField label={t.nationality} value={nationality} onChange={v => { setNationality(v); setErrors(p => ({ ...p, nationality: "" })); }} error={errors.nationality} />
                 <InputField label={t.phone} value={phone} onChange={v => { setPhone(v); setErrors(p => ({ ...p, phone: "" })); }} type="tel" error={errors.phone} />
+                <InputField label={t.email} value={email} onChange={v => { setEmail(v); setErrors(p => ({ ...p, email: "" })); }} type="email" error={errors.email} />
                 <InputField label={t.experience} value={experience} onChange={v => { setExperience(v); setErrors(p => ({ ...p, experience: "" })); }} type="number" error={errors.experience} />
               </div>
             </SectionCard>

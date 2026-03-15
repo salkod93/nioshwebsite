@@ -36,3 +36,4 @@
 - [x] Add phone number field to Kawader personal information section (mandatory, bilingual)
 - [x] Generate unique application reference number (KWD-YYYY-XXXX) in backend and return it to frontend
 - [x] Display reference number prominently on the success screen
+- [x] Add mandatory email field to Kawader form (with format validation, bilingual, included in Pipedrive note)
