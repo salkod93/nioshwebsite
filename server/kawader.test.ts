@@ -36,6 +36,7 @@ const sampleDoc = {
 
 const sampleInput = {
   certificationPath: "Practitioner" as const,
+  commLang: "Arabic" as const,
   fullNameAr: "محمد أحمد",
   fullNameEn: "Mohammed Ahmed",
   dob: "1990-01-15",
@@ -77,6 +78,7 @@ const sampleInput = {
  */
 function buildMockFieldKeys(): Record<string, string> {
   const labels = [
+    "Kawader: Preferred Communication Language",
     "Kawader: Reference Number",
     "Kawader: Full Name (Arabic)",
     "Kawader: Date of Birth",
@@ -183,6 +185,10 @@ describe("kawader.submitAccreditation", () => {
     expect(dealBody.title).toContain(result.refNumber);
     expect(dealBody.status).toBe("open");
     expect(dealBody.person_id).toBeDefined();
+    // Preferred communication language should be mapped
+    const fk = buildMockFieldKeys();
+    const commLangKey = fk["Kawader: Preferred Communication Language"];
+    if (commLangKey) expect(dealBody[commLangKey]).toBeDefined();
   });
 
   it("maps academic slot 1 fields individually onto the deal payload", async () => {

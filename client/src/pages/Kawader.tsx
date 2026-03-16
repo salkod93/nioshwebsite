@@ -131,6 +131,11 @@ const c = {
       cv: "Curriculum Vitae (CV) *",
       oshCertificates: "OSH Professional Certificates & Courses *",
     },
+    commLangSection: "Preferred Communication Language",
+    commLangLabel: "What language would you like to be communicated with? *",
+    commLangArabic: "Arabic",
+    commLangEnglish: "English",
+    errors_commLang: "Please select a preferred communication language",
     submit: "Submit Application",
     submitting: "Submitting...",
     successTitle: "Application Submitted!",
@@ -247,6 +252,11 @@ const c = {
       cv: "السيرة الذاتية *",
       oshCertificates: "شهادات ودورات السلامة والصحة المهنية *",
     },
+    commLangSection: "لغة التواصل المفضلة",
+    commLangLabel: "بأي لغة تفضل التواصل معك؟ *",
+    commLangArabic: "عربي",
+    commLangEnglish: "إنجليزي",
+    errors_commLang: "يرجى اختيار لغة التواصل المفضلة",
     submit: "إرسال الطلب",
     submitting: "جارٍ الإرسال...",
     successTitle: "تم إرسال الطلب!",
@@ -380,6 +390,9 @@ export default function Kawader() {
   const t = lang === 'en' ? c.en : c.ar;
   const isRTL = lang === 'ar';
 
+  // Preferred communication language
+  const [commLang, setCommLang] = useState<"Arabic" | "English" | "">("")
+
   // Certification path
   const [path, setPath] = useState<"Practitioner" | "Professional" | "">("");
 
@@ -422,6 +435,7 @@ export default function Kawader() {
 
   const validate = () => {
     const e: Record<string, string> = {};
+    if (!commLang) e.commLang = t.errors_commLang;
     if (!path) e.path = t.errors.pathRequired;
     if (!fullNameAr.trim()) e.fullNameAr = t.errors.required;
     if (!fullNameEn.trim()) e.fullNameEn = t.errors.required;
@@ -469,6 +483,7 @@ export default function Kawader() {
 
     submitMutation.mutate({
       certificationPath: path as "Practitioner" | "Professional",
+      commLang: commLang as "Arabic" | "English",
       fullNameAr, fullNameEn, dob, nationalId, nationality, phone, email, experience,
       academics: academics.map(({ id: _id, ...rest }) => rest),
       oshCerts,
@@ -599,6 +614,33 @@ export default function Kawader() {
       <section className="py-16 bg-background">
         <div className="container max-w-3xl mx-auto px-4">
           <form onSubmit={handleSubmit} className="space-y-8">
+
+            {/* ── 0. Preferred Communication Language ── */}
+            <SectionCard title={t.commLangSection}>
+              <p className="text-sm font-semibold text-foreground mb-3">{t.commLangLabel}</p>
+              {errors.commLang && <p className="text-red-500 text-xs mb-2">{errors.commLang}</p>}
+              <div className="flex flex-wrap gap-4">
+                {(["Arabic", "English"] as const).map(lang => {
+                  const label = lang === "Arabic" ? t.commLangArabic : t.commLangEnglish;
+                  return (
+                    <button
+                      type="button"
+                      key={lang}
+                      onClick={() => { setCommLang(lang); setErrors(prev => ({ ...prev, commLang: "" })); }}
+                      className={cn(
+                        "flex items-center gap-3 px-6 py-4 rounded-xl border-2 transition-all cursor-pointer min-w-[140px]",
+                        commLang === lang ? "border-primary bg-primary/5" : "border-border hover:border-primary/40"
+                      )}
+                    >
+                      <div className={cn("w-5 h-5 rounded-full border-2 flex items-center justify-center shrink-0", commLang === lang ? "border-primary" : "border-muted-foreground")}>
+                        {commLang === lang && <div className="w-2.5 h-2.5 rounded-full bg-primary" />}
+                      </div>
+                      <span className="font-bold text-foreground text-base">{label}</span>
+                    </button>
+                  );
+                })}
+              </div>
+            </SectionCard>
 
             {/* ── 1. Certification Path ── */}
             <SectionCard title={t.pathSection}>

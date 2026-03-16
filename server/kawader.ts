@@ -41,6 +41,7 @@ function generateRefNumber(): string {
 
 const submitSchema = z.object({
   certificationPath: z.enum(["Practitioner", "Professional"]),
+  commLang: z.enum(["Arabic", "English"]),
   fullNameAr: z.string().min(1),
   fullNameEn: z.string().min(1),
   dob: z.string().min(1),
@@ -81,6 +82,7 @@ const ACADEMIC_SUB_FIELDS: Array<{ suffix: string; field_type: string }> = [
 
 // Core (non-academic) custom fields
 const CORE_FIELD_DEFS: Array<{ label: string; field_type: string; options?: readonly string[] }> = [
+  { label: "Kawader: Preferred Communication Language", field_type: "enum", options: ["Arabic", "English"] },
   { label: "Kawader: Reference Number",   field_type: "varchar" },
   { label: "Kawader: Full Name (Arabic)", field_type: "varchar" },
   { label: "Kawader: Date of Birth",      field_type: "date"    },
@@ -262,6 +264,7 @@ async function createDeal(
 
   // ── Core custom fields ──
   const coreFieldMappings: Array<[string, unknown]> = [
+    ["Kawader: Preferred Communication Language", data.commLang],
     ["Kawader: Reference Number",    refNumber],
     ["Kawader: Full Name (Arabic)",  data.fullNameAr],
     ["Kawader: Date of Birth",       data.dob],
