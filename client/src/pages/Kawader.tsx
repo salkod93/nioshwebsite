@@ -1,4 +1,5 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
+import { createPortal } from "react-dom";
 import { useLang } from "@/contexts/LanguageContext";
 import Layout from "@/components/Layout";
 import { Button } from "@/components/ui/button";
@@ -8,7 +9,6 @@ import { Upload, FileText, CheckCircle, Loader2, Plus, Trash2, ChevronDown, Chev
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { COUNTRIES } from "@/lib/countries";
-import { useState as useSearchState } from "react";
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 
@@ -336,28 +336,77 @@ function SelectField({ label, value, onChange, options, error }: {
 function CountrySelectField({ label, value, onChange, error, placeholder }: {
   label: string; value: string; onChange: (v: string) => void; error?: string; placeholder?: string;
 }) {
-  const [search, setSearch] = useSearchState("");
-  const [open, setOpen] = useSearchState(false);
+  const [search, setSearch] = useState("");
+  const [open, setOpen] = useState(false);
+  const [dropdownStyle, setDropdownStyle] = useState<React.CSSProperties>({});
+  const triggerRef = useRef<HTMLDivElement>(null);
   const filtered = COUNTRIES.filter(c => c.toLowerCase().includes(search.toLowerCase()));
 
+  const updatePosition = useCallback(() => {
+    if (!triggerRef.current) return;
+    const rect = triggerRef.current.getBoundingClientRect();
+    setDropdownStyle({
+      position: "fixed",
+      top: rect.bottom + 4,
+      left: rect.left,
+      width: rect.width,
+      zIndex: 9999,
+    });
+  }, []);
+
+  const handleOpen = () => {
+    updatePosition();
+    setOpen(o => !o);
+  };
+
+  // Close on outside click
+  useEffect(() => {
+    if (!open) return;
+    const handler = (e: MouseEvent) => {
+      if (triggerRef.current && !triggerRef.current.contains(e.target as Node)) {
+        setOpen(false);
+        setSearch("");
+      }
+    };
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, [open]);
+
+  // Reposition on scroll/resize
+  useEffect(() => {
+    if (!open) return;
+    const handler = () => updatePosition();
+    window.addEventListener("scroll", handler, true);
+    window.addEventListener("resize", handler);
+    return () => {
+      window.removeEventListener("scroll", handler, true);
+      window.removeEventListener("resize", handler);
+    };
+  }, [open, updatePosition]);
+
   return (
-    <div className="space-y-1 relative">
+    <div className="space-y-1">
       <label className="block text-sm font-semibold text-foreground">{label}</label>
       <div
+        ref={triggerRef}
         className={cn(
           "w-full px-4 py-3 rounded-xl border bg-background text-foreground cursor-pointer flex items-center justify-between transition-all",
           error ? "border-red-400" : "border-border",
           open ? "ring-2 ring-primary/50" : ""
         )}
-        onClick={() => setOpen(o => !o)}
+        onClick={handleOpen}
       >
         <span className={value ? "text-foreground" : "text-muted-foreground"}>
           {value || placeholder || "—"}
         </span>
         <ChevronDown className={cn("h-4 w-4 text-muted-foreground transition-transform", open ? "rotate-180" : "")} />
       </div>
-      {open && (
-        <div className="absolute z-50 w-full mt-1 bg-background border border-border rounded-xl shadow-lg overflow-hidden">
+      {open && createPortal(
+        <div
+          style={dropdownStyle}
+          className="bg-background border border-border rounded-xl shadow-2xl overflow-hidden"
+          onMouseDown={e => e.stopPropagation()}
+        >
           <div className="p-2 border-b border-border">
             <input
               autoFocus
@@ -366,7 +415,6 @@ function CountrySelectField({ label, value, onChange, error, placeholder }: {
               onChange={e => setSearch(e.target.value)}
               placeholder="Search country..."
               className="w-full px-3 py-2 text-sm rounded-lg border border-border bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50"
-              onClick={e => e.stopPropagation()}
             />
           </div>
           <div className="max-h-52 overflow-y-auto">
@@ -387,7 +435,8 @@ function CountrySelectField({ label, value, onChange, error, placeholder }: {
               ))
             )}
           </div>
-        </div>
+        </div>,
+        document.body
       )}
       {error && <p className="text-red-500 text-xs">{error}</p>}
     </div>
@@ -739,7 +788,7 @@ export default function Kawader() {
                 <InputField label={t.fullNameEn} value={fullNameEn} onChange={v => { setFullNameEn(v); setErrors(p => ({ ...p, fullNameEn: "" })); }} error={errors.fullNameEn} />
                 <InputField label={t.dob} value={dob} onChange={v => { setDob(v); setErrors(p => ({ ...p, dob: "" })); }} type="date" error={errors.dob} />
                 <InputField label={t.nationalId} value={nationalId} onChange={v => { setNationalId(v); setErrors(p => ({ ...p, nationalId: "" })); }} error={errors.nationalId} />
-                <InputField label={t.nationality} value={nationality} onChange={v => { setNationality(v); setErrors(p => ({ ...p, nationality: "" })); }} error={errors.nationality} />
+                <CountrySelectField label={t.nationality} value={nationality} onChange={v => { setNationality(v); setErrors(p => ({ ...p, nationality: "" })); }} error={errors.nationality} placeholder="Select nationality" />
                 <InputField label={t.phone} value={phone} onChange={v => { setPhone(v); setErrors(p => ({ ...p, phone: "" })); }} type="tel" error={errors.phone} />
                 <InputField label={t.email} value={email} onChange={v => { setEmail(v); setErrors(p => ({ ...p, email: "" })); }} type="email" error={errors.email} />
                 <InputField label={t.experience} value={experience} onChange={v => { setExperience(v); setErrors(p => ({ ...p, experience: "" })); }} type="number" error={errors.experience} />

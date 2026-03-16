@@ -49,3 +49,5 @@
 - [x] Fix commLang Pipedrive mapping: resolve enum option ID instead of passing raw string
 - [x] Replace hero shield image with new factory safety worker + doctor photo
 - [x] Replace country text input in Kawader academic section with a searchable dropdown of all world countries
+- [x] Fix country dropdown being hidden/clipped by parent overflow
+- [x] Add searchable nationality dropdown (same as country) to Personal Information section
