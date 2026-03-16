@@ -120,8 +120,8 @@ export default function Home() {
             {/* Mobile Hero Image - Visible only on mobile, below texture pattern */}
             <div className="md:hidden w-full max-w-[220px] mt-4 mx-auto">
               <img 
-                src="/images/hero-image.png" 
-                alt="Safety Helmet" 
+                src="https://d2xsxph8kpxj0f.cloudfront.net/310419663032539921/8KA3rh2fh9ZWBW5EBavnvF/hero-shield-composed_659e4f1a.png" 
+                alt="NIOSH Safety Worker and Doctor" 
                 className="w-full h-auto drop-shadow-2xl"
               />
             </div>
@@ -151,8 +151,8 @@ export default function Home() {
           >
             <div className="relative z-10 w-full max-w-[425px] -mt-8">
               <img 
-                src="/images/hero-image.png" 
-                alt="Safety Helmet" 
+                src="https://d2xsxph8kpxj0f.cloudfront.net/310419663032539921/8KA3rh2fh9ZWBW5EBavnvF/hero-shield-composed_659e4f1a.png" 
+                alt="NIOSH Safety Worker and Doctor" 
                 className="w-full h-auto drop-shadow-2xl"
               />
             </div>
