@@ -125,7 +125,8 @@ async function uploadDoc(
   return url;
 }
 
-/** Fetch all existing deal fields and return label → key map */
+/** Fetch all existing deal fields and return label → key map.
+ * Leads inherit custom fields from deals, so we use /dealFields for both. */
 async function fetchDealFieldKeys(apiKey: string): Promise<Record<string, string>> {
   const res = await axios.get(`${PIPEDRIVE_API_BASE}/dealFields`, {
     params: { api_token: apiKey, limit: 500 },
@@ -234,14 +235,19 @@ async function createOrFindPerson(
   return res.data.data.id;
 }
 
-async function createDeal(
+/**
+ * Create a Pipedrive Lead (not a Deal) with all mapped custom fields.
+ * Leads inherit the custom fields structure from deals, so the same field keys apply.
+ * The lead ID is a UUID string.
+ */
+async function createLead(
   data: z.infer<typeof submitSchema>,
   docUrls: Record<string, string>,
   personId: number,
   apiKey: string,
   refNumber: string,
   fieldKeys: Record<string, string>
-): Promise<number | null> {
+): Promise<string | null> {
   // Build uploaded documents text
   const docText = Object.entries(docUrls)
     .map(([k, url]) => `${k}: ${url}`)
@@ -263,10 +269,9 @@ async function createDeal(
     if (optionId !== null) commLangValue = optionId;
   }
 
-  // Build deal payload
-  const dealPayload: Record<string, unknown> = {
+  // Build lead payload — leads use the same custom field keys as deals
+  const leadPayload: Record<string, unknown> = {
     title: `[${refNumber}] Kawader Application – ${data.fullNameEn} (${data.certificationPath})`,
-    status: "open",
     person_id: personId,
   };
 
@@ -286,7 +291,7 @@ async function createDeal(
 
   for (const [label, value] of coreFieldMappings) {
     const key = fieldKeys[label];
-    if (key) dealPayload[key] = value;
+    if (key) leadPayload[key] = value;
   }
 
   // ── Per-field academic custom fields ──
@@ -308,17 +313,18 @@ async function createDeal(
     for (const [suffix, value] of subFieldMappings) {
       const label = academicFieldLabel(slot, suffix);
       const key = fieldKeys[label];
-      if (key) dealPayload[key] = value;
+      if (key) leadPayload[key] = value;
     }
   });
 
-  const dealRes = await axios.post(
-    `${PIPEDRIVE_API_BASE}/deals`,
-    dealPayload,
+  // POST to /v1/leads — returns a UUID string as the lead ID
+  const leadRes = await axios.post(
+    `${PIPEDRIVE_API_BASE}/leads`,
+    leadPayload,
     { params: { api_token: apiKey } }
   );
 
-  return dealRes.data?.data?.id ?? null;
+  return leadRes.data?.data?.id ?? null;
 }
 
 // ─── Router ───────────────────────────────────────────────────────────────────
@@ -364,11 +370,11 @@ export const kawaderRouter = router({
         apiKey
       );
 
-      // 5. Create deal with all mapped fields
+      // 5. Create lead with all mapped fields
       try {
-        await createDeal(input, docUrls, personId, apiKey, refNumber, fieldKeys);
+        await createLead(input, docUrls, personId, apiKey, refNumber, fieldKeys);
       } catch (err) {
-        console.error("[Kawader] Pipedrive deal creation error:", err);
+        console.error("[Kawader] Pipedrive lead creation error:", err);
         // Don't fail the submission if Pipedrive is temporarily down
       }
 

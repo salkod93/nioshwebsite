@@ -182,39 +182,48 @@ describe("kawader.submitAccreditation", () => {
     expect(personCall![1].phone[0].value).toBe("+966501234567");
   });
 
-  it("creates a deal with core custom fields", async () => {
+  it("creates a lead (not a deal) with core custom fields", async () => {
     const caller = appRouter.createCaller(createCtx());
     const result = await caller.kawader.submitAccreditation(sampleInput);
 
     const postCalls = (mockedAxios.post as ReturnType<typeof vi.fn>).mock.calls;
+
+    // Must POST to /leads, not /deals
+    const leadCall = postCalls.find(
+      (c) => typeof c[0] === "string" && c[0].includes("/leads") && !c[0].includes("Fields")
+    );
+    expect(leadCall).toBeDefined();
+
+    // Must NOT have posted to /deals
     const dealCall = postCalls.find(
       (c) => typeof c[0] === "string" && c[0].includes("/deals") && !c[0].includes("Fields")
     );
-    expect(dealCall).toBeDefined();
+    expect(dealCall).toBeUndefined();
 
-    const dealBody = dealCall![1];
-    expect(dealBody.title).toContain("Mohammed Ahmed");
-    expect(dealBody.title).toContain("Practitioner");
-    expect(dealBody.title).toContain(result.refNumber);
-    expect(dealBody.status).toBe("open");
-    expect(dealBody.person_id).toBeDefined();
+    const leadBody = leadCall![1];
+    expect(leadBody.title).toContain("Mohammed Ahmed");
+    expect(leadBody.title).toContain("Practitioner");
+    expect(leadBody.title).toContain(result.refNumber);
+    // Leads do not have a status field (unlike deals)
+    expect(leadBody.status).toBeUndefined();
+    expect(leadBody.person_id).toBeDefined();
     // Preferred communication language should be mapped as a resolved enum option ID
     const fk = buildMockFieldKeys();
     const commLangKey = fk["Kawader: Preferred Communication Language"];
     // Arabic resolves to option ID 10 in the mock
-    expect(dealBody[commLangKey]).toBe(10);
+    expect(leadBody[commLangKey]).toBe(10);
   });
 
-  it("maps academic slot 1 fields individually onto the deal payload", async () => {
+  it("maps academic slot 1 fields individually onto the lead payload", async () => {
     const caller = appRouter.createCaller(createCtx());
     await caller.kawader.submitAccreditation(sampleInput);
 
     const postCalls = (mockedAxios.post as ReturnType<typeof vi.fn>).mock.calls;
-    const dealCall = postCalls.find(
-      (c) => typeof c[0] === "string" && c[0].includes("/deals") && !c[0].includes("Fields")
+    const leadCall = postCalls.find(
+      (c) => typeof c[0] === "string" && c[0].includes("/leads") && !c[0].includes("Fields")
     );
-    expect(dealCall).toBeDefined();
-    const dealBody = dealCall![1];
+    expect(leadCall).toBeDefined();
+    const dealBody = leadCall![1];
 
     const mockFieldKeys = buildMockFieldKeys();
 

@@ -51,3 +51,4 @@
 - [x] Replace country text input in Kawader academic section with a searchable dropdown of all world countries
 - [x] Fix country dropdown being hidden/clipped by parent overflow
 - [x] Add searchable nationality dropdown (same as country) to Personal Information section
+- [x] Change Kawader Pipedrive integration from Deals to Leads (POST /leads API)
