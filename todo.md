@@ -48,3 +48,4 @@
 - [x] Add preferred communication language question (Arabic/English) at the start of the Kawader form, mapped to Pipedrive
 - [x] Fix commLang Pipedrive mapping: resolve enum option ID instead of passing raw string
 - [x] Replace hero shield image with new factory safety worker + doctor photo
+- [x] Replace country text input in Kawader academic section with a searchable dropdown of all world countries

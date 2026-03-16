@@ -7,6 +7,8 @@ import { toast } from "sonner";
 import { Upload, FileText, CheckCircle, Loader2, Plus, Trash2, ChevronDown, ChevronUp } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { COUNTRIES } from "@/lib/countries";
+import { useState as useSearchState } from "react";
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 
@@ -326,6 +328,67 @@ function SelectField({ label, value, onChange, options, error }: {
         <option value="">—</option>
         {options.map(o => <option key={o} value={o}>{o}</option>)}
       </select>
+      {error && <p className="text-red-500 text-xs">{error}</p>}
+    </div>
+  );
+}
+
+function CountrySelectField({ label, value, onChange, error, placeholder }: {
+  label: string; value: string; onChange: (v: string) => void; error?: string; placeholder?: string;
+}) {
+  const [search, setSearch] = useSearchState("");
+  const [open, setOpen] = useSearchState(false);
+  const filtered = COUNTRIES.filter(c => c.toLowerCase().includes(search.toLowerCase()));
+
+  return (
+    <div className="space-y-1 relative">
+      <label className="block text-sm font-semibold text-foreground">{label}</label>
+      <div
+        className={cn(
+          "w-full px-4 py-3 rounded-xl border bg-background text-foreground cursor-pointer flex items-center justify-between transition-all",
+          error ? "border-red-400" : "border-border",
+          open ? "ring-2 ring-primary/50" : ""
+        )}
+        onClick={() => setOpen(o => !o)}
+      >
+        <span className={value ? "text-foreground" : "text-muted-foreground"}>
+          {value || placeholder || "—"}
+        </span>
+        <ChevronDown className={cn("h-4 w-4 text-muted-foreground transition-transform", open ? "rotate-180" : "")} />
+      </div>
+      {open && (
+        <div className="absolute z-50 w-full mt-1 bg-background border border-border rounded-xl shadow-lg overflow-hidden">
+          <div className="p-2 border-b border-border">
+            <input
+              autoFocus
+              type="text"
+              value={search}
+              onChange={e => setSearch(e.target.value)}
+              placeholder="Search country..."
+              className="w-full px-3 py-2 text-sm rounded-lg border border-border bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50"
+              onClick={e => e.stopPropagation()}
+            />
+          </div>
+          <div className="max-h-52 overflow-y-auto">
+            {filtered.length === 0 ? (
+              <div className="px-4 py-3 text-sm text-muted-foreground">No results</div>
+            ) : (
+              filtered.map(c => (
+                <div
+                  key={c}
+                  className={cn(
+                    "px-4 py-2.5 text-sm cursor-pointer hover:bg-primary/10 transition-colors",
+                    value === c ? "bg-primary/10 font-semibold text-primary" : "text-foreground"
+                  )}
+                  onClick={() => { onChange(c); setOpen(false); setSearch(""); }}
+                >
+                  {c}
+                </div>
+              ))
+            )}
+          </div>
+        </div>
+      )}
       {error && <p className="text-red-500 text-xs">{error}</p>}
     </div>
   );
@@ -710,7 +773,7 @@ export default function Kawader() {
                       <SelectField label={t.educationLevel} value={a.educationLevel} onChange={v => updateAcademic(a.id, "educationLevel", v)} options={t.educationLevels} error={errors[`acad_${i}_educationLevel`]} />
                       <InputField label={t.enrollmentDate} value={a.enrollmentDate} onChange={v => { updateAcademic(a.id, "enrollmentDate", v); setErrors(p => ({ ...p, [`acad_${i}_enrollmentDate`]: "" })); }} type="date" error={errors[`acad_${i}_enrollmentDate`]} />
                       <InputField label={t.graduationDate} value={a.graduationDate} onChange={v => { updateAcademic(a.id, "graduationDate", v); setErrors(p => ({ ...p, [`acad_${i}_graduationDate`]: "" })); }} type="date" error={errors[`acad_${i}_graduationDate`]} />
-                      <InputField label={t.country} value={a.country} onChange={v => updateAcademic(a.id, "country", v)} error={errors[`acad_${i}_country`]} />
+                      <CountrySelectField label={t.country} value={a.country} onChange={v => { updateAcademic(a.id, "country", v); setErrors(p => ({ ...p, [`acad_${i}_country`]: "" })); }} error={errors[`acad_${i}_country`]} placeholder="Select country" />
                       <InputField label={t.city} value={a.city} onChange={v => updateAcademic(a.id, "city", v)} error={errors[`acad_${i}_city`]} />
                     </div>
                   </motion.div>
