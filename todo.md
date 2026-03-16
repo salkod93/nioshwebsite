@@ -46,3 +46,4 @@
 - [x] SEO: Add H1 heading to homepage
 - [x] Add merge-documents note to Required Documents section in Kawader form (bilingual)
 - [x] Add preferred communication language question (Arabic/English) at the start of the Kawader form, mapped to Pipedrive
+- [x] Fix commLang Pipedrive mapping: resolve enum option ID instead of passing raw string

@@ -255,6 +255,14 @@ async function createDeal(
     if (optionId !== null) certPathValue = optionId;
   }
 
+  // Resolve enum option ID for preferred communication language
+  const commLangKey = fieldKeys["Kawader: Preferred Communication Language"];
+  let commLangValue: number | string = data.commLang;
+  if (commLangKey) {
+    const optionId = await resolveEnumOptionId(commLangKey, data.commLang, apiKey);
+    if (optionId !== null) commLangValue = optionId;
+  }
+
   // Build deal payload
   const dealPayload: Record<string, unknown> = {
     title: `[${refNumber}] Kawader Application – ${data.fullNameEn} (${data.certificationPath})`,
@@ -264,7 +272,7 @@ async function createDeal(
 
   // ── Core custom fields ──
   const coreFieldMappings: Array<[string, unknown]> = [
-    ["Kawader: Preferred Communication Language", data.commLang],
+    ["Kawader: Preferred Communication Language", commLangValue],
     ["Kawader: Reference Number",    refNumber],
     ["Kawader: Full Name (Arabic)",  data.fullNameAr],
     ["Kawader: Date of Birth",       data.dob],

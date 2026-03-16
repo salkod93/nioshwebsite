@@ -127,9 +127,22 @@ describe("kawader.submitAccreditation", () => {
     const mockFieldKeys = buildMockFieldKeys();
 
     // GET /dealFields – returns all fields as already existing (avoids POST for field creation)
+    // Also includes options for enum fields so resolveEnumOptionId works correctly
     mockedAxios.get = vi.fn().mockImplementation((url: string) => {
       if (url.includes("/dealFields")) {
-        const fields = Object.entries(mockFieldKeys).map(([name, key]) => ({ name, key }));
+        const fields = Object.entries(mockFieldKeys).map(([name, key]) => {
+          const enumOptions: Record<string, Array<{ id: number; label: string }>> = {
+            [mockFieldKeys["Kawader: Certification Path"]]: [
+              { id: 1, label: "Practitioner" },
+              { id: 2, label: "Professional" },
+            ],
+            [mockFieldKeys["Kawader: Preferred Communication Language"]]: [
+              { id: 10, label: "Arabic" },
+              { id: 11, label: "English" },
+            ],
+          };
+          return { name, key, options: enumOptions[key] ?? undefined };
+        });
         return Promise.resolve({ data: { data: fields } });
       }
       if (url.includes("/persons/search")) {
@@ -185,10 +198,11 @@ describe("kawader.submitAccreditation", () => {
     expect(dealBody.title).toContain(result.refNumber);
     expect(dealBody.status).toBe("open");
     expect(dealBody.person_id).toBeDefined();
-    // Preferred communication language should be mapped
+    // Preferred communication language should be mapped as a resolved enum option ID
     const fk = buildMockFieldKeys();
     const commLangKey = fk["Kawader: Preferred Communication Language"];
-    if (commLangKey) expect(dealBody[commLangKey]).toBeDefined();
+    // Arabic resolves to option ID 10 in the mock
+    expect(dealBody[commLangKey]).toBe(10);
   });
 
   it("maps academic slot 1 fields individually onto the deal payload", async () => {
