@@ -52,3 +52,5 @@
 - [x] Fix country dropdown being hidden/clipped by parent overflow
 - [x] Add searchable nationality dropdown (same as country) to Personal Information section
 - [x] Change Kawader Pipedrive integration from Deals to Leads (POST /leads API)
+- [x] SEO: Shorten page title to 30-60 characters (currently 61)
+- [x] SEO: Reduce meta keywords from 11 to 3-8 focused keywords
