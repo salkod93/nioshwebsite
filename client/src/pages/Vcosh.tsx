@@ -48,19 +48,14 @@ export default function Vcosh() {
           </p>
 
           {/* Booking button */}
-          <a
-            href={BOOKING_URL}
-            target="_blank"
-            rel="noopener noreferrer"
+          <Button
+            size="lg"
+            className="bg-orange-500 hover:bg-orange-600 text-white px-8 py-4 text-base font-semibold rounded-xl shadow-md hover:shadow-lg transition-all gap-2"
+            onClick={() => window.open(BOOKING_URL, "_blank", "noopener,noreferrer")}
           >
-            <Button
-              size="lg"
-              className="bg-orange-500 hover:bg-orange-600 text-white px-8 py-4 text-base font-semibold rounded-xl shadow-md hover:shadow-lg transition-all gap-2"
-            >
-              <Calendar className="h-5 w-5" />
-              {btnLabel}
-            </Button>
-          </a>
+            <Calendar className="h-5 w-5" />
+            {btnLabel}
+          </Button>
         </div>
       </section>
     </Layout>
