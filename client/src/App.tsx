@@ -8,6 +8,7 @@ import { LanguageProvider } from "./contexts/LanguageContext";
 import Home from "./pages/Home";
 import ComingSoon from "./pages/ComingSoon";
 import Kawader from "./pages/Kawader";
+import Vcosh from "./pages/Vcosh";
 
 function Router() {
   return (
@@ -47,6 +48,9 @@ function Router() {
 
       {/* Kawader Accreditation */}
       <Route path={"/kawader"} component={Kawader} />
+
+      {/* Virtual Center of OSH Services */}
+      <Route path={"/vcosh"} component={Vcosh} />
 
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}

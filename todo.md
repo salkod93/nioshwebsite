@@ -54,3 +54,4 @@
 - [x] Change Kawader Pipedrive integration from Deals to Leads (POST /leads API)
 - [x] SEO: Shorten page title to 30-60 characters (currently 61)
 - [x] SEO: Reduce meta keywords from 11 to 3-8 focused keywords
+- [x] Create VCOSH page with booking message and Google Calendar appointment button
