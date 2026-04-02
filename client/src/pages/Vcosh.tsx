@@ -1,13 +1,12 @@
-import { useState } from "react";
+import { useLang } from "@/contexts/LanguageContext";
 import Layout from "@/components/Layout";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "lucide-react";
-import type { Language } from "@/lib/content";
 
 const BOOKING_URL = "https://calendar.app.google/BMXEVoHiriKVdqxY6";
 
 export default function Vcosh() {
-  const [lang, setLang] = useState<Language>("ar");
+  const { lang, setLang } = useLang();
   const isRTL = lang === "ar";
 
   const heading =

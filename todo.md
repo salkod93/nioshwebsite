@@ -55,3 +55,4 @@
 - [x] SEO: Shorten page title to 30-60 characters (currently 61)
 - [x] SEO: Reduce meta keywords from 11 to 3-8 focused keywords
 - [x] Fix: VCOSH orange button still not navigating to /vcosh (persistent bug)
+- [x] Fix: VCOSH page resets language to Arabic when navigating from header button
