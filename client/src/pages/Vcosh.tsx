@@ -8,7 +8,6 @@ const BOOKING_URL = "https://calendar.app.google/BMXEVoHiriKVdqxY6";
 
 export default function Vcosh() {
   const [lang, setLang] = useState<Language>("ar");
-
   const isRTL = lang === "ar";
 
   const heading =
@@ -51,7 +50,9 @@ export default function Vcosh() {
           <Button
             size="lg"
             className="bg-orange-500 hover:bg-orange-600 text-white px-8 py-4 text-base font-semibold rounded-xl shadow-md hover:shadow-lg transition-all gap-2"
-            onClick={() => window.open(BOOKING_URL, "_blank", "noopener,noreferrer")}
+            onClick={() =>
+              window.open(BOOKING_URL, "_blank", "noopener,noreferrer")
+            }
           >
             <Calendar className="h-5 w-5" />
             {btnLabel}
