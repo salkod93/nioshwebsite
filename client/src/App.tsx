@@ -9,6 +9,7 @@ import Home from "./pages/Home";
 import ComingSoon from "./pages/ComingSoon";
 import Kawader from "./pages/Kawader";
 import Vcosh from "./pages/Vcosh";
+import BoardOfDirectors from "./pages/BoardOfDirectors";
 
 function Router() {
   return (
@@ -19,9 +20,7 @@ function Router() {
       <Route path={"/ceo-message"}>
         {() => <ComingSoon titleEn="CEO's Message" titleAr="كلمة الرئيس التنفيذي" />}
       </Route>
-      <Route path={"/board-of-directors"}>
-        {() => <ComingSoon titleEn="Board of Directors" titleAr="أعضاء مجلس الإدارة" />}
-      </Route>
+      <Route path={"/board-of-directors"} component={BoardOfDirectors} />
       <Route path={"/institute-roles"}>
         {() => <ComingSoon titleEn="Institute's Roles and Powers" titleAr="أدوار وصلاحيات المعهد" />}
       </Route>
