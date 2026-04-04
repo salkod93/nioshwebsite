@@ -7,6 +7,8 @@ const PIPEDRIVE_API_BASE = "https://api.pipedrive.com/v1";
 
 // Maximum number of academic qualification slots we pre-create fields for
 const MAX_ACADEMICS = 5;
+// Maximum number of OSH certificate slots we pre-create fields for
+const MAX_OSH_CERTS = 10;
 
 function getPipedriveApiKey(): string {
   const key = process.env.PIPEDRIVE_API_KEY;
@@ -22,6 +24,8 @@ const documentSchema = z.object({
   mimeType: z.string(),
 });
 
+const optionalDocumentSchema = documentSchema.nullable().optional();
+
 const academicSchema = z.object({
   institution: z.string(),
   address: z.string().optional(),
@@ -33,6 +37,13 @@ const academicSchema = z.object({
   city: z.string(),
 });
 
+const oshCertSchema = z.object({
+  name: z.string(),
+  issuingBody: z.string(),
+  validity: z.string(),   // date string or "N/A"
+  file: documentSchema.nullable().optional(),
+});
+
 function generateRefNumber(): string {
   const year = new Date().getFullYear();
   const random = Math.floor(10000 + Math.random() * 90000);
@@ -42,27 +53,30 @@ function generateRefNumber(): string {
 const submitSchema = z.object({
   certificationPath: z.enum(["Practitioner", "Professional"]),
   commLang: z.enum(["Arabic", "English"]),
+  idType: z.enum(["saudi_national", "saudi_resident", "international"]),
   fullNameAr: z.string().min(1),
   fullNameEn: z.string().min(1),
   dob: z.string().min(1),
-  nationalId: z.string().min(1),
-  nationality: z.string().min(1),
+  nationalId: z.string().optional(),      // Saudi national only
+  iqamaId: z.string().optional(),          // Resident only
+  passportNumber: z.string().optional(),   // Resident + International
+  nationality: z.string().optional(),      // Resident + International
   phone: z.string().min(1),
   email: z.string().email(),
   experience: z.string().min(1),
   academics: z.array(academicSchema).min(1),
-  oshCerts: z.string().optional(),
+  oshCerts: z.array(oshCertSchema).min(1),
   documents: z.object({
-    nationalId: documentSchema,
-    passport: documentSchema,
-    academicDegree: documentSchema,
-    transcript: documentSchema,
-    equivalency: documentSchema,
-    employmentLetter: documentSchema,
-    jobDescription: documentSchema,
-    gosi: documentSchema,
-    cv: documentSchema,
-    oshCertificates: documentSchema,
+    nationalId: optionalDocumentSchema,
+    iqamaId: optionalDocumentSchema,
+    passport: optionalDocumentSchema,
+    academicDegree: optionalDocumentSchema,
+    academicRecord: optionalDocumentSchema,
+    equivalency: optionalDocumentSchema,
+    employmentLetter: optionalDocumentSchema,
+    jobDescription: optionalDocumentSchema,
+    gosi: optionalDocumentSchema,
+    cv: optionalDocumentSchema,
   }),
 });
 
@@ -70,28 +84,38 @@ const submitSchema = z.object({
 
 // Per-academic sub-fields (one set per qualification slot)
 const ACADEMIC_SUB_FIELDS: Array<{ suffix: string; field_type: string }> = [
-  { suffix: "Institution",       field_type: "varchar" },
+  { suffix: "Institution",         field_type: "varchar" },
   { suffix: "Institution Address", field_type: "varchar" },
-  { suffix: "Degree Title",      field_type: "varchar" },
-  { suffix: "Education Level",   field_type: "varchar" },
-  { suffix: "Enrollment Date",   field_type: "date"    },
-  { suffix: "Graduation Date",   field_type: "date"    },
-  { suffix: "Country",           field_type: "varchar" },
-  { suffix: "City",              field_type: "varchar" },
+  { suffix: "Degree Title",        field_type: "varchar" },
+  { suffix: "Education Level",     field_type: "varchar" },
+  { suffix: "Enrollment Date",     field_type: "date"    },
+  { suffix: "Graduation Date",     field_type: "date"    },
+  { suffix: "Country",             field_type: "varchar" },
+  { suffix: "City",                field_type: "varchar" },
+];
+
+// Per-OSH cert sub-fields
+const OSH_CERT_SUB_FIELDS: Array<{ suffix: string; field_type: string }> = [
+  { suffix: "Name",         field_type: "varchar" },
+  { suffix: "Issuing Body", field_type: "varchar" },
+  { suffix: "Validity",     field_type: "varchar" },
+  { suffix: "File URL",     field_type: "varchar" },
 ];
 
 // Core (non-academic) custom fields
 const CORE_FIELD_DEFS: Array<{ label: string; field_type: string; options?: readonly string[] }> = [
   { label: "Kawader: Preferred Communication Language", field_type: "enum", options: ["Arabic", "English"] },
-  { label: "Kawader: Reference Number",   field_type: "varchar" },
-  { label: "Kawader: Full Name (Arabic)", field_type: "varchar" },
-  { label: "Kawader: Date of Birth",      field_type: "date"    },
-  { label: "Kawader: National ID / Iqama", field_type: "varchar" },
-  { label: "Kawader: Nationality",        field_type: "varchar" },
+  { label: "Kawader: Reference Number",    field_type: "varchar" },
+  { label: "Kawader: Full Name (Arabic)",  field_type: "varchar" },
+  { label: "Kawader: Date of Birth",       field_type: "date"    },
+  { label: "Kawader: ID Type",             field_type: "enum",   options: ["Saudi National", "Saudi Resident", "International"] },
+  { label: "Kawader: National ID",         field_type: "varchar" },
+  { label: "Kawader: Iqama ID",            field_type: "varchar" },
+  { label: "Kawader: Passport Number",     field_type: "varchar" },
+  { label: "Kawader: Nationality",         field_type: "varchar" },
   { label: "Kawader: Years of Experience", field_type: "double"  },
-  { label: "Kawader: Certification Path", field_type: "enum",   options: ["Practitioner", "Professional"] },
-  { label: "Kawader: OSH Certificates",   field_type: "text"    },
-  { label: "Kawader: Uploaded Documents", field_type: "text"    },
+  { label: "Kawader: Certification Path",  field_type: "enum",   options: ["Practitioner", "Professional"] },
+  { label: "Kawader: Uploaded Documents",  field_type: "text"    },
 ];
 
 /** Build the full label for an academic sub-field, e.g. "Kawader: Academic 1 – Institution" */
@@ -99,12 +123,22 @@ function academicFieldLabel(index: number, suffix: string): string {
   return `Kawader: Academic ${index} – ${suffix}`;
 }
 
-/** Collect all field definitions (core + per-slot academic) */
+/** Build the full label for an OSH cert sub-field, e.g. "Kawader: OSH Cert 1 – Name" */
+function oshCertFieldLabel(index: number, suffix: string): string {
+  return `Kawader: OSH Cert ${index} – ${suffix}`;
+}
+
+/** Collect all field definitions (core + per-slot academic + per-slot OSH cert) */
 function allFieldDefs(): Array<{ label: string; field_type: string; options?: readonly string[] }> {
   const defs = [...CORE_FIELD_DEFS];
   for (let i = 1; i <= MAX_ACADEMICS; i++) {
     for (const sub of ACADEMIC_SUB_FIELDS) {
       defs.push({ label: academicFieldLabel(i, sub.suffix), field_type: sub.field_type });
+    }
+  }
+  for (let i = 1; i <= MAX_OSH_CERTS; i++) {
+    for (const sub of OSH_CERT_SUB_FIELDS) {
+      defs.push({ label: oshCertFieldLabel(i, sub.suffix), field_type: sub.field_type });
     }
   }
   return defs;
@@ -235,10 +269,16 @@ async function createOrFindPerson(
   return res.data.data.id;
 }
 
+/** Map idType enum value to a human-readable Pipedrive enum label */
+function idTypeLabel(idType: string): string {
+  if (idType === "saudi_national") return "Saudi National";
+  if (idType === "saudi_resident") return "Saudi Resident";
+  return "International";
+}
+
 /**
  * Create a Pipedrive Lead (not a Deal) with all mapped custom fields.
  * Leads inherit the custom fields structure from deals, so the same field keys apply.
- * The lead ID is a UUID string.
  */
 async function createLead(
   data: z.infer<typeof submitSchema>,
@@ -253,7 +293,7 @@ async function createLead(
     .map(([k, url]) => `${k}: ${url}`)
     .join("\n");
 
-  // Resolve enum option ID for certification path
+  // Resolve enum option IDs
   const certPathKey = fieldKeys["Kawader: Certification Path"];
   let certPathValue: number | string = data.certificationPath;
   if (certPathKey) {
@@ -261,7 +301,6 @@ async function createLead(
     if (optionId !== null) certPathValue = optionId;
   }
 
-  // Resolve enum option ID for preferred communication language
   const commLangKey = fieldKeys["Kawader: Preferred Communication Language"];
   let commLangValue: number | string = data.commLang;
   if (commLangKey) {
@@ -269,7 +308,14 @@ async function createLead(
     if (optionId !== null) commLangValue = optionId;
   }
 
-  // Build lead payload — leads use the same custom field keys as deals
+  const idTypeKey = fieldKeys["Kawader: ID Type"];
+  let idTypeValue: number | string = idTypeLabel(data.idType);
+  if (idTypeKey) {
+    const optionId = await resolveEnumOptionId(idTypeKey, idTypeLabel(data.idType), apiKey);
+    if (optionId !== null) idTypeValue = optionId;
+  }
+
+  // Build lead payload
   const leadPayload: Record<string, unknown> = {
     title: `[${refNumber}] Kawader Application – ${data.fullNameEn} (${data.certificationPath})`,
     person_id: personId,
@@ -281,11 +327,13 @@ async function createLead(
     ["Kawader: Reference Number",    refNumber],
     ["Kawader: Full Name (Arabic)",  data.fullNameAr],
     ["Kawader: Date of Birth",       data.dob],
-    ["Kawader: National ID / Iqama", data.nationalId],
-    ["Kawader: Nationality",         data.nationality],
+    ["Kawader: ID Type",             idTypeValue],
+    ["Kawader: National ID",         data.nationalId ?? ""],
+    ["Kawader: Iqama ID",            data.iqamaId ?? ""],
+    ["Kawader: Passport Number",     data.passportNumber ?? ""],
+    ["Kawader: Nationality",         data.nationality ?? ""],
     ["Kawader: Years of Experience", Number(data.experience)],
     ["Kawader: Certification Path",  certPathValue],
-    ["Kawader: OSH Certificates",    data.oshCerts ?? ""],
     ["Kawader: Uploaded Documents",  docText],
   ];
 
@@ -296,8 +344,8 @@ async function createLead(
 
   // ── Per-field academic custom fields ──
   data.academics.forEach((acad, idx) => {
-    const slot = idx + 1; // 1-based
-    if (slot > MAX_ACADEMICS) return; // ignore beyond max
+    const slot = idx + 1;
+    if (slot > MAX_ACADEMICS) return;
 
     const subFieldMappings: Array<[string, unknown]> = [
       ["Institution",         acad.institution],
@@ -317,7 +365,27 @@ async function createLead(
     }
   });
 
-  // POST to /v1/leads — returns a UUID string as the lead ID
+  // ── Per-OSH cert custom fields ──
+  data.oshCerts.forEach((cert, idx) => {
+    const slot = idx + 1;
+    if (slot > MAX_OSH_CERTS) return;
+
+    const certFileUrl = docUrls[`oshCert_${idx}`] ?? "";
+    const subFieldMappings: Array<[string, unknown]> = [
+      ["Name",         cert.name],
+      ["Issuing Body", cert.issuingBody],
+      ["Validity",     cert.validity],
+      ["File URL",     certFileUrl],
+    ];
+
+    for (const [suffix, value] of subFieldMappings) {
+      const label = oshCertFieldLabel(slot, suffix);
+      const key = fieldKeys[label];
+      if (key) leadPayload[key] = value;
+    }
+  });
+
+  // POST to /v1/leads
   const leadRes = await axios.post(
     `${PIPEDRIVE_API_BASE}/leads`,
     leadPayload,
@@ -335,19 +403,33 @@ export const kawaderRouter = router({
     .mutation(async ({ input }) => {
       const apiKey = getPipedriveApiKey();
 
-      // 1. Upload all documents to S3
+      // 1. Upload all non-null documents to S3
       const docUrls: Record<string, string> = {};
       const docEntries = Object.entries(input.documents) as [
-        keyof typeof input.documents,
-        { base64: string; fileName: string; mimeType: string }
+        string,
+        { base64: string; fileName: string; mimeType: string } | null | undefined
       ][];
 
       for (const [key, doc] of docEntries) {
-        try {
-          docUrls[key] = await uploadDoc(doc.base64, doc.fileName, doc.mimeType, key);
-        } catch (err) {
-          console.error(`[Kawader] Failed to upload ${key}:`, err);
-          throw new Error(`Failed to upload document: ${key}`);
+        if (doc) {
+          try {
+            docUrls[key] = await uploadDoc(doc.base64, doc.fileName, doc.mimeType, key);
+          } catch (err) {
+            console.error(`[Kawader] Failed to upload ${key}:`, err);
+            throw new Error(`Failed to upload document: ${key}`);
+          }
+        }
+      }
+
+      // 1b. Upload OSH cert files
+      for (let i = 0; i < input.oshCerts.length; i++) {
+        const cert = input.oshCerts[i];
+        if (cert.file) {
+          try {
+            docUrls[`oshCert_${i}`] = await uploadDoc(cert.file.base64, cert.file.fileName, cert.file.mimeType, `osh_cert_${i + 1}`);
+          } catch (err) {
+            console.error(`[Kawader] Failed to upload OSH cert ${i + 1}:`, err);
+          }
         }
       }
 

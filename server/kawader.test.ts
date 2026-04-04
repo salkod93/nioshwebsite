@@ -34,14 +34,24 @@ const sampleDoc = {
   mimeType: "application/pdf",
 };
 
+const sampleOshCert = {
+  name: "NEBOSH IGC",
+  issuingBody: "NEBOSH",
+  validity: "2025-12-31",
+  file: sampleDoc,
+};
+
 const sampleInput = {
   certificationPath: "Practitioner" as const,
   commLang: "Arabic" as const,
+  idType: "saudi_national" as const,
   fullNameAr: "محمد أحمد",
   fullNameEn: "Mohammed Ahmed",
   dob: "1990-01-15",
   nationalId: "1234567890",
-  nationality: "Saudi",
+  iqamaId: "",
+  passportNumber: "",
+  nationality: "",
   phone: "+966501234567",
   email: "mohammed.ahmed@example.com",
   experience: "5",
@@ -57,18 +67,18 @@ const sampleInput = {
       city: "Riyadh",
     },
   ],
-  oshCerts: "NEBOSH IGC – 2020\nNFPA Fire Safety – 2021",
+  oshCerts: [sampleOshCert],
   documents: {
     nationalId: sampleDoc,
-    passport: sampleDoc,
+    iqamaId: null,
+    passport: null,
     academicDegree: sampleDoc,
-    transcript: sampleDoc,
+    academicRecord: sampleDoc,
     equivalency: sampleDoc,
     employmentLetter: sampleDoc,
     jobDescription: sampleDoc,
     gosi: sampleDoc,
     cv: sampleDoc,
-    oshCertificates: sampleDoc,
   },
 };
 
@@ -82,11 +92,13 @@ function buildMockFieldKeys(): Record<string, string> {
     "Kawader: Reference Number",
     "Kawader: Full Name (Arabic)",
     "Kawader: Date of Birth",
-    "Kawader: National ID / Iqama",
+    "Kawader: ID Type",
+    "Kawader: National ID",
+    "Kawader: Iqama ID",
+    "Kawader: Passport Number",
     "Kawader: Nationality",
     "Kawader: Years of Experience",
     "Kawader: Certification Path",
-    "Kawader: OSH Certificates",
     "Kawader: Uploaded Documents",
     // Academic slot 1
     "Kawader: Academic 1 – Institution",
@@ -111,6 +123,11 @@ function buildMockFieldKeys(): Record<string, string> {
         `Kawader: Academic ${slot} – City`,
       ];
     }).flat(),
+    // OSH cert slot 1
+    "Kawader: OSH Cert 1 – Name",
+    "Kawader: OSH Cert 1 – Issuing Body",
+    "Kawader: OSH Cert 1 – Validity",
+    "Kawader: OSH Cert 1 – File URL",
   ];
   const map: Record<string, string> = {};
   for (const label of labels) {
@@ -140,6 +157,11 @@ describe("kawader.submitAccreditation", () => {
               { id: 10, label: "Arabic" },
               { id: 11, label: "English" },
             ],
+            [mockFieldKeys["Kawader: ID Type"]]: [
+              { id: 20, label: "Saudi National" },
+              { id: 21, label: "Saudi Resident" },
+              { id: 22, label: "International" },
+            ],
           };
           return { name, key, options: enumOptions[key] ?? undefined };
         });
@@ -157,7 +179,7 @@ describe("kawader.submitAccreditation", () => {
     });
   });
 
-  it("uploads all 10 documents to S3 and returns success with a reference number", async () => {
+  it("uploads documents to S3 and returns success with a reference number", async () => {
     const { storagePut } = await import("./storage");
     const caller = appRouter.createCaller(createCtx());
 
@@ -165,7 +187,8 @@ describe("kawader.submitAccreditation", () => {
 
     expect(result.success).toBe(true);
     expect(result.refNumber).toMatch(/^KWD-\d{4}-\d{5}$/);
-    expect(storagePut).toHaveBeenCalledTimes(10);
+    // 8 non-null docs + 1 OSH cert file = 9 uploads
+    expect(storagePut).toHaveBeenCalledTimes(9);
   });
 
   it("creates a person with email and phone", async () => {
@@ -212,6 +235,35 @@ describe("kawader.submitAccreditation", () => {
     const commLangKey = fk["Kawader: Preferred Communication Language"];
     // Arabic resolves to option ID 10 in the mock
     expect(leadBody[commLangKey]).toBe(10);
+  });
+
+  it("maps OSH cert slot 1 fields onto the lead payload", async () => {
+    const caller = appRouter.createCaller(createCtx());
+    await caller.kawader.submitAccreditation(sampleInput);
+    const postCalls = (mockedAxios.post as ReturnType<typeof vi.fn>).mock.calls;
+    const leadCall = postCalls.find(
+      (c) => typeof c[0] === "string" && c[0].includes("/leads") && !c[0].includes("Fields")
+    );
+    expect(leadCall).toBeDefined();
+    const leadBody = leadCall![1];
+    const mockFieldKeys = buildMockFieldKeys();
+    expect(leadBody[mockFieldKeys["Kawader: OSH Cert 1 – Name"]]).toBe("NEBOSH IGC");
+    expect(leadBody[mockFieldKeys["Kawader: OSH Cert 1 – Issuing Body"]]).toBe("NEBOSH");
+    expect(leadBody[mockFieldKeys["Kawader: OSH Cert 1 – Validity"]]).toBe("2025-12-31");
+  });
+
+  it("maps ID type field onto the lead payload", async () => {
+    const caller = appRouter.createCaller(createCtx());
+    await caller.kawader.submitAccreditation(sampleInput);
+    const postCalls = (mockedAxios.post as ReturnType<typeof vi.fn>).mock.calls;
+    const leadCall = postCalls.find(
+      (c) => typeof c[0] === "string" && c[0].includes("/leads") && !c[0].includes("Fields")
+    );
+    expect(leadCall).toBeDefined();
+    const leadBody = leadCall![1];
+    const mockFieldKeys = buildMockFieldKeys();
+    // Saudi National resolves to option ID 20 in the mock
+    expect(leadBody[mockFieldKeys["Kawader: ID Type"]]).toBe(20);
   });
 
   it("maps academic slot 1 fields individually onto the lead payload", async () => {

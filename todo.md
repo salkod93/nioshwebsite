@@ -68,3 +68,12 @@
 - [x] Replace NCOSH, TVTC, UQU, and GOSI logos with new official logos on Board of Directors page
 - [x] Increase size of all entity logos on Board of Directors page
 - [x] Crop TVTC logo to remove excess whitespace and make it visually consistent with other logos
+- [x] Kawader: Add ID type selector (Saudi National / Saudi Resident / International) at top of Personal Information section
+- [x] Kawader: Show personal info fields only after ID type is selected; show National ID for Saudi National, Iqama ID + Nationality + Passport for Resident, Passport + Nationality for International
+- [x] Kawader: Rename "Employment Verification Letter" to "Employment Introduction Letter" (خطاب تعريف العمل) in documents
+- [x] Kawader: Add note that Job Description must be certified by the Chamber of Commerce
+- [x] Kawader: Replace "Academic Transcript" (كشف الدرجات) with "Academic Record / سجل أكاديمي"
+- [x] Kawader: Make passport upload optional (not mandatory)
+- [x] Kawader: Rename "GOSI Employment and Wage Statement" to "GOSI Salary and Period Certificate" (شهادة المدد والأجور من نظام التأمينات الاجتماعية)
+- [x] Kawader: Restructure OSH certificates from free-text textarea to structured add/remove entries (name, issuing body, validity with N/A option, upload copy)
+- [x] Kawader: Update backend schema and Pipedrive field mappings for all new/changed fields

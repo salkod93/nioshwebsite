@@ -5,12 +5,14 @@ import Layout from "@/components/Layout";
 import { Button } from "@/components/ui/button";
 import { trpc } from "@/lib/trpc";
 import { toast } from "sonner";
-import { Upload, FileText, CheckCircle, Loader2, Plus, Trash2, ChevronDown, ChevronUp } from "lucide-react";
+import { Upload, FileText, CheckCircle, Loader2, Plus, Trash2, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { COUNTRIES } from "@/lib/countries";
 
 // ─── Types ───────────────────────────────────────────────────────────────────
+
+type IdType = "saudi_national" | "saudi_resident" | "international" | "";
 
 interface AcademicEntry {
   id: string;
@@ -24,9 +26,13 @@ interface AcademicEntry {
   city: string;
 }
 
-interface UploadedFile {
-  file: File;
-  key: string;
+interface OshCertEntry {
+  id: string;
+  name: string;
+  issuingBody: string;
+  validity: string;      // date string or "N/A"
+  validityNA: boolean;
+  file: File | null;
 }
 
 // ─── Content ─────────────────────────────────────────────────────────────────
@@ -94,15 +100,25 @@ const c = {
         { spec: "Occupational Medicine", practQual: "—", practExp: "—", profQual: "PhD Holders", profExp: "—" },
       ],
     },
+    // ID type
+    idTypeSection: "Type of ID",
+    idTypeLabel: "Please select your ID type *",
+    idTypeSaudiNational: "Saudi National (مواطن)",
+    idTypeSaudiResident: "Saudi Resident (مقيم)",
+    idTypeInternational: "International Applicant",
+    // Personal info
     personalSection: "Personal Information",
     fullNameAr: "Full Name in Arabic *",
     fullNameEn: "Full Name in English *",
     dob: "Date of Birth *",
-    nationalId: "National ID / Iqama Number *",
+    nationalId: "National ID (الهوية الوطنية) *",
+    iqamaId: "Iqama ID Number (هوية مقيم) *",
+    passportNumber: "Passport Number *",
     nationality: "Nationality *",
     phone: "Phone Number *",
     email: "Email Address *",
     experience: "Total Years of Experience *",
+    // Academic
     academicSection: "Academic Information",
     academicNote: "You may add more than one qualification.",
     institution: "Name of Educational Institution *",
@@ -115,29 +131,38 @@ const c = {
     city: "City *",
     addQualification: "Add Another Qualification",
     removeQualification: "Remove",
+    // OSH certs
     oshSection: "OSH Professional Certificates & Courses",
-    oshLabel: "List your OSH professional certificates and courses (one per line) *",
-    oshPlaceholder: "e.g.\nNEBOSH IGC\nQHSE Professional Master\nIOSH Managing Safely\nOHSAS 18001 IRCA",
+    oshNote: "Add each professional certificate or course separately.",
+    oshCertName: "Certificate Name *",
+    oshIssuingBody: "Issuing Body *",
+    oshValidity: "Certificate Validity *",
+    oshValidityNA: "Not Applicable",
+    oshUpload: "Upload Copy *",
+    addOshCert: "Add Another Certificate",
+    removeOshCert: "Remove",
+    // Documents
     docsSection: "Required Documents",
     docsNote: "Please upload all required documents. Accepted formats: PDF, JPG, PNG (max 10MB each).",
     docsMergeNote: "If you have multiple documents of the same type, please merge them into one file before uploading.",
     docs: {
-      nationalId: "National ID *",
-      passport: "Passport *",
+      nationalId: "National ID (الهوية الوطنية) *",
+      iqamaId: "Iqama ID (هوية مقيم) *",
+      passport: "Passport (optional)",
       academicDegree: "Certified Copy of Academic Degree *",
-      transcript: "Academic Transcript *",
+      academicRecord: "Academic Record (السجل الأكاديمي) *",
       equivalency: "Certificate Equivalency Document *",
-      employmentLetter: "Employment Verification Letter (for employees) *",
-      jobDescription: "Current Job Description *",
-      gosi: "GOSI Employment and Wage Statement *",
+      employmentLetter: "Employment Introduction Letter (خطاب تعريف العمل) *",
+      jobDescription: "Current Job Description (must be certified by the Chamber of Commerce) *",
+      gosi: "GOSI Salary and Period Certificate (شهادة المدد والأجور من التأمينات الاجتماعية) *",
       cv: "Curriculum Vitae (CV) *",
-      oshCertificates: "OSH Professional Certificates & Courses *",
     },
     commLangSection: "Preferred Communication Language",
     commLangLabel: "What language would you like to be communicated with? *",
     commLangArabic: "Arabic",
     commLangEnglish: "English",
     errors_commLang: "Please select a preferred communication language",
+    errors_idType: "Please select your ID type",
     submit: "Submit Application",
     submitting: "Submitting...",
     successTitle: "Application Submitted!",
@@ -206,7 +231,7 @@ const c = {
       profQual: "مؤهل المحترف",
       profExp: "خبرة المحترف في السلامة والصحة المهنية",
       rows: [
-        { spec: "التخصصات الهندسية", practQual: "دبلوم تقني أو بكالوريوس", practExp: "سنة", profQual: "بكالوريوس فوق", profExp: "سنة" },
+        { spec: "التخصصات الهندسية", practQual: "دبلوم تقني أو بكالوريوس", practExp: "سنة", profQual: "بكالوريوس فأعلى", profExp: "سنة" },
         { spec: "التخصصات الهندسية", practQual: "—", practExp: "—", profQual: "دبلوم تقني", profExp: "8 سنوات" },
         { spec: "التخصصات غير الهندسية", practQual: "بكالوريوس", practExp: "سنتان", profQual: "بكالوريوس فوق", profExp: "سنتان" },
         { spec: "التخصصات غير الهندسية", practQual: "دبلوم غير تقني", practExp: "3 سنوات", profQual: "دبلوم غير تقني", profExp: "10 سنوات" },
@@ -215,15 +240,25 @@ const c = {
         { spec: "الطب المهني", practQual: "—", practExp: "—", profQual: "دكتوراه", profExp: "—" },
       ],
     },
+    // ID type
+    idTypeSection: "نوع الهوية",
+    idTypeLabel: "يرجى اختيار نوع الهوية *",
+    idTypeSaudiNational: "مواطن سعودي",
+    idTypeSaudiResident: "مقيم في المملكة",
+    idTypeInternational: "متقدم دولي",
+    // Personal info
     personalSection: "المعلومات الشخصية",
     fullNameAr: "الاسم الكامل بالعربية *",
     fullNameEn: "الاسم الكامل بالإنجليزية *",
     dob: "تاريخ الميلاد *",
-    nationalId: "رقم الهوية الوطنية / الإقامة *",
+    nationalId: "رقم الهوية الوطنية *",
+    iqamaId: "رقم هوية المقيم *",
+    passportNumber: "رقم جواز السفر *",
     nationality: "الجنسية *",
     phone: "رقم الجوال *",
     email: "البريد الإلكتروني *",
     experience: "إجمالي سنوات الخبرة *",
+    // Academic
     academicSection: "المعلومات الأكاديمية",
     academicNote: "يمكنك إضافة أكثر من مؤهل علمي.",
     institution: "اسم المؤسسة التعليمية *",
@@ -236,29 +271,38 @@ const c = {
     city: "المدينة *",
     addQualification: "إضافة مؤهل آخر",
     removeQualification: "حذف",
+    // OSH certs
     oshSection: "شهادات ودورات السلامة والصحة المهنية",
-    oshLabel: "اذكر شهاداتك ودوراتك المهنية في السلامة والصحة المهنية (واحدة في كل سطر) *",
-    oshPlaceholder: "مثال:\nNEBOSH IGC\nQHSE Professional Master\nIOSH Managing Safely\nOHSAS 18001 IRCA",
+    oshNote: "أضف كل شهادة أو دورة مهنية بشكل منفصل.",
+    oshCertName: "اسم الشهادة *",
+    oshIssuingBody: "الجهة المانحة *",
+    oshValidity: "صلاحية الشهادة *",
+    oshValidityNA: "لا ينطبق",
+    oshUpload: "رفع نسخة *",
+    addOshCert: "إضافة شهادة أخرى",
+    removeOshCert: "حذف",
+    // Documents
     docsSection: "المستندات المطلوبة",
     docsNote: "يرجى رفع جميع المستندات المطلوبة. الصيغ المقبولة: PDF، JPG، PNG (الحد الأقصى 10MB لكل ملف).",
     docsMergeNote: "إذا كان لديك أكثر من مستند من نفس النوع، يرجى دمجها في ملف واحد قبل الرفع.",
     docs: {
       nationalId: "الهوية الوطنية *",
-      passport: "جواز السفر *",
+      iqamaId: "هوية مقيم *",
+      passport: "جواز السفر (اختياري)",
       academicDegree: "نسخة معتمدة من الشهادة الأكاديمية *",
-      transcript: "كشف الدرجات الأكاديمية *",
+      academicRecord: "السجل الأكاديمي *",
       equivalency: "وثيقة معادلة الشهادة *",
-      employmentLetter: "خطاب تحقق من العمل (للموظفين) *",
-      jobDescription: "وصف الوظيفة الحالية *",
-      gosi: "بيان التوظيف والأجر من التأمينات الاجتماعية *",
+      employmentLetter: "خطاب تعريف العمل *",
+      jobDescription: "الوصف الوظيفي الحالي (يجب أن يكون مصادقاً عليه من الغرفة التجارية) *",
+      gosi: "شهادة المدد والأجور من نظام التأمينات الاجتماعية *",
       cv: "السيرة الذاتية *",
-      oshCertificates: "شهادات ودورات السلامة والصحة المهنية *",
     },
     commLangSection: "لغة التواصل المفضلة",
     commLangLabel: "بأي لغة تفضل التواصل معك؟ *",
     commLangArabic: "عربي",
     commLangEnglish: "إنجليزي",
     errors_commLang: "يرجى اختيار لغة التواصل المفضلة",
+    errors_idType: "يرجى اختيار نوع الهوية",
     submit: "إرسال الطلب",
     submitting: "جارٍ الإرسال...",
     successTitle: "تم إرسال الطلب!",
@@ -283,6 +327,10 @@ const MAX_FILE_SIZE = 10 * 1024 * 1024;
 
 function newAcademic(): AcademicEntry {
   return { id: crypto.randomUUID(), institution: "", address: "", degreeTitle: "", enrollmentDate: "", graduationDate: "", educationLevel: "", country: "", city: "" };
+}
+
+function newOshCert(): OshCertEntry {
+  return { id: crypto.randomUUID(), name: "", issuingBody: "", validity: "", validityNA: false, file: null };
 }
 
 function fileToBase64(file: File): Promise<string> {
@@ -359,7 +407,6 @@ function CountrySelectField({ label, value, onChange, error, placeholder }: {
     setOpen(o => !o);
   };
 
-  // Close on outside click
   useEffect(() => {
     if (!open) return;
     const handler = (e: MouseEvent) => {
@@ -372,7 +419,6 @@ function CountrySelectField({ label, value, onChange, error, placeholder }: {
     return () => document.removeEventListener("mousedown", handler);
   }, [open]);
 
-  // Reposition on scroll/resize
   useEffect(() => {
     if (!open) return;
     const handler = () => updatePosition();
@@ -443,8 +489,8 @@ function CountrySelectField({ label, value, onChange, error, placeholder }: {
   );
 }
 
-function FileUploadField({ label, file, onFile, error }: {
-  label: string; file: File | null; onFile: (f: File) => void; error?: string;
+function FileUploadField({ label, file, onFile, error, optional }: {
+  label: string; file: File | null; onFile: (f: File) => void; error?: string; optional?: boolean;
 }) {
   const ref = useRef<HTMLInputElement>(null);
   const [dragging, setDragging] = useState(false);
@@ -467,7 +513,8 @@ function FileUploadField({ label, file, onFile, error }: {
           "flex items-center gap-3 px-4 py-3 rounded-xl border-2 border-dashed cursor-pointer transition-all",
           dragging ? "border-primary bg-primary/5" : "border-border hover:border-primary/50",
           file ? "bg-green-50 border-green-400" : "",
-          error ? "border-red-400" : ""
+          error ? "border-red-400" : "",
+          optional && !file ? "opacity-70" : ""
         )}
       >
         <input ref={ref} type="file" accept=".pdf,.jpg,.jpeg,.png" className="hidden" onChange={e => { const f = e.target.files?.[0]; if (f) handle(f); }} />
@@ -508,12 +555,17 @@ export default function Kawader() {
   // Certification path
   const [path, setPath] = useState<"Practitioner" | "Professional" | "">("");
 
+  // ID type
+  const [idType, setIdType] = useState<IdType>("");
+
   // Personal info
   const [fullNameAr, setFullNameAr] = useState("");
   const [fullNameEn, setFullNameEn] = useState("");
   const [dob, setDob] = useState("");
-  const [nationalId, setNationalId] = useState("");
-  const [nationality, setNationality] = useState("");
+  const [nationalId, setNationalId] = useState("");   // Saudi national only
+  const [iqamaId, setIqamaId] = useState("");          // Resident only
+  const [passportNumber, setPassportNumber] = useState(""); // Resident + International
+  const [nationality, setNationality] = useState("");  // Resident + International
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [experience, setExperience] = useState("");
@@ -521,19 +573,25 @@ export default function Kawader() {
   // Academic info (multi-entry)
   const [academics, setAcademics] = useState<AcademicEntry[]>([newAcademic()]);
 
-  // OSH certs
-  const [oshCerts, setOshCerts] = useState("");
+  // OSH certs (structured)
+  const [oshCerts, setOshCerts] = useState<OshCertEntry[]>([newOshCert()]);
 
   // Documents
   const [docs, setDocs] = useState<Record<string, File | null>>({
-    nationalId: null, passport: null, academicDegree: null, transcript: null,
-    equivalency: null, employmentLetter: null, jobDescription: null, gosi: null,
-    cv: null, oshCertificates: null,
+    nationalId: null,
+    iqamaId: null,
+    passport: null,
+    academicDegree: null,
+    academicRecord: null,
+    equivalency: null,
+    employmentLetter: null,
+    jobDescription: null,
+    gosi: null,
+    cv: null,
   });
 
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [submitted, setSubmitted] = useState(false);
-
   const [refNumber, setRefNumber] = useState("");
 
   const submitMutation = trpc.kawader.submitAccreditation.useMutation({
@@ -545,19 +603,50 @@ export default function Kawader() {
     setAcademics(prev => prev.map(a => a.id === id ? { ...a, [field]: value } : a));
   };
 
+  const updateOshCert = (id: string, field: keyof OshCertEntry, value: string | boolean | File | null) => {
+    setOshCerts(prev => prev.map(c => c.id === id ? { ...c, [field]: value } : c));
+  };
+
+  // Which document keys are required based on ID type
+  const requiredDocKeys = (): string[] => {
+    const base = ["academicDegree", "academicRecord", "equivalency", "employmentLetter", "jobDescription", "gosi", "cv"];
+    if (idType === "saudi_national") return [...base, "nationalId"];
+    if (idType === "saudi_resident") return [...base, "iqamaId"];
+    if (idType === "international") return [...base]; // passport optional for international too
+    return base;
+  };
+
   const validate = () => {
     const e: Record<string, string> = {};
     if (!commLang) e.commLang = t.errors_commLang;
     if (!path) e.path = t.errors.pathRequired;
-    if (!fullNameAr.trim()) e.fullNameAr = t.errors.required;
-    if (!fullNameEn.trim()) e.fullNameEn = t.errors.required;
-    if (!dob) e.dob = t.errors.required;
-    if (!nationalId.trim()) e.nationalId = t.errors.required;
-    if (!nationality.trim()) e.nationality = t.errors.required;
-    if (!phone.trim()) e.phone = t.errors.required;
-    if (!email.trim()) e.email = t.errors.required;
-    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) e.email = t.errors.email;
-    if (!experience.trim()) e.experience = t.errors.required;
+    if (!idType) e.idType = t.errors_idType;
+
+    // Personal info — only validate if idType is set
+    if (idType) {
+      if (!fullNameAr.trim()) e.fullNameAr = t.errors.required;
+      if (!fullNameEn.trim()) e.fullNameEn = t.errors.required;
+      if (!dob) e.dob = t.errors.required;
+      if (!phone.trim()) e.phone = t.errors.required;
+      if (!email.trim()) e.email = t.errors.required;
+      else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) e.email = t.errors.email;
+      if (!experience.trim()) e.experience = t.errors.required;
+
+      if (idType === "saudi_national") {
+        if (!nationalId.trim()) e.nationalId = t.errors.required;
+      }
+      if (idType === "saudi_resident") {
+        if (!iqamaId.trim()) e.iqamaId = t.errors.required;
+        if (!passportNumber.trim()) e.passportNumber = t.errors.required;
+        if (!nationality.trim()) e.nationality = t.errors.required;
+      }
+      if (idType === "international") {
+        if (!passportNumber.trim()) e.passportNumber = t.errors.required;
+        if (!nationality.trim()) e.nationality = t.errors.required;
+      }
+    }
+
+    // Academic
     academics.forEach((a, i) => {
       if (!a.institution.trim()) e[`acad_${i}_institution`] = t.errors.required;
       if (!a.address.trim()) e[`acad_${i}_address`] = t.errors.required;
@@ -568,10 +657,20 @@ export default function Kawader() {
       if (!a.country.trim()) e[`acad_${i}_country`] = t.errors.required;
       if (!a.city.trim()) e[`acad_${i}_city`] = t.errors.required;
     });
-    if (!oshCerts.trim()) e.oshCerts = t.errors.required;
-    Object.keys(docs).forEach(k => {
+
+    // OSH certs
+    oshCerts.forEach((cert, i) => {
+      if (!cert.name.trim()) e[`osh_${i}_name`] = t.errors.required;
+      if (!cert.issuingBody.trim()) e[`osh_${i}_issuingBody`] = t.errors.required;
+      if (!cert.validityNA && !cert.validity) e[`osh_${i}_validity`] = t.errors.required;
+      if (!cert.file) e[`osh_${i}_file`] = t.errors.fileRequired;
+    });
+
+    // Documents — only required ones
+    requiredDocKeys().forEach(k => {
       if (!docs[k]) e[`doc_${k}`] = t.errors.fileRequired;
     });
+
     setErrors(e);
     return Object.keys(e).length === 0;
   };
@@ -580,26 +679,38 @@ export default function Kawader() {
     e.preventDefault();
     if (!validate()) { toast.error(isRTL ? "يرجى تعبئة جميع الحقول المطلوبة" : "Please fill in all required fields."); return; }
 
-    // Convert all docs to base64
-    type DocPayload = { base64: string; fileName: string; mimeType: string };
-    const uploadedDocs: {
-      nationalId: DocPayload; passport: DocPayload; academicDegree: DocPayload;
-      transcript: DocPayload; equivalency: DocPayload; employmentLetter: DocPayload;
-      jobDescription: DocPayload; gosi: DocPayload; cv: DocPayload; oshCertificates: DocPayload;
-    } = {} as any;
+    // Convert required docs to base64
+    type DocPayload = { base64: string; fileName: string; mimeType: string } | null;
+    const uploadedDocs: Record<string, DocPayload> = {};
     for (const [key, file] of Object.entries(docs)) {
       if (file) {
-        (uploadedDocs as any)[key] = { base64: await fileToBase64(file), fileName: file.name, mimeType: file.type };
+        uploadedDocs[key] = { base64: await fileToBase64(file), fileName: file.name, mimeType: file.type };
+      } else {
+        uploadedDocs[key] = null;
       }
     }
+
+    // Convert OSH cert files to base64
+    const oshCertsPayload = await Promise.all(oshCerts.map(async cert => ({
+      name: cert.name,
+      issuingBody: cert.issuingBody,
+      validity: cert.validityNA ? "N/A" : cert.validity,
+      file: cert.file ? { base64: await fileToBase64(cert.file), fileName: cert.file.name, mimeType: cert.file.type } : null,
+    })));
 
     submitMutation.mutate({
       certificationPath: path as "Practitioner" | "Professional",
       commLang: commLang as "Arabic" | "English",
-      fullNameAr, fullNameEn, dob, nationalId, nationality, phone, email, experience,
+      idType: idType as "saudi_national" | "saudi_resident" | "international",
+      fullNameAr, fullNameEn, dob,
+      nationalId: idType === "saudi_national" ? nationalId : "",
+      iqamaId: idType === "saudi_resident" ? iqamaId : "",
+      passportNumber: (idType === "saudi_resident" || idType === "international") ? passportNumber : "",
+      nationality: (idType === "saudi_resident" || idType === "international") ? nationality : "",
+      phone, email, experience,
       academics: academics.map(({ id: _id, ...rest }) => rest),
-      oshCerts,
-      documents: uploadedDocs,
+      oshCerts: oshCertsPayload,
+      documents: uploadedDocs as any,
     });
   };
 
@@ -624,6 +735,27 @@ export default function Kawader() {
       </Layout>
     );
   }
+
+  // Determine which document upload fields to show based on ID type
+  const docFieldsToShow: Array<{ key: string; label: string; optional?: boolean }> = [];
+  if (idType === "saudi_national") {
+    docFieldsToShow.push({ key: "nationalId", label: t.docs.nationalId });
+    docFieldsToShow.push({ key: "passport", label: t.docs.passport, optional: true });
+  } else if (idType === "saudi_resident") {
+    docFieldsToShow.push({ key: "iqamaId", label: t.docs.iqamaId });
+    docFieldsToShow.push({ key: "passport", label: t.docs.passport, optional: true });
+  } else if (idType === "international") {
+    docFieldsToShow.push({ key: "passport", label: t.docs.passport, optional: true });
+  }
+  docFieldsToShow.push(
+    { key: "academicDegree", label: t.docs.academicDegree },
+    { key: "academicRecord", label: t.docs.academicRecord },
+    { key: "equivalency", label: t.docs.equivalency },
+    { key: "employmentLetter", label: t.docs.employmentLetter },
+    { key: "jobDescription", label: t.docs.jobDescription },
+    { key: "gosi", label: t.docs.gosi },
+    { key: "cv", label: t.docs.cv },
+  );
 
   return (
     <Layout lang={lang} setLang={setLang}>
@@ -732,20 +864,20 @@ export default function Kawader() {
               <p className="text-sm font-semibold text-foreground mb-3">{t.commLangLabel}</p>
               {errors.commLang && <p className="text-red-500 text-xs mb-2">{errors.commLang}</p>}
               <div className="flex flex-wrap gap-4">
-                {(["Arabic", "English"] as const).map(lang => {
-                  const label = lang === "Arabic" ? t.commLangArabic : t.commLangEnglish;
+                {(["Arabic", "English"] as const).map(langOpt => {
+                  const label = langOpt === "Arabic" ? t.commLangArabic : t.commLangEnglish;
                   return (
                     <button
                       type="button"
-                      key={lang}
-                      onClick={() => { setCommLang(lang); setErrors(prev => ({ ...prev, commLang: "" })); }}
+                      key={langOpt}
+                      onClick={() => { setCommLang(langOpt); setErrors(prev => ({ ...prev, commLang: "" })); }}
                       className={cn(
                         "flex items-center gap-3 px-6 py-4 rounded-xl border-2 transition-all cursor-pointer min-w-[140px]",
-                        commLang === lang ? "border-primary bg-primary/5" : "border-border hover:border-primary/40"
+                        commLang === langOpt ? "border-primary bg-primary/5" : "border-border hover:border-primary/40"
                       )}
                     >
-                      <div className={cn("w-5 h-5 rounded-full border-2 flex items-center justify-center shrink-0", commLang === lang ? "border-primary" : "border-muted-foreground")}>
-                        {commLang === lang && <div className="w-2.5 h-2.5 rounded-full bg-primary" />}
+                      <div className={cn("w-5 h-5 rounded-full border-2 flex items-center justify-center shrink-0", commLang === langOpt ? "border-primary" : "border-muted-foreground")}>
+                        {commLang === langOpt && <div className="w-2.5 h-2.5 rounded-full bg-primary" />}
                       </div>
                       <span className="font-bold text-foreground text-base">{label}</span>
                     </button>
@@ -783,16 +915,77 @@ export default function Kawader() {
 
             {/* ── 2. Personal Information ── */}
             <SectionCard title={t.personalSection}>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <InputField label={t.fullNameAr} value={fullNameAr} onChange={v => { setFullNameAr(v); setErrors(p => ({ ...p, fullNameAr: "" })); }} error={errors.fullNameAr} />
-                <InputField label={t.fullNameEn} value={fullNameEn} onChange={v => { setFullNameEn(v); setErrors(p => ({ ...p, fullNameEn: "" })); }} error={errors.fullNameEn} />
-                <InputField label={t.dob} value={dob} onChange={v => { setDob(v); setErrors(p => ({ ...p, dob: "" })); }} type="date" error={errors.dob} />
-                <InputField label={t.nationalId} value={nationalId} onChange={v => { setNationalId(v); setErrors(p => ({ ...p, nationalId: "" })); }} error={errors.nationalId} />
-                <CountrySelectField label={t.nationality} value={nationality} onChange={v => { setNationality(v); setErrors(p => ({ ...p, nationality: "" })); }} error={errors.nationality} placeholder="Select nationality" />
-                <InputField label={t.phone} value={phone} onChange={v => { setPhone(v); setErrors(p => ({ ...p, phone: "" })); }} type="tel" error={errors.phone} />
-                <InputField label={t.email} value={email} onChange={v => { setEmail(v); setErrors(p => ({ ...p, email: "" })); }} type="email" error={errors.email} />
-                <InputField label={t.experience} value={experience} onChange={v => { setExperience(v); setErrors(p => ({ ...p, experience: "" })); }} type="number" error={errors.experience} />
+
+              {/* ID Type Selector — always visible at top */}
+              <div className="space-y-3">
+                <p className="text-sm font-semibold text-foreground">{t.idTypeLabel}</p>
+                {errors.idType && <p className="text-red-500 text-xs">{errors.idType}</p>}
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                  {([
+                    { value: "saudi_national", label: t.idTypeSaudiNational },
+                    { value: "saudi_resident", label: t.idTypeSaudiResident },
+                    { value: "international",  label: t.idTypeInternational },
+                  ] as const).map(opt => (
+                    <button
+                      type="button"
+                      key={opt.value}
+                      onClick={() => { setIdType(opt.value); setErrors(prev => ({ ...prev, idType: "" })); }}
+                      className={cn(
+                        "flex items-center gap-3 px-4 py-3 rounded-xl border-2 transition-all cursor-pointer text-sm",
+                        idType === opt.value ? "border-primary bg-primary/5" : "border-border hover:border-primary/40"
+                      )}
+                    >
+                      <div className={cn("w-4 h-4 rounded-full border-2 flex items-center justify-center shrink-0", idType === opt.value ? "border-primary" : "border-muted-foreground")}>
+                        {idType === opt.value && <div className="w-2 h-2 rounded-full bg-primary" />}
+                      </div>
+                      <span className="font-semibold text-foreground">{opt.label}</span>
+                    </button>
+                  ))}
+                </div>
               </div>
+
+              {/* Personal fields — only shown after ID type is selected */}
+              <AnimatePresence>
+                {idType && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -8 }}
+                    className="space-y-4"
+                  >
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <InputField label={t.fullNameAr} value={fullNameAr} onChange={v => { setFullNameAr(v); setErrors(p => ({ ...p, fullNameAr: "" })); }} error={errors.fullNameAr} />
+                      <InputField label={t.fullNameEn} value={fullNameEn} onChange={v => { setFullNameEn(v); setErrors(p => ({ ...p, fullNameEn: "" })); }} error={errors.fullNameEn} />
+                      <InputField label={t.dob} value={dob} onChange={v => { setDob(v); setErrors(p => ({ ...p, dob: "" })); }} type="date" error={errors.dob} />
+                      <InputField label={t.phone} value={phone} onChange={v => { setPhone(v); setErrors(p => ({ ...p, phone: "" })); }} type="tel" error={errors.phone} />
+                      <InputField label={t.email} value={email} onChange={v => { setEmail(v); setErrors(p => ({ ...p, email: "" })); }} type="email" error={errors.email} />
+                      <InputField label={t.experience} value={experience} onChange={v => { setExperience(v); setErrors(p => ({ ...p, experience: "" })); }} type="number" error={errors.experience} />
+
+                      {/* Saudi National: National ID only */}
+                      {idType === "saudi_national" && (
+                        <InputField label={t.nationalId} value={nationalId} onChange={v => { setNationalId(v); setErrors(p => ({ ...p, nationalId: "" })); }} error={errors.nationalId} />
+                      )}
+
+                      {/* Saudi Resident: Iqama ID + Nationality + Passport */}
+                      {idType === "saudi_resident" && (
+                        <>
+                          <InputField label={t.iqamaId} value={iqamaId} onChange={v => { setIqamaId(v); setErrors(p => ({ ...p, iqamaId: "" })); }} error={errors.iqamaId} />
+                          <InputField label={t.passportNumber} value={passportNumber} onChange={v => { setPassportNumber(v); setErrors(p => ({ ...p, passportNumber: "" })); }} error={errors.passportNumber} />
+                          <CountrySelectField label={t.nationality} value={nationality} onChange={v => { setNationality(v); setErrors(p => ({ ...p, nationality: "" })); }} error={errors.nationality} placeholder={isRTL ? "اختر الجنسية" : "Select nationality"} />
+                        </>
+                      )}
+
+                      {/* International: Passport + Nationality */}
+                      {idType === "international" && (
+                        <>
+                          <InputField label={t.passportNumber} value={passportNumber} onChange={v => { setPassportNumber(v); setErrors(p => ({ ...p, passportNumber: "" })); }} error={errors.passportNumber} />
+                          <CountrySelectField label={t.nationality} value={nationality} onChange={v => { setNationality(v); setErrors(p => ({ ...p, nationality: "" })); }} error={errors.nationality} placeholder={isRTL ? "اختر الجنسية" : "Select nationality"} />
+                        </>
+                      )}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </SectionCard>
 
             {/* ── 3. Academic Information ── */}
@@ -833,19 +1026,79 @@ export default function Kawader() {
               </Button>
             </SectionCard>
 
-            {/* ── 4. OSH Certificates ── */}
+            {/* ── 4. OSH Professional Certificates (structured) ── */}
             <SectionCard title={t.oshSection}>
-              <div className="space-y-1">
-                <label className="block text-sm font-semibold text-foreground">{t.oshLabel}</label>
-                <textarea
-                  value={oshCerts}
-                  onChange={e => { setOshCerts(e.target.value); setErrors(p => ({ ...p, oshCerts: "" })); }}
-                  placeholder={t.oshPlaceholder}
-                  rows={4}
-                  className={cn("w-full px-4 py-3 rounded-xl border bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all resize-none", errors.oshCerts ? "border-red-400" : "border-border")}
-                />
-                {errors.oshCerts && <p className="text-red-500 text-xs">{errors.oshCerts}</p>}
-              </div>
+              <p className="text-sm text-muted-foreground">{t.oshNote}</p>
+              <AnimatePresence>
+                {oshCerts.map((cert, i) => (
+                  <motion.div
+                    key={cert.id}
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    className="border border-border/50 rounded-xl p-4 space-y-4 bg-background/50"
+                  >
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm font-bold text-primary">#{i + 1}</span>
+                      {oshCerts.length > 1 && (
+                        <button type="button" onClick={() => setOshCerts(prev => prev.filter(x => x.id !== cert.id))} className="text-red-500 hover:text-red-700 text-xs flex items-center gap-1 cursor-pointer">
+                          <Trash2 className="h-3.5 w-3.5" />{t.removeOshCert}
+                        </button>
+                      )}
+                    </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <InputField
+                        label={t.oshCertName}
+                        value={cert.name}
+                        onChange={v => { updateOshCert(cert.id, "name", v); setErrors(p => ({ ...p, [`osh_${i}_name`]: "" })); }}
+                        error={errors[`osh_${i}_name`]}
+                      />
+                      <InputField
+                        label={t.oshIssuingBody}
+                        value={cert.issuingBody}
+                        onChange={v => { updateOshCert(cert.id, "issuingBody", v); setErrors(p => ({ ...p, [`osh_${i}_issuingBody`]: "" })); }}
+                        error={errors[`osh_${i}_issuingBody`]}
+                      />
+                    </div>
+                    {/* Validity with N/A checkbox */}
+                    <div className="space-y-2">
+                      <label className="block text-sm font-semibold text-foreground">{t.oshValidity}</label>
+                      <div className="flex items-center gap-3">
+                        <input
+                          type="date"
+                          value={cert.validity}
+                          disabled={cert.validityNA}
+                          onChange={e => { updateOshCert(cert.id, "validity", e.target.value); setErrors(p => ({ ...p, [`osh_${i}_validity`]: "" })); }}
+                          className={cn(
+                            "flex-1 px-4 py-3 rounded-xl border bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all disabled:opacity-50",
+                            errors[`osh_${i}_validity`] ? "border-red-400" : "border-border"
+                          )}
+                        />
+                        <label className="flex items-center gap-2 text-sm text-muted-foreground cursor-pointer whitespace-nowrap">
+                          <input
+                            type="checkbox"
+                            checked={cert.validityNA}
+                            onChange={e => { updateOshCert(cert.id, "validityNA", e.target.checked); if (e.target.checked) { updateOshCert(cert.id, "validity", ""); setErrors(p => ({ ...p, [`osh_${i}_validity`]: "" })); } }}
+                            className="w-4 h-4 rounded border-border accent-primary"
+                          />
+                          {t.oshValidityNA}
+                        </label>
+                      </div>
+                      {errors[`osh_${i}_validity`] && <p className="text-red-500 text-xs">{errors[`osh_${i}_validity`]}</p>}
+                    </div>
+                    {/* Certificate file upload */}
+                    <FileUploadField
+                      label={t.oshUpload}
+                      file={cert.file}
+                      onFile={f => { updateOshCert(cert.id, "file", f); setErrors(p => ({ ...p, [`osh_${i}_file`]: "" })); }}
+                      error={errors[`osh_${i}_file`]}
+                    />
+                  </motion.div>
+                ))}
+              </AnimatePresence>
+              <Button type="button" variant="outline" onClick={() => setOshCerts(prev => [...prev, newOshCert()])} className="gap-2 cursor-pointer">
+                <Plus className="h-4 w-4" />{t.addOshCert}
+              </Button>
             </SectionCard>
 
             {/* ── 5. Required Documents ── */}
@@ -856,13 +1109,14 @@ export default function Kawader() {
                 <span>{t.docsMergeNote}</span>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {(Object.keys(t.docs) as (keyof typeof t.docs)[]).map(key => (
+                {docFieldsToShow.map(({ key, label, optional }) => (
                   <FileUploadField
                     key={key}
-                    label={t.docs[key]}
+                    label={label}
                     file={docs[key]}
                     onFile={f => { setDocs(prev => ({ ...prev, [key]: f })); setErrors(prev => ({ ...prev, [`doc_${key}`]: "" })); }}
                     error={errors[`doc_${key}`]}
+                    optional={optional}
                   />
                 ))}
               </div>
