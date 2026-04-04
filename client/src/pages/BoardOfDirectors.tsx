@@ -5,7 +5,7 @@ import Layout from "@/components/Layout";
 const LOGOS = {
   mhrsd: "https://d2xsxph8kpxj0f.cloudfront.net/310419663032539921/8KA3rh2fh9ZWBW5EBavnvF/logo-mhrsd_bbbd817a.png",
   gosi:  "https://d2xsxph8kpxj0f.cloudfront.net/310419663032539921/8KA3rh2fh9ZWBW5EBavnvF/logo-gosi-new_8556ccc0.png",
-  tvtc:  "https://d2xsxph8kpxj0f.cloudfront.net/310419663032539921/8KA3rh2fh9ZWBW5EBavnvF/logo-tvtc-new_635ec1c9.png",
+  tvtc:  "https://d2xsxph8kpxj0f.cloudfront.net/310419663032539921/8KA3rh2fh9ZWBW5EBavnvF/tvtc_cropped_d6008e71.png",
   ncosh: "https://d2xsxph8kpxj0f.cloudfront.net/310419663032539921/8KA3rh2fh9ZWBW5EBavnvF/logo-ncosh-new_28e0e950.png",
   sais:  "https://d2xsxph8kpxj0f.cloudfront.net/310419663032539921/8KA3rh2fh9ZWBW5EBavnvF/logo-sais_c18b314c.png",
   uqu:   "https://d2xsxph8kpxj0f.cloudfront.net/310419663032539921/8KA3rh2fh9ZWBW5EBavnvF/logo-uqu-new_70a7f96f.png",

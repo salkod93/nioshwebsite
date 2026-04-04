@@ -54,10 +54,8 @@
 - [x] Change Kawader Pipedrive integration from Deals to Leads (POST /leads API)
 - [x] SEO: Shorten page title to 30-60 characters (currently 61)
 - [x] SEO: Reduce meta keywords from 11 to 3-8 focused keywords
-<<<<<<< Updated upstream
 - [x] Fix: VCOSH orange button still not navigating to /vcosh (persistent bug)
 - [x] Fix: VCOSH page resets language to Arabic when navigating from header button
-=======
 - [x] Extract board member data from uploaded document (Arabic names, positions, entities)
 - [x] Research official English names and entity names for all board members
 - [x] Fetch and upload entity logos to CDN
@@ -69,3 +67,4 @@
 - [x] Fix: Shinawi photo and logo are swapped on Board of Directors page
 - [x] Replace NCOSH, TVTC, UQU, and GOSI logos with new official logos on Board of Directors page
 - [x] Increase size of all entity logos on Board of Directors page
+- [x] Crop TVTC logo to remove excess whitespace and make it visually consistent with other logos
