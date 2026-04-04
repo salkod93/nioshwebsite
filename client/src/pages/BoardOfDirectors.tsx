@@ -9,7 +9,7 @@ const LOGOS = {
   ncosh: "https://d2xsxph8kpxj0f.cloudfront.net/310419663032539921/8KA3rh2fh9ZWBW5EBavnvF/logo-ncosh_1f506bbb.png",
   sais:  "https://d2xsxph8kpxj0f.cloudfront.net/310419663032539921/8KA3rh2fh9ZWBW5EBavnvF/logo-sais_c18b314c.png",
   uqu:   "https://d2xsxph8kpxj0f.cloudfront.net/310419663032539921/8KA3rh2fh9ZWBW5EBavnvF/logo-uqu_28d70680.png",
-  hrdf:  "https://d2xsxph8kpxj0f.cloudfront.net/310419663032539921/8KA3rh2fh9ZWBW5EBavnvF/logo-hrdf_a1dd317c.png",
+  hrdf:  "https://d2xsxph8kpxj0f.cloudfront.net/310419663032539921/8KA3rh2fh9ZWBW5EBavnvF/logo-hrdf-correct_8bb3a901.png",
 };
 
 // CDN URLs for personal photos
@@ -20,7 +20,7 @@ const PHOTOS = {
   alfuwaiz:  "https://d2xsxph8kpxj0f.cloudfront.net/310419663032539921/8KA3rh2fh9ZWBW5EBavnvF/photo-alfuwaiz_8bdf7da1.png",
   alsubaie:  "https://d2xsxph8kpxj0f.cloudfront.net/310419663032539921/8KA3rh2fh9ZWBW5EBavnvF/photo-alsubaie_22cb90aa.jpeg",
   alsharif:  "https://d2xsxph8kpxj0f.cloudfront.net/310419663032539921/8KA3rh2fh9ZWBW5EBavnvF/photo-alsharif_95c90089.png",
-  shinawi:   "https://d2xsxph8kpxj0f.cloudfront.net/310419663032539921/8KA3rh2fh9ZWBW5EBavnvF/photo-shinawi_d867a063.png",
+  shinawi:   "https://d2xsxph8kpxj0f.cloudfront.net/310419663032539921/8KA3rh2fh9ZWBW5EBavnvF/photo-shinawi-correct_3596c371.png",
 };
 
 interface BoardMember {

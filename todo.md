@@ -66,3 +66,4 @@
 - [x] Extract personal photos and entity logos from 7 uploaded Word documents
 - [x] Upload all board member photos and entity logos to CDN
 - [x] Update Board of Directors page with real photos, correct logos, and larger logo size
+- [x] Fix: Shinawi photo and logo are swapped on Board of Directors page
