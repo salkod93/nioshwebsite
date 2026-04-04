@@ -76,7 +76,6 @@ const sampleInput = {
     academicRecord: sampleDoc,
     equivalency: sampleDoc,
     employmentLetter: sampleDoc,
-    jobDescription: sampleDoc,
     gosi: sampleDoc,
     cv: sampleDoc,
   },
@@ -187,8 +186,8 @@ describe("kawader.submitAccreditation", () => {
 
     expect(result.success).toBe(true);
     expect(result.refNumber).toMatch(/^KWD-\d{4}-\d{5}$/);
-    // 8 non-null docs + 1 OSH cert file = 9 uploads
-    expect(storagePut).toHaveBeenCalledTimes(9);
+    // 7 non-null docs + 1 OSH cert file = 8 uploads
+    expect(storagePut).toHaveBeenCalledTimes(8);
   });
 
   it("creates a person with email and phone", async () => {

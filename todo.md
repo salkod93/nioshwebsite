@@ -77,3 +77,7 @@
 - [x] Kawader: Rename "GOSI Employment and Wage Statement" to "GOSI Salary and Period Certificate" (شهادة المدد والأجور من نظام التأمينات الاجتماعية)
 - [x] Kawader: Restructure OSH certificates from free-text textarea to structured add/remove entries (name, issuing body, validity with N/A option, upload copy)
 - [x] Kawader: Update backend schema and Pipedrive field mappings for all new/changed fields
+- [x] Kawader: Remove job description field entirely from form and backend
+- [x] Kawader: Rename employment letter to "خطاب تعريف العمل (مصدق من الغرفة التجارية)" and show only for Saudi National / Saudi Resident
+- [x] Kawader: Show GOSI certificate field only for Saudi National / Saudi Resident
+- [x] Kawader: Make passport upload mandatory and show only for Saudi Resident / International

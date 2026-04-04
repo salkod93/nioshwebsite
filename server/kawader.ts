@@ -74,7 +74,6 @@ const submitSchema = z.object({
     academicRecord: optionalDocumentSchema,
     equivalency: optionalDocumentSchema,
     employmentLetter: optionalDocumentSchema,
-    jobDescription: optionalDocumentSchema,
     gosi: optionalDocumentSchema,
     cv: optionalDocumentSchema,
   }),

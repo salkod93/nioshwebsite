@@ -148,12 +148,11 @@ const c = {
     docs: {
       nationalId: "National ID (الهوية الوطنية) *",
       iqamaId: "Iqama ID (هوية مقيم) *",
-      passport: "Passport (optional)",
+      passport: "Passport *",
       academicDegree: "Certified Copy of Academic Degree *",
       academicRecord: "Academic Record (السجل الأكاديمي) *",
       equivalency: "Certificate Equivalency Document *",
-      employmentLetter: "Employment Introduction Letter (خطاب تعريف العمل) *",
-      jobDescription: "Current Job Description (must be certified by the Chamber of Commerce) *",
+      employmentLetter: "Employment Introduction Letter (certified by the Chamber of Commerce) *",
       gosi: "GOSI Salary and Period Certificate (شهادة المدد والأجور من التأمينات الاجتماعية) *",
       cv: "Curriculum Vitae (CV) *",
     },
@@ -288,12 +287,11 @@ const c = {
     docs: {
       nationalId: "الهوية الوطنية *",
       iqamaId: "هوية مقيم *",
-      passport: "جواز السفر (اختياري)",
+      passport: "جواز السفر *",
       academicDegree: "نسخة معتمدة من الشهادة الأكاديمية *",
       academicRecord: "السجل الأكاديمي *",
       equivalency: "وثيقة معادلة الشهادة *",
-      employmentLetter: "خطاب تعريف العمل *",
-      jobDescription: "الوصف الوظيفي الحالي (يجب أن يكون مصادقاً عليه من الغرفة التجارية) *",
+      employmentLetter: "خطاب تعريف العمل (مصدق من الغرفة التجارية) *",
       gosi: "شهادة المدد والأجور من نظام التأمينات الاجتماعية *",
       cv: "السيرة الذاتية *",
     },
@@ -585,7 +583,6 @@ export default function Kawader() {
     academicRecord: null,
     equivalency: null,
     employmentLetter: null,
-    jobDescription: null,
     gosi: null,
     cv: null,
   });
@@ -609,10 +606,10 @@ export default function Kawader() {
 
   // Which document keys are required based on ID type
   const requiredDocKeys = (): string[] => {
-    const base = ["academicDegree", "academicRecord", "equivalency", "employmentLetter", "jobDescription", "gosi", "cv"];
-    if (idType === "saudi_national") return [...base, "nationalId"];
-    if (idType === "saudi_resident") return [...base, "iqamaId"];
-    if (idType === "international") return [...base]; // passport optional for international too
+    const base = ["academicDegree", "academicRecord", "equivalency", "cv"];
+    if (idType === "saudi_national") return [...base, "nationalId", "employmentLetter", "gosi"];
+    if (idType === "saudi_resident") return [...base, "iqamaId", "passport", "employmentLetter", "gosi"];
+    if (idType === "international") return [...base, "passport"];
     return base;
   };
 
@@ -740,22 +737,23 @@ export default function Kawader() {
   const docFieldsToShow: Array<{ key: string; label: string; optional?: boolean }> = [];
   if (idType === "saudi_national") {
     docFieldsToShow.push({ key: "nationalId", label: t.docs.nationalId });
-    docFieldsToShow.push({ key: "passport", label: t.docs.passport, optional: true });
   } else if (idType === "saudi_resident") {
     docFieldsToShow.push({ key: "iqamaId", label: t.docs.iqamaId });
-    docFieldsToShow.push({ key: "passport", label: t.docs.passport, optional: true });
+    docFieldsToShow.push({ key: "passport", label: t.docs.passport });
   } else if (idType === "international") {
-    docFieldsToShow.push({ key: "passport", label: t.docs.passport, optional: true });
+    docFieldsToShow.push({ key: "passport", label: t.docs.passport });
   }
   docFieldsToShow.push(
     { key: "academicDegree", label: t.docs.academicDegree },
     { key: "academicRecord", label: t.docs.academicRecord },
     { key: "equivalency", label: t.docs.equivalency },
-    { key: "employmentLetter", label: t.docs.employmentLetter },
-    { key: "jobDescription", label: t.docs.jobDescription },
-    { key: "gosi", label: t.docs.gosi },
-    { key: "cv", label: t.docs.cv },
   );
+  // Employment letter and GOSI only for Saudi nationals and residents
+  if (idType === "saudi_national" || idType === "saudi_resident") {
+    docFieldsToShow.push({ key: "employmentLetter", label: t.docs.employmentLetter });
+    docFieldsToShow.push({ key: "gosi", label: t.docs.gosi });
+  }
+  docFieldsToShow.push({ key: "cv", label: t.docs.cv });
 
   return (
     <Layout lang={lang} setLang={setLang}>
