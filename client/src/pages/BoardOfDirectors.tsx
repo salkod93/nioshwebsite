@@ -41,7 +41,7 @@ const BOARD_MEMBERS: BoardMember[] = [
   {
     photoKey: "abuthnain",
     nameEn: "Dr. Abdullah Nasser Abuthnain",
-    nameAr: "د. عبدالله بن ناصر أبونثين",
+    nameAr: "د. عبدالله بن ناصر أبواثنين",
     boardRoleEn: "Chairman of the Board",
     boardRoleAr: "رئيس مجلس الإدارة",
     positionEn: "Vice Minister of Human Resources and Social Development for the Labor Sector",
@@ -66,7 +66,7 @@ const BOARD_MEMBERS: BoardMember[] = [
   },
   {
     photoKey: "alahmad",
-    nameEn: "Dr. Bader Suleiman Al-Ahmad",
+    nameEn: "Badr Suleman A. Alahmad",
     nameAr: "د. بدر بن سليمان الأحمد",
     boardRoleEn: "Board Member",
     boardRoleAr: "عضو مجلس الإدارة",
@@ -105,7 +105,7 @@ const BOARD_MEMBERS: BoardMember[] = [
   },
   {
     photoKey: "alsharif",
-    nameEn: "Dr. Muhammad bin Naif Zamil Al-Sharif",
+    nameEn: "Dr. Muhammad bin Naif bin Zamil Al-Sharif",
     nameAr: "د. محمد بن زامل الشريف",
     boardRoleEn: "Board Member",
     boardRoleAr: "عضو مجلس الإدارة",

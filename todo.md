@@ -81,3 +81,6 @@
 - [x] Kawader: Rename employment letter to "خطاب تعريف العمل (مصدق من الغرفة التجارية)" and show only for Saudi National / Saudi Resident
 - [x] Kawader: Show GOSI certificate field only for Saudi National / Saudi Resident
 - [x] Kawader: Make passport upload mandatory and show only for Saudi Resident / International
+- [x] Board of Directors: Fix Arabic name to أبواثنين (currently incorrect)
+- [x] Board of Directors: Fix English name to "Badr Suleman A. Alahmad"
+- [x] Board of Directors: Fix English name to "Dr. Muhammad bin Naif bin Zamil Al-Sharif"
