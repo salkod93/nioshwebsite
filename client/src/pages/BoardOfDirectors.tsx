@@ -4,11 +4,11 @@ import Layout from "@/components/Layout";
 // CDN URLs for entity logos (extracted from member documents)
 const LOGOS = {
   mhrsd: "https://d2xsxph8kpxj0f.cloudfront.net/310419663032539921/8KA3rh2fh9ZWBW5EBavnvF/logo-mhrsd_bbbd817a.png",
-  gosi:  "https://d2xsxph8kpxj0f.cloudfront.net/310419663032539921/8KA3rh2fh9ZWBW5EBavnvF/logo-gosi_3ef26bbe.png",
-  tvtc:  "https://d2xsxph8kpxj0f.cloudfront.net/310419663032539921/8KA3rh2fh9ZWBW5EBavnvF/logo-tvtc_04abf8f7.png",
-  ncosh: "https://d2xsxph8kpxj0f.cloudfront.net/310419663032539921/8KA3rh2fh9ZWBW5EBavnvF/logo-ncosh_1f506bbb.png",
+  gosi:  "https://d2xsxph8kpxj0f.cloudfront.net/310419663032539921/8KA3rh2fh9ZWBW5EBavnvF/logo-gosi-new_8556ccc0.png",
+  tvtc:  "https://d2xsxph8kpxj0f.cloudfront.net/310419663032539921/8KA3rh2fh9ZWBW5EBavnvF/logo-tvtc-new_635ec1c9.png",
+  ncosh: "https://d2xsxph8kpxj0f.cloudfront.net/310419663032539921/8KA3rh2fh9ZWBW5EBavnvF/logo-ncosh-new_28e0e950.png",
   sais:  "https://d2xsxph8kpxj0f.cloudfront.net/310419663032539921/8KA3rh2fh9ZWBW5EBavnvF/logo-sais_c18b314c.png",
-  uqu:   "https://d2xsxph8kpxj0f.cloudfront.net/310419663032539921/8KA3rh2fh9ZWBW5EBavnvF/logo-uqu_28d70680.png",
+  uqu:   "https://d2xsxph8kpxj0f.cloudfront.net/310419663032539921/8KA3rh2fh9ZWBW5EBavnvF/logo-uqu-new_70a7f96f.png",
   hrdf:  "https://d2xsxph8kpxj0f.cloudfront.net/310419663032539921/8KA3rh2fh9ZWBW5EBavnvF/logo-hrdf-correct_8bb3a901.png",
 };
 
@@ -182,11 +182,11 @@ function MemberCard({ member, isRTL }: { member: BoardMember; isRTL: boolean }) 
         {/* Divider */}
         <div className="border-t border-gray-100 pt-4">
           {/* Entity logo — larger */}
-          <div className="flex justify-center items-center h-16 mb-2">
+          <div className="flex justify-center items-center h-20 mb-2">
             <img
               src={LOGOS[member.logoKey]}
               alt={entity}
-              className="max-h-14 max-w-[160px] object-contain"
+              className="max-h-20 max-w-[200px] object-contain"
             />
           </div>
           {/* Entity name */}

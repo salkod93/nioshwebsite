@@ -67,3 +67,5 @@
 - [x] Upload all board member photos and entity logos to CDN
 - [x] Update Board of Directors page with real photos, correct logos, and larger logo size
 - [x] Fix: Shinawi photo and logo are swapped on Board of Directors page
+- [x] Replace NCOSH, TVTC, UQU, and GOSI logos with new official logos on Board of Directors page
+- [x] Increase size of all entity logos on Board of Directors page
