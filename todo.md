@@ -63,4 +63,6 @@
 - [x] Fetch and upload entity logos to CDN
 - [x] Build Board of Directors page styled after energytech.edu.sa reference
 - [x] Wire Board of Directors page to the About dropdown in the nav
->>>>>>> Stashed changes
+- [x] Extract personal photos and entity logos from 7 uploaded Word documents
+- [x] Upload all board member photos and entity logos to CDN
+- [x] Update Board of Directors page with real photos, correct logos, and larger logo size

@@ -1,20 +1,30 @@
 import { useLang } from "@/contexts/LanguageContext";
 import Layout from "@/components/Layout";
 
-// CDN URLs for entity logos
+// CDN URLs for entity logos (extracted from member documents)
 const LOGOS = {
-  mhrsd: "https://d2xsxph8kpxj0f.cloudfront.net/310419663032539921/8KA3rh2fh9ZWBW5EBavnvF/mhrsd_2884fdd7.png",
-  gosi:  "https://d2xsxph8kpxj0f.cloudfront.net/310419663032539921/8KA3rh2fh9ZWBW5EBavnvF/gosi_6d4b8919.png",
-  tvtc:  "https://d2xsxph8kpxj0f.cloudfront.net/310419663032539921/8KA3rh2fh9ZWBW5EBavnvF/tvtc_51b5c207.jpg",
-  ncosh: "https://d2xsxph8kpxj0f.cloudfront.net/310419663032539921/8KA3rh2fh9ZWBW5EBavnvF/ncosh_a8a7e9de.jpg",
-  sais:  "https://d2xsxph8kpxj0f.cloudfront.net/310419663032539921/8KA3rh2fh9ZWBW5EBavnvF/sais_41d256b3.jpg",
-  uqu:   "https://d2xsxph8kpxj0f.cloudfront.net/310419663032539921/8KA3rh2fh9ZWBW5EBavnvF/uqu_40cf543d.png",
-  hrdf:  "https://d2xsxph8kpxj0f.cloudfront.net/310419663032539921/8KA3rh2fh9ZWBW5EBavnvF/hrdf_d4739dca.png",
+  mhrsd: "https://d2xsxph8kpxj0f.cloudfront.net/310419663032539921/8KA3rh2fh9ZWBW5EBavnvF/logo-mhrsd_bbbd817a.png",
+  gosi:  "https://d2xsxph8kpxj0f.cloudfront.net/310419663032539921/8KA3rh2fh9ZWBW5EBavnvF/logo-gosi_3ef26bbe.png",
+  tvtc:  "https://d2xsxph8kpxj0f.cloudfront.net/310419663032539921/8KA3rh2fh9ZWBW5EBavnvF/logo-tvtc_04abf8f7.png",
+  ncosh: "https://d2xsxph8kpxj0f.cloudfront.net/310419663032539921/8KA3rh2fh9ZWBW5EBavnvF/logo-ncosh_1f506bbb.png",
+  sais:  "https://d2xsxph8kpxj0f.cloudfront.net/310419663032539921/8KA3rh2fh9ZWBW5EBavnvF/logo-sais_c18b314c.png",
+  uqu:   "https://d2xsxph8kpxj0f.cloudfront.net/310419663032539921/8KA3rh2fh9ZWBW5EBavnvF/logo-uqu_28d70680.png",
+  hrdf:  "https://d2xsxph8kpxj0f.cloudfront.net/310419663032539921/8KA3rh2fh9ZWBW5EBavnvF/logo-hrdf_a1dd317c.png",
+};
+
+// CDN URLs for personal photos
+const PHOTOS = {
+  abuthnain: "https://d2xsxph8kpxj0f.cloudfront.net/310419663032539921/8KA3rh2fh9ZWBW5EBavnvF/photo-abuthnain_ad119f7d.png",
+  alboug:    "https://d2xsxph8kpxj0f.cloudfront.net/310419663032539921/8KA3rh2fh9ZWBW5EBavnvF/photo-alboug_67f5394f.jpeg",
+  alahmad:   "https://d2xsxph8kpxj0f.cloudfront.net/310419663032539921/8KA3rh2fh9ZWBW5EBavnvF/photo-alahmad_700a247f.png",
+  alfuwaiz:  "https://d2xsxph8kpxj0f.cloudfront.net/310419663032539921/8KA3rh2fh9ZWBW5EBavnvF/photo-alfuwaiz_8bdf7da1.png",
+  alsubaie:  "https://d2xsxph8kpxj0f.cloudfront.net/310419663032539921/8KA3rh2fh9ZWBW5EBavnvF/photo-alsubaie_22cb90aa.jpeg",
+  alsharif:  "https://d2xsxph8kpxj0f.cloudfront.net/310419663032539921/8KA3rh2fh9ZWBW5EBavnvF/photo-alsharif_95c90089.png",
+  shinawi:   "https://d2xsxph8kpxj0f.cloudfront.net/310419663032539921/8KA3rh2fh9ZWBW5EBavnvF/photo-shinawi_d867a063.png",
 };
 
 interface BoardMember {
-  initialsEn: string;
-  initialsAr: string;
+  photoKey: keyof typeof PHOTOS;
   nameEn: string;
   nameAr: string;
   boardRoleEn: string;
@@ -29,8 +39,7 @@ interface BoardMember {
 
 const BOARD_MEMBERS: BoardMember[] = [
   {
-    initialsEn: "AA",
-    initialsAr: "عأ",
+    photoKey: "abuthnain",
     nameEn: "Dr. Abdullah Nasser Abuthnain",
     nameAr: "د. عبدالله بن ناصر أبونثين",
     boardRoleEn: "Chairman of the Board",
@@ -43,8 +52,7 @@ const BOARD_MEMBERS: BoardMember[] = [
     accentColor: "#1a6b3c",
   },
   {
-    initialsEn: "AB",
-    initialsAr: "عب",
+    photoKey: "alboug",
     nameEn: "Eng. Abdulaziz bin Hassan Al-Boug",
     nameAr: "أ. عبدالعزيز بن حسن البوق",
     boardRoleEn: "Board Member",
@@ -57,8 +65,7 @@ const BOARD_MEMBERS: BoardMember[] = [
     accentColor: "#003366",
   },
   {
-    initialsEn: "BA",
-    initialsAr: "بأ",
+    photoKey: "alahmad",
     nameEn: "Dr. Bader Suleiman Al-Ahmad",
     nameAr: "د. بدر بن سليمان الأحمد",
     boardRoleEn: "Board Member",
@@ -71,8 +78,7 @@ const BOARD_MEMBERS: BoardMember[] = [
     accentColor: "#006b8f",
   },
   {
-    initialsEn: "MF",
-    initialsAr: "مف",
+    photoKey: "alfuwaiz",
     nameEn: "Eng. Majed bin Ibrahim Al-Fuwaiz",
     nameAr: "م. ماجد بن إبراهيم الفويز",
     boardRoleEn: "Board Member",
@@ -85,8 +91,7 @@ const BOARD_MEMBERS: BoardMember[] = [
     accentColor: "#e87722",
   },
   {
-    initialsEn: "MS",
-    initialsAr: "مس",
+    photoKey: "alsubaie",
     nameEn: "Eng. Misfer bin Salah Al-Subaie",
     nameAr: "م. مسفر بن صالح السبيعي",
     boardRoleEn: "Board Member",
@@ -99,8 +104,7 @@ const BOARD_MEMBERS: BoardMember[] = [
     accentColor: "#8b6914",
   },
   {
-    initialsEn: "MS2",
-    initialsAr: "مش",
+    photoKey: "alsharif",
     nameEn: "Dr. Muhammad bin Naif Zamil Al-Sharif",
     nameAr: "د. محمد بن زامل الشريف",
     boardRoleEn: "Board Member",
@@ -113,8 +117,7 @@ const BOARD_MEMBERS: BoardMember[] = [
     accentColor: "#1a5276",
   },
   {
-    initialsEn: "NS",
-    initialsAr: "نش",
+    photoKey: "shinawi",
     nameEn: "Eng. Nader bin Youssef Shinawi",
     nameAr: "م. نادر بن يوسف شنوي",
     boardRoleEn: "Board Member",
@@ -133,7 +136,6 @@ function MemberCard({ member, isRTL }: { member: BoardMember; isRTL: boolean }) 
   const boardRole = isRTL ? member.boardRoleAr : member.boardRoleEn;
   const position = isRTL ? member.positionAr : member.positionEn;
   const entity = isRTL ? member.entityAr : member.entityEn;
-  const initials = isRTL ? member.initialsAr : member.initialsEn;
   const isChairman = member.boardRoleEn === "Chairman of the Board";
 
   return (
@@ -144,13 +146,17 @@ function MemberCard({ member, isRTL }: { member: BoardMember; isRTL: boolean }) 
       {/* Top accent bar */}
       <div className="h-1.5 w-full" style={{ backgroundColor: member.accentColor }} />
 
-      {/* Avatar */}
+      {/* Photo */}
       <div className="flex justify-center pt-8 pb-4">
         <div
-          className="w-24 h-24 rounded-full flex items-center justify-center text-white text-2xl font-bold shadow-lg"
-          style={{ backgroundColor: member.accentColor }}
+          className="w-28 h-28 rounded-full overflow-hidden shadow-lg border-4 border-white"
+          style={{ boxShadow: `0 0 0 3px ${member.accentColor}30` }}
         >
-          {initials}
+          <img
+            src={PHOTOS[member.photoKey]}
+            alt={name}
+            className="w-full h-full object-cover object-top"
+          />
         </div>
       </div>
 
@@ -175,12 +181,12 @@ function MemberCard({ member, isRTL }: { member: BoardMember; isRTL: boolean }) 
 
         {/* Divider */}
         <div className="border-t border-gray-100 pt-4">
-          {/* Entity logo */}
-          <div className="flex justify-center items-center h-12 mb-2">
+          {/* Entity logo — larger */}
+          <div className="flex justify-center items-center h-16 mb-2">
             <img
               src={LOGOS[member.logoKey]}
               alt={entity}
-              className="max-h-10 max-w-[120px] object-contain"
+              className="max-h-14 max-w-[160px] object-contain"
             />
           </div>
           {/* Entity name */}
