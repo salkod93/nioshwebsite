@@ -106,7 +106,7 @@ const BOARD_MEMBERS: BoardMember[] = [
   {
     photoKey: "alsharif",
     nameEn: "Dr. Muhammad bin Naif bin Zamil Al-Sharif",
-    nameAr: "د. محمد بن زامل الشريف",
+    nameAr: "د.محمد بن نايف الشريف",
     boardRoleEn: "Board Member",
     boardRoleAr: "عضو مجلس الإدارة",
     positionEn: "Dean of the Institute of Research and Studies and Consulting Services, Umm Al-Qura University",
