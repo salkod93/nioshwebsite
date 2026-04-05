@@ -88,3 +88,4 @@
 - [x] Board: Add "His Excellency" title to Abu Thinain (معالي الدكتور, space in English: "Abu Thinain")
 - [x] Board: Update Dr. Badr Alahmad title to Dr. (remove Eng. if present), update role to Vice Governor for Support Services
 - [x] Board: Fix Shinawi spelling site-wide (Arabic: شناوي)
+- [x] Board: Update Dr. Muhammad Al-Sharif institute name to "Institute of Research and Studies and Consulting Services"

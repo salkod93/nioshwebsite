@@ -109,7 +109,7 @@ const BOARD_MEMBERS: BoardMember[] = [
     nameAr: "د. محمد بن زامل الشريف",
     boardRoleEn: "Board Member",
     boardRoleAr: "عضو مجلس الإدارة",
-    positionEn: "Dean of the Institute of Consulting Research and Studies, Umm Al-Qura University",
+    positionEn: "Dean of the Institute of Research and Studies and Consulting Services, Umm Al-Qura University",
     positionAr: "عميد معهد الأبحاث والدراسات الاستشارية بجامعة أم القرى",
     entityEn: "Umm Al-Qura University (UQU)",
     entityAr: "جامعة أم القرى",
