@@ -90,3 +90,4 @@
 - [x] Board: Fix Shinawi spelling site-wide (Arabic: شناوي)
 - [x] Board: Update Dr. Muhammad Al-Sharif institute name to "Institute of Research and Studies and Consulting Services"
 - [x] Board: Center Dr. Badr Alahmad and Eng. Majed Al-Fuwaiz photos (heads in middle of circular frame)
+- [x] Board: Replace photos for Abu Thinain, Dr. Badr Alahmad, and Eng. Majed Al-Fuwaiz with new provided images

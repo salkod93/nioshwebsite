@@ -14,10 +14,10 @@ const LOGOS = {
 
 // CDN URLs for personal photos
 const PHOTOS = {
-  abuthnain: "https://d2xsxph8kpxj0f.cloudfront.net/310419663032539921/8KA3rh2fh9ZWBW5EBavnvF/photo-abuthnain_ad119f7d.png",
+  abuthnain: "https://d2xsxph8kpxj0f.cloudfront.net/310419663032539921/8KA3rh2fh9ZWBW5EBavnvF/photo-abuthnain-new_8641f572.jpeg",
   alboug:    "https://d2xsxph8kpxj0f.cloudfront.net/310419663032539921/8KA3rh2fh9ZWBW5EBavnvF/photo-alboug_67f5394f.jpeg",
-  alahmad:   "https://d2xsxph8kpxj0f.cloudfront.net/310419663032539921/8KA3rh2fh9ZWBW5EBavnvF/photo-alahmad_700a247f.png",
-  alfuwaiz:  "https://d2xsxph8kpxj0f.cloudfront.net/310419663032539921/8KA3rh2fh9ZWBW5EBavnvF/photo-alfuwaiz_8bdf7da1.png",
+  alahmad:   "https://d2xsxph8kpxj0f.cloudfront.net/310419663032539921/8KA3rh2fh9ZWBW5EBavnvF/photo-badr-new_ff9b9887.png",
+  alfuwaiz:  "https://d2xsxph8kpxj0f.cloudfront.net/310419663032539921/8KA3rh2fh9ZWBW5EBavnvF/photo-majed-new_68b46b75.png",
   alsubaie:  "https://d2xsxph8kpxj0f.cloudfront.net/310419663032539921/8KA3rh2fh9ZWBW5EBavnvF/photo-alsubaie_22cb90aa.jpeg",
   alsharif:  "https://d2xsxph8kpxj0f.cloudfront.net/310419663032539921/8KA3rh2fh9ZWBW5EBavnvF/photo-alsharif_95c90089.png",
   shinawi:   "https://d2xsxph8kpxj0f.cloudfront.net/310419663032539921/8KA3rh2fh9ZWBW5EBavnvF/photo-shinawi-correct_3596c371.png",
