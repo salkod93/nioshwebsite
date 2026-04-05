@@ -84,3 +84,7 @@
 - [x] Board of Directors: Fix Arabic name to أبواثنين (currently incorrect)
 - [x] Board of Directors: Fix English name to "Badr Suleman A. Alahmad"
 - [x] Board of Directors: Fix English name to "Dr. Muhammad bin Naif bin Zamil Al-Sharif"
+- [x] Board: Add "His Excellency" title to Al-Boug (remove Eng., use معالي الأستاذ)
+- [x] Board: Add "His Excellency" title to Abu Thinain (معالي الدكتور, space in English: "Abu Thinain")
+- [x] Board: Update Dr. Badr Alahmad title to Dr. (remove Eng. if present), update role to Vice Governor for Support Services
+- [x] Board: Fix Shinawi spelling site-wide (Arabic: شناوي)

@@ -40,8 +40,8 @@ interface BoardMember {
 const BOARD_MEMBERS: BoardMember[] = [
   {
     photoKey: "abuthnain",
-    nameEn: "Dr. Abdullah Nasser Abuthnain",
-    nameAr: "د. عبدالله بن ناصر أبواثنين",
+    nameEn: "His Excellency Dr. Abdullah bin Nasser Abu Thinain",
+    nameAr: "معالي الدكتور عبدالله بن ناصر أبو ثنين",
     boardRoleEn: "Chairman of the Board",
     boardRoleAr: "رئيس مجلس الإدارة",
     positionEn: "Vice Minister of Human Resources and Social Development for the Labor Sector",
@@ -53,8 +53,8 @@ const BOARD_MEMBERS: BoardMember[] = [
   },
   {
     photoKey: "alboug",
-    nameEn: "Eng. Abdulaziz bin Hassan Al-Boug",
-    nameAr: "أ. عبدالعزيز بن حسن البوق",
+    nameEn: "His Excellency Abdulaziz bin Hasan Al-Boug",
+    nameAr: "معالي الأستاذ عبدالعزيز بن حسن البوق",
     boardRoleEn: "Board Member",
     boardRoleAr: "عضو مجلس الإدارة",
     positionEn: "Governor of the General Organization for Social Insurance",
@@ -66,12 +66,12 @@ const BOARD_MEMBERS: BoardMember[] = [
   },
   {
     photoKey: "alahmad",
-    nameEn: "Badr Suleman A. Alahmad",
+    nameEn: "Dr. Badr Suleman A. Alahmad",
     nameAr: "د. بدر بن سليمان الأحمد",
     boardRoleEn: "Board Member",
     boardRoleAr: "عضو مجلس الإدارة",
-    positionEn: "Vice Governor of the Technical and Vocational Training Corporation",
-    positionAr: "نائب محافظ المؤسسة العامة للتدريب التقني والمهني",
+    positionEn: "Vice Governor for Support Services, Technical and Vocational Training Corporation (TVTC)",
+    positionAr: "نائب محافظ المؤسسة العامة للتدريب التقني والمهني للخدمات المساندة",
     entityEn: "Technical and Vocational Training Corporation (TVTC)",
     entityAr: "المؤسسة العامة للتدريب التقني والمهني",
     logoKey: "tvtc",
@@ -119,7 +119,7 @@ const BOARD_MEMBERS: BoardMember[] = [
   {
     photoKey: "shinawi",
     nameEn: "Eng. Nader bin Youssef Shinawi",
-    nameAr: "م. نادر بن يوسف شنوي",
+    nameAr: "م. نادر بن يوسف شناوي",
     boardRoleEn: "Board Member",
     boardRoleAr: "عضو مجلس الإدارة",
     positionEn: "Head of the Training Support Program, Human Resources Development Fund",
