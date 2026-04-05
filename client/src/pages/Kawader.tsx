@@ -151,9 +151,9 @@ const c = {
       passport: "Passport *",
       academicDegree: "Certified Copy of Academic Degree *",
       academicRecord: "Academic Record (السجل الأكاديمي) *",
-      equivalency: "Certificate Equivalency Document *",
+      equivalency: "Certificate Equivalency Document (optional)",
       employmentLetter: "Employment Introduction Letter (certified by the Chamber of Commerce) *",
-      gosi: "GOSI Salary and Period Certificate (شهادة المدد والأجور من التأمينات الاجتماعية) *",
+      gosi: "GOSI Salary and Period Certificate (شهادة بيان المدد والأجور من نظام التأمينات الاجتماعية) *",
       cv: "Curriculum Vitae (CV) *",
     },
     commLangSection: "Preferred Communication Language",
@@ -290,9 +290,9 @@ const c = {
       passport: "جواز السفر *",
       academicDegree: "نسخة معتمدة من الشهادة الأكاديمية *",
       academicRecord: "السجل الأكاديمي *",
-      equivalency: "وثيقة معادلة الشهادة *",
+      equivalency: "وثيقة معادلة الشهادة (اختياري)",
       employmentLetter: "خطاب تعريف العمل (مصدق من الغرفة التجارية) *",
-      gosi: "شهادة المدد والأجور من نظام التأمينات الاجتماعية *",
+      gosi: "شهادة بيان المدد والأجور من نظام التأمينات الاجتماعية *",
       cv: "السيرة الذاتية *",
     },
     commLangSection: "لغة التواصل المفضلة",
@@ -606,7 +606,7 @@ export default function Kawader() {
 
   // Which document keys are required based on ID type
   const requiredDocKeys = (): string[] => {
-    const base = ["academicDegree", "academicRecord", "equivalency", "cv"];
+    const base = ["academicDegree", "academicRecord", "cv"];
     if (idType === "saudi_national") return [...base, "nationalId", "employmentLetter", "gosi"];
     if (idType === "saudi_resident") return [...base, "iqamaId", "passport", "employmentLetter", "gosi"];
     if (idType === "international") return [...base, "passport"];
