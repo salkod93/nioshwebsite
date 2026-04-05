@@ -35,6 +35,7 @@ interface BoardMember {
   entityAr: string;
   logoKey: keyof typeof LOGOS;
   accentColor: string;
+  photoPosition?: string;
 }
 
 const BOARD_MEMBERS: BoardMember[] = [
@@ -76,6 +77,7 @@ const BOARD_MEMBERS: BoardMember[] = [
     entityAr: "المؤسسة العامة للتدريب التقني والمهني",
     logoKey: "tvtc",
     accentColor: "#006b8f",
+    photoPosition: "center center",
   },
   {
     photoKey: "alfuwaiz",
@@ -89,6 +91,7 @@ const BOARD_MEMBERS: BoardMember[] = [
     entityAr: "المجلس الوطني للسلامة والصحة المهنية",
     logoKey: "ncosh",
     accentColor: "#e87722",
+    photoPosition: "center center",
   },
   {
     photoKey: "alsubaie",
@@ -155,7 +158,8 @@ function MemberCard({ member, isRTL }: { member: BoardMember; isRTL: boolean }) 
           <img
             src={PHOTOS[member.photoKey]}
             alt={name}
-            className="w-full h-full object-cover object-top"
+            className="w-full h-full object-cover"
+            style={{ objectPosition: member.photoPosition ?? "top center" }}
           />
         </div>
       </div>
