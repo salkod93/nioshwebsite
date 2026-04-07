@@ -112,3 +112,6 @@
 - [x] VCOSH Landing: Add NCOSH logo inline wherever NCOSH is mentioned in the page
 - [x] VCOSH Landing: Add white background to NIOSH logo in footer
 - [x] VCOSH Landing: Replace hero badge with "VCOSH" + "Virtual Center of Occupational Safety and Health" two-line format
+- [x] VCOSH Landing: Sync language from main site (open in AR if site was in AR, EN if EN)
+- [x] VCOSH Landing: Add entrance animation to hero phone images on page load
+- [x] VCOSH Landing: Replace "Built for Saudi Arabia" section icon with NCOSH logo

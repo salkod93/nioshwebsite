@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useLang } from "@/contexts/LanguageContext";
 import { Link } from "wouter";
 
 // ─── Asset URLs (all from the original vcosh-landingpage.manus.space CDN) ───
@@ -70,7 +71,7 @@ const t = {
       cards: [
         { emoji: "🏢", title: "For HR & Leadership", desc: "A command center that gives you real-time visibility into workforce health, engagement levels, and absenteeism risk — so you can act before problems become costs." },
         { emoji: "👷", title: "For Your Employees", desc: "A mobile app available in 9 languages that helps every worker — from the C-suite to the construction site — track health, earn rewards, and access professional support." },
-        { emoji: "🏛️", title: "Built for Saudi Arabia", desc: "Developed under NIOSH standards and approved by NCOSH — not a foreign center adapted for the Kingdom. Fully compliant, culturally relevant, Vision 2030 aligned." },
+        { emoji: "__NCOSH__", title: "Built for Saudi Arabia", desc: "Developed under NIOSH standards and approved by NCOSH — not a foreign center adapted for the Kingdom. Fully compliant, culturally relevant, Vision 2030 aligned." },
       ],
     },
     business: {
@@ -189,7 +190,7 @@ const t = {
       cards: [
         { emoji: "🏢", title: "للموارد البشرية والقيادة", desc: "مركز قيادة يمنحك رؤية فورية لصحة القوى العاملة ومستويات التفاعل ومخاطر الغياب — لتتصرف قبل أن تتحول المشكلات إلى تكاليف." },
         { emoji: "👷", title: "للموظفين", desc: "تطبيق جوال متاح بـ9 لغات يساعد كل عامل — من الإدارة العليا إلى موقع البناء — على تتبع صحته وكسب المكافآت والحصول على الدعم المهني." },
-        { emoji: "🏛️", title: "مصمم للمملكة العربية السعودية", desc: "تم تطويره وفق معايير المعهد الوطني ومعتمد من المجلس الوطني (NCOSH) — وليس مركزاً أجنبياً معدّلاً. متوافق تماماً، ذو صلة ثقافية، ومنسجم مع رؤية 2030." },
+        { emoji: "__NCOSH__", title: "مصمم للمملكة العربية السعودية", desc: "تم تطويره وفق معايير المعهد الوطني ومعتمد من المجلس الوطني (NCOSH) — وليس مركزاً أجنبياً معدّلاً. متوافق تماماً، ذو صلة ثقافية، ومنسجم مع رؤية 2030." },
       ],
     },
     business: {
@@ -485,15 +486,24 @@ function Hero({ lang }: { lang: Lang }) {
           </div>
         </div>
 
-        {/* Right: 3 phone screenshots (same layout as original — left shorter, center taller, right shorter) */}
+        {/* Right: 3 phone screenshots with entrance animations */}
         <div className="relative flex justify-center items-end gap-4 h-[500px]">
-          <div className="relative z-10 w-36 h-72 rounded-3xl overflow-hidden shadow-2xl border border-white/20 self-end mb-8">
+          <div
+            className="relative z-10 w-36 h-72 rounded-3xl overflow-hidden shadow-2xl border border-white/20 self-end mb-8"
+            style={{ animation: "vcoshPhoneLeft 0.8s cubic-bezier(0.22,1,0.36,1) both", animationDelay: "0.1s" }}
+          >
             <img src={HERO_SCREEN_1} alt="VCOSH App" className="w-full h-full object-cover" />
           </div>
-          <div className="relative z-20 w-44 h-96 rounded-3xl overflow-hidden shadow-2xl border border-white/20">
+          <div
+            className="relative z-20 w-44 h-96 rounded-3xl overflow-hidden shadow-2xl border border-white/20"
+            style={{ animation: "vcoshPhoneCenter 0.9s cubic-bezier(0.22,1,0.36,1) both", animationDelay: "0s" }}
+          >
             <img src={HERO_SCREEN_2} alt="VCOSH App" className="w-full h-full object-cover" />
           </div>
-          <div className="relative z-10 w-36 h-72 rounded-3xl overflow-hidden shadow-2xl border border-white/20 self-end mb-8">
+          <div
+            className="relative z-10 w-36 h-72 rounded-3xl overflow-hidden shadow-2xl border border-white/20 self-end mb-8"
+            style={{ animation: "vcoshPhoneRight 0.8s cubic-bezier(0.22,1,0.36,1) both", animationDelay: "0.2s" }}
+          >
             <img src={HERO_SCREEN_3} alt="VCOSH App" className="w-full h-full object-cover" />
           </div>
         </div>
@@ -532,7 +542,13 @@ function WhatIsVcosh({ lang }: { lang: Lang }) {
         <div className="grid md:grid-cols-3 gap-6">
           {c.cards.map((card, i) => (
             <div key={card.title} className="rounded-2xl p-8" style={{ background: bgColors[i].bg, border: `1px solid ${bgColors[i].border}` }}>
-              <div className="text-4xl mb-4">{card.emoji}</div>
+              <div className="mb-4">
+                {card.emoji === "__NCOSH__" ? (
+                  <img src={NCOSH_LOGO} alt="NCOSH" className="h-10 object-contain" />
+                ) : (
+                  <span className="text-4xl">{card.emoji}</span>
+                )}
+              </div>
               <h3 className="text-xl font-bold text-gray-900 mb-3" style={{ fontFamily: isRTL ? "'Noto Sans Arabic', sans-serif" : "inherit" }}>{card.title}</h3>
               <p className="text-gray-600 leading-relaxed" style={{ fontFamily: isRTL ? "'Noto Sans Arabic', sans-serif" : "inherit" }}>{card.desc}</p>
             </div>
@@ -863,11 +879,12 @@ function Footer({ lang }: { lang: Lang }) {
 
 // ─── Main export ──────────────────────────────────────────────────────────────
 export default function VcoshLanding() {
-  const [lang, setLang] = useState<Lang>("en");
-
+  const { lang: siteLang } = useLang();
+  // Initialise from the main site's language; map "ar" → "ar", anything else → "en"
+  const [lang, setLang] = useState<Lang>(() => siteLang === "ar" ? "ar" : "en");
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, []);
+  }, []);;
 
   return (
     <div className="min-h-screen font-sans" style={{ fontFamily: "'Inter', sans-serif" }}>
