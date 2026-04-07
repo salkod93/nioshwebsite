@@ -101,3 +101,5 @@
 - [x] VCOSH Landing: NIOSH logo links back to NIOSH homepage
 - [x] VCOSH Landing: Fix App Store link to https://apps.apple.com/sa/app/vcosh/id6754536603
 - [x] VCOSH Landing: Fix Google Play link to https://play.google.com/store/apps/details?id=occupational.health
+- [x] Homepage: Change VCOSH button color to green (matching VCOSH hero section green)
+- [x] VCOSH Landing: Fix "Book a Strategic Call" button URL to https://calendar.app.google/BMXEVoHiriKVdqxY6

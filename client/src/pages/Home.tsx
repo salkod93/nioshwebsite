@@ -363,7 +363,7 @@ export default function Home() {
               </div>
 
               {/* Virtual Center CTA */}
-              <div className="mt-6 pt-6 border-t border-border/50 bg-orange-50 rounded-xl p-5">
+              <div className="mt-6 pt-6 border-t border-border/50 rounded-xl p-5" style={{ background: 'linear-gradient(135deg, #e8f5ef 0%, #d0ede0 100%)' }}>
                 <p className="text-sm text-muted-foreground mb-4">
                   {lang === 'en'
                     ? 'To access the services and for more information, visit:'
@@ -376,7 +376,7 @@ export default function Home() {
                 </p>
                 <a
                   href="#"
-                  className="inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-xl font-semibold transition-colors"
+                  className="inline-flex items-center gap-2 text-white px-6 py-3 rounded-xl font-semibold transition-all" style={{ background: 'linear-gradient(135deg, #1a7a5e 0%, #2da882 100%)' }}
                 >
                   <ExternalLink className="h-4 w-4" />
                   {lang === 'en' ? 'Access Virtual Center' : 'الدخول إلى المركز الافتراضي'}

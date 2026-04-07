@@ -142,7 +142,7 @@ export default function Layout({ children, lang, setLang }: LayoutProps) {
 
             <button
               onClick={() => navigate('/vcosh')}
-              className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-md font-medium transition-colors text-sm text-center leading-tight max-w-[200px]"
+              className="text-white px-4 py-2 rounded-md font-medium text-sm text-center leading-tight max-w-[200px] transition-all" style={{ background: 'linear-gradient(135deg, #1a7a5e 0%, #2da882 100%)' }}
             >
               {t.nav.virtualCenter}
             </button>
@@ -249,7 +249,7 @@ export default function Layout({ children, lang, setLang }: LayoutProps) {
           {/* Virtual Center */}
           <button
             onClick={() => { navigate('/vcosh'); setMobileMenuOpen(false); }}
-            className="w-full text-start py-4 px-4 text-lg font-semibold text-orange-500 hover:text-orange-600 hover:bg-orange-50 rounded-xl transition-colors border-b border-border/20"
+            className="w-full text-start py-4 px-4 text-lg font-semibold rounded-xl transition-colors border-b border-border/20 text-white" style={{ background: 'linear-gradient(135deg, #1a7a5e 0%, #2da882 100%)' }}
           >
             {t.nav.virtualCenter}
           </button>
