@@ -105,3 +105,9 @@
 - [x] VCOSH Landing: Fix "Book a Strategic Call" button URL to https://calendar.app.google/BMXEVoHiriKVdqxY6
 - [x] VCOSH button: Add hover interaction (brightness lift, shadow, cursor pointer)
 - [x] VCOSH Landing: Fix all Arabic references to VCOSH to use masculine form (هو) throughout
+- [x] VCOSH Landing: Replace all "platform" with "center" (EN) and "منصة" with "مركز" (AR) when referring to VCOSH
+- [x] VCOSH Landing: Remove NCOSH logo from navbar and footer
+- [x] VCOSH Landing: Fix "AI Health Agent" to "AI Health Coach" (EN and AR)
+- [x] VCOSH Landing: Fix "7 pillars" to "8 pillars" (EN and AR)
+- [x] VCOSH Landing: Add NCOSH logo inline wherever NCOSH is mentioned in the page
+- [x] VCOSH Landing: Add white background to NIOSH logo in footer

@@ -54,7 +54,7 @@ const t = {
       headline2: "Is Your Most",
       headline3: "Expensive Asset.",
       headline4: "Are You Protecting It?",
-      body: "Saudi enterprises lose billions annually to preventable absenteeism, disengaged workers, and health risks that go undetected — because there has never been a platform built for the Saudi workforce. Until now.",
+      body: "Saudi enterprises lose billions annually to preventable absenteeism, disengaged workers, and health risks that go undetected — because there has never been a center built for the Saudi workforce. Until now.",
       cta1: "Book a Strategic Call →",
       cta2: "See How It Works ↓",
       appStore: "Download on the",
@@ -63,13 +63,13 @@ const t = {
       googlePlayName: "Google Play",
     },
     whatIs: {
-      tag: "THE PLATFORM",
+      tag: "THE CENTER",
       title: "What Exactly Is VCOSH?",
-      body: "VCOSH is Saudi Arabia's first occupational health and workforce wellness platform — built under NIOSH and approved by the National Council for Occupational Safety and Health. It is not a generic wellness app. It is a clinically-grounded, government-endorsed system designed for the Saudi enterprise workforce.",
+      body: "VCOSH is Saudi Arabia's first occupational health and workforce wellness center — built under NIOSH and approved by the National Council for Occupational Safety and Health (NCOSH). It is not a generic wellness app. It is a clinically-grounded, government-endorsed system designed for the Saudi enterprise workforce.",
       cards: [
         { emoji: "🏢", title: "For HR & Leadership", desc: "A command center that gives you real-time visibility into workforce health, engagement levels, and absenteeism risk — so you can act before problems become costs." },
         { emoji: "👷", title: "For Your Employees", desc: "A mobile app available in 9 languages that helps every worker — from the C-suite to the construction site — track health, earn rewards, and access professional support." },
-        { emoji: "🏛️", title: "Built for Saudi Arabia", desc: "Developed under NIOSH standards and approved by NCOSH — not a foreign platform adapted for the Kingdom. Fully compliant, culturally relevant, Vision 2030 aligned." },
+        { emoji: "🏛️", title: "Built for Saudi Arabia", desc: "Developed under NIOSH standards and approved by NCOSH — not a foreign center adapted for the Kingdom. Fully compliant, culturally relevant, Vision 2030 aligned." },
       ],
     },
     business: {
@@ -77,7 +77,7 @@ const t = {
       title: "3 Problems Every Saudi Enterprise Faces Today",
       problems: [
         { num: "01", emoji: "📉", title: "Absenteeism Is Costing You More Than You Think", desc: "Unplanned absences, chronic health issues, and burnout silently drain productivity. Global enterprises using workforce wellness platforms report up to 28% reduction in absenteeism. Saudi enterprises deserve the same tool." },
-        { num: "02", emoji: "🌍", title: "Your Workforce Speaks 9 Languages — Your Health Platform Speaks 1", desc: "40%+ of Saudi enterprise workforces are non-Arabic speakers. When health content, safety protocols, and wellness guidance aren't in their language, they disengage — and risk goes unmanaged." },
+        { num: "02", emoji: "🌍", title: "Your Workforce Speaks 9 Languages — Your Health Center Speaks 1", desc: "40%+ of Saudi enterprise workforces are non-Arabic speakers. When health content, safety protocols, and wellness guidance aren't in their language, they disengage — and risk goes unmanaged." },
         { num: "03", emoji: "📊", title: "You Can't Measure What You Can't See", desc: "Most HR teams have no dashboard for workforce health. No data on participation, no early warning on health risks, no way to show the board the ROI of their people investment." },
       ],
       stats: [
@@ -98,9 +98,9 @@ const t = {
       ],
     },
     features: {
-      tag: "THE PLATFORM",
+      tag: "THE CENTER",
       title: "What's Inside VCOSH",
-      subtitle: "Seven pillars that cover every dimension of workforce health and engagement.",
+      subtitle: "Eight pillars that cover every dimension of workforce health and engagement.",
       pillars: [
         { emoji: "🧬", tag: "PILLAR #1", title: "RealAge Test", desc: "Employees discover their biological age versus chronological age through a science-backed assessment. A powerful engagement hook that drives immediate personal investment in health — and gives HR a baseline workforce health score.", img: FEAT_REALAGE },
         { emoji: "📚", tag: "", title: "Library of Digital Therapeutics", desc: "A comprehensive content library spanning Occupational Safety, Mental Health, and Overall Wellbeing — structured as interactive programs, videos, and guided modules. Evidence-based, NIOSH-aligned, and delivered in 9 languages.", img: FEAT_LIBRARY },
@@ -108,13 +108,13 @@ const t = {
         { emoji: "👥", tag: "", title: "Community & Social Engagement", desc: "Employees connect, share achievements, and motivate each other. A social layer that drives participation and builds a culture of health across your organization.", img: FEAT_COMMUNITY },
         { emoji: "🩺", tag: "", title: "Connect with Professionals", desc: "Employees can request direct consultations with occupational health professionals — not just chatbots. Schedule by urgency, get real clinical guidance.", img: FEAT_CONNECT },
         { emoji: "🎁", tag: "", title: "Rewards Marketplace", desc: "100+ brand partners across food, fashion, medical, services, and more. Employees redeem real points for real rewards — driving daily engagement that no other platform can match.", img: FEAT_REWARDS },
-        { emoji: "🤖", tag: "", title: "AI Occupational Health Agent", desc: "Employees speak directly with an AI agent trained on occupational health guidelines. Get instant answers on symptoms, safety protocols, and wellness recommendations — available 24/7 in any of the 9 supported languages.", img: FEAT_AI },
+        { emoji: "🤖", tag: "", title: "AI Occupational Health Coach", desc: "Employees speak directly with an AI coach trained on occupational health guidelines. Get instant answers on symptoms, safety protocols, and wellness recommendations — available 24/7 in any of the 9 supported languages.", img: FEAT_AI },
         { emoji: "📊", tag: "", title: "HR & Manager Dashboards", desc: "Real-time visibility into workforce health engagement, absenteeism trends, and wellness participation rates. Give HR leaders and managers the data they need to make proactive, evidence-based decisions.", img: null },
       ],
     },
     languages: {
       tag: "MULTILINGUAL BY DESIGN",
-      title: "9 Languages.\nOne Platform.\nEvery Worker.",
+      title: "9 Languages.\nOne Center.\nEvery Worker.",
       body: "VCOSH is available in Arabic, English, Hindi, Bengali, Tagalog, Indonesian, Sinhala, Amharic, and Urdu — covering the full linguistic diversity of the Saudi enterprise workforce. When every worker can access health content in their own language, participation rates soar and health outcomes improve.",
       langs: [
         { flag: "🇸🇦", name: "Arabic" }, { flag: "🇬🇧", name: "English" }, { flag: "🇮🇳", name: "Hindi" },
@@ -128,7 +128,7 @@ const t = {
       subtitle: "There are wellness apps. And then there is VCOSH.",
       reasons: [
         { emoji: "🏛️", title: "Saudi-First, Not Adapted", desc: "Built from the ground up under NIOSH and approved by NCOSH. Compliance and cultural relevance are built in — not retrofitted." },
-        { emoji: "🌍", title: "9 Languages for the Real Workforce", desc: "The only occupational health platform that serves Arabic, Hindi, Bengali, Tagalog, Sinhala, Amharic, and Urdu workers in their native language." },
+        { emoji: "🌍", title: "9 Languages for the Real Workforce", desc: "The only occupational health center that serves Arabic, Hindi, Bengali, Tagalog, Sinhala, Amharic, and Urdu workers in their native language." },
         { emoji: "🦺", title: "Occupational Health, Not Just Wellness", desc: "Built on NIOSH occupational safety science — covering hazard reporting, RealAge testing, and clinical consultations. Not a step counter." },
         { emoji: "🎁", title: "Real Rewards, Real Engagement", desc: "100+ brand partners. Employees earn points and redeem real vouchers — not badges. This is what drives daily, sustained engagement." },
         { emoji: "📊", title: "Measurable ROI for the Board", desc: "Your HR dashboard tracks participation, health trends, and absenteeism reduction. You can show the board exactly what your wellness investment is delivering." },
@@ -141,7 +141,7 @@ const t = {
       subtitle: "Employees earn points through healthy behaviors and redeem them at leading brands across food, fashion, medical, services, and more.",
       endorsements: [
         { logo: NIOSH_LOGO_AR, alt: "NIOSH", title: "Developed Under NIOSH", desc: "Built in alignment with the National Institute for Occupational Safety and Health — the Kingdom's authority on workforce health standards." },
-        { logo: NCOSH_LOGO, alt: "NCOSH", title: "Approved by NCOSH", desc: "Officially endorsed by the National Council for Occupational Safety and Health — giving your organization full regulatory confidence in the platform." },
+        { logo: NCOSH_LOGO, alt: "NCOSH", title: "Approved by NCOSH", desc: "Officially endorsed by the National Council for Occupational Safety and Health (NCOSH) — giving your organization full regulatory confidence in the center." },
         { logo: null, emoji: "🌐", title: "Proven Global Model", desc: "Enterprise wellness platforms globally have demonstrated 28–36% reductions in absenteeism and 6:1 ROI on workforce health investment. VCOSH brings this to Saudi Arabia." },
       ],
     },
@@ -181,13 +181,13 @@ const t = {
       googlePlayName: "Google Play",
     },
     whatIs: {
-      tag: "المنصة",
+      tag: "المركز",
       title: "ما هو VCOSH بالضبط؟",
-      body: "VCOSH هو أول منصة سعودية للصحة المهنية وصحة القوى العاملة — مبني تحت إشراف المعهد الوطني للسلامة والصحة المهنية ومعتمد من المجلس الوطني للسلامة والصحة المهنية. إنه ليس تطبيق عافية عادياً، بل نظام مدعوم سريرياً ومعتمد حكومياً مصمم للقوى العاملة في المؤسسات السعودية.",
+      body: "VCOSH هو أول مركز سعودي للصحة المهنية وصحة القوى العاملة — مبني تحت إشراف المعهد الوطني للسلامة والصحة المهنية ومعتمد من المجلس الوطني للسلامة والصحة المهنية (NCOSH). إنه ليس تطبيق عافية عادياً، بل نظام مدعوم سريرياً ومعتمد حكومياً مصمم للقوى العاملة في المؤسسات السعودية.",
       cards: [
         { emoji: "🏢", title: "للموارد البشرية والقيادة", desc: "مركز قيادة يمنحك رؤية فورية لصحة القوى العاملة ومستويات التفاعل ومخاطر الغياب — لتتصرف قبل أن تتحول المشكلات إلى تكاليف." },
         { emoji: "👷", title: "للموظفين", desc: "تطبيق جوال متاح بـ9 لغات يساعد كل عامل — من الإدارة العليا إلى موقع البناء — على تتبع صحته وكسب المكافآت والحصول على الدعم المهني." },
-        { emoji: "🏛️", title: "مصمم للمملكة العربية السعودية", desc: "تم تطويره وفق معايير المعهد الوطني ومعتمد من المجلس الوطني — وليس منصة أجنبية معدّلة. متوافق تماماً، ذو صلة ثقافية، ومنسجم مع رؤية 2030." },
+        { emoji: "🏛️", title: "مصمم للمملكة العربية السعودية", desc: "تم تطويره وفق معايير المعهد الوطني ومعتمد من المجلس الوطني (NCOSH) — وليس مركزاً أجنبياً معدّلاً. متوافق تماماً، ذو صلة ثقافية، ومنسجم مع رؤية 2030." },
       ],
     },
     business: {
@@ -195,7 +195,7 @@ const t = {
       title: "3 تحديات تواجهها كل مؤسسة سعودية اليوم",
       problems: [
         { num: "01", emoji: "📉", title: "الغياب يكلفك أكثر مما تتخيل", desc: "تستنزف الغيابات غير المخططة والمشكلات الصحية المزمنة والإرهاق الإنتاجية بصمت. تُفيد المؤسسات العالمية التي تستخدم منصات صحة القوى العاملة بانخفاض يصل إلى 28% في الغياب. المؤسسات السعودية تستحق الأداة ذاتها." },
-        { num: "02", emoji: "🌍", title: "قوتك العاملة تتحدث 9 لغات — منصتك الصحية تتحدث لغة واحدة", desc: "أكثر من 40% من القوى العاملة في المؤسسات السعودية من غير الناطقين بالعربية. عندما لا تكون المحتوى الصحي وبروتوكولات السلامة وإرشادات العافية بلغتهم، ينفصلون — وتبقى المخاطر دون إدارة." },
+        { num: "02", emoji: "🌍", title: "قوتك العاملة تتحدث 9 لغات — مركزك الصحي يتحدث لغة واحدة", desc: "أكثر من 40% من القوى العاملة في المؤسسات السعودية من غير الناطقين بالعربية. عندما لا تكون المحتوى الصحي وبروتوكولات السلامة وإرشادات العافية بلغتهم، ينفصلون — وتبقى المخاطر دون إدارة." },
         { num: "03", emoji: "📊", title: "لا يمكنك قياس ما لا تراه", desc: "معظم فرق الموارد البشرية لا تملك لوحة تحكم لصحة القوى العاملة. لا بيانات عن المشاركة، ولا إنذار مبكر بالمخاطر الصحية، ولا طريقة لإثبات عائد الاستثمار في رأس المال البشري." },
       ],
       stats: [
@@ -216,9 +216,9 @@ const t = {
       ],
     },
     features: {
-      tag: "المنصة",
+      tag: "المركز",
       title: "ما الذي يحتويه VCOSH",
-      subtitle: "سبعة محاور تغطي كل أبعاد صحة القوى العاملة وتفاعلها.",
+      subtitle: "ثمانية محاور تغطي كل أبعاد صحة القوى العاملة وتفاعلها.",
       pillars: [
         { emoji: "🧬", tag: "المحور الأول", title: "اختبار العمر الحقيقي", desc: "يكتشف الموظفون عمرهم البيولوجي مقارنةً بعمرهم الزمني من خلال تقييم مدعوم علمياً. أداة تفاعل قوية تدفع إلى الاستثمار الشخصي الفوري في الصحة — وتمنح الموارد البشرية نقطة انطلاق لقياس صحة القوى العاملة.", img: FEAT_REALAGE },
         { emoji: "📚", tag: "", title: "مكتبة العلاجات الرقمية", desc: "مكتبة محتوى شاملة تغطي السلامة المهنية والصحة النفسية والعافية العامة — منظمة كبرامج تفاعلية ومقاطع فيديو ووحدات إرشادية. مبنية على أدلة علمية ومتوافقة مع معايير المعهد الوطني ومتاحة بـ9 لغات.", img: FEAT_LIBRARY },
@@ -226,13 +226,13 @@ const t = {
         { emoji: "👥", tag: "", title: "المجتمع والتفاعل الاجتماعي", desc: "يتواصل الموظفون ويتشاركون الإنجازات ويحفزون بعضهم البعض. طبقة اجتماعية تعزز المشاركة وتبني ثقافة الصحة عبر مؤسستك.", img: FEAT_COMMUNITY },
         { emoji: "🩺", tag: "", title: "التواصل مع المختصين", desc: "يمكن للموظفين طلب استشارات مباشرة مع متخصصي الصحة المهنية — وليس مجرد روبوتات دردشة. جدولة حسب الأولوية، والحصول على توجيه سريري حقيقي.", img: FEAT_CONNECT },
         { emoji: "🎁", tag: "", title: "سوق المكافآت", desc: "أكثر من 100 شريك من العلامات التجارية في الغذاء والأزياء والطب والخدمات وغيرها. يستبدل الموظفون نقاطاً حقيقية بمكافآت حقيقية — مما يدفع التفاعل اليومي المستدام الذي لا تستطيع أي منصة أخرى تحقيقه.", img: FEAT_REWARDS },
-        { emoji: "🤖", tag: "", title: "وكيل الذكاء الاصطناعي للصحة المهنية", desc: "يتحدث الموظفون مباشرة مع وكيل ذكاء اصطناعي مدرّب على إرشادات الصحة المهنية. احصل على إجابات فورية حول الأعراض وبروتوكولات السلامة وتوصيات العافية — متاح على مدار الساعة بأي من اللغات التسع المدعومة.", img: FEAT_AI },
+        { emoji: "🤖", tag: "", title: "مدرّب الذكاء الاصطناعي للصحة المهنية", desc: "يتحدث الموظفون مباشرة مع مدرّب ذكاء اصطناعي متخصص في إرشادات الصحة المهنية. احصل على إجابات فورية حول الأعراض وبروتوكولات السلامة وتوصيات العافية — متاح على مدار الساعة بأي من اللغات التسع المدعومة.", img: FEAT_AI },
         { emoji: "📊", tag: "", title: "لوحات تحكم الموارد البشرية والمديرين", desc: "رؤية فورية لتفاعل القوى العاملة الصحي واتجاهات الغياب ومعدلات مشاركة العافية. امنح قادة الموارد البشرية والمديرين البيانات التي يحتاجونها لاتخاذ قرارات استباقية مبنية على الأدلة.", img: null },
       ],
     },
     languages: {
       tag: "متعدد اللغات بالتصميم",
-      title: "9 لغات.\nمنصة واحدة.\nكل عامل.",
+      title: "9 لغات.\nمركز واحد.\nكل عامل.",
       body: "VCOSH متاح بالعربية والإنجليزية والهندية والبنغالية والتاغالوغ والإندونيسية والسنهالية والأمهرية والأردية — يغطي التنوع اللغوي الكامل للقوى العاملة في المؤسسات السعودية. عندما يتمكن كل عامل من الوصول إلى المحتوى الصحي بلغته الأم، ترتفع معدلات المشاركة وتتحسن النتائج الصحية.",
       langs: [
         { flag: "🇸🇦", name: "العربية" }, { flag: "🇬🇧", name: "الإنجليزية" }, { flag: "🇮🇳", name: "الهندية" },
@@ -246,7 +246,7 @@ const t = {
       subtitle: "هناك تطبيقات عافية. وهناك VCOSH.",
       reasons: [
         { emoji: "🏛️", title: "سعودي أولاً، وليس معدّلاً", desc: "مبني من الصفر تحت إشراف المعهد الوطني ومعتمد من المجلس الوطني. الامتثال والملاءمة الثقافية مدمجان فيه — وليسا مضافَين لاحقاً." },
-        { emoji: "🌍", title: "9 لغات للقوى العاملة الحقيقية", desc: "هو المنصة الوحيد للصحة المهنية الذي يخدم العمال الناطقين بالعربية والهندية والبنغالية والتاغالوغ والسنهالية والأمهرية والأردية بلغتهم الأم." },
+        { emoji: "🌍", title: "9 لغات للقوى العاملة الحقيقية", desc: "هو المركز الوحيد للصحة المهنية الذي يخدم العمال الناطقين بالعربية والهندية والبنغالية والتاغالوغ والسنهالية والأمهرية والأردية بلغتهم الأم." },
         { emoji: "🦺", title: "الصحة المهنية، وليس مجرد عافية", desc: "مبني على علم السلامة المهنية للمعهد الوطني — يشمل الإبلاغ عن المخاطر واختبار العمر الحقيقي والاستشارات السريرية. وليس مجرد عداد خطوات." },
         { emoji: "🎁", title: "مكافآت حقيقية، تفاعل حقيقي", desc: "أكثر من 100 شريك من العلامات التجارية. يكسب الموظفون نقاطاً ويستبدلون قسائم حقيقية — وليس شارات. هذا ما يدفع التفاعل اليومي المستدام." },
         { emoji: "📊", title: "عائد استثمار قابل للقياس للمجلس", desc: "تتتبع لوحة تحكم الموارد البشرية المشاركة واتجاهات الصحة وانخفاض الغياب. يمكنك إثبات للمجلس بالضبط ما يحققه استثمارك في العافية." },
@@ -259,7 +259,7 @@ const t = {
       subtitle: "يكسب الموظفون نقاطاً من خلال السلوكيات الصحية ويستبدلونها في العلامات التجارية الرائدة في الغذاء والأزياء والطب والخدمات وغيرها.",
       endorsements: [
         { logo: NIOSH_LOGO_AR, alt: "NIOSH", title: "مطوَّر تحت إشراف المعهد الوطني", desc: "مبني بالتوافق مع المعهد الوطني للسلامة والصحة المهنية — مرجعية المملكة في معايير صحة القوى العاملة." },
-        { logo: NCOSH_LOGO, alt: "NCOSH", title: "معتمد من المجلس الوطني", desc: "معتمد رسمياً من المجلس الوطني للسلامة والصحة المهنية — مما يمنح مؤسستك ثقة تنظيمية كاملة في المنصة." },
+        { logo: NCOSH_LOGO, alt: "NCOSH", title: "معتمد من المجلس الوطني (NCOSH)", desc: "معتمد رسمياً من المجلس الوطني للسلامة والصحة المهنية (NCOSH) — مما يمنح مؤسستك ثقة تنظيمية كاملة في المركز." },
         { logo: null, emoji: "🌐", title: "نموذج عالمي مثبت", desc: "أثبتت منصات صحة القوى العاملة عالمياً انخفاضاً بنسبة 28-36% في الغياب وعائداً استثمارياً بنسبة 6:1 على الاستثمار في صحة القوى العاملة. VCOSH يجلبه إلى المملكة العربية السعودية." },
       ],
     },
@@ -348,8 +348,6 @@ function Navbar({ lang, setLang }: { lang: Lang; setLang: (l: Lang) => void }) {
           <Link href="/">
             <img src={NIOSH_LOGO_AR} alt="NIOSH" className="h-10 object-contain cursor-pointer hover:opacity-80 transition-opacity" />
           </Link>
-          <div className="w-px h-8 bg-gray-200" />
-          <img src={NCOSH_LOGO} alt="NCOSH" className="h-10 object-contain" />
           <div className="w-px h-8 bg-gray-200" />
           <img src={VCOSH_LOGO} alt="VCOSH" className="h-10 object-contain" />
         </div>
@@ -847,9 +845,8 @@ function Footer({ lang }: { lang: Lang }) {
     <footer dir={isRTL ? "rtl" : "ltr"} className="py-8 bg-gray-900 text-center">
       <div className="flex justify-center items-center gap-6 mb-4">
         <Link href="/">
-          <img src={NIOSH_LOGO_AR} alt="NIOSH" className="h-10 object-contain cursor-pointer hover:opacity-80 transition-opacity" />
+          <img src={NIOSH_LOGO_AR} alt="NIOSH" className="h-10 object-contain cursor-pointer hover:opacity-80 transition-opacity bg-white rounded-lg px-2 py-1" />
         </Link>
-        <img src={NCOSH_LOGO} alt="NCOSH" className="h-10 object-contain" />
       </div>
       <p className="text-sm text-gray-500" style={{ fontFamily: isRTL ? "'Noto Sans Arabic', sans-serif" : "inherit" }}>{c.line1}</p>
       <p className="text-sm text-gray-600 mt-1" style={{ fontFamily: isRTL ? "'Noto Sans Arabic', sans-serif" : "inherit" }}>{c.line2}</p>
