@@ -104,3 +104,4 @@
 - [x] Homepage: Change VCOSH button color to green (matching VCOSH hero section green)
 - [x] VCOSH Landing: Fix "Book a Strategic Call" button URL to https://calendar.app.google/BMXEVoHiriKVdqxY6
 - [x] VCOSH button: Add hover interaction (brightness lift, shadow, cursor pointer)
+- [x] VCOSH Landing: Fix all Arabic references to VCOSH to use masculine form (هو) throughout
