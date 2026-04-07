@@ -186,3 +186,20 @@
     background: linear-gradient(135deg, var(--primary) 0%, oklch(0.20 0.08 260) 100%);
   }
 }
+
+/* VCOSH button — green gradient with hover lift */
+.vcosh-btn {
+  background: linear-gradient(135deg, #1a7a5e 0%, #2da882 100%);
+  cursor: pointer;
+  transition: filter 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
+}
+.vcosh-btn:hover {
+  filter: brightness(1.12);
+  box-shadow: 0 6px 20px rgba(29, 185, 130, 0.45);
+  transform: translateY(-1px);
+}
+.vcosh-btn:active {
+  filter: brightness(0.95);
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(29, 185, 130, 0.3);
+}

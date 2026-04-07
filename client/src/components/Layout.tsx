@@ -142,7 +142,7 @@ export default function Layout({ children, lang, setLang }: LayoutProps) {
 
             <button
               onClick={() => navigate('/vcosh')}
-              className="text-white px-4 py-2 rounded-md font-medium text-sm text-center leading-tight max-w-[200px] transition-all" style={{ background: 'linear-gradient(135deg, #1a7a5e 0%, #2da882 100%)' }}
+              className="vcosh-btn text-white px-4 py-2 rounded-md font-medium text-sm text-center leading-tight max-w-[200px]"
             >
               {t.nav.virtualCenter}
             </button>
@@ -249,7 +249,7 @@ export default function Layout({ children, lang, setLang }: LayoutProps) {
           {/* Virtual Center */}
           <button
             onClick={() => { navigate('/vcosh'); setMobileMenuOpen(false); }}
-            className="w-full text-start py-4 px-4 text-lg font-semibold rounded-xl transition-colors border-b border-border/20 text-white" style={{ background: 'linear-gradient(135deg, #1a7a5e 0%, #2da882 100%)' }}
+            className="vcosh-btn w-full text-start py-4 px-4 text-lg font-semibold rounded-xl border-b border-border/20 text-white"
           >
             {t.nav.virtualCenter}
           </button>

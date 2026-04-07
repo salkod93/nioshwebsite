@@ -103,3 +103,4 @@
 - [x] VCOSH Landing: Fix Google Play link to https://play.google.com/store/apps/details?id=occupational.health
 - [x] Homepage: Change VCOSH button color to green (matching VCOSH hero section green)
 - [x] VCOSH Landing: Fix "Book a Strategic Call" button URL to https://calendar.app.google/BMXEVoHiriKVdqxY6
+- [x] VCOSH button: Add hover interaction (brightness lift, shadow, cursor pointer)
