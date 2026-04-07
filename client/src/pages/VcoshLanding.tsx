@@ -415,7 +415,7 @@ function Hero({ lang }: { lang: Lang }) {
       <div
         className="absolute inset-0"
         style={{
-          backgroundImage: "url('https://d2xsxph8kpxj0f.cloudfront.net/310419663032539921/8KA3rh2fh9ZWBW5EBavnvF/riyadh-skyline_af1ac20c.jpg')",
+          backgroundImage: "url('https://d2xsxph8kpxj0f.cloudfront.net/310419663032539921/8KA3rh2fh9ZWBW5EBavnvF/riyadh-night-skyline_ae5307a2.webp')",
           backgroundSize: "cover",
           backgroundPosition: "center bottom",
           backgroundRepeat: "no-repeat",
