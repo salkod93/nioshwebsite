@@ -411,6 +411,17 @@ function Hero({ lang }: { lang: Lang }) {
       className="relative min-h-screen flex items-center overflow-hidden"
       style={{ background: "linear-gradient(135deg, #0d3d2e 0%, #1a5c42 40%, #1e6b4a 70%, #0f4a35 100%)" }}
     >
+      {/* Riyadh skyline background — faint, same treatment as main homepage */}
+      <div
+        className="absolute inset-0"
+        style={{
+          backgroundImage: "url('https://d2xsxph8kpxj0f.cloudfront.net/310419663032539921/8KA3rh2fh9ZWBW5EBavnvF/riyadh-skyline_af1ac20c.jpg')",
+          backgroundSize: "cover",
+          backgroundPosition: "center bottom",
+          backgroundRepeat: "no-repeat",
+          opacity: 0.12,
+        }}
+      />
       {/* Subtle dot pattern */}
       <div
         className="absolute inset-0 opacity-10"

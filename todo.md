@@ -115,3 +115,4 @@
 - [x] VCOSH Landing: Sync language from main site (open in AR if site was in AR, EN if EN)
 - [x] VCOSH Landing: Add entrance animation to hero phone images on page load
 - [x] VCOSH Landing: Replace "Built for Saudi Arabia" section icon with NCOSH logo
+- [x] VCOSH Landing: Add faint Riyadh skyline background to hero section (matching main homepage treatment)
