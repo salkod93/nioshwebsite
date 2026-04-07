@@ -516,6 +516,15 @@ function WhatIsVcosh({ lang }: { lang: Lang }) {
     <section id="what-is-vcosh" dir={isRTL ? "rtl" : "ltr"} className="py-24 bg-white">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">
+          {/* Endorsement logos */}
+          <div className={`flex items-center justify-center gap-4 mb-8 flex-wrap`}>
+            <div className="flex items-center gap-2 px-4 py-2 rounded-xl bg-gray-50 border border-gray-100">
+              <img src={NIOSH_LOGO_AR} alt="NIOSH" className="h-8 object-contain" />
+            </div>
+            <div className="flex items-center gap-2 px-4 py-2 rounded-xl bg-gray-50 border border-gray-100">
+              <img src={NCOSH_LOGO} alt="NCOSH" className="h-8 object-contain" />
+            </div>
+          </div>
           <p className="text-xs font-bold tracking-widest uppercase mb-4" style={{ color: "#f5a623", fontFamily: isRTL ? "'Noto Sans Arabic', sans-serif" : "inherit" }}>
             {c.tag}
           </p>
@@ -524,7 +533,7 @@ function WhatIsVcosh({ lang }: { lang: Lang }) {
           </h2>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed" style={{ fontFamily: isRTL ? "'Noto Sans Arabic', sans-serif" : "inherit" }}>
             {lang === "en" ? (
-              <>VCOSH is Saudi Arabia's first{" "}<strong>occupational health and workforce wellness platform</strong> — built under NIOSH and approved by the National Council for Occupational Safety and Health. It is not a generic wellness app. It is a clinically-grounded, government-endorsed system designed for the Saudi enterprise workforce.</>
+              <>VCOSH is Saudi Arabia's first{" "}<strong>occupational health and workforce wellness center</strong> — built under NIOSH and approved by the National Council for Occupational Safety and Health (NCOSH). It is not a generic wellness app. It is a clinically-grounded, government-endorsed system designed for the Saudi enterprise workforce.</>
             ) : c.body}
           </p>
         </div>
