@@ -78,14 +78,14 @@ const t = {
       tag: "THE BUSINESS CASE",
       title: "3 Problems Every Saudi Enterprise Faces Today",
       problems: [
-        { num: "01", emoji: "📉", title: "Absenteeism Is Costing You More Than You Think", desc: "Unplanned absences, chronic health issues, and burnout silently drain productivity. Global enterprises using workforce wellness platforms report up to 28% reduction in absenteeism. Saudi enterprises deserve the same tool." },
+        { num: "01", emoji: "📉", title: "Absenteeism Is Costing You More Than You Think", desc: "Unplanned absences, chronic health issues, and burnout silently drain productivity. Global enterprises using workforce wellness virtual centers report up to 28% reduction in absenteeism. Saudi enterprises deserve the same tool." },
         { num: "02", emoji: "🌍", title: "Your Workforce Speaks 9 Languages — Your Health Center Speaks 1", desc: "40%+ of Saudi enterprise workforces are non-Arabic speakers. When health content, safety protocols, and wellness guidance aren't in their language, they disengage — and risk goes unmanaged." },
         { num: "03", emoji: "📊", title: "You Can't Measure What You Can't See", desc: "Most HR teams have no dashboard for workforce health. No data on participation, no early warning on health risks, no way to show the board the ROI of their people investment." },
       ],
       stats: [
         { value: "9.7%", label: "Of Saudi GDP projected lost to ill-health & absenteeism by 2030", source: "US Chamber of Commerce" },
         { value: "72%", label: "Of Saudi employees are not fully engaged at work", source: "Gallup KSA Report, 2024" },
-        { value: "28%", label: "Reduction in absenteeism with workforce wellness platforms", source: "Global Wellness Institute" },
+        { value: "28%", label: "Reduction in absenteeism with workforce wellness virtual centers", source: "Global Wellness Institute" },
         { value: "SAR 884M", label: "KSA corporate wellness market — growing 6.3% annually", source: "IMARC Group, 2025" },
       ],
     },
@@ -144,7 +144,7 @@ const t = {
       endorsements: [
         { logo: NIOSH_LOGO_AR, alt: "NIOSH", title: "Developed Under NIOSH", desc: "Built in alignment with the National Institute for Occupational Safety and Health — the Kingdom's authority on workforce health standards." },
         { logo: NCOSH_LOGO, alt: "NCOSH", title: "Approved by NCOSH", desc: "Officially endorsed by the National Council for Occupational Safety and Health (NCOSH) — giving your organization full regulatory confidence in the center." },
-        { logo: null, emoji: "🌐", title: "Proven Global Model", desc: "Enterprise wellness platforms globally have demonstrated 28–36% reductions in absenteeism and 6:1 ROI on workforce health investment. VCOSH brings this to Saudi Arabia." },
+        { logo: null, emoji: "🌐", title: "Proven Global Model", desc: "Enterprise wellness virtual centers globally have demonstrated 28–36% reductions in absenteeism and 6:1 ROI on workforce health investment. VCOSH brings this to Saudi Arabia." },
       ],
     },
     finalCta: {
@@ -545,7 +545,7 @@ function WhatIsVcosh({ lang }: { lang: Lang }) {
           </h2>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed" style={{ fontFamily: isRTL ? "'Noto Sans Arabic', sans-serif" : "inherit" }}>
             {lang === "en" ? (
-              <>VCOSH is Saudi Arabia's first{" "}<strong>occupational health and workforce wellness platform</strong> — built under NIOSH and approved by the National Council for Occupational Safety and Health. It is not a generic wellness app. It is a clinically-grounded, government-endorsed system designed for the Saudi enterprise workforce.</>
+              <>VCOSH is Saudi Arabia's first{" "}<strong>occupational health and workforce wellness Virtual Center</strong> — built under NIOSH and approved by the National Council for Occupational Safety and Health. It is not a generic wellness app. It is a clinically-grounded, government-endorsed system designed for the Saudi enterprise workforce.</>
             ) : c.body}
           </p>
         </div>
