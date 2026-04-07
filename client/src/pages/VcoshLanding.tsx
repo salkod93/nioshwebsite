@@ -49,7 +49,8 @@ const t = {
       langBtn: "عربي",
     },
     hero: {
-      badge: "Under NIOSH · Approved by NCOSH",
+      badge: "VCOSH",
+      badgeSub: "Virtual Center of Occupational Safety and Health",
       headline1: "Your Workforce",
       headline2: "Is Your Most",
       headline3: "Expensive Asset.",
@@ -167,7 +168,8 @@ const t = {
       langBtn: "English",
     },
     hero: {
-      badge: "تحت إشراف المعهد الوطني · معتمد من المجلس الوطني",
+      badge: "VCOSH",
+      badgeSub: "المركز الافتراضي للسلامة والصحة المهنية",
       headline1: "قوتك العاملة",
       headline2: "هي أثمن",
       headline3: "أصولك.",
@@ -421,13 +423,18 @@ function Hero({ lang }: { lang: Lang }) {
         {/* Text side */}
         <div className={isRTL ? "text-right" : "text-left"}>
           {/* Badge */}
-          <div className={`inline-flex items-center gap-2 mb-8 px-4 py-2 rounded-full border border-emerald-400/30 bg-emerald-900/30 backdrop-blur-sm ${isRTL ? "flex-row-reverse" : ""}`}>
-            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+          <div className={`inline-flex flex-col mb-8 px-5 py-3 rounded-2xl border border-emerald-400/30 bg-emerald-900/30 backdrop-blur-sm ${isRTL ? "items-end" : "items-start"}`}>
             <span
-              className="text-xs font-semibold tracking-widest text-emerald-300 uppercase"
-              style={{ fontFamily: isRTL ? "'Noto Sans Arabic', sans-serif" : "inherit", letterSpacing: isRTL ? "0" : undefined }}
+              className="text-2xl font-extrabold text-white"
+              style={{ fontFamily: "'Inter', sans-serif", letterSpacing: "0.12em" }}
             >
               {c.hero.badge}
+            </span>
+            <span
+              className="text-xs font-medium text-emerald-300 mt-0.5"
+              style={{ fontFamily: isRTL ? "'Noto Sans Arabic', sans-serif" : "inherit" }}
+            >
+              {(c.hero as any).badgeSub}
             </span>
           </div>
 

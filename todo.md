@@ -111,3 +111,4 @@
 - [x] VCOSH Landing: Fix "7 pillars" to "8 pillars" (EN and AR)
 - [x] VCOSH Landing: Add NCOSH logo inline wherever NCOSH is mentioned in the page
 - [x] VCOSH Landing: Add white background to NIOSH logo in footer
+- [x] VCOSH Landing: Replace hero badge with "VCOSH" + "Virtual Center of Occupational Safety and Health" two-line format
