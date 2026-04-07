@@ -426,8 +426,8 @@ function Hero({ lang }: { lang: Lang }) {
           {/* Badge */}
           <div className={`inline-flex flex-col mb-8 px-5 py-3 rounded-2xl border border-emerald-400/30 bg-emerald-900/30 backdrop-blur-sm ${isRTL ? "items-end" : "items-start"}`}>
             <span
-              className="text-2xl font-extrabold text-white"
-              style={{ fontFamily: "'Inter', sans-serif", letterSpacing: "0.12em" }}
+              className="font-extrabold text-white"
+              style={{ fontFamily: "'Inter', sans-serif", letterSpacing: "0.12em", fontSize: "42px" }}
             >
               {c.hero.badge}
             </span>
