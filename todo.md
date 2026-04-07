@@ -95,3 +95,9 @@
 - [x] Kawader: Rename GOSI label to "شهادة بيان المدد والأجور من نظام التأمينات الاجتماعية"
 - [x] VCOSH: Copy vcosh-landingpage.manus.space exactly into NIOSH website as new VCOSH page
 - [x] VCOSH: "Book a Strategic Call" button routes to same URL as "Book an Appointment" in current VCOSH page
+- [x] VCOSH Landing: Add Arabic/English language toggle with RTL support
+- [x] VCOSH Landing: Fix hero section photos to match original page exactly
+- [x] VCOSH Landing: Ensure all photos used in correct sections matching original
+- [x] VCOSH Landing: NIOSH logo links back to NIOSH homepage
+- [x] VCOSH Landing: Fix App Store link to https://apps.apple.com/sa/app/vcosh/id6754536603
+- [x] VCOSH Landing: Fix Google Play link to https://play.google.com/store/apps/details?id=occupational.health
