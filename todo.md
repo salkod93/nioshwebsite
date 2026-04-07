@@ -93,3 +93,5 @@
 - [x] Board: Replace photos for Abu Thinain, Dr. Badr Alahmad, and Eng. Majed Al-Fuwaiz with new provided images
 - [x] Kawader: Make وثيقة معادلة الشهادة (equivalency document) optional (not mandatory)
 - [x] Kawader: Rename GOSI label to "شهادة بيان المدد والأجور من نظام التأمينات الاجتماعية"
+- [x] VCOSH: Copy vcosh-landingpage.manus.space exactly into NIOSH website as new VCOSH page
+- [x] VCOSH: "Book a Strategic Call" button routes to same URL as "Book an Appointment" in current VCOSH page
