@@ -10,6 +10,7 @@ import ComingSoon from "./pages/ComingSoon";
 import Kawader from "./pages/Kawader";
 import VcoshLanding from "./pages/VcoshLanding";
 import BoardOfDirectors from "./pages/BoardOfDirectors";
+import CeoMessage from "./pages/CeoMessage";
 
 function Router() {
   return (
@@ -17,9 +18,7 @@ function Router() {
       <Route path={"/"} component={Home} />
 
       {/* About the Institute subpages */}
-      <Route path={"/ceo-message"}>
-        {() => <ComingSoon titleEn="CEO's Message" titleAr="كلمة الرئيس التنفيذي" />}
-      </Route>
+      <Route path={"/ceo-message"} component={CeoMessage} />
       <Route path={"/board-of-directors"} component={BoardOfDirectors} />
       <Route path={"/institute-roles"}>
         {() => <ComingSoon titleEn="Institute's Roles and Powers" titleAr="أدوار وصلاحيات المعهد" />}
