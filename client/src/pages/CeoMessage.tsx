@@ -2,7 +2,7 @@ import { useLang } from "@/contexts/LanguageContext";
 import Layout from "@/components/Layout";
 import JsonLd from "@/components/JsonLd";
 import { motion } from "framer-motion";
-import { Quote } from "lucide-react";
+
 
 const CEO_PHOTO = "https://d2xsxph8kpxj0f.cloudfront.net/310419663032539921/8KA3rh2fh9ZWBW5EBavnvF/ceo-photo_2af81301.png";
 
@@ -10,7 +10,7 @@ const content = {
   ar: {
     pageTitle: "كلمة الرئيس التنفيذي المكلّف",
     subtitle: "المعهد الوطني للسلامة والصحة المهنية",
-    name: "المهندس/ ماجد بن إبراهيم الفويز",
+    name: "سعادة المهندس/ ماجد بن إبراهيم الفويز",
     role: "الرئيس التنفيذي المكلّف",
     org: "المعهد الوطني للسلامة والصحة المهنية",
     paragraphs: [
@@ -114,12 +114,6 @@ export default function CeoMessage() {
 
             {/* Message Body */}
             <div className="p-8 md:p-12">
-              {/* Decorative quote icon */}
-              <div className="flex justify-center mb-8">
-                <div className="w-14 h-14 rounded-full bg-[#2d6a4f]/10 flex items-center justify-center">
-                  <Quote className="w-7 h-7 text-[#2d6a4f]" />
-                </div>
-              </div>
 
               <div className="space-y-6 max-w-3xl mx-auto">
                 {t.paragraphs.map((paragraph, index) => (
@@ -140,20 +134,7 @@ export default function CeoMessage() {
                 ))}
               </div>
 
-              {/* Signature line */}
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.5, delay: 0.8 }}
-                className="mt-12 pt-8 border-t border-gray-200"
-              >
-                <div className={`flex flex-col ${isRTL ? "items-end" : "items-start"}`}>
-                  <div className="w-16 h-1 bg-[#2d6a4f] rounded-full mb-4" />
-                  <p className="text-gray-900 font-bold text-lg">{t.name}</p>
-                  <p className="text-[#2d6a4f] font-medium">{t.role}</p>
-                  <p className="text-gray-500 text-sm mt-1">{t.org}</p>
-                </div>
-              </motion.div>
+
             </div>
           </motion.div>
         </div>
