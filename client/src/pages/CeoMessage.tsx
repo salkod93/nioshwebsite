@@ -2,17 +2,17 @@ import { useLang } from "@/contexts/LanguageContext";
 import Layout from "@/components/Layout";
 import JsonLd from "@/components/JsonLd";
 import { motion } from "framer-motion";
-import { Quote } from "lucide-react";
+
 
 const CEO_PHOTO = "https://d2xsxph8kpxj0f.cloudfront.net/310419663032539921/8KA3rh2fh9ZWBW5EBavnvF/ceo-photo_2af81301.png";
 
 const content = {
   ar: {
     pageTitle: "كلمة الرئيس التنفيذي المكلّف",
-    subtitle: "المعهد الوطني للسلامة والصحة المهنية",
-    name: "المهندس/ ماجد بن إبراهيم الفويز",
-    role: "الرئيس التنفيذي المكلّف",
-    org: "المعهد الوطني للسلامة والصحة المهنية",
+    subtitle: "",
+    name: "سعادة المهندس/ ماجد بن إبراهيم الفويز",
+    role: "",
+    org: "",
     paragraphs: [
       "يشهد سوق العمل في المملكة العربية السعودية تحولات اقتصادية وصناعية متسارعة، تماشياً مع المستهدفات الطموحة لرؤية السعودية 2030. ومع هذا التوسع غير المسبوق في حجم الأعمال وتنوع القطاعات، تتزايد الحاجة الملحة لضمان بيئات عمل آمنة وصحية ومستدامة، تضع سلامة الإنسان في صميم أولوياتها باعتباره المحرك الأساسي للتنمية الشاملة.",
       "من هذا المنطلق، وتتويجاً للجهود الوطنية الرامية إلى الارتقاء بمعايير السلامة والصحة المهنية، يأتي دور المعهد الوطني للسلامة والصحة المهنية ليكون الذراع التنفيذي والمرجع الوطني الأول في هذا المجال. نحن في المعهد لا نكتفي بتقديم التدريب والاستشارات، بل نسعى لبناء منظومة متكاملة تعمل على تأهيل الكفاءات الوطنية، وتطوير السياسات، وتمكين البحث والابتكار، وفق أعلى المعايير والممارسات العالمية.",
@@ -63,9 +63,11 @@ export default function CeoMessage() {
       >
         <div className="container max-w-5xl mx-auto px-6 text-center">
           <h1 className="text-3xl md:text-4xl font-bold mb-3">{t.pageTitle}</h1>
-          <p className="text-green-200 text-base md:text-lg max-w-2xl mx-auto">
-            {t.subtitle}
-          </p>
+          {t.subtitle && (
+            <p className="text-green-200 text-base md:text-lg max-w-2xl mx-auto">
+              {t.subtitle}
+            </p>
+          )}
         </div>
       </section>
 
@@ -102,24 +104,23 @@ export default function CeoMessage() {
                   <h2 className="text-2xl md:text-3xl font-bold text-white mb-2">
                     {t.name}
                   </h2>
-                  <p className="text-green-200 text-lg font-medium mb-1">
-                    {t.role}
-                  </p>
-                  <p className="text-green-300/80 text-sm">
-                    {t.org}
-                  </p>
+                  {t.role && (
+                    <p className="text-green-200 text-lg font-medium mb-1">
+                      {t.role}
+                    </p>
+                  )}
+                  {t.org && (
+                    <p className="text-green-300/80 text-sm">
+                      {t.org}
+                    </p>
+                  )}
                 </div>
               </div>
             </div>
 
             {/* Message Body */}
             <div className="p-8 md:p-12">
-              {/* Decorative quote icon */}
-              <div className="flex justify-center mb-8">
-                <div className="w-14 h-14 rounded-full bg-[#2d6a4f]/10 flex items-center justify-center">
-                  <Quote className="w-7 h-7 text-[#2d6a4f]" />
-                </div>
-              </div>
+
 
               <div className="space-y-6 max-w-3xl mx-auto">
                 {t.paragraphs.map((paragraph, index) => (
@@ -150,8 +151,8 @@ export default function CeoMessage() {
                 <div className={`flex flex-col ${isRTL ? "items-end" : "items-start"}`}>
                   <div className="w-16 h-1 bg-[#2d6a4f] rounded-full mb-4" />
                   <p className="text-gray-900 font-bold text-lg">{t.name}</p>
-                  <p className="text-[#2d6a4f] font-medium">{t.role}</p>
-                  <p className="text-gray-500 text-sm mt-1">{t.org}</p>
+                  {t.role && <p className="text-[#2d6a4f] font-medium">{t.role}</p>}
+                  {t.org && <p className="text-gray-500 text-sm mt-1">{t.org}</p>}
                 </div>
               </motion.div>
             </div>
