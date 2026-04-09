@@ -11,6 +11,8 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
+const NCSP_LOGO = "https://d2xsxph8kpxj0f.cloudfront.net/310419663032539921/8KA3rh2fh9ZWBW5EBavnvF/NCSPLOGO-_25baafc5.png";
+
 interface LayoutProps {
   children: React.ReactNode;
   lang: Language;
@@ -285,11 +287,18 @@ export default function Layout({ children, lang, setLang }: LayoutProps) {
         <div className="container relative z-10">
           <div className="flex flex-col md:flex-row justify-between items-center gap-6">
             <div className="flex flex-col items-center md:items-start gap-4">
-              <img 
-                src={lang === 'ar' ? "/images/logo-ar-white.png" : "/images/logo-en.png"} 
-                alt="NIOSH Logo" 
-                className={cn("h-12 w-auto opacity-90", lang === 'en' && "brightness-0 invert")}
-              />
+              <div className="flex items-center gap-4">
+                <img 
+                  src={lang === 'ar' ? "/images/logo-ar-white.png" : "/images/logo-en.png"} 
+                  alt="NIOSH Logo" 
+                  className={cn("h-12 w-auto opacity-90", lang === 'en' && "brightness-0 invert")}
+                />
+                <img 
+                  src={NCSP_LOGO} 
+                  alt="NCSP - National Center for Strategic Partnerships" 
+                  className="h-12 w-auto object-contain bg-white rounded-lg px-2 py-1"
+                />
+              </div>
               <p className="text-primary-foreground/80 text-sm max-w-md text-center md:text-start">
                 {t.about.vision.text}
               </p>

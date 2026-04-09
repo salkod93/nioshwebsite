@@ -880,9 +880,9 @@ function Footer({ lang }: { lang: Lang }) {
     <footer dir={isRTL ? "rtl" : "ltr"} className="py-8 bg-gray-900 text-center">
       <div className="flex justify-center items-center gap-6 mb-4">
         <Link href="/">
-          <img src={NIOSH_LOGO_AR} alt="NIOSH" className="h-10 object-contain cursor-pointer hover:opacity-80 transition-opacity bg-white rounded-lg px-2 py-1" />
+          <img src={NIOSH_LOGO_AR} alt="NIOSH" className="h-12 object-contain cursor-pointer hover:opacity-80 transition-opacity bg-white rounded-lg px-2 py-1" />
         </Link>
-        <img src={NCSP_LOGO} alt="NCSP - National Center for Strategic Partnerships" className="h-10 object-contain bg-white rounded-lg px-2 py-1" />
+        <img src={NCSP_LOGO} alt="NCSP - National Center for Strategic Partnerships" className="h-12 object-contain bg-white rounded-lg px-2 py-1" />
       </div>
       <p className="text-sm text-gray-500" style={{ fontFamily: isRTL ? "'Noto Sans Arabic', sans-serif" : "inherit" }}>{c.line1}</p>
       <p className="text-sm text-gray-600 mt-1" style={{ fontFamily: isRTL ? "'Noto Sans Arabic', sans-serif" : "inherit" }}>{c.line2}</p>
