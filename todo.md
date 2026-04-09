@@ -132,3 +132,4 @@
 - [x] Wire CEO Message page into routing and navigation
 - [x] VCOSH: Replace Arabic translations with content from TranslationsVCOSH.docx
 - [x] VCOSH: Change CTA button text from (احجز مكالمة استراتيجي) to (احجز استشارة معنا)
+- [x] CEO Message: Replace CEO photo with new provided image (majed.png)

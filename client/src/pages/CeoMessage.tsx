@@ -4,7 +4,7 @@ import JsonLd from "@/components/JsonLd";
 import { motion } from "framer-motion";
 
 
-const CEO_PHOTO = "https://d2xsxph8kpxj0f.cloudfront.net/310419663032539921/8KA3rh2fh9ZWBW5EBavnvF/ceo-photo_2af81301.png";
+const CEO_PHOTO = "https://d2xsxph8kpxj0f.cloudfront.net/310419663032539921/8KA3rh2fh9ZWBW5EBavnvF/majed-ceo_5cf6b059.png";
 
 const content = {
   ar: {
