@@ -121,3 +121,8 @@
 - [x] VCOSH Landing: Enlarge NCSP logo in footer to match NIOSH logo size
 - [x] NIOSH Main Page: Add NCSP logo to footer next to NIOSH logo with white background and rounded corners
 - [x] Crop NCSP logo to match NIOSH logo dimensions; make both logos identical size/background on NIOSH and VCOSH pages
+- [x] SEO: Add JSON-LD Organization/GovernmentOrganization schema to NIOSH homepage
+- [x] SEO: Add JSON-LD WebSite schema for search engine site links
+- [x] SEO: Add JSON-LD WebPage schema to Board of Directors page
+- [x] SEO: Add JSON-LD WebPage schema to Kawader page
+- [x] SEO: Add JSON-LD SoftwareApplication schema to VCOSH page

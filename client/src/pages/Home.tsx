@@ -9,6 +9,8 @@ import { motion } from "framer-motion";
 import { Shield, GraduationCap, Users, FileCheck, ArrowRight, ArrowLeft, Target, Lightbulb, Handshake, Globe, Laptop, BookOpen, MapPin, Mail, Phone, Loader2, CheckCircle2, ExternalLink, Heart } from "lucide-react";
 import { trpc } from "@/lib/trpc";
 import { toast } from "sonner";
+import JsonLd from "@/components/JsonLd";
+import { organizationSchema, webSiteSchema, homePageSchema } from "@/lib/jsonLdSchemas";
 
 export default function Home() {
   const { lang, setLang } = useLang();
@@ -83,6 +85,7 @@ export default function Home() {
 
   return (
     <Layout lang={lang} setLang={setLang}>
+      <JsonLd data={[organizationSchema, webSiteSchema, homePageSchema]} />
       {/* Hero Section */}
       <section id="home" className="relative min-h-[90vh] flex items-center overflow-hidden bg-gradient-hero text-white">
         {/* Background Image */}

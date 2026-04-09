@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { useLang } from "@/contexts/LanguageContext";
 import { Link } from "wouter";
+import JsonLd from "@/components/JsonLd";
+import { vcoshAppSchema, vcoshPageSchema } from "@/lib/jsonLdSchemas";
 
 // ─── Asset URLs (all from the original vcosh-landingpage.manus.space CDN) ───
 const VCOSH_LOGO = "https://d2xsxph8kpxj0f.cloudfront.net/310519663393484347/HnNSxun7cEnxahzcKEUCqw/vcosh_logo_transparent_4a6acfd5.png";
@@ -901,6 +903,7 @@ export default function VcoshLanding() {
 
   return (
     <div className="min-h-screen font-sans" style={{ fontFamily: "'Inter', sans-serif" }}>
+      <JsonLd data={[vcoshAppSchema, vcoshPageSchema]} />
       <Navbar lang={lang} setLang={setLang} />
       <Hero lang={lang} />
       <WhatIsVcosh lang={lang} />

@@ -1,5 +1,7 @@
 import { useLang } from "@/contexts/LanguageContext";
 import Layout from "@/components/Layout";
+import JsonLd from "@/components/JsonLd";
+import { boardOfDirectorsPageSchema } from "@/lib/jsonLdSchemas";
 
 // CDN URLs for entity logos (extracted from member documents)
 const LOGOS = {
@@ -210,6 +212,7 @@ export default function BoardOfDirectors() {
 
   return (
     <Layout lang={lang} setLang={setLang}>
+      <JsonLd data={boardOfDirectorsPageSchema} />
       {/* Page Hero */}
       <section
         className="bg-gradient-to-br from-[#1a3a2a] to-[#2d6a4f] text-white py-16"

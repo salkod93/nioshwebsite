@@ -9,6 +9,8 @@ import { Upload, FileText, CheckCircle, Loader2, Plus, Trash2, ChevronDown } fro
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { COUNTRIES } from "@/lib/countries";
+import JsonLd from "@/components/JsonLd";
+import { kawaderPageSchema } from "@/lib/jsonLdSchemas";
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 
@@ -757,6 +759,7 @@ export default function Kawader() {
 
   return (
     <Layout lang={lang} setLang={setLang}>
+      <JsonLd data={kawaderPageSchema} />
       {/* Hero */}
       <section className="bg-gradient-to-r from-primary to-primary/80 text-white py-16 relative overflow-hidden">
         <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'url(/images/texture-pattern.png)', backgroundRepeat: 'repeat' }} />
