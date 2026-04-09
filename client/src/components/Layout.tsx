@@ -11,7 +11,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-const NCSP_LOGO = "https://d2xsxph8kpxj0f.cloudfront.net/310419663032539921/8KA3rh2fh9ZWBW5EBavnvF/NCSPLOGO-_25baafc5.png";
+const NCSP_LOGO = "https://d2xsxph8kpxj0f.cloudfront.net/310419663032539921/8KA3rh2fh9ZWBW5EBavnvF/NCSPLOGO-cropped_47ccb151.png";
 
 interface LayoutProps {
   children: React.ReactNode;

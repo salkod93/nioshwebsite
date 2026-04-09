@@ -6,7 +6,7 @@ import { Link } from "wouter";
 const VCOSH_LOGO = "https://d2xsxph8kpxj0f.cloudfront.net/310519663393484347/HnNSxun7cEnxahzcKEUCqw/vcosh_logo_transparent_4a6acfd5.png";
 const NIOSH_LOGO_AR = "https://d2xsxph8kpxj0f.cloudfront.net/310519663393484347/HnNSxun7cEnxahzcKEUCqw/logo-ar(1)_4b7d030f.png";
 const NCOSH_LOGO = "https://d2xsxph8kpxj0f.cloudfront.net/310519663393484347/HnNSxun7cEnxahzcKEUCqw/logo-arabic-1_cbe1630f.webp";
-const NCSP_LOGO = "https://d2xsxph8kpxj0f.cloudfront.net/310419663032539921/8KA3rh2fh9ZWBW5EBavnvF/NCSPLOGO-_25baafc5.png";
+const NCSP_LOGO = "https://d2xsxph8kpxj0f.cloudfront.net/310419663032539921/8KA3rh2fh9ZWBW5EBavnvF/NCSPLOGO-cropped_47ccb151.png";
 
 // Hero app screenshots (correct ones from original page)
 const HERO_SCREEN_1 = "https://d2xsxph8kpxj0f.cloudfront.net/310519663393484347/HnNSxun7cEnxahzcKEUCqw/Screenshot2026-04-06at11.22.38PM_0639cebd.png";
@@ -882,7 +882,7 @@ function Footer({ lang }: { lang: Lang }) {
         <Link href="/">
           <img src={NIOSH_LOGO_AR} alt="NIOSH" className="h-12 object-contain cursor-pointer hover:opacity-80 transition-opacity bg-white rounded-lg px-2 py-1" />
         </Link>
-        <img src={NCSP_LOGO} alt="NCSP - National Center for Strategic Partnerships" className="h-12 object-contain bg-white rounded-lg px-2 py-1" />
+        <img src={NCSP_LOGO} alt="NCSP - National Center for Strategic Partnerships" className="h-12 object-contain bg-white rounded-lg px-2 py-1 hover:opacity-80 transition-opacity" />
       </div>
       <p className="text-sm text-gray-500" style={{ fontFamily: isRTL ? "'Noto Sans Arabic', sans-serif" : "inherit" }}>{c.line1}</p>
       <p className="text-sm text-gray-600 mt-1" style={{ fontFamily: isRTL ? "'Noto Sans Arabic', sans-serif" : "inherit" }}>{c.line2}</p>
