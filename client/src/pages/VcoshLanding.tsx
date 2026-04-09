@@ -355,7 +355,7 @@ function Navbar({ lang, setLang }: { lang: Lang; setLang: (l: Lang) => void }) {
             <img src={NIOSH_LOGO_AR} alt="NIOSH" className="h-10 object-contain cursor-pointer hover:opacity-80 transition-opacity" />
           </Link>
           <div className="w-px h-8 bg-gray-200" />
-          <img src={VCOSH_LOGO} alt="VCOSH" className="h-10 object-contain" />
+          <img src={VCOSH_LOGO} alt="VCOSH" className="h-[60px] object-contain" />
         </div>
 
         {/* Center: nav links */}
@@ -558,7 +558,7 @@ function WhatIsVcosh({ lang }: { lang: Lang }) {
             <div key={card.title} className="rounded-2xl p-8" style={{ background: bgColors[i].bg, border: `1px solid ${bgColors[i].border}` }}>
               <div className="mb-4">
                 {card.emoji === "__NCOSH__" ? (
-                  <img src={NCOSH_LOGO} alt="NCOSH" className="h-10 object-contain" />
+                  <img src={NCOSH_LOGO} alt="NCOSH" className="h-[60px] object-contain" />
                 ) : (
                   <span className="text-4xl">{card.emoji}</span>
                 )}
