@@ -133,3 +133,6 @@
 - [x] VCOSH: Replace Arabic translations with content from TranslationsVCOSH.docx
 - [x] VCOSH: Change CTA button text from (احجز مكالمة استراتيجي) to (احجز استشارة معنا)
 - [x] CEO Message: Replace CEO photo with new provided image (majed.png)
+- [x] Build Chairman's Message page (كلمة رئيس مجلس الإدارة) matching CEO Message design
+- [x] Translate chairman message to English
+- [x] Wire Chairman Message page into routing and navigation

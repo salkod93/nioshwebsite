@@ -97,6 +97,7 @@ export default function Layout({ children, lang, setLang }: LayoutProps) {
                   {t.nav.aboutDropdown.overview}
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={() => navigate('/ceo-message')}>{t.nav.aboutDropdown.ceoMessage}</DropdownMenuItem>
+                <DropdownMenuItem onClick={() => navigate('/chairman-message')}>{t.nav.aboutDropdown.chairmanMessage}</DropdownMenuItem>
                 <DropdownMenuItem onClick={() => navigate('/board-of-directors')}>{t.nav.aboutDropdown.boardMembers}</DropdownMenuItem>
                 <DropdownMenuItem onClick={() => navigate('/institute-roles')}>{t.nav.aboutDropdown.boardRoles}</DropdownMenuItem>
                 <DropdownMenuItem onClick={() => scrollToSection('priorities')}>{t.nav.aboutDropdown.priorities}</DropdownMenuItem>
@@ -200,6 +201,7 @@ export default function Layout({ children, lang, setLang }: LayoutProps) {
             </button>
             <div className="flex flex-col gap-1 pb-3 px-4">
               <button onClick={() => navigate('/ceo-message')} className="text-start py-2 px-3 text-sm text-muted-foreground hover:text-primary hover:bg-primary/5 rounded-lg transition-colors">{t.nav.aboutDropdown.ceoMessage}</button>
+              <button onClick={() => navigate('/chairman-message')} className="text-start py-2 px-3 text-sm text-muted-foreground hover:text-primary hover:bg-primary/5 rounded-lg transition-colors">{t.nav.aboutDropdown.chairmanMessage}</button>
               <button onClick={() => navigate('/board-of-directors')} className="text-start py-2 px-3 text-sm text-muted-foreground hover:text-primary hover:bg-primary/5 rounded-lg transition-colors">{t.nav.aboutDropdown.boardMembers}</button>
               <button onClick={() => navigate('/institute-roles')} className="text-start py-2 px-3 text-sm text-muted-foreground hover:text-primary hover:bg-primary/5 rounded-lg transition-colors">{t.nav.aboutDropdown.boardRoles}</button>
               <button onClick={() => scrollToSection('priorities')} className="text-start py-2 px-3 text-sm text-muted-foreground hover:text-primary hover:bg-primary/5 rounded-lg transition-colors">{t.nav.aboutDropdown.priorities}</button>

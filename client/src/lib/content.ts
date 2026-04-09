@@ -8,6 +8,7 @@ export const content = {
       aboutDropdown: {
         overview: "About the Institute",
         ceoMessage: "CEO's Message",
+        chairmanMessage: "Chairman's Message",
         boardMembers: "Board of Directors",
         boardRoles: "Institute's Roles and Powers",
         priorities: "Strategic Priorities",
@@ -274,6 +275,7 @@ export const content = {
       aboutDropdown: {
         overview: "نبذة عن المعهد",
         ceoMessage: "كلمة الرئيس التنفيذي",
+        chairmanMessage: "كلمة رئيس مجلس الإدارة",
         boardMembers: "أعضاء مجلس الإدارة",
         boardRoles: "أدوار وصلاحيات المعهد",
         priorities: "الأولويات الاستراتيجية",

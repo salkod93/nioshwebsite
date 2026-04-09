@@ -11,6 +11,7 @@ import Kawader from "./pages/Kawader";
 import VcoshLanding from "./pages/VcoshLanding";
 import BoardOfDirectors from "./pages/BoardOfDirectors";
 import CeoMessage from "./pages/CeoMessage";
+import ChairmanMessage from "./pages/ChairmanMessage";
 
 function Router() {
   return (
@@ -19,6 +20,7 @@ function Router() {
 
       {/* About the Institute subpages */}
       <Route path={"/ceo-message"} component={CeoMessage} />
+      <Route path={"/chairman-message"} component={ChairmanMessage} />
       <Route path={"/board-of-directors"} component={BoardOfDirectors} />
       <Route path={"/institute-roles"}>
         {() => <ComingSoon titleEn="Institute's Roles and Powers" titleAr="أدوار وصلاحيات المعهد" />}
