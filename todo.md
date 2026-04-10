@@ -139,3 +139,4 @@
 - [x] Build unified About page with all 7 sections (نبذة، الأولويات، الهيكل، الأدوار، مجلس الإدارة، كلمة الرئيس، كلمة التنفيذي)
 - [x] Update CEO message from new PDF
 - [x] Wire all About dropdown items to scroll to corresponding section in unified page
+- [x] About page: Unify board member card sizes across both AR and EN (keep chairman card separate/above)

@@ -320,20 +320,32 @@ function MemberCard({ member, isRTL }: { member: BoardMember; isRTL: boolean }) 
         </div>
       </div>
       <div className="px-6 pb-6 flex flex-col flex-1 text-center">
-        <span
-          className={`inline-block self-center px-3 py-1 rounded-full text-xs font-semibold mb-3 ${
-            isChairman ? "bg-amber-100 text-amber-800" : "bg-slate-100 text-slate-600"
-          }`}
-        >
-          {boardRole}
-        </span>
-        <h3 className="text-base font-bold text-gray-900 mb-2 leading-snug">{name}</h3>
-        <p className="text-sm text-gray-500 leading-relaxed flex-1 mb-4">{position}</p>
-        <div className="border-t border-gray-100 pt-4">
+        {/* Board role badge — fixed height so all cards align */}
+        <div className="flex justify-center mb-3" style={{ minHeight: '28px' }}>
+          <span
+            className={`inline-block self-center px-3 py-1 rounded-full text-xs font-semibold ${
+              isChairman ? "bg-amber-100 text-amber-800" : "bg-slate-100 text-slate-600"
+            }`}
+          >
+            {boardRole}
+          </span>
+        </div>
+        {/* Name — fixed height to absorb long/short names equally */}
+        <div style={{ minHeight: '48px' }} className="flex items-start justify-center mb-2">
+          <h3 className="text-base font-bold text-gray-900 leading-snug">{name}</h3>
+        </div>
+        {/* Position — fixed height so all cards have the same body height */}
+        <div style={{ minHeight: '72px' }} className="flex items-start justify-center mb-4">
+          <p className="text-sm text-gray-500 leading-relaxed">{position}</p>
+        </div>
+        <div className="border-t border-gray-100 pt-4 mt-auto">
           <div className="flex justify-center items-center h-20 mb-2">
             <img src={LOGOS[member.logoKey]} alt={entity} className="max-h-20 max-w-[200px] object-contain" />
           </div>
-          <p className="text-xs text-gray-400 leading-snug">{entity}</p>
+          {/* Entity name — fixed height */}
+          <div style={{ minHeight: '36px' }} className="flex items-start justify-center">
+            <p className="text-xs text-gray-400 leading-snug">{entity}</p>
+          </div>
         </div>
       </div>
     </div>
