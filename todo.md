@@ -140,3 +140,4 @@
 - [x] Update CEO message from new PDF
 - [x] Wire all About dropdown items to scroll to corresponding section in unified page
 - [x] About page: Unify board member card sizes across both AR and EN (keep chairman card separate/above)
+- [x] Fix: About dropdown items don't scroll to their section on the About page
