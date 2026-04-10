@@ -12,22 +12,23 @@ import VcoshLanding from "./pages/VcoshLanding";
 import BoardOfDirectors from "./pages/BoardOfDirectors";
 import CeoMessage from "./pages/CeoMessage";
 import ChairmanMessage from "./pages/ChairmanMessage";
+import About from "./pages/About";
+import { Redirect } from "wouter";
 
 function Router() {
   return (
     <Switch>
       <Route path={"/"} component={Home} />
 
-      {/* About the Institute subpages */}
-      <Route path={"/ceo-message"} component={CeoMessage} />
-      <Route path={"/chairman-message"} component={ChairmanMessage} />
-      <Route path={"/board-of-directors"} component={BoardOfDirectors} />
-      <Route path={"/institute-roles"}>
-        {() => <ComingSoon titleEn="Institute's Roles and Powers" titleAr="أدوار وصلاحيات المعهد" />}
-      </Route>
-      <Route path={"/organizational-structure"}>
-        {() => <ComingSoon titleEn="Organizational Structure" titleAr="الهيكل التنظيمي" />}
-      </Route>
+      {/* Unified About page */}
+      <Route path={"/about"} component={About} />
+
+      {/* Redirect old individual pages to unified About page with anchors */}
+      <Route path={"/ceo-message"}>{() => <Redirect to="/about#about-ceo-message" />}</Route>
+      <Route path={"/chairman-message"}>{() => <Redirect to="/about#about-chairman-message" />}</Route>
+      <Route path={"/board-of-directors"}>{() => <Redirect to="/about#about-board" />}</Route>
+      <Route path={"/institute-roles"}>{() => <Redirect to="/about#about-roles" />}</Route>
+      <Route path={"/organizational-structure"}>{() => <Redirect to="/about#about-structure" />}</Route>
 
       {/* Media Center subpages */}
       <Route path={"/news"}>

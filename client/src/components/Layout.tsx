@@ -93,15 +93,13 @@ export default function Layout({ children, lang, setLang }: LayoutProps) {
                 <ChevronDown className="h-4 w-4" />
               </DropdownMenuTrigger>
               <DropdownMenuContent align={isRTL ? "end" : "start"} className="w-56">
-                <DropdownMenuItem onClick={() => scrollToSection('about')}>
-                  {t.nav.aboutDropdown.overview}
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => navigate('/ceo-message')}>{t.nav.aboutDropdown.ceoMessage}</DropdownMenuItem>
-                <DropdownMenuItem onClick={() => navigate('/chairman-message')}>{t.nav.aboutDropdown.chairmanMessage}</DropdownMenuItem>
-                <DropdownMenuItem onClick={() => navigate('/board-of-directors')}>{t.nav.aboutDropdown.boardMembers}</DropdownMenuItem>
-                <DropdownMenuItem onClick={() => navigate('/institute-roles')}>{t.nav.aboutDropdown.boardRoles}</DropdownMenuItem>
-                <DropdownMenuItem onClick={() => scrollToSection('priorities')}>{t.nav.aboutDropdown.priorities}</DropdownMenuItem>
-                <DropdownMenuItem onClick={() => navigate('/organizational-structure')}>{t.nav.aboutDropdown.structure}</DropdownMenuItem>
+                <DropdownMenuItem onClick={() => navigate('/about#about-overview')}>{t.nav.aboutDropdown.overview}</DropdownMenuItem>
+                <DropdownMenuItem onClick={() => navigate('/about#about-priorities')}>{t.nav.aboutDropdown.priorities}</DropdownMenuItem>
+                <DropdownMenuItem onClick={() => navigate('/about#about-structure')}>{t.nav.aboutDropdown.structure}</DropdownMenuItem>
+                <DropdownMenuItem onClick={() => navigate('/about#about-roles')}>{t.nav.aboutDropdown.boardRoles}</DropdownMenuItem>
+                <DropdownMenuItem onClick={() => navigate('/about#about-board')}>{t.nav.aboutDropdown.boardMembers}</DropdownMenuItem>
+                <DropdownMenuItem onClick={() => navigate('/about#about-chairman-message')}>{t.nav.aboutDropdown.chairmanMessage}</DropdownMenuItem>
+                <DropdownMenuItem onClick={() => navigate('/about#about-ceo-message')}>{t.nav.aboutDropdown.ceoMessage}</DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
 
@@ -200,12 +198,13 @@ export default function Layout({ children, lang, setLang }: LayoutProps) {
               {t.nav.about}
             </button>
             <div className="flex flex-col gap-1 pb-3 px-4">
-              <button onClick={() => navigate('/ceo-message')} className="text-start py-2 px-3 text-sm text-muted-foreground hover:text-primary hover:bg-primary/5 rounded-lg transition-colors">{t.nav.aboutDropdown.ceoMessage}</button>
-              <button onClick={() => navigate('/chairman-message')} className="text-start py-2 px-3 text-sm text-muted-foreground hover:text-primary hover:bg-primary/5 rounded-lg transition-colors">{t.nav.aboutDropdown.chairmanMessage}</button>
-              <button onClick={() => navigate('/board-of-directors')} className="text-start py-2 px-3 text-sm text-muted-foreground hover:text-primary hover:bg-primary/5 rounded-lg transition-colors">{t.nav.aboutDropdown.boardMembers}</button>
-              <button onClick={() => navigate('/institute-roles')} className="text-start py-2 px-3 text-sm text-muted-foreground hover:text-primary hover:bg-primary/5 rounded-lg transition-colors">{t.nav.aboutDropdown.boardRoles}</button>
-              <button onClick={() => scrollToSection('priorities')} className="text-start py-2 px-3 text-sm text-muted-foreground hover:text-primary hover:bg-primary/5 rounded-lg transition-colors">{t.nav.aboutDropdown.priorities}</button>
-              <button onClick={() => navigate('/organizational-structure')} className="text-start py-2 px-3 text-sm text-muted-foreground hover:text-primary hover:bg-primary/5 rounded-lg transition-colors">{t.nav.aboutDropdown.structure}</button>
+              <button onClick={() => { navigate('/about#about-overview'); setMobileMenuOpen(false); }} className="text-start py-2 px-3 text-sm text-muted-foreground hover:text-primary hover:bg-primary/5 rounded-lg transition-colors">{t.nav.aboutDropdown.overview}</button>
+              <button onClick={() => { navigate('/about#about-priorities'); setMobileMenuOpen(false); }} className="text-start py-2 px-3 text-sm text-muted-foreground hover:text-primary hover:bg-primary/5 rounded-lg transition-colors">{t.nav.aboutDropdown.priorities}</button>
+              <button onClick={() => { navigate('/about#about-structure'); setMobileMenuOpen(false); }} className="text-start py-2 px-3 text-sm text-muted-foreground hover:text-primary hover:bg-primary/5 rounded-lg transition-colors">{t.nav.aboutDropdown.structure}</button>
+              <button onClick={() => { navigate('/about#about-roles'); setMobileMenuOpen(false); }} className="text-start py-2 px-3 text-sm text-muted-foreground hover:text-primary hover:bg-primary/5 rounded-lg transition-colors">{t.nav.aboutDropdown.boardRoles}</button>
+              <button onClick={() => { navigate('/about#about-board'); setMobileMenuOpen(false); }} className="text-start py-2 px-3 text-sm text-muted-foreground hover:text-primary hover:bg-primary/5 rounded-lg transition-colors">{t.nav.aboutDropdown.boardMembers}</button>
+              <button onClick={() => { navigate('/about#about-chairman-message'); setMobileMenuOpen(false); }} className="text-start py-2 px-3 text-sm text-muted-foreground hover:text-primary hover:bg-primary/5 rounded-lg transition-colors">{t.nav.aboutDropdown.chairmanMessage}</button>
+              <button onClick={() => { navigate('/about#about-ceo-message'); setMobileMenuOpen(false); }} className="text-start py-2 px-3 text-sm text-muted-foreground hover:text-primary hover:bg-primary/5 rounded-lg transition-colors">{t.nav.aboutDropdown.ceoMessage}</button>
             </div>
           </div>
 
