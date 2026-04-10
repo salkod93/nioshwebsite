@@ -543,14 +543,7 @@ export default function About() {
       <section id={ABOUT_SECTIONS.chairman} className="py-20 bg-primary/5" dir={isRTL ? "rtl" : "ltr"}>
         <div className="container max-w-5xl mx-auto px-6">
           <SectionHeader title={isRTL ? "كلمة رئيس مجلس الإدارة" : "Chairman's Message"} accent />
-          <MessageBlock
-            photo={PHOTOS.abuthnain}
-            name={chairmanContent[lang].name}
-            role={chairmanContent[lang].role}
-            org={chairmanContent[lang].org}
-            paragraphs={chairmanContent[lang].paragraphs}
-            isRTL={isRTL}
-          />
+          <ComingSoonBlock isRTL={isRTL} />
         </div>
       </section>
 
