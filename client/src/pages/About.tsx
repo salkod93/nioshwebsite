@@ -496,23 +496,9 @@ export default function About() {
       <section id={ABOUT_SECTIONS.board} className="py-20 bg-background" dir={isRTL ? "rtl" : "ltr"}>
         <div className="container max-w-6xl mx-auto px-6">
           <SectionHeader title={isRTL ? "أعضاء مجلس الإدارة" : "Board of Directors"} />
-          {/* Chairman */}
-          <div className="flex justify-center mb-10">
-            <div className="w-full max-w-sm">
-              <MemberCard member={chairman} isRTL={isRTL} />
-            </div>
-          </div>
-          {/* Divider */}
-          <div className="flex items-center gap-4 mb-10">
-            <div className="flex-1 border-t border-gray-200" />
-            <span className="text-sm text-gray-400 font-medium whitespace-nowrap">
-              {isRTL ? "أعضاء المجلس" : "Board Members"}
-            </span>
-            <div className="flex-1 border-t border-gray-200" />
-          </div>
-          {/* Other members */}
+          {/* All members in a uniform grid — chairman first */}
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {members.map((m, i) => (
+            {BOARD_MEMBERS.map((m, i) => (
               <motion.div
                 key={i}
                 initial={{ opacity: 0, y: 20 }}
