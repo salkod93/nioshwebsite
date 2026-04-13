@@ -142,3 +142,4 @@
 - [x] About page: Unify board member card sizes across both AR and EN (keep chairman card separate/above)
 - [x] Fix: About dropdown items don't scroll to their section on the About page
 - [x] About page: Replace chairman message section with Coming Soon (content saved for later)
+- [x] VCOSH: Replace all Arabic text with new approved copy from pasted_content.txt (22 replacements)
