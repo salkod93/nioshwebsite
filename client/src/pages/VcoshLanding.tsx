@@ -588,10 +588,6 @@ function BusinessCase({ lang }: { lang: Lang }) {
         <div className="grid md:grid-cols-3 gap-6 mb-20">
           {c.problems.map((p) => (
             <div key={p.num} className="rounded-2xl p-8" style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)" }}>
-              <div className={`flex items-center gap-3 mb-4 ${isRTL ? "flex-row-reverse" : ""}`}>
-                <span className="text-3xl">{p.emoji}</span>
-                <span className="text-sm font-bold tracking-widest text-gray-400">{p.num}</span>
-              </div>
               <h3 className="text-xl font-bold text-white mb-3" style={{ fontFamily: isRTL ? "'Noto Sans Arabic', sans-serif" : "inherit" }}>{p.title}</h3>
               <p className="text-gray-400 leading-relaxed" style={{ fontFamily: isRTL ? "'Noto Sans Arabic', sans-serif" : "inherit" }}>{p.desc}</p>
             </div>
@@ -821,13 +817,6 @@ function FinalCTA({ lang }: { lang: Lang }) {
       style={{ background: "linear-gradient(135deg, #0d3d2e 0%, #1a5c42 50%, #0f4a35 100%)" }}
     >
       <div className="max-w-3xl mx-auto px-6 text-center">
-        <div className="inline-flex items-center gap-2 mb-8 px-4 py-2 rounded-full border border-emerald-400/30 bg-emerald-900/30">
-          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-          <span className="text-xs font-semibold tracking-widest text-emerald-300 uppercase" style={{ fontFamily: isRTL ? "'Noto Sans Arabic', sans-serif" : "inherit" }}>
-            {c.badge}
-          </span>
-        </div>
-
         <h2 className="text-4xl lg:text-5xl font-bold text-white mb-6 whitespace-pre-line" style={{ fontFamily: isRTL ? "'Noto Sans Arabic', sans-serif" : "inherit" }}>
           {c.title}
         </h2>
