@@ -1,6 +1,7 @@
 import { useLang } from "@/contexts/LanguageContext";
 import Layout from "@/components/Layout";
 import JsonLd from "@/components/JsonLd";
+import PageMeta from "@/components/PageMeta";
 import { motion } from "framer-motion";
 
 
@@ -55,6 +56,11 @@ export default function CeoMessage() {
   return (
     <Layout lang={lang} setLang={setLang}>
       <JsonLd data={ceoMessagePageSchema} />
+      <PageMeta
+        title={isRTL ? 'كلمة الرئيس التنفيذي المكلّف – المعهد الوطني للسلامة والصحة المهنية' : 'Interim CEO\'s Message – NIOSH'}
+        description={isRTL ? 'كلمة سعادة المهندس ماجد بن إبراهيم الفويز، الرئيس التنفيذي المكلّف للمعهد الوطني للسلامة والصحة المهنية.' : 'A message from Eng. Majed bin Ibrahim Al-Fuwaiz, Interim CEO of the National Institute for Occupational Safety and Health (NIOSH).'}
+        url="/ceo-message"
+      />
 
       {/* Hero */}
       <section

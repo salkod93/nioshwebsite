@@ -10,6 +10,7 @@ import { Shield, GraduationCap, Users, FileCheck, ArrowRight, ArrowLeft, Target,
 import { trpc } from "@/lib/trpc";
 import { toast } from "sonner";
 import JsonLd from "@/components/JsonLd";
+import PageMeta from "@/components/PageMeta";
 import { organizationSchema, webSiteSchema, homePageSchema } from "@/lib/jsonLdSchemas";
 
 export default function Home() {
@@ -86,6 +87,11 @@ export default function Home() {
   return (
     <Layout lang={lang} setLang={setLang}>
       <JsonLd data={[organizationSchema, webSiteSchema, homePageSchema]} />
+      <PageMeta
+        title={lang === 'ar' ? 'المعهد الوطني للسلامة والصحة المهنية – NIOSH' : 'NIOSH – National Institute for Occupational Safety and Health'}
+        description={lang === 'ar' ? 'المعهد الوطني للسلامة والصحة المهنية — نوفر خدمات التدريب والاستشارات والاعتماد المهني لتعزيز بيئات العمل الآمنة في المملكة العربية السعودية.' : 'NIOSH is Saudi Arabia\'s national institute for occupational safety and health — offering training, consultancy, accreditation, and OSH certification services.'}
+        url="/"
+      />
       {/* Hero Section */}
       <section id="home" className="relative min-h-[90vh] flex items-center overflow-hidden bg-gradient-hero text-white">
         {/* Background Image */}

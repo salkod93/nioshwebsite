@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useLang } from "@/contexts/LanguageContext";
 import { Link } from "wouter";
 import JsonLd from "@/components/JsonLd";
+import PageMeta from "@/components/PageMeta";
 import { vcoshAppSchema, vcoshPageSchema } from "@/lib/jsonLdSchemas";
 
 // ─── Asset URLs (all from the original vcosh-landingpage.manus.space CDN) ───
@@ -904,6 +905,11 @@ export default function VcoshLanding() {
   return (
     <div className="min-h-screen font-sans" style={{ fontFamily: "'Inter', sans-serif" }}>
       <JsonLd data={[vcoshAppSchema, vcoshPageSchema]} />
+      <PageMeta
+        title={lang === 'ar' ? 'VCOSH – مركز خدمات السلامة والصحة المهنية الافتراضي' : 'VCOSH – Virtual Center for Occupational Safety and Health'}
+        description={lang === 'ar' ? 'VCOSH – منصة رقمية متكاملة لخدمات السلامة والصحة المهنية — تمكّن منشآتك من تقليل الغياب، ورفع التفاعل، وتحسين بيئة العمل في المملكة العربية السعودية.' : 'VCOSH is a comprehensive digital platform for occupational safety and health services — helping Saudi organizations reduce absenteeism, boost engagement, and improve workplace wellbeing.'}
+        url="/vcosh"
+      />
       <Navbar lang={lang} setLang={setLang} />
       <Hero lang={lang} />
       <WhatIsVcosh lang={lang} />

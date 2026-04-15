@@ -144,3 +144,5 @@
 - [x] About page: Replace chairman message section with Coming Soon (content saved for later)
 - [x] VCOSH: Replace all Arabic text with new approved copy from pasted_content.txt (22 replacements)
 - [x] VCOSH: Change all instances of احجز استشارة معنا to احجز موعدك
+- [x] SEO: Create OG preview image (NIOSH logo on white 1200x630 background) and upload to CDN
+- [x] SEO: Add Open Graph meta tags to all pages (Home, About, Kawader, VCOSH, CEO Message)

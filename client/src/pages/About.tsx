@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Shield, GraduationCap, Users, Lightbulb, Handshake, Target, Laptop, Globe, BookOpen, Clock } from "lucide-react";
 import JsonLd from "@/components/JsonLd";
+import PageMeta from "@/components/PageMeta";
 
 // ─── Board member data ─────────────────────────────────────────────────────────
 const LOGOS = {
@@ -402,6 +403,11 @@ export default function About() {
   return (
     <Layout lang={lang} setLang={setLang}>
       <JsonLd data={aboutPageSchema} />
+      <PageMeta
+        title={isRTL ? 'عن المعهد – المعهد الوطني للسلامة والصحة المهنية' : 'About NIOSH – National Institute for Occupational Safety and Health'}
+        description={isRTL ? 'تعرف على المعهد الوطني للسلامة والصحة المهنية: نبذته، أولوياته الاستراتيجية، أعضاء مجلس الإدارة، وكلمة الرئيس التنفيذي.' : 'Learn about NIOSH: our mission, strategic priorities, board of directors, and the CEO\'s message.'}
+        url="/about"
+      />
 
       {/* ── Page Hero ── */}
       <section

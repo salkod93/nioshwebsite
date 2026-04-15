@@ -10,6 +10,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { COUNTRIES } from "@/lib/countries";
 import JsonLd from "@/components/JsonLd";
+import PageMeta from "@/components/PageMeta";
 import { kawaderPageSchema } from "@/lib/jsonLdSchemas";
 
 // ─── Types ───────────────────────────────────────────────────────────────────
@@ -760,6 +761,11 @@ export default function Kawader() {
   return (
     <Layout lang={lang} setLang={setLang}>
       <JsonLd data={kawaderPageSchema} />
+      <PageMeta
+        title={lang === 'ar' ? 'كوادر – برنامج اعتماد المتخصصين في السلامة والصحة المهنية' : 'Kawader – OSH Professional Accreditation Program'}
+        description={lang === 'ar' ? 'برنامج كوادر لاعتماد المتخصصين في السلامة والصحة المهنية — ارفع كفاءتك المهنية واحصل على اعتماد دولي معترف به في المملكة العربية السعودية.' : 'Kawader is NIOSH\'s OSH professional accreditation program — elevate your credentials with a nationally recognized certification in Saudi Arabia.'}
+        url="/kawader"
+      />
       {/* Hero */}
       <section className="bg-gradient-to-r from-primary to-primary/80 text-white py-16 relative overflow-hidden">
         <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'url(/images/texture-pattern.png)', backgroundRepeat: 'repeat' }} />
