@@ -439,10 +439,10 @@ function Hero({ lang }: { lang: Lang }) {
         {/* Text side */}
         <div className={isRTL ? "text-right" : "text-left"}>
           {/* Badge */}
-          <div className={`inline-flex flex-col mb-8 px-5 py-3 rounded-2xl border border-emerald-400/30 bg-emerald-900/30 backdrop-blur-sm ${isRTL ? "items-end" : "items-start"}`}>
+          <div className={`inline-flex flex-col mb-8 px-5 py-3 rounded-2xl border border-emerald-400/30 bg-emerald-900/30 backdrop-blur-sm items-center`}>
             <span
               className="font-extrabold text-white"
-              style={{ fontFamily: "'Inter', sans-serif", letterSpacing: "0.12em", fontSize: "42px" }}
+              style={{ fontFamily: "'Inter', sans-serif", letterSpacing: "0.12em", fontSize: "42px", textAlign: 'center' }}
             >
               {c.hero.badge}
             </span>
@@ -687,7 +687,7 @@ function Features({ lang }: { lang: Lang }) {
               <div className={`flex-1 ${!p.img ? "pl-0" : ""}`}>
                 <div className="text-3xl mb-2">{p.emoji}</div>
                 {p.tag && (
-                  <span className="text-xs font-bold tracking-widest uppercase px-2 py-1 rounded-full mb-2 inline-block" style={{ background: "#e8f5ef", color: "#1a7a5e", fontFamily: isRTL ? "'Noto Sans Arabic', sans-serif" : "inherit" }}>
+                  <span className="text-xs font-bold tracking-widest uppercase px-2 py-1 rounded-full mb-2 inline-block" style={{ background: "#e8f5ef", color: "#1a7a5e", fontFamily: isRTL ? "'Noto Sans Arabic', sans-serif" : "inherit", backgroundColor: '#f8f9fa' }}>
                     {p.tag}
                   </span>
                 )}
