@@ -435,7 +435,7 @@ function Hero({ lang }: { lang: Lang }) {
         }}
       />
 
-      <div className="relative max-w-7xl mx-auto px-6 pt-24 pb-16 grid lg:grid-cols-2 gap-12 items-center w-full">
+      <div className="relative max-w-7xl mx-auto px-6 pt-24 pb-16 flex flex-col lg:grid lg:grid-cols-2 gap-12 items-center w-full">
         {/* Text side */}
         <div className={isRTL ? "text-right" : "text-left"}>
           {/* Badge */}
@@ -502,22 +502,44 @@ function Hero({ lang }: { lang: Lang }) {
         </div>
 
         {/* Right: 3 phone screenshots with entrance animations */}
-        <div className="relative flex justify-center items-end gap-4 h-[500px]">
+        {/* Each phone uses aspect-ratio so the image is NEVER cropped regardless of screen size.
+            Side phones: natural ratio ~1:1.85 (hero1) and ~1:2.19 (hero3)
+            Center phone: natural ratio ~1:2.16 (hero2)
+            Width is driven by clamp() and height follows automatically via aspect-ratio. */}
+        <div className="relative flex justify-center items-end gap-3 lg:gap-4">
+          {/* Left phone — aspect ratio matches hero1 (346×641 ≈ 0.54) */}
           <div
-            className="relative z-10 w-36 h-72 rounded-3xl overflow-hidden shadow-2xl border border-white/20 self-end mb-8"
-            style={{ animation: "vcoshPhoneLeft 0.8s cubic-bezier(0.22,1,0.36,1) both", animationDelay: "0.1s" }}
+            className="relative z-10 rounded-3xl overflow-hidden shadow-2xl border border-white/20 self-end mb-6 lg:mb-8"
+            style={{
+              width: "clamp(90px, 19vw, 144px)",
+              aspectRatio: "346 / 641",
+              animation: "vcoshPhoneLeft 0.8s cubic-bezier(0.22,1,0.36,1) both",
+              animationDelay: "0.1s"
+            }}
           >
             <img src={HERO_SCREEN_1} alt="VCOSH App" className="w-full h-full object-cover" />
           </div>
+          {/* Center phone (tallest) — aspect ratio matches hero2 (946×2048 ≈ 0.46) */}
           <div
-            className="relative z-20 w-44 h-96 rounded-3xl overflow-hidden shadow-2xl border border-white/20"
-            style={{ animation: "vcoshPhoneCenter 0.9s cubic-bezier(0.22,1,0.36,1) both", animationDelay: "0s" }}
+            className="relative z-20 rounded-3xl overflow-hidden shadow-2xl border border-white/20"
+            style={{
+              width: "clamp(110px, 24vw, 176px)",
+              aspectRatio: "946 / 2048",
+              animation: "vcoshPhoneCenter 0.9s cubic-bezier(0.22,1,0.36,1) both",
+              animationDelay: "0s"
+            }}
           >
             <img src={HERO_SCREEN_2} alt="VCOSH App" className="w-full h-full object-cover" />
           </div>
+          {/* Right phone — aspect ratio matches hero3 (242×529 ≈ 0.46) */}
           <div
-            className="relative z-10 w-36 h-72 rounded-3xl overflow-hidden shadow-2xl border border-white/20 self-end mb-8"
-            style={{ animation: "vcoshPhoneRight 0.8s cubic-bezier(0.22,1,0.36,1) both", animationDelay: "0.2s" }}
+            className="relative z-10 rounded-3xl overflow-hidden shadow-2xl border border-white/20 self-end mb-6 lg:mb-8"
+            style={{
+              width: "clamp(90px, 19vw, 144px)",
+              aspectRatio: "242 / 529",
+              animation: "vcoshPhoneRight 0.8s cubic-bezier(0.22,1,0.36,1) both",
+              animationDelay: "0.2s"
+            }}
           >
             <img src={HERO_SCREEN_3} alt="VCOSH App" className="w-full h-full object-cover" />
           </div>
