@@ -119,29 +119,38 @@ export default function Home() {
         {/* Visually-hidden H1 for SEO – the visual hero heading uses the subtitle text */}
         <h1 className="sr-only">NIOSH – National Institute for Occupational Safety and Health in Saudi Arabia</h1>
 
-        <div className="container relative z-10 grid md:grid-cols-2 gap-12 items-center min-h-[70vh]">
+        {/* Mobile layout: stacked vertically */}
+        <div className="container relative z-10 flex flex-col md:grid md:grid-cols-2 gap-6 md:gap-12 items-center min-h-[70vh] py-8 md:py-0">
+
+          {/* Mobile Hero Image - shown at top on mobile only */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.1 }}
+            className="md:hidden w-full flex justify-center mt-6"
+          >
+            <div className="relative w-full max-w-[320px]">
+              <img 
+                src="https://d2xsxph8kpxj0f.cloudfront.net/310419663032539921/8KA3rh2fh9ZWBW5EBavnvF/hero-shield-composed_659e4f1a.png" 
+                alt="NIOSH Safety Worker and Doctor" 
+                className="w-full h-auto object-contain drop-shadow-2xl"
+              />
+            </div>
+          </motion.div>
+
           <motion.div 
             initial="hidden"
             animate="visible"
             variants={fadeInUp}
-            className="space-y-8 flex flex-col justify-center"
+            className="space-y-6 md:space-y-8 flex flex-col justify-center text-center md:text-start"
           >
-            {/* Mobile Hero Image - Visible only on mobile, below texture pattern */}
-            <div className="md:hidden w-full max-w-[220px] mt-4 mx-auto">
-              <img 
-                src="https://d2xsxph8kpxj0f.cloudfront.net/310419663032539921/8KA3rh2fh9ZWBW5EBavnvF/hero-shield-composed_659e4f1a.png" 
-                alt="NIOSH Safety Worker and Doctor" 
-                className="w-full h-auto drop-shadow-2xl"
-              />
-            </div>
-
-            <h1 className="text-5xl md:text-7xl font-extrabold leading-tight tracking-tight">
+            <h1 className="text-4xl md:text-7xl font-extrabold leading-tight tracking-tight">
               {t.hero.title}
             </h1>
-            <p className="text-[24px] md:text-[38px] font-bold text-white/95 max-w-2xl leading-snug">
+            <p className="text-[20px] md:text-[38px] font-bold text-white/95 max-w-2xl leading-snug">
               {t.hero.subtitle}
             </p>
-            <div className="flex flex-wrap gap-4 pt-4">
+            <div className="flex flex-wrap justify-center md:justify-start gap-4 pt-2 md:pt-4">
               <Button 
                 size="lg" 
                 className="bg-accent text-accent-foreground hover:bg-accent/90 font-bold text-lg h-14 px-8 rounded-full shadow-lg shadow-accent/20"
@@ -152,6 +161,7 @@ export default function Home() {
             </div>
           </motion.div>
 
+          {/* Desktop Hero Image - hidden on mobile */}
           <motion.div 
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}

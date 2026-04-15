@@ -147,4 +147,5 @@
 - [x] SEO: Create OG preview image (NIOSH logo on white 1200x630 background) and upload to CDN
 - [x] SEO: Add Open Graph meta tags to all pages (Home, About, Kawader, VCOSH, CEO Message)
 - [x] VCOSH: Remove emoji and number labels from problem cards; remove div at line 824
+- [x] Fix: Hero section images crop incorrectly on mobile view
 - [x] VCOSH: Remove 7 subtitle/label text elements (المركز, الحالة التجارية, العملية, متعدد اللغات بالتصميم, الفارق, نظام المكافآت)
