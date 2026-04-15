@@ -541,9 +541,6 @@ function WhatIsVcosh({ lang }: { lang: Lang }) {
     <section id="what-is-vcosh" dir={isRTL ? "rtl" : "ltr"} className="py-24 bg-white">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">
-          <p className="text-xs font-bold tracking-widest uppercase mb-4" style={{ color: "#f5a623", fontFamily: isRTL ? "'Noto Sans Arabic', sans-serif" : "inherit" }}>
-            {c.tag}
-          </p>
           <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6" style={{ fontFamily: isRTL ? "'Noto Sans Arabic', sans-serif" : "inherit" }}>
             {c.title}
           </h2>
@@ -583,9 +580,6 @@ function BusinessCase({ lang }: { lang: Lang }) {
     <section dir={isRTL ? "rtl" : "ltr"} style={{ background: "#0d1f2d" }} className="py-24">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">
-          <p className="text-xs font-bold tracking-widest uppercase mb-4" style={{ color: "#f5a623", fontFamily: isRTL ? "'Noto Sans Arabic', sans-serif" : "inherit" }}>
-            {c.tag}
-          </p>
           <h2 className="text-4xl lg:text-5xl font-bold text-white" style={{ fontFamily: isRTL ? "'Noto Sans Arabic', sans-serif" : "inherit" }}>
             {c.title}
           </h2>
@@ -627,9 +621,6 @@ function HowItWorks({ lang }: { lang: Lang }) {
     <section id="how-it-works" dir={isRTL ? "rtl" : "ltr"} className="py-24 bg-gray-50">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">
-          <p className="text-xs font-bold tracking-widest uppercase mb-4" style={{ color: "#f5a623", fontFamily: isRTL ? "'Noto Sans Arabic', sans-serif" : "inherit" }}>
-            {c.tag}
-          </p>
           <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4" style={{ fontFamily: isRTL ? "'Noto Sans Arabic', sans-serif" : "inherit" }}>{c.title}</h2>
           <p className="text-lg text-gray-500" style={{ fontFamily: isRTL ? "'Noto Sans Arabic', sans-serif" : "inherit" }}>{c.subtitle}</p>
         </div>
@@ -664,9 +655,6 @@ function Features({ lang }: { lang: Lang }) {
     <section id="features" dir={isRTL ? "rtl" : "ltr"} className="py-24 bg-white">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">
-          <p className="text-xs font-bold tracking-widest uppercase mb-4" style={{ color: "#f5a623", fontFamily: isRTL ? "'Noto Sans Arabic', sans-serif" : "inherit" }}>
-            {c.tag}
-          </p>
           <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4" style={{ fontFamily: isRTL ? "'Noto Sans Arabic', sans-serif" : "inherit" }}>{c.title}</h2>
           <p className="text-lg text-gray-500" style={{ fontFamily: isRTL ? "'Noto Sans Arabic', sans-serif" : "inherit" }}>{c.subtitle}</p>
         </div>
@@ -715,9 +703,6 @@ function Languages({ lang }: { lang: Lang }) {
     >
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-12">
-          <p className="text-xs font-bold tracking-widest uppercase mb-4" style={{ color: "#f5a623", fontFamily: isRTL ? "'Noto Sans Arabic', sans-serif" : "inherit" }}>
-            {c.tag}
-          </p>
           <h2 className="text-4xl lg:text-5xl font-bold text-white mb-6 whitespace-pre-line" style={{ fontFamily: isRTL ? "'Noto Sans Arabic', sans-serif" : "inherit" }}>
             {c.title}
           </h2>
@@ -756,9 +741,6 @@ function WhyVcosh({ lang }: { lang: Lang }) {
     <section id="why-vcosh" dir={isRTL ? "rtl" : "ltr"} className="py-24 bg-gray-50">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">
-          <p className="text-xs font-bold tracking-widest uppercase mb-4" style={{ color: "#f5a623", fontFamily: isRTL ? "'Noto Sans Arabic', sans-serif" : "inherit" }}>
-            {c.tag}
-          </p>
           <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4" style={{ fontFamily: isRTL ? "'Noto Sans Arabic', sans-serif" : "inherit" }}>{c.title}</h2>
           <p className="text-lg text-gray-500" style={{ fontFamily: isRTL ? "'Noto Sans Arabic', sans-serif" : "inherit" }}>{c.subtitle}</p>
         </div>
@@ -791,9 +773,6 @@ function RewardsEcosystem({ lang }: { lang: Lang }) {
     <section dir={isRTL ? "rtl" : "ltr"} className="py-24 bg-white">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-12">
-          <p className="text-xs font-bold tracking-widest uppercase mb-4" style={{ color: "#f5a623", fontFamily: isRTL ? "'Noto Sans Arabic', sans-serif" : "inherit" }}>
-            {c.tag}
-          </p>
           <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4 whitespace-pre-line" style={{ fontFamily: isRTL ? "'Noto Sans Arabic', sans-serif" : "inherit" }}>
             {c.title}
           </h2>
