@@ -443,7 +443,7 @@ function Hero({ lang }: { lang: Lang }) {
         }}
       />
 
-      <div className="relative max-w-7xl mx-auto px-6 py-16 lg:py-20 w-full">
+      <div className="relative max-w-7xl mx-auto px-6 py-8 lg:py-12 w-full h-screen lg:h-auto lg:min-h-screen flex items-center">
         {/* Hero container: improved spacing and alignment */}
         <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 items-stretch lg:items-center">
           {/* Left: Text content — takes up ~45% on desktop */}
@@ -457,7 +457,7 @@ function Hero({ lang }: { lang: Lang }) {
             </div>
 
             {/* Headline — clean and unified */}
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight mb-6" style={{ fontFamily: isRTL ? "'Noto Sans Arabic', sans-serif" : "inherit" }}>
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight mb-4" style={{ fontFamily: isRTL ? "'Noto Sans Arabic', sans-serif" : "inherit" }}>
               <span className="text-white">
                 {c.hero.headline1} {c.hero.headline2}
               </span>
@@ -470,12 +470,12 @@ function Hero({ lang }: { lang: Lang }) {
             </h1>
 
             {/* Body text */}
-            <p className="text-base sm:text-lg text-emerald-100/90 mb-8 max-w-lg leading-relaxed" style={{ fontFamily: isRTL ? "'Noto Sans Arabic', sans-serif" : "inherit" }}>
+            <p className="text-sm sm:text-base text-emerald-100/90 mb-6 max-w-lg leading-relaxed" style={{ fontFamily: isRTL ? "'Noto Sans Arabic', sans-serif" : "inherit" }}>
               {c.hero.body}
             </p>
 
             {/* Action section — organized vertically */}
-            <div className="space-y-4 mb-8">
+            <div className="space-y-3 mb-6">
               {/* Primary CTA */}
               <a
                 href={BOOKING_URL}
@@ -515,7 +515,7 @@ function Hero({ lang }: { lang: Lang }) {
                 altText="VCOSH App"
                 autoplayInterval={5000}
                 imageWidth="clamp(150px, 35vw, 280px)"
-                fixedHeight="h-[500px] lg:h-[600px]"
+                fixedHeight="h-[350px] lg:h-[450px]"
                 showDots={true}
               />
             </div>
