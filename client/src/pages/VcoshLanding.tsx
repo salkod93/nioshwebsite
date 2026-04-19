@@ -449,7 +449,7 @@ function Hero({ lang }: { lang: Lang }) {
           {/* Left: Text content — takes up ~45% on desktop */}
           <div className={`flex flex-col justify-center flex-1 ${isRTL ? "text-right" : "text-left"}`}>
             {/* Badge — compact and refined */}
-            <div className={`inline-flex items-center gap-2 mb-4 px-4 py-2 rounded-full border border-emerald-400/40 bg-emerald-900/20 backdrop-blur-sm w-fit ${isRTL ? "flex-row-reverse" : ""}`}>
+            <div className={`inline-flex items-center gap-2 mt-8 sm:mt-6 lg:mt-0 mb-4 px-4 py-2 rounded-full border border-emerald-400/40 bg-emerald-900/20 backdrop-blur-sm w-fit ${isRTL ? "flex-row-reverse" : ""}`}>
               <div className="w-2 h-2 rounded-full" style={{ background: "#10b981" }} />
               <span className="text-sm font-semibold text-emerald-300" style={{ fontFamily: isRTL ? "'Noto Sans Arabic', sans-serif" : "inherit" }}>
                 {c.hero.badge}
