@@ -775,7 +775,7 @@ function RewardsEcosystem({ lang }: { lang: Lang }) {
             images={[REWARDS_SCREEN_1, REWARDS_SCREEN_2, REWARDS_SCREEN_3, REWARDS_SCREEN_4]}
             altText="VCOSH Rewards"
             speed={25}
-            imageWidth="w-36 h-72"
+            imageWidth="w-48 h-96"
             gap={16}
             visibleCount={3}
           />

@@ -4,7 +4,7 @@ interface InfiniteScrollProps {
   images: string[];
   altText: string;
   speed?: number; // pixels per second
-  imageWidth?: string; // e.g., "w-36 h-72"
+  imageWidth?: string; // e.g., "w-48 h-96"
   gap?: number; // gap between images in pixels (default: 16)
   visibleCount?: number; // number of images to show at once (default: 3)
 }
@@ -16,8 +16,8 @@ interface InfiniteScrollProps {
 export function InfiniteScroll({
   images,
   altText,
-  speed = 30,
-  imageWidth = "w-36 h-72",
+  speed = 40,
+  imageWidth = "w-48 h-96",
   gap = 16,
   visibleCount = 3,
 }: InfiniteScrollProps) {
@@ -35,7 +35,7 @@ export function InfiniteScroll({
     let scrollPosition = 0;
 
     // Calculate the width of one complete set of images
-    const imageWidthPx = 144; // w-36 = 144px
+    const imageWidthPx = 192; // w-48 = 192px
     const singleSetWidth = (imageWidthPx + gap) * images.length;
 
     const animate = () => {
@@ -56,7 +56,7 @@ export function InfiniteScroll({
   }, [speed, isAnimating, images.length, gap]);
 
   // Calculate container width to show exactly N images
-  const imageWidthPx = 144; // w-36 = 144px
+  const imageWidthPx = 192; // w-48 = 192px
   const containerWidth = (imageWidthPx * visibleCount) + (gap * (visibleCount - 1));
 
   return (
@@ -64,12 +64,15 @@ export function InfiniteScroll({
       {/* Outer container with overflow hidden and fixed width */}
       <div
         ref={scrollContainerRef}
-        className="overflow-hidden"
+        className="overflow-x-auto overflow-y-hidden"
         onMouseEnter={() => setIsAnimating(false)}
         onMouseLeave={() => setIsAnimating(true)}
         style={{
           width: `${containerWidth}px`,
           scrollBehavior: 'auto',
+          // Hide scrollbar
+          scrollbarWidth: 'none',
+          msOverflowStyle: 'none',
         }}
       >
         {/* Inner scrolling content - duplicated for seamless loop */}
@@ -96,6 +99,13 @@ export function InfiniteScroll({
           ))}
         </div>
       </div>
+      
+      {/* Hide scrollbar for webkit browsers */}
+      <style>{`
+        div::-webkit-scrollbar {
+          display: none;
+        }
+      `}</style>
     </div>
   );
 }
