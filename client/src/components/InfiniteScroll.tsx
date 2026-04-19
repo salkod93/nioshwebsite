@@ -13,6 +13,7 @@ interface InfiniteScrollProps {
  * Infinite scrolling carousel component
  * Shows N images at a time with continuous smooth scrolling
  * Works in both LTR (English) and RTL (Arabic) modes
+ * Preserves scroll position when pausing and resuming
  */
 export function InfiniteScroll({
   images,
@@ -26,6 +27,7 @@ export function InfiniteScroll({
   const contentRef = useRef<HTMLDivElement>(null);
   const [isAnimating, setIsAnimating] = useState(true);
   const [isRTL, setIsRTL] = useState(false);
+  const scrollPositionRef = useRef(0); // Persist scroll position across pause/resume
 
   // Detect if the page is in RTL mode
   useEffect(() => {
@@ -40,18 +42,18 @@ export function InfiniteScroll({
     if (!container || !content || !isAnimating) return;
 
     let animationId: number;
-    let scrollPosition = 0;
 
     // Calculate the width of one complete set of images
     const imageWidthPx = 192; // w-48 = 192px
     const singleSetWidth = (imageWidthPx + gap) * images.length;
 
     const animate = () => {
-      scrollPosition += speed / 60; // Divide by 60 for 60fps
+      // Increment from the persisted scroll position
+      scrollPositionRef.current += speed / 60; // Divide by 60 for 60fps
 
       // Reset to beginning when we've scrolled past the first set
-      if (scrollPosition >= singleSetWidth) {
-        scrollPosition = 0;
+      if (scrollPositionRef.current >= singleSetWidth) {
+        scrollPositionRef.current = 0;
       }
 
       // In RTL mode, scroll from right to left
@@ -59,10 +61,10 @@ export function InfiniteScroll({
         // For RTL, we need to scroll in the opposite direction
         // The maximum scroll value in RTL is negative
         const maxScroll = content.scrollWidth - container.clientWidth;
-        container.scrollLeft = maxScroll - scrollPosition;
+        container.scrollLeft = maxScroll - scrollPositionRef.current;
       } else {
         // In LTR mode, normal left-to-right scrolling
-        container.scrollLeft = scrollPosition;
+        container.scrollLeft = scrollPositionRef.current;
       }
 
       animationId = requestAnimationFrame(animate);
