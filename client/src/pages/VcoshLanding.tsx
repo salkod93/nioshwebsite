@@ -508,8 +508,8 @@ function Hero({ lang }: { lang: Lang }) {
             images={[HERO_SCREEN_1, HERO_SCREEN_2, HERO_SCREEN_3]}
             altText="VCOSH App"
             autoplayInterval={5000}
-            imageWidth="clamp(90px, 24vw, 176px)"
-            aspectRatio="946 / 2048"
+            imageWidth="clamp(150px, 35vw, 280px)"
+            fixedHeight="h-[500px] lg:h-[600px]"
             showDots={true}
           />
         </div>

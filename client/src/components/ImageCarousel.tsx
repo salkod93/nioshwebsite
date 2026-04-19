@@ -9,6 +9,7 @@ interface ImageCarouselProps {
   showDots?: boolean;
   imageWidth?: string; // CSS width value, e.g., "w-36 h-72"
   aspectRatio?: string; // CSS aspect-ratio value, e.g., "346 / 641"
+  fixedHeight?: string; // Fixed height to prevent size changes (e.g., "h-96")
 }
 
 /**
@@ -20,10 +21,11 @@ export function ImageCarousel({
   altText,
   autoplayInterval = 4000,
   containerClassName = "flex justify-center items-center",
-  imageClassName = "w-full h-full object-cover",
+  imageClassName = "w-full h-full object-contain",
   showDots = true,
   imageWidth = "w-36 h-72",
   aspectRatio,
+  fixedHeight,
 }: ImageCarouselProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -53,8 +55,8 @@ export function ImageCarousel({
       <div className="relative w-full flex justify-center">
         {/* Main carousel container */}
         <div
-          className={`rounded-3xl overflow-hidden shadow-2xl border border-white/20 ${imageWidth}`}
-          style={aspectRatio ? { aspectRatio } : undefined}
+          className={`rounded-3xl overflow-hidden shadow-2xl border border-white/20 ${imageWidth} ${fixedHeight || ''}`}
+          style={aspectRatio && !fixedHeight ? { aspectRatio } : undefined}
         >
           {/* Image with fade transition */}
           <img
