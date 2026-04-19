@@ -443,7 +443,7 @@ function Hero({ lang }: { lang: Lang }) {
         }}
       />
 
-      <div className="relative max-w-7xl mx-auto px-6 py-8 lg:py-12 w-full h-screen lg:h-auto lg:min-h-screen flex items-center">
+      <div className="relative max-w-7xl mx-auto px-6 py-8 lg:py-12 w-full min-h-screen flex items-center">
         {/* Hero container: improved spacing and alignment */}
         <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 items-stretch lg:items-center">
           {/* Left: Text content — takes up ~45% on desktop */}
