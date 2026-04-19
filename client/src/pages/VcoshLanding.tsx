@@ -4,6 +4,7 @@ import { Link } from "wouter";
 import JsonLd from "@/components/JsonLd";
 import PageMeta from "@/components/PageMeta";
 import { ImageCarousel } from "@/components/ImageCarousel";
+import { InfiniteScroll } from "@/components/InfiniteScroll";
 import { vcoshAppSchema, vcoshPageSchema } from "@/lib/jsonLdSchemas";
 
 // ─── Asset URLs (all from the original vcosh-landingpage.manus.space CDN) ───
@@ -768,14 +769,14 @@ function RewardsEcosystem({ lang }: { lang: Lang }) {
           </p>
         </div>
 
-        {/* Rotating carousel of 4 phone screenshots */}
+        {/* Infinite scrolling carousel of 4 phone screenshots */}
         <div className="mb-16">
-          <ImageCarousel
+          <InfiniteScroll
             images={[REWARDS_SCREEN_1, REWARDS_SCREEN_2, REWARDS_SCREEN_3, REWARDS_SCREEN_4]}
             altText="VCOSH Rewards"
-            autoplayInterval={4000}
+            speed={25}
             imageWidth="w-36 h-72"
-            showDots={true}
+            gap="gap-4"
           />
         </div>
 
