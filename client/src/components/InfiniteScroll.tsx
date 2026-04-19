@@ -12,6 +12,7 @@ interface InfiniteScrollProps {
 /**
  * Infinite scrolling carousel component
  * Shows N images at a time with continuous smooth scrolling
+ * Works in both LTR (English) and RTL (Arabic) modes
  */
 export function InfiniteScroll({
   images,
@@ -24,6 +25,13 @@ export function InfiniteScroll({
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const [isAnimating, setIsAnimating] = useState(true);
+  const [isRTL, setIsRTL] = useState(false);
+
+  // Detect if the page is in RTL mode
+  useEffect(() => {
+    const htmlDir = document.documentElement.dir || document.documentElement.lang?.startsWith('ar');
+    setIsRTL(htmlDir === 'rtl' || htmlDir === true);
+  }, []);
 
   useEffect(() => {
     const container = scrollContainerRef.current;
@@ -46,14 +54,24 @@ export function InfiniteScroll({
         scrollPosition = 0;
       }
 
-      container.scrollLeft = scrollPosition;
+      // In RTL mode, scroll from right to left
+      if (isRTL) {
+        // For RTL, we need to scroll in the opposite direction
+        // The maximum scroll value in RTL is negative
+        const maxScroll = content.scrollWidth - container.clientWidth;
+        container.scrollLeft = maxScroll - scrollPosition;
+      } else {
+        // In LTR mode, normal left-to-right scrolling
+        container.scrollLeft = scrollPosition;
+      }
+
       animationId = requestAnimationFrame(animate);
     };
 
     animationId = requestAnimationFrame(animate);
 
     return () => cancelAnimationFrame(animationId);
-  }, [speed, isAnimating, images.length, gap]);
+  }, [speed, isAnimating, images.length, gap, isRTL]);
 
   // Calculate container width to show exactly N images
   const imageWidthPx = 192; // w-48 = 192px
@@ -73,6 +91,7 @@ export function InfiniteScroll({
           // Hide scrollbar
           scrollbarWidth: 'none',
           msOverflowStyle: 'none',
+          direction: isRTL ? 'rtl' : 'ltr',
         }}
       >
         {/* Inner scrolling content - duplicated for seamless loop */}
@@ -82,6 +101,7 @@ export function InfiniteScroll({
           style={{
             gap: `${gap}px`,
             width: `${(imageWidthPx + gap) * images.length * 2}px`,
+            direction: isRTL ? 'rtl' : 'ltr',
           }}
         >
           {/* Render images twice for seamless infinite loop */}
