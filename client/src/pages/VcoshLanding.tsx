@@ -437,74 +437,69 @@ function Hero({ lang }: { lang: Lang }) {
         }}
       />
 
-      <div className="relative max-w-7xl mx-auto px-6 pt-24 pb-16 flex flex-col lg:grid lg:grid-cols-2 gap-12 items-center w-full">
-        {/* Text side */}
-        <div className={isRTL ? "text-right" : "text-left"}>
-          {/* Badge */}
-          <div className={`inline-flex flex-col mb-8 px-5 py-3 rounded-2xl border border-emerald-400/30 bg-emerald-900/30 backdrop-blur-sm items-center`}>
-            <span
-              className="font-extrabold text-white"
-              style={{ fontFamily: "'Inter', sans-serif", letterSpacing: "0.12em", fontSize: "42px", textAlign: 'center' }}
-            >
+      <div className="relative max-w-7xl mx-auto px-6 pt-20 pb-20 flex flex-col lg:grid lg:grid-cols-2 gap-16 items-center w-full">
+        {/* Left: Text content */}
+        <div className={`flex flex-col ${isRTL ? "text-right" : "text-left"}`}>
+          {/* Badge — compact and refined */}
+          <div className={`inline-flex items-center gap-2 mb-6 px-4 py-2 rounded-full border border-emerald-400/40 bg-emerald-900/20 backdrop-blur-sm w-fit ${isRTL ? "flex-row-reverse" : ""}`}>
+            <div className="w-2 h-2 rounded-full" style={{ background: "#10b981" }} />
+            <span className="text-sm font-semibold text-emerald-300" style={{ fontFamily: isRTL ? "'Noto Sans Arabic', sans-serif" : "inherit" }}>
               {c.hero.badge}
-            </span>
-            <span
-              className="text-xs font-medium text-emerald-300 mt-0.5"
-              style={{ fontFamily: isRTL ? "'Noto Sans Arabic', sans-serif" : "inherit" }}
-            >
-              {(c.hero as any).badgeSub}
             </span>
           </div>
 
-          {/* Headline */}
-          <h1
-            className="text-5xl lg:text-6xl font-bold leading-tight mb-6"
-            style={{ fontFamily: isRTL ? "'Noto Sans Arabic', sans-serif" : "inherit" }}
-          >
-            <span className="text-white">{c.hero.headline1}<br />{c.hero.headline2}<br /></span>
-            <span style={{ color: "#f5a623" }}>{c.hero.headline3}</span>
+          {/* Headline — clean and unified */}
+          <h1 className="text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight mb-8" style={{ fontFamily: isRTL ? "'Noto Sans Arabic', sans-serif" : "inherit" }}>
+            <span className="text-white">
+              {c.hero.headline1} {c.hero.headline2}
+            </span>
             <br />
-            <span className="text-white text-4xl lg:text-5xl">{c.hero.headline4}</span>
+            <span style={{ color: "#fbbf24" }}>
+              {c.hero.headline3}
+            </span>
+            <br />
+            <span className="text-white">{c.hero.headline4}</span>
           </h1>
 
-          <p
-            className="text-lg text-emerald-100/80 mb-10 max-w-lg leading-relaxed"
-            style={{ fontFamily: isRTL ? "'Noto Sans Arabic', sans-serif" : "inherit" }}
-          >
+          {/* Body text */}
+          <p className="text-lg text-emerald-100/90 mb-12 max-w-xl leading-relaxed" style={{ fontFamily: isRTL ? "'Noto Sans Arabic', sans-serif" : "inherit" }}>
             {c.hero.body}
           </p>
 
-          {/* CTAs */}
-          <div className={`flex flex-wrap gap-4 mb-8 ${isRTL ? "justify-end" : ""}`}>
+          {/* Action section — organized vertically */}
+          <div className="space-y-5">
+            {/* Primary CTA */}
             <a
               href={BOOKING_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full font-semibold text-white transition-all hover:opacity-90 hover:scale-105"
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-lg font-semibold text-white transition-all hover:shadow-lg hover:scale-105 w-full sm:w-auto"
               style={{
-                background: "linear-gradient(135deg, #1a7a5e 0%, #2da882 100%)",
+                background: "linear-gradient(135deg, #10b981 0%, #059669 100%)",
                 fontFamily: isRTL ? "'Noto Sans Arabic', sans-serif" : "inherit",
               }}
             >
               {c.hero.cta1}
             </a>
+
+            {/* Secondary CTA */}
             <button
               onClick={() => scrollTo("how-it-works")}
-              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full font-semibold border border-white/30 text-white hover:bg-white/10 transition-all"
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-lg font-semibold border-2 border-white/40 text-white hover:bg-white/10 transition-all w-full sm:w-auto"
               style={{ fontFamily: isRTL ? "'Noto Sans Arabic', sans-serif" : "inherit" }}
             >
               {c.hero.cta2}
             </button>
           </div>
 
-          {/* App store badges */}
-          <div className={isRTL ? "flex justify-end" : ""}>
+          {/* App store badges — below CTAs */}
+          <div className={`mt-10 ${isRTL ? "flex justify-end" : ""}`}>
             <AppStoreBadges lang={lang} />
           </div>
         </div>
 
-        {/* Right: Rotating carousel of 3 phone screenshots */}
-        <div className="mb-12">
+        {/* Right: Image carousel — centered and prominent */}
+        <div className="flex justify-center items-center">
           <ImageCarousel
             images={[HERO_SCREEN_1, HERO_SCREEN_2, HERO_SCREEN_3]}
             altText="VCOSH App"
