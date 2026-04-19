@@ -776,7 +776,8 @@ function RewardsEcosystem({ lang }: { lang: Lang }) {
             altText="VCOSH Rewards"
             speed={25}
             imageWidth="w-36 h-72"
-            gap="gap-4"
+            gap={16}
+            visibleCount={3}
           />
         </div>
 
