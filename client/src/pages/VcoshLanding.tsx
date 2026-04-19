@@ -3,6 +3,7 @@ import { useLang } from "@/contexts/LanguageContext";
 import { Link } from "wouter";
 import JsonLd from "@/components/JsonLd";
 import PageMeta from "@/components/PageMeta";
+import { ImageCarousel } from "@/components/ImageCarousel";
 import { vcoshAppSchema, vcoshPageSchema } from "@/lib/jsonLdSchemas";
 
 // ─── Asset URLs (all from the original vcosh-landingpage.manus.space CDN) ───
@@ -501,48 +502,16 @@ function Hero({ lang }: { lang: Lang }) {
           </div>
         </div>
 
-        {/* Right: 3 phone screenshots with entrance animations */}
-        {/* Each phone uses aspect-ratio so the image is NEVER cropped regardless of screen size.
-            Side phones: natural ratio ~1:1.85 (hero1) and ~1:2.19 (hero3)
-            Center phone: natural ratio ~1:2.16 (hero2)
-            Width is driven by clamp() and height follows automatically via aspect-ratio. */}
-        <div className="relative flex justify-center items-end gap-3 lg:gap-4">
-          {/* Left phone — aspect ratio matches hero1 (346×641 ≈ 0.54) */}
-          <div
-            className="relative z-10 rounded-3xl overflow-hidden shadow-2xl border border-white/20 self-end mb-6 lg:mb-8"
-            style={{
-              width: "clamp(90px, 19vw, 144px)",
-              aspectRatio: "346 / 641",
-              animation: "vcoshPhoneLeft 0.8s cubic-bezier(0.22,1,0.36,1) both",
-              animationDelay: "0.1s"
-            }}
-          >
-            <img src={HERO_SCREEN_1} alt="VCOSH App" className="w-full h-full object-cover" />
-          </div>
-          {/* Center phone (tallest) — aspect ratio matches hero2 (946×2048 ≈ 0.46) */}
-          <div
-            className="relative z-20 rounded-3xl overflow-hidden shadow-2xl border border-white/20"
-            style={{
-              width: "clamp(110px, 24vw, 176px)",
-              aspectRatio: "946 / 2048",
-              animation: "vcoshPhoneCenter 0.9s cubic-bezier(0.22,1,0.36,1) both",
-              animationDelay: "0s"
-            }}
-          >
-            <img src={HERO_SCREEN_2} alt="VCOSH App" className="w-full h-full object-cover" />
-          </div>
-          {/* Right phone — aspect ratio matches hero3 (242×529 ≈ 0.46) */}
-          <div
-            className="relative z-10 rounded-3xl overflow-hidden shadow-2xl border border-white/20 self-end mb-6 lg:mb-8"
-            style={{
-              width: "clamp(90px, 19vw, 144px)",
-              aspectRatio: "242 / 529",
-              animation: "vcoshPhoneRight 0.8s cubic-bezier(0.22,1,0.36,1) both",
-              animationDelay: "0.2s"
-            }}
-          >
-            <img src={HERO_SCREEN_3} alt="VCOSH App" className="w-full h-full object-cover" />
-          </div>
+        {/* Right: Rotating carousel of 3 phone screenshots */}
+        <div className="mb-12">
+          <ImageCarousel
+            images={[HERO_SCREEN_1, HERO_SCREEN_2, HERO_SCREEN_3]}
+            altText="VCOSH App"
+            autoplayInterval={5000}
+            imageWidth="clamp(90px, 24vw, 176px)"
+            aspectRatio="946 / 2048"
+            showDots={true}
+          />
         </div>
       </div>
     </section>
@@ -799,13 +768,15 @@ function RewardsEcosystem({ lang }: { lang: Lang }) {
           </p>
         </div>
 
-        {/* 4 phone screenshots */}
-        <div className="flex justify-center gap-4 mb-16 flex-wrap">
-          {[REWARDS_SCREEN_1, REWARDS_SCREEN_2, REWARDS_SCREEN_3, REWARDS_SCREEN_4].map((src, i) => (
-            <div key={i} className="w-36 h-72 rounded-3xl overflow-hidden shadow-xl border border-gray-100">
-              <img src={src} alt="VCOSH Rewards" className="w-full h-full object-cover" />
-            </div>
-          ))}
+        {/* Rotating carousel of 4 phone screenshots */}
+        <div className="mb-16">
+          <ImageCarousel
+            images={[REWARDS_SCREEN_1, REWARDS_SCREEN_2, REWARDS_SCREEN_3, REWARDS_SCREEN_4]}
+            altText="VCOSH Rewards"
+            autoplayInterval={4000}
+            imageWidth="w-36 h-72"
+            showDots={true}
+          />
         </div>
 
         {/* Endorsement cards */}
