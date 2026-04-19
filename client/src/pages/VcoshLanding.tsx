@@ -286,29 +286,35 @@ const t = {
 };
 
 // ─── App Store Badges ─────────────────────────────────────────────────────────
-function AppStoreBadges({ lang }: { lang: Lang }) {
+function AppStoreBadges({ lang, size = "sm" }: { lang: Lang; size?: "sm" | "lg" }) {
   const c = t[lang];
+  const isLarge = size === "lg";
+  const paddingClass = isLarge ? "px-8 py-4" : "px-4 py-2";
+  const textClass = isLarge ? "text-base" : "text-sm";
+  const iconClass = isLarge ? "w-6 h-6" : "w-5 h-5";
+  const labelClass = isLarge ? "text-sm" : "text-xs";
+  
   return (
-    <div className="flex gap-3 flex-wrap">
+    <div className={`flex gap-3 flex-wrap ${isLarge ? "justify-center md:justify-start" : ""}`}>
       <a
         href={APP_STORE_URL}
         target="_blank"
         rel="noopener noreferrer"
-        className="flex items-center gap-2 px-4 py-2 rounded-xl bg-black text-white text-sm font-medium hover:bg-gray-900 transition-colors"
+        className={`flex items-center gap-2 ${paddingClass} rounded-lg bg-black text-white ${textClass} font-medium hover:bg-gray-900 transition-colors`}
       >
-        <svg className="w-5 h-5 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">
+        <svg className={`${iconClass} flex-shrink-0`} viewBox="0 0 24 24" fill="currentColor">
           <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
         </svg>
         <div>
-          <div className="text-xs text-gray-400 leading-none">{c.hero.appStore}</div>
-          <div className="text-sm font-semibold leading-tight">{c.hero.appStoreName}</div>
+          <div className={`${labelClass} text-gray-400 leading-none`}>{c.hero.appStore}</div>
+          <div className={`${textClass} font-semibold leading-tight`}>{c.hero.appStoreName}</div>
         </div>
       </a>
       <a
         href={GOOGLE_PLAY_URL}
         target="_blank"
         rel="noopener noreferrer"
-        className="flex items-center gap-2 px-4 py-2 rounded-xl bg-black text-white text-sm font-medium hover:bg-gray-900 transition-colors"
+        className={`flex items-center gap-2 ${paddingClass} rounded-lg bg-black text-white ${textClass} font-medium hover:bg-gray-900 transition-colors`}
       >
         <svg className="w-5 h-5 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">
           <path d="M3.18 23.76c.3.17.65.19.98.08l12.49-7.17-2.83-2.83-10.64 9.92zM.54 1.52C.2 1.86 0 2.4 0 3.1v17.8c0 .7.2 1.24.54 1.58l.08.08 9.96-9.96v-.24L.62 1.44l-.08.08zM20.15 10.3l-2.83-1.63-3.17 3.17 3.17 3.17 2.86-1.65c.82-.47.82-1.24-.03-1.06zM3.18.24L15.67 7.4l-2.83 2.83L2.2.31c.33-.11.68-.09.98.08v-.15z" />
@@ -438,8 +444,8 @@ function Hero({ lang }: { lang: Lang }) {
       />
 
       <div className="relative max-w-7xl mx-auto px-6 pt-20 pb-20 w-full">
-        {/* Main grid: text left, carousel right */}
-        <div className="flex flex-col md:grid md:grid-cols-2 gap-12 items-start mb-8">
+        {/* Main grid: text left, carousel + badges right */}
+        <div className="flex flex-col md:grid md:grid-cols-2 gap-12 items-start">
           {/* Left: Text content */}
           <div className={`flex flex-col ${isRTL ? "text-right" : "text-left"}`}>
             {/* Badge — compact and refined */}
@@ -495,22 +501,23 @@ function Hero({ lang }: { lang: Lang }) {
             </div>
           </div>
 
-          {/* Right: Image carousel — next to text */}
-          <div className="flex justify-center items-start">
-            <ImageCarousel
-              images={[HERO_SCREEN_1, HERO_SCREEN_2, HERO_SCREEN_3]}
-              altText="VCOSH App"
-              autoplayInterval={5000}
-              imageWidth="clamp(150px, 35vw, 280px)"
-              fixedHeight="h-[500px] lg:h-[600px]"
-              showDots={true}
-            />
+          {/* Right: Image carousel + app badges */}
+          <div className="flex flex-col items-center md:items-start gap-8 w-full">
+            {/* Carousel centered on mobile, aligned left on desktop */}
+            <div className="flex justify-center w-full md:justify-start">
+              <ImageCarousel
+                images={[HERO_SCREEN_1, HERO_SCREEN_2, HERO_SCREEN_3]}
+                altText="VCOSH App"
+                autoplayInterval={5000}
+                imageWidth="clamp(150px, 35vw, 280px)"
+                fixedHeight="h-[500px] lg:h-[600px]"
+                showDots={true}
+              />
+            </div>
+            
+            {/* App store badges — below carousel, sized like hero buttons */}
+            <AppStoreBadges lang={lang} size="lg" />
           </div>
-        </div>
-
-        {/* App store badges — below both text and carousel */}
-        <div className={`flex gap-4 ${isRTL ? "justify-end" : ""}`}>
-          <AppStoreBadges lang={lang} />
         </div>
       </div>
     </section>
