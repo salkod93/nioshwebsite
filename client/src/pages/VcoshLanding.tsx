@@ -443,13 +443,13 @@ function Hero({ lang }: { lang: Lang }) {
         }}
       />
 
-      <div className="relative max-w-7xl mx-auto px-6 pt-20 pb-20 w-full">
-        {/* Main grid: text left, carousel + badges right */}
-        <div className="flex flex-col md:grid md:grid-cols-2 gap-12 items-start">
-          {/* Left: Text content */}
-          <div className={`flex flex-col ${isRTL ? "text-right" : "text-left"}`}>
+      <div className="relative max-w-7xl mx-auto px-6 py-16 lg:py-20 w-full">
+        {/* Hero container: improved spacing and alignment */}
+        <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 items-stretch lg:items-center">
+          {/* Left: Text content — takes up ~45% on desktop */}
+          <div className={`flex flex-col justify-center flex-1 ${isRTL ? "text-right" : "text-left"}`}>
             {/* Badge — compact and refined */}
-            <div className={`inline-flex items-center gap-2 mb-6 px-4 py-2 rounded-full border border-emerald-400/40 bg-emerald-900/20 backdrop-blur-sm w-fit ${isRTL ? "flex-row-reverse" : ""}`}>
+            <div className={`inline-flex items-center gap-2 mb-4 px-4 py-2 rounded-full border border-emerald-400/40 bg-emerald-900/20 backdrop-blur-sm w-fit ${isRTL ? "flex-row-reverse" : ""}`}>
               <div className="w-2 h-2 rounded-full" style={{ background: "#10b981" }} />
               <span className="text-sm font-semibold text-emerald-300" style={{ fontFamily: isRTL ? "'Noto Sans Arabic', sans-serif" : "inherit" }}>
                 {c.hero.badge}
@@ -457,7 +457,7 @@ function Hero({ lang }: { lang: Lang }) {
             </div>
 
             {/* Headline — clean and unified */}
-            <h1 className="text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight mb-8" style={{ fontFamily: isRTL ? "'Noto Sans Arabic', sans-serif" : "inherit" }}>
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight mb-6" style={{ fontFamily: isRTL ? "'Noto Sans Arabic', sans-serif" : "inherit" }}>
               <span className="text-white">
                 {c.hero.headline1} {c.hero.headline2}
               </span>
@@ -470,18 +470,18 @@ function Hero({ lang }: { lang: Lang }) {
             </h1>
 
             {/* Body text */}
-            <p className="text-lg text-emerald-100/90 mb-12 max-w-xl leading-relaxed" style={{ fontFamily: isRTL ? "'Noto Sans Arabic', sans-serif" : "inherit" }}>
+            <p className="text-base sm:text-lg text-emerald-100/90 mb-8 max-w-lg leading-relaxed" style={{ fontFamily: isRTL ? "'Noto Sans Arabic', sans-serif" : "inherit" }}>
               {c.hero.body}
             </p>
 
             {/* Action section — organized vertically */}
-            <div className="space-y-5">
+            <div className="space-y-3 mb-8">
               {/* Primary CTA */}
               <a
                 href={BOOKING_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-lg font-semibold text-white transition-all hover:shadow-lg hover:scale-105 w-full sm:w-auto"
+                className="inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold text-white transition-all hover:shadow-lg hover:scale-105 w-full sm:w-auto"
                 style={{
                   background: "linear-gradient(135deg, #10b981 0%, #059669 100%)",
                   fontFamily: isRTL ? "'Noto Sans Arabic', sans-serif" : "inherit",
@@ -493,18 +493,23 @@ function Hero({ lang }: { lang: Lang }) {
               {/* Secondary CTA */}
               <button
                 onClick={() => scrollTo("how-it-works")}
-                className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-lg font-semibold border-2 border-white/40 text-white hover:bg-white/10 transition-all w-full sm:w-auto"
+                className="inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold border-2 border-white/40 text-white hover:bg-white/10 transition-all w-full sm:w-auto"
                 style={{ fontFamily: isRTL ? "'Noto Sans Arabic', sans-serif" : "inherit" }}
               >
                 {c.hero.cta2}
               </button>
             </div>
+
+            {/* App store badges — visible on mobile only */}
+            <div className="lg:hidden">
+              <AppStoreBadges lang={lang} size="lg" />
+            </div>
           </div>
 
-          {/* Right: Image carousel + app badges */}
-          <div className="flex flex-col items-center md:items-start gap-8 w-full">
-            {/* Carousel centered on mobile, aligned left on desktop */}
-            <div className="flex justify-center w-full md:justify-start">
+          {/* Right: Image carousel — takes up ~55% on desktop */}
+          <div className="flex flex-col items-center lg:items-stretch flex-1 gap-6">
+            {/* Carousel: full width on mobile, natural width on desktop */}
+            <div className="flex justify-center w-full">
               <ImageCarousel
                 images={[HERO_SCREEN_1, HERO_SCREEN_2, HERO_SCREEN_3]}
                 altText="VCOSH App"
@@ -515,8 +520,10 @@ function Hero({ lang }: { lang: Lang }) {
               />
             </div>
             
-            {/* App store badges — below carousel, sized like hero buttons */}
-            <AppStoreBadges lang={lang} size="lg" />
+            {/* App store badges — visible only on desktop, positioned below carousel */}
+            <div className="hidden lg:flex justify-center">
+              <AppStoreBadges lang={lang} size="lg" />
+            </div>
           </div>
         </div>
       </div>
