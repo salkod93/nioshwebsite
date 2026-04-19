@@ -90,7 +90,7 @@ export function ImageCarousel({
 
         {/* Dot indicators */}
         {showDots && (
-          <div className="absolute -bottom-12 left-1/2 -translate-x-1/2 flex gap-2">
+          <div className="absolute -bottom-16 left-1/2 -translate-x-1/2 flex gap-2">
             {images.map((_, index) => (
               <button
                 key={index}
