@@ -43,7 +43,7 @@ export const content = {
     about: {
       title: "About NIOSH",
       description: [
-        "The National Institute for Occupational Safety and Health is the executive arm of the National Council for Occupational Safety and Health. It was established in 2024 to be the first national reference for qualifying competencies, developing policies, and promoting innovation in the field of occupational safety and health.",
+        "The National Institute for Occupational Safety and Health is the executive arm of the National Council for Occupational Safety and Health. It was established in 2025 to be the first national reference for qualifying competencies, developing policies, and promoting innovation in the field of occupational safety and health.",
         "The Institute's establishment came in response to the economic and social transformations witnessed by the Saudi labor market, with the significant expansion in the number of establishments and workers, and the increasing need for safe and healthy work environments.",
         "The Institute aims to be the national reference in building capabilities, developing knowledge, and standardizing practices in the field of occupational safety and health, in a way that enhances the quality of the work environment and supports sustainable development."
       ],
@@ -310,7 +310,7 @@ export const content = {
     about: {
       title: "عن المعهد",
       description: [
-        "المعهد الوطني للسلامة والصحة المهنية هو الذراع التنفيذي للمجلس الوطني للسلامة والصحة المهنية. تأسس عام 2024 ليكون المرجع الوطني الأول لتأهيل الكفاءات وتطوير السياسات وتعزيز الابتكار في مجال السلامة والصحة المهنية.",
+        "المعهد الوطني للسلامة والصحة المهنية هو الذراع التنفيذي للمجلس الوطني للسلامة والصحة المهنية. تأسس عام 2025 ليكون المرجع الوطني الأول لتأهيل الكفاءات وتطوير السياسات وتعزيز الابتكار في مجال السلامة والصحة المهنية.",
         "جاء تأسيس المعهد استجابة للتحولات الاقتصادية والاجتماعية التي يشهدها سوق العمل السعودي، مع التوسع الكبير في أعداد المنشآت والعاملين، والحاجة المتزايدة لبيئات عمل آمنة وصحية.",
         "يهدف المعهد إلى أن يكون المرجع الوطني في بناء القدرات وتطوير المعرفة وتوحيد الممارسات في مجال السلامة والصحة المهنية، بما يعزز جودة بيئة العمل ويدعم التنمية المستدامة."
       ],
