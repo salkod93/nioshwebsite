@@ -151,7 +151,8 @@ export default function Layout({ children, lang, setLang }: LayoutProps) {
               {t.nav.contact}
             </button>
 
-            <button onClick={() => navigate('/kawader')} className="cursor-pointer text-foreground/80 hover:text-primary font-medium transition-colors px-2 py-1 rounded-md hover:bg-primary/10 hover:underline underline-offset-4">
+            {/* Kawader tab hidden for now - page preserved for future reinstatement */}
+            <button onClick={() => navigate('/kawader')} className="hidden cursor-pointer text-foreground/80 hover:text-primary font-medium transition-colors px-2 py-1 rounded-md hover:bg-primary/10 hover:underline underline-offset-4">
               {t.nav.kawader}
             </button>
 
@@ -255,10 +256,10 @@ export default function Layout({ children, lang, setLang }: LayoutProps) {
             {t.nav.contact}
           </button>
 
-          {/* Kawader */}
+          {/* Kawader - hidden for now, page preserved for future reinstatement */}
           <button
             onClick={() => { navigate('/kawader'); setMobileMenuOpen(false); }}
-            className="w-full text-start py-4 px-4 text-lg font-semibold text-foreground hover:text-primary hover:bg-primary/5 rounded-xl transition-colors border-b border-border/20"
+            className="hidden w-full text-start py-4 px-4 text-lg font-semibold text-foreground hover:text-primary hover:bg-primary/5 rounded-xl transition-colors border-b border-border/20"
           >
             {t.nav.kawader}
           </button>
