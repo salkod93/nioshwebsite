@@ -156,12 +156,22 @@ export default function Layout({ children, lang, setLang }: LayoutProps) {
               {t.nav.kawader}
             </button>
 
+            {/* VCOSH button hidden for now - page preserved for future reinstatement */}
             <button
               onClick={() => navigate('/vcosh')}
-              className="vcosh-btn text-white px-4 py-2 rounded-md font-medium text-sm text-center leading-tight max-w-[200px]"
+              className="hidden vcosh-btn text-white px-4 py-2 rounded-md font-medium text-sm text-center leading-tight max-w-[200px]"
             >
               {t.nav.virtualCenter}
             </button>
+            
+            <a
+              href="https://niosh.futurex.sa"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="elearning-btn bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-md font-medium text-sm text-center leading-tight max-w-[200px] transition-colors"
+            >
+              {t.nav.eLearningCenter || 'eLearning Center'}
+            </a>
             
             <Button 
               variant="outline" 
@@ -264,13 +274,24 @@ export default function Layout({ children, lang, setLang }: LayoutProps) {
             {t.nav.kawader}
           </button>
 
-          {/* Virtual Center */}
+          {/* VCOSH button hidden for now - page preserved for future reinstatement */}
           <button
             onClick={() => { navigate('/vcosh'); setMobileMenuOpen(false); }}
-            className="vcosh-btn w-full text-start py-4 px-4 text-lg font-semibold rounded-xl border-b border-border/20 text-white"
+            className="hidden vcosh-btn w-full text-start py-4 px-4 text-lg font-semibold rounded-xl border-b border-border/20 text-white"
           >
             {t.nav.virtualCenter}
           </button>
+          
+          {/* eLearning Center */}
+          <a
+            href="https://niosh.futurex.sa"
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => setMobileMenuOpen(false)}
+            className="elearning-btn w-full text-start py-4 px-4 text-lg font-semibold rounded-xl border-b border-border/20 text-white bg-emerald-600 hover:bg-emerald-700 transition-colors"
+          >
+            {t.nav.eLearningCenter}
+          </a>
 
           {/* Language Toggle */}
           <div className="mt-auto pt-6">

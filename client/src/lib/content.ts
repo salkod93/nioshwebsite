@@ -33,6 +33,7 @@ export const content = {
       contact: "Contact Us",
       kawader: "Apply to Kawader",
       virtualCenter: "Virtual Center of Occupational Safety and Health Services",
+      eLearningCenter: "eLearning Center",
       langSwitch: "العربية"
     },
     hero: {
@@ -299,7 +300,8 @@ export const content = {
       },
       contact: "تواصل معنا",
       kawader: "التقديم على كوادر",
-      virtualCenter: "مركز خدمات السلامة والصحة المهنية الافتراضي",
+      virtualCenter: "المركز الافتراضي لخدمات السلامة والصحة المهنية",
+      eLearningCenter: "مركز التعلم الإلكتروني",
       langSwitch: "English"
     },
     hero: {
