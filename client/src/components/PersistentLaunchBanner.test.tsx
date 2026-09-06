@@ -9,6 +9,7 @@ describe("PersistentLaunchBanner", () => {
 
     expect(markup).toContain("اطلاق تجريبي");
     expect(markup).toContain("launch-banner");
+    expect(markup.match(/launch-banner-group/g)).toHaveLength(2);
     expect(markup).toContain('aria-live="polite"');
   });
 });

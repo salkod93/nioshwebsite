@@ -205,13 +205,13 @@
 }
 
 /* Persistent experimental-launch banner */
-@keyframes launchBannerScroll {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
+@keyframes launchBannerLoop {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(-50%, 0, 0); }
 }
 
 .launch-banner-track {
-  animation: launchBannerScroll 24s linear infinite;
+  animation: launchBannerLoop 20s linear infinite;
   will-change: transform;
 }
 
@@ -222,7 +222,7 @@
     justify-content: center;
   }
 
-  .launch-banner-track > span:last-child {
+  .launch-banner-track > .launch-banner-group:last-child {
     display: none;
   }
 }

@@ -151,3 +151,4 @@
 - [x] VCOSH: Remove 7 subtitle/label text elements (المركز, الحالة التجارية, العملية, متعدد اللغات بالتصميم, الفارق, نظام المكافآت)
 
 - [x] Add persistent animated bottom banner across all pages with the text “اطلاق تجريبي”
+- [x] Refine the experimental-launch banner to scroll in a seamless infinite loop
