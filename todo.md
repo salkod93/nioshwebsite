@@ -149,3 +149,5 @@
 - [x] VCOSH: Remove emoji and number labels from problem cards; remove div at line 824
 - [x] Fix: Hero section images crop incorrectly on mobile view
 - [x] VCOSH: Remove 7 subtitle/label text elements (المركز, الحالة التجارية, العملية, متعدد اللغات بالتصميم, الفارق, نظام المكافآت)
+
+- [x] Add persistent animated bottom banner across all pages with the text “اطلاق تجريبي”

@@ -14,6 +14,7 @@ import CeoMessage from "./pages/CeoMessage";
 import ChairmanMessage from "./pages/ChairmanMessage";
 import About from "./pages/About";
 import { Redirect } from "wouter";
+import { PersistentLaunchBanner } from "./components/PersistentLaunchBanner";
 
 function Router() {
   return (
@@ -69,7 +70,10 @@ function App() {
         <LanguageProvider>
           <TooltipProvider>
             <Toaster />
-            <Router />
+            <div className="min-h-screen pb-10 sm:pb-11">
+              <Router />
+            </div>
+            <PersistentLaunchBanner />
           </TooltipProvider>
         </LanguageProvider>
       </ThemeProvider>

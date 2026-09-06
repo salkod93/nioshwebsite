@@ -204,6 +204,29 @@
   box-shadow: 0 2px 8px rgba(29, 185, 130, 0.3);
 }
 
+/* Persistent experimental-launch banner */
+@keyframes launchBannerScroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.launch-banner-track {
+  animation: launchBannerScroll 24s linear infinite;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .launch-banner-track {
+    animation: none;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .launch-banner-track > span:last-child {
+    display: none;
+  }
+}
+
 /* ─── VCOSH Hero phone entrance animations ─────────────────────────── */
 @keyframes vcoshPhoneCenter {
   from { opacity: 0; transform: translateY(60px) scale(0.92); }
