@@ -16,8 +16,9 @@ describe("PersistentLaunchBanner", () => {
   it("uses the English experimental-launch label in English mode", () => {
     const markup = renderToStaticMarkup(<PersistentLaunchBanner langOverride="en" />);
 
-    expect(markup).toContain("Experimental Launch");
+    expect(markup).toContain("Soft Launch");
     expect(markup).not.toContain("اطلاق تجريبي");
+    expect(markup).not.toContain("—");
     expect(markup).toContain('dir="ltr"');
   });
 });

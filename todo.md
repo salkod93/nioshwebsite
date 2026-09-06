@@ -153,3 +153,4 @@
 - [x] Add persistent animated bottom banner across all pages with the text “اطلاق تجريبي”
 - [x] Refine the experimental-launch banner to scroll in a seamless infinite loop
 - [x] Reduce launch-banner label repetition, increase spacing, and show English text in English mode
+- [x] Remove the launch-banner dash separator and change the English label to “Soft Launch”

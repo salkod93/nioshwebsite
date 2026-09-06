@@ -4,14 +4,14 @@ import type { Language } from "@/lib/content";
 
 const BANNER_LABELS: Record<Language, string> = {
   ar: "اطلاق تجريبي",
-  en: "Experimental Launch",
+  en: "Soft Launch",
 };
 
 export function PersistentLaunchBanner({ langOverride }: { langOverride?: Language }) {
   const { lang: contextLang } = useLang();
   const lang = langOverride ?? contextLang;
   const bannerText = BANNER_LABELS[lang];
-  const repeatedLabels = Array.from({ length: 4 }, (_, index) => `${bannerText} —`);
+  const repeatedLabels = Array.from({ length: 4 }, () => bannerText);
 
   return (
     <aside
